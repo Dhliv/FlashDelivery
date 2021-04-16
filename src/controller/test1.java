@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,6 +8,10 @@ import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -29,6 +34,24 @@ public class test1 {
 
     @FXML
     private Color x4;
+
+    @FXML
+    private AnchorPane content;
+
+    @FXML
+    void goToSedeConsulta(ActionEvent event) {
+        content.getChildren().clear();
+        var loader = new FXMLLoader(getClass().getResource("../view/sede.consulta.fxml"));
+        loader.setController(new test1());
+        Parent root;
+        try {
+            root = loader.load();
+            content.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @FXML
     void clicksoide(ActionEvent event) {
