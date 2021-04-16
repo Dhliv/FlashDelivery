@@ -1,4 +1,5 @@
 package view;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +12,11 @@ public class Main extends Application {
         launch(args);
     }
 
-
     @Override
     public void start(Stage stage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        var loader = new FXMLLoader(getClass().getResource("Main_Sedes.fxml"));
         loader.setController(new test1());
+
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
@@ -23,5 +24,5 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    
+
 }
