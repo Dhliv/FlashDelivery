@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button alignment="CENTER" layoutX="271.0" layoutY="21.0" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="380.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="487.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TreeTableView layoutX="14.0" layoutY="100.0" prefHeight="286.0" prefWidth="569.0">
+         <columns>
+            <TreeTableColumn prefWidth="176.0" text="ID Sede" />
+            <TreeTableColumn prefWidth="265.0" text="Direccion" />
+         </columns>
+      </TreeTableView>
+   </children>
+</Pane>
