@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class test1 {
 
     @FXML
     void clicksoide(ActionEvent event) {
-        JOptionPane.showMessageDialog(null, "message", "title", -1);
+        JOptionPane.showMessageDialog(null, "Does it works?", "Test", 0);
     }
 
     @FXML
