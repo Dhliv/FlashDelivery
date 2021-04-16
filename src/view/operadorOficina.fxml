@@ -156,7 +156,7 @@
                   </Pane>
                   <Pane layoutX="75.0" layoutY="365.0" prefHeight="200.0" prefWidth="400.0">
                      <children>
-                        <Button layoutX="40.0" layoutY="65.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="130.0" text="Registrar paquete">
+                        <Button onAction="#clicksoide" layoutX="40.0" layoutY="65.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="130.0" text="Registrar paquete">
                            <font>
                               <Font size="15.0" />
                            </font>

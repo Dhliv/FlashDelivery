@@ -14,14 +14,19 @@ public class App {
 
         Class.forName(driver);
         Connection con = DriverManager.getConnection(url, usr, pwd);
-        String sqlStatement = "SELECT * FROM Cliente";
+        String sqlStatement = "SELECT * FROM Sede";
         /*
          * PreparedStatement instruccion = con.prepareStatement(sqlStatement); int
          * result = instruccion.executeUpdate();
          */
         Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM Sede");
+        ResultSet rs = st.executeQuery(sqlStatement);
+        Object[] arr = new Object[3];
 
-        System.out.println("Hello, World!");
+        while(rs.next()){
+            arr[0] = rs.getInt(1);
+            arr[1] = rs.getString(2);
+            arr[2] = rs.getString(3); // This is da wae.
+        }
     }
 }

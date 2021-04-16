@@ -14,10 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-            var loader = new FXMLLoader(getClass().getResource("Main_Sedes.fxml"));
-            loader.setController(new test1());
-       Parent root = loader.load();
-        Scene scene = new Scene(root, 400, 275);
+        var loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        loader.setController(new test1());
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
 
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);
