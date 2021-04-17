@@ -17,6 +17,25 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class test1 {
+    private Parent sedeConsulta;
+    private Parent userConsulta;
+
+    public test1() {
+        sedeConsulta = loadView("sede.consulta");
+        userConsulta = loadView("user.consulta");
+    }
+
+    private Parent loadView(String name) {
+        var loader = new FXMLLoader(getClass().getResource("../view/" + name + ".fxml"));
+        loader.setController(this);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return root;
+    }
 
     @FXML
     private ResourceBundle resources;
@@ -42,16 +61,7 @@ public class test1 {
     @FXML
     void goToSedeConsulta(ActionEvent event) {
         content.getChildren().clear();
-        var loader = new FXMLLoader(getClass().getResource("../view/sede.consulta.fxml"));
-        loader.setController(this);
-        Parent root;
-        try {
-            root = loader.load();
-            content.getChildren().add(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        content.getChildren().add(sedeConsulta);
     }
 
     @FXML
