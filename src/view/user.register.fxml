@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="100.0" layoutY="72.0" text="Identificación">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="100.0" layoutY="212.0" text="Nombres">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="100.0" layoutY="357.0" text="Apellidos">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="100.0" layoutY="493.0" text="Rol">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="100.0" layoutY="628.0" text="Dirección">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="566.0" layoutY="72.0" text="Teléfono">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="566.0" layoutY="339.0" prefHeight="59.0" prefWidth="101.0" text="Fecha de cumpleaños" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="566.0" layoutY="212.0" text="ID Sede">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="566.0" layoutY="493.0" text="Username">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="566.0" layoutY="628.0" text="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="identificacionT" layoutX="233.0" layoutY="71.0" />
+      <TextField fx:id="nombreT" layoutX="233.0" layoutY="211.0" />
+      <TextField fx:id="apellidoT" layoutX="233.0" layoutY="356.0" />
+      <TextField fx:id="rolT" layoutX="233.0" layoutY="492.0" />
+      <TextField fx:id="direccionT" layoutX="233.0" layoutY="627.0" />
+      <TextField fx:id="telefonoT" layoutX="696.0" layoutY="71.0" />
+      <TextField fx:id="idsedeT" layoutX="696.0" layoutY="211.0" />
+      <TextField fx:id="fechaT" layoutX="696.0" layoutY="356.0" />
+      <TextField fx:id="usernameT" layoutX="696.0" layoutY="492.0" />
+      <TextField fx:id="passwordT" layoutX="696.0" layoutY="627.0" />
+      <Button layoutX="464.0" onAction="#goToUsuariosConsulta" layoutY="695.0" mnemonicParsing="false" text="Registrar">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

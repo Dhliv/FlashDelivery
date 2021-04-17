@@ -85,6 +85,21 @@ public class test1 {
     }
 
     @FXML
+    void goToUsuariosRegistro(ActionEvent event) {
+        content.getChildren().clear();
+        var loader = new FXMLLoader(getClass().getResource("../view/user.register.fxml"));
+        loader.setController(new test1());
+        Parent root;
+        try {
+            root = loader.load();
+            content.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
     void clicksoide(ActionEvent event) {
         JOptionPane.showMessageDialog(null, "Does it works?", "Test", 0);
     }
