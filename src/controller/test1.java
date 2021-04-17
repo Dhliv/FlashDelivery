@@ -43,7 +43,7 @@ public class test1 {
     void goToSedeConsulta(ActionEvent event) {
         content.getChildren().clear();
         var loader = new FXMLLoader(getClass().getResource("../view/sede.consulta.fxml"));
-        loader.setController(new test1());
+        loader.setController(this);
         Parent root;
         try {
             root = loader.load();
@@ -58,7 +58,7 @@ public class test1 {
     void goToUsuariosConsulta(ActionEvent event) {
         content.getChildren().clear();
         var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-        loader.setController(new test1());
+        loader.setController(this);
         Parent root;
         try {
             root = loader.load();
@@ -73,7 +73,7 @@ public class test1 {
     void goToAdminReportes(ActionEvent event) {
         content.getChildren().clear();
         var loader = new FXMLLoader(getClass().getResource("../view/reportes.fxml"));
-        loader.setController(new test1());
+        loader.setController(this);
         Parent root;
         try {
             root = loader.load();
@@ -88,7 +88,7 @@ public class test1 {
     void goToUsuariosRegistro(ActionEvent event) {
         content.getChildren().clear();
         var loader = new FXMLLoader(getClass().getResource("../view/user.register.fxml"));
-        loader.setController(new test1());
+        loader.setController(this);
         Parent root;
         try {
             root = loader.load();
