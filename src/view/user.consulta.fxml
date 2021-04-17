@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button alignment="CENTER" layoutX="554.0" layoutY="32.0" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
+      <Button alignment="CENTER" layoutX="554.0" layoutY="32.0" onAction="#goToUsuariosRegistro" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
