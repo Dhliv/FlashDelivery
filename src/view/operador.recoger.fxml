@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane prefHeight="800.0" prefWidth="1280.0">
+         <children>
+            <Button layoutX="68.0" layoutY="33.0" mnemonicParsing="false" text="Regresar">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Label layoutX="933.0" layoutY="59.0" text="Registro de paquetes">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="140.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0">
+               <content>
+                  <AnchorPane prefHeight="670.0" prefWidth="984.0">
+                     <children>
+                        <Pane layoutX="165.0" layoutY="50.0" prefHeight="350.0" prefWidth="280.0">
+                           <children>
+                              <Label layoutX="20.0" layoutY="165.0" text="Costo del envío">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="240.0" text="Empresa de envíos encargada">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="15.0" text="Dirección de entrada">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="90.0" text="Valor del paquete">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="20.0" layoutY="40.0" prefHeight="25.0" prefWidth="240.0" />
+                              <TextField layoutX="20.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
+                              <TextField layoutX="20.0" layoutY="190.0" prefHeight="25.0" prefWidth="240.0" />
+                              <TextField layoutX="20.0" layoutY="265.0" prefHeight="25.0" prefWidth="240.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="510.0" layoutY="50.0" prefHeight="350.0" prefWidth="280.0">
+                           <children>
+                              <Label layoutX="20.0" layoutY="165.0" text="Fecha de registro">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="15.0" text="Peso del paquete">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="90.0" text="Método de pago">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="20.0" layoutY="40.0" prefHeight="25.0" prefWidth="240.0" />
+                              <TextField layoutX="20.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
+                              <TextField layoutX="20.0" layoutY="190.0" prefHeight="25.0" prefWidth="240.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="165.0" layoutY="351.0" prefHeight="266.0" prefWidth="625.0">
+                           <children>
+                              <Label layoutX="20.0" layoutY="14.0" text="Descripción">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextArea layoutX="20.0" layoutY="41.0" prefHeight="144.0" prefWidth="585.0" />
+                              <Label layoutX="20.0" layoutY="193.0" text="Impuesto del envío:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox layoutX="20.0" layoutY="220.0" mnemonicParsing="false" text="Seguro" />
+                              <Button layoutX="440.0" layoutY="217.0" mnemonicParsing="false" text="Registrar paquete">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
