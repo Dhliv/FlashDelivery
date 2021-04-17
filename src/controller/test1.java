@@ -55,6 +55,36 @@ public class test1 {
     }
 
     @FXML
+    void goToUsuariosConsulta(ActionEvent event) {
+        content.getChildren().clear();
+        var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
+        loader.setController(new test1());
+        Parent root;
+        try {
+            root = loader.load();
+            content.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void goToAdminReportes(ActionEvent event) {
+        content.getChildren().clear();
+        var loader = new FXMLLoader(getClass().getResource("../view/reportes.fxml"));
+        loader.setController(new test1());
+        Parent root;
+        try {
+            root = loader.load();
+            content.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
     void clicksoide(ActionEvent event) {
         JOptionPane.showMessageDialog(null, "Does it works?", "Test", 0);
     }

@@ -96,7 +96,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Button alignment="CENTER" layoutX="64.0" layoutY="354.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" text="Usuarios" textAlignment="CENTER">
+                  <Button alignment="CENTER" layoutX="64.0" onAction="#goToUsuariosConsulta" layoutY="354.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" text="Usuarios" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -108,7 +108,7 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" layoutX="65.0" layoutY="576.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" text="Reportes" textAlignment="CENTER">
+                  <Button alignment="CENTER" layoutX="65.0" layoutY="576.0" onAction="#goToAdminReportes" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" text="Reportes" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
