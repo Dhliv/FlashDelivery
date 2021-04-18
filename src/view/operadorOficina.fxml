@@ -107,7 +107,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <TableView layoutX="18.5" layoutY="125.0" prefHeight="525.0" prefWidth="600.0">
+                  <TableView focusTraversable="false" layoutX="18.5" layoutY="125.0" prefHeight="525.0" prefWidth="600.0">
                     <columns>
                         <TableColumn prefWidth="315.9999809265137" text="Destinatario" />
                         <TableColumn prefWidth="110.4000244140625" text="ID del paquete" />
