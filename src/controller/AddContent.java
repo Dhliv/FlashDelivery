@@ -40,7 +40,7 @@ public class AddContent {
 
     private Parent aRegistrar() {
         var loader = new FXMLLoader(getClass().getResource("../view/user.register.fxml"));
-        loader.setController(new UserRegister(content));
+        loader.setController(new UserRegister(content, this));
         Parent root = null;
         try {
             root = loader.load();
