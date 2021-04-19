@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import utilities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,14 +11,12 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-import Utilities.*;
-
-public class LoginController {
+public class Login {
     private Stage pantalla;
     private Roles roles;
     private ArrayList<String> rol;
 
-    public LoginController(Stage lgin) {
+    public Login(Stage lgin) {
         this.pantalla = lgin;
         roles = new Roles();
         this.rol = roles.rol;
@@ -61,16 +60,16 @@ public class LoginController {
             Ventana vent = new Ventana(null, null);
 
             if (rolAcc.equals(rol.get(0))) {
-                vent = new Ventana("main", new AddContent());
+                vent = new Ventana("admin", new Admin());
                 vent.start(pantalla);
             } else if (rolAcc.equals(rol.get(1))) {
-                vent = new Ventana("main", new AddContent());
+                vent = new Ventana("admin", new Admin());
             } else if (rolAcc.equals(rol.get(2))) {
-                vent = new Ventana("operadorOficina", new AddContent());
+                vent = new Ventana("operadorOficina", new Admin());
             } else if (rolAcc.equals(rol.get(3))) {
-                vent = new Ventana("operadorAuxiliar", new AddContent());
+                vent = new Ventana("operadorAuxiliar", new Admin());
             } else if (rolAcc.equals(rol.get(4))) {
-                vent = new Ventana("contador", new AddContent());
+                vent = new Ventana("contador", new Admin());
             }
         }
     }

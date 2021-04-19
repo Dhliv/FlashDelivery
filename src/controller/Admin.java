@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.layout.AnchorPane;
 
-public class AddContent {
+public class Admin {
 
     @FXML
     private AnchorPane content;
@@ -19,7 +19,7 @@ public class AddContent {
     private Parent reportes;
     private Parent userRegister;
 
-    public AddContent() {
+    public Admin() {
         sedeConsulta = loadView("sede.consulta", this);
         userConsulta = loadView("user.consulta", this);
         reportes = loadView("reportes", this);

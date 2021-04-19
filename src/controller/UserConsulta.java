@@ -6,10 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
-public class UsuariosConsulta {
-    
-    
-    void verConsulta(AnchorPane content, Object controlador, int ventana){
+public class UserConsulta {
+
+    void verConsulta(AnchorPane content, Object controlador, int ventana) {
         content.getChildren().clear();
         var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
         loader.setController(controlador);
@@ -20,6 +19,6 @@ public class UsuariosConsulta {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
+
     }
 }

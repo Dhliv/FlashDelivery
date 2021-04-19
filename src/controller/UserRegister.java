@@ -24,7 +24,7 @@ import model.Empleado;
 import model.EmpleadoDAO;
 import model.Usuario;
 import model.UsuarioDAO;
-import Utilities.*;
+import utilities.*;
 
 public class UserRegister implements Initializable {
   private AnchorPane content;
