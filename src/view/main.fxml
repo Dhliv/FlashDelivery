@@ -39,12 +39,13 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="ventana" onMouseEntered="#bloquear" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -85,54 +86,49 @@
         </Menu>
       </menus>
     </MenuBar>
-      <SplitPane dividerPositions="0.19561815336463223" prefHeight="780.0" prefWidth="1280.0">
+      <SplitPane fx:id="splitPanel" dividerPositions="0.2" prefWidth="1280.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="253.0">
                <children>
-                  <Button alignment="CENTER" layoutX="64.0" layoutY="354.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefHeight="42.0" prefWidth="119.0" text="Usuarios" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="141.0" fitWidth="187.0" layoutX="31.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label layoutX="90.0" layoutY="90.0" text="LOGO AQUI" />
-                  <Button alignment="CENTER" layoutX="64.0" layoutY="466.0" mnemonicParsing="false" onAction="#goToSedeConsulta" prefHeight="42.0" prefWidth="119.0" text="Sedes" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="65.0" layoutY="576.0" mnemonicParsing="false" onAction="#goToAdminReportes" prefHeight="42.0" prefWidth="119.0" text="Reportes" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="64.0" layoutY="686.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" text="Log Out" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Button>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="169.0" prefHeight="124.0" prefWidth="151.0" text="Bienvenido 'USER'" textAlignment="CENTER" wrapText="true">
+                  <ImageView fitWidth="175.0" layoutX="41.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/Images/logoEmpresa.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="169.0" prefHeight="124.0" prefWidth="151.0" text="Bienvenido 'USER'" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Button alignment="CENTER" layoutX="65.0" layoutY="353.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefHeight="42.0" prefWidth="127.0" text="Usuarios" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="65.0" layoutY="466.0" mnemonicParsing="false" onAction="#goToSedeConsulta" prefHeight="42.0" prefWidth="127.0" text="Sedes" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="65.0" layoutY="576.0" mnemonicParsing="false" onAction="#goToAdminReportes" prefHeight="46.0" prefWidth="127.0" text="Reportes" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="65.0" layoutY="686.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="127.0" text="Log Out" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
-          <AnchorPane id="content" fx:id="content" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane fx:id="content" minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="1024.0">
                <children>
-                  <SplitPane orientation="VERTICAL" prefHeight="771.0" prefWidth="1025.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                           <children>
-                              <Label layoutX="243.0" layoutY="369.0" text="Por favor seleccione la operación que desea ejecutar">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
+                  <Label layoutX="211.0" layoutY="350.0" text="Por favor seleccione la operación que desea ejecutar">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>
