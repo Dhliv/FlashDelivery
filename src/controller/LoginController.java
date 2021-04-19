@@ -2,9 +2,7 @@ package controller;
 
 import model.*;
 import view.Ventanas;
-
 import javax.swing.JOptionPane;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -52,15 +50,15 @@ public class LoginController {
             pantalla.close();
 
             if (rolAcc.equals("Gerente")) {
-                Ventanas vent = new Ventanas("main", new test1());
+                Ventanas vent = new Ventanas("main", new AddContent());
             } else if (rolAcc.equals("Secretaria")) {
-                Ventanas vent = new Ventanas("main", new test1());
+                Ventanas vent = new Ventanas("main", new AddContent());
             } else if (rolAcc.equals("Operador")) {
-                Ventanas vent = new Ventanas("operadorOficina", new test1());
+                Ventanas vent = new Ventanas("operadorOficina", new AddContent());
             } else if (rolAcc.equals("Auxiliar")) {
-                Ventanas vent = new Ventanas("operadorAuxiliar", new test1());
+                Ventanas vent = new Ventanas("operadorAuxiliar", new AddContent());
             } else if (rolAcc.equals("Contador")) {
-                Ventanas vent = new Ventanas("contador", new test1());
+                Ventanas vent = new Ventanas("contador", new AddContent());
             }
         }
     }
