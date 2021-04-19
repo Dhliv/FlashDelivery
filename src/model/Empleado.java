@@ -2,16 +2,17 @@ package model;
 
 import java.time.LocalDate;
 
-public class Empleado implements Entity{
+public class Empleado implements Entity {
     private int ID;
-    private String nombres, apellidos,rol,direccion,telefono;
+    private String nombres, apellidos, rol, direccion, telefono;
     private LocalDate birthdate;
     private int sede;
 
     public Empleado() {
     }
 
-    public Empleado(int ID, String nombres, String apellidos, String rol, String direccion, String telefono, LocalDate birthdate, int sede) {
+    public Empleado(int ID, String nombres, String apellidos, String rol, String direccion, String telefono,
+            LocalDate birthdate, int sede) {
         this.ID = ID;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -21,8 +22,6 @@ public class Empleado implements Entity{
         this.birthdate = birthdate;
         this.sede = sede;
     }
-
-    
 
     public int getID() {
         return ID;
@@ -55,7 +54,6 @@ public class Empleado implements Entity{
     public int getSede() {
         return sede;
     }
-    
 
     public void setID(int ID) {
         this.ID = ID;
@@ -103,7 +101,9 @@ public class Empleado implements Entity{
 
     @Override
     public String toString() {
-        return "Empleado{" + "ID=" + ID + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede + '}';
+        return "Empleado{" + "ID=" + ID + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
+                + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede
+                + '}';
     }
-    
+
 }

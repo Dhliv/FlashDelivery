@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        var loader = new FXMLLoader(getClass().getResource("login.fxml"));
         loader.setController(new test1());
 
         Parent root = loader.load();
