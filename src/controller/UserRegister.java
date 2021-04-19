@@ -26,7 +26,7 @@ import model.UsuarioDAO;
 
 public class UserRegister implements Initializable {
   private AnchorPane content;
-
+  
   @FXML
   private TextField nombreT;
 
@@ -70,7 +70,7 @@ public class UserRegister implements Initializable {
 
     s.removeAll(s);
     l.removeAll(l);
-    l.addAll("cosa1", "cosa2", "cosa3");
+    l.addAll("Gerente", "Secretario(a)", "Operador de oficina", "Auxiliar", "Vendedor de cocaina");
     s.addAll(sedes);
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);

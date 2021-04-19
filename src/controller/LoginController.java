@@ -2,7 +2,6 @@ package controller;
 
 import model.*;
 import view.Ventana;
-import javax.swing.JOptionPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,11 +9,19 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
+import Utilities.*;
+
 public class LoginController {
     private Stage pantalla;
-
+    private Roles roles;
+    private ArrayList<String> rol;
+    
     public LoginController(Stage lgin) {
         this.pantalla = lgin;
+        roles = new Roles();
+        this.rol = roles.rol;
     }
 
     private UsuarioDAO ud;
@@ -51,19 +58,19 @@ public class LoginController {
             //Cerrar ventana actual
             pantalla.close();
 
-
             //Abrir nueva ventana
             Ventana vent = new Ventana(null, null);
-            if (rolAcc.equals("Gerente")) {
+            
+            if (rolAcc.equals(rol.get(0))) {
                 vent = new Ventana("main", new AddContent());
                 vent.start(pantalla);
-            } else if (rolAcc.equals("Secretaria")) {
+            } else if (rolAcc.equals(rol.get(1))) {
                 vent = new Ventana("main", new AddContent());
-            } else if (rolAcc.equals("Operador")) {
+            } else if (rolAcc.equals(rol.get(2))) {
                 vent = new Ventana("operadorOficina", new AddContent());
-            } else if (rolAcc.equals("Auxiliar")) {
+            } else if (rolAcc.equals(rol.get(3))) {
                 vent = new Ventana("operadorAuxiliar", new AddContent());
-            } else if (rolAcc.equals("Contador")) {
+            } else if (rolAcc.equals(rol.get(4))) {
                 vent = new Ventana("contador", new AddContent());
             }
         }
