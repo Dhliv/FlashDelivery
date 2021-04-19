@@ -44,7 +44,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar maxHeight="300.0" maxWidth="500.0" VBox.vgrow="NEVER">
       <menus>
@@ -96,11 +96,11 @@
                   </Pane>
                </children>
             </Pane>
-            <Button layoutX="307.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" />
+            <Button fx:id="btIngresar" layoutX="307.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" />
             <Label layoutX="117.0" layoutY="115.0" text="Usuario" />
             <Label layoutX="117.0" layoutY="167.0" text="Contraseña" />
-            <PasswordField layoutX="218.0" layoutY="163.0" />
-            <TextField layoutX="217.0" layoutY="111.0" />
+            <PasswordField fx:id="txtPass" layoutX="218.0" layoutY="163.0" />
+            <TextField fx:id="txtUsuario" layoutX="217.0" layoutY="111.0" />
          </children>
     </AnchorPane>
   </children>

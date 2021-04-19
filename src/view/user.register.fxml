@@ -68,7 +68,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="585.0" layoutY="360.0" text="Correo electrónico">
+            <Label layoutX="585.0" layoutY="360.0" text="Usuario">
                <font>
                   <Font size="18.0" />
                </font>

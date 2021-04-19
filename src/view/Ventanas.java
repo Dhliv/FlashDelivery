@@ -5,17 +5,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.lang.ModuleLayer.Controller;
+
 import controller.*;
 
-public class Main extends Application {
-    public static void main(String[] args) {
-        launch(args);
+public class Ventanas extends Application {
+    private String ventana;
+    private Object cont;
+
+    public Ventanas(String ventana, Object controlador) {
+        this.ventana = ventana;
+        this.cont = controlador;
+        launch(new String[] {});
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource("main.fxml"));
-        loader.setController(new test1());
+        var loader = new FXMLLoader(getClass().getResource(ventana + ".fxml"));
+        loader.setController(cont);
 
         Parent root = loader.load();
         Scene scene = new Scene(root);
