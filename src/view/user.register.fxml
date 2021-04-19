@@ -12,25 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="494.0" layoutY="26.0">
-         <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToUsuariosRegistro" text="Registrar" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+      <Pane layoutX="494.0" layoutY="26.0" />
       <Pane layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0">
          <children>
             <Label layoutX="250.0" layoutY="160.0" text="Identificación">
@@ -68,7 +50,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="585.0" layoutY="360.0" text="Correo electrónico">
+            <Label layoutX="585.0" layoutY="360.0" text="Usuario">
                <font>
                   <Font size="18.0" />
                </font>
