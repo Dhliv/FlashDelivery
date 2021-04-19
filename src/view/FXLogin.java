@@ -15,9 +15,9 @@ public class FXLogin extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource("main.fxml"));
-        // loader.setController(new LoginController(stage));
-        loader.setController(new AddContent());
+        var loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        loader.setController(new LoginController(stage));
+        // loader.setController(new AddContent());
         Parent root = loader.load();
         Scene scene = new Scene(root);
 

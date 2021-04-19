@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.lang.ModuleLayer.Controller;
@@ -14,10 +15,15 @@ public class Ventanas extends Application {
     private String ventana;
     private Object cont;
 
-    public Ventanas(String ventana, Object controlador) {
+    public Ventanas(String ventana, Object controlador, Stage pantalla) {
         this.ventana = ventana;
         this.cont = controlador;
-        launch(new String[] {});
+        try {
+            start(pantalla);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override

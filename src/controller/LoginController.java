@@ -47,18 +47,18 @@ public class LoginController {
             System.out.println("entre");
             Empleado userActual = ed.cargarEmpleado(acc);
             var rolAcc = userActual.getRol();
-            pantalla.close();
+            System.out.println(rolAcc);
 
             if (rolAcc.equals("Gerente")) {
-                Ventanas vent = new Ventanas("main", new AddContent());
+                Ventanas vent = new Ventanas("main", new AddContent(), pantalla);
             } else if (rolAcc.equals("Secretaria")) {
-                Ventanas vent = new Ventanas("main", new AddContent());
+                Ventanas vent = new Ventanas("main", new AddContent(), pantalla);
             } else if (rolAcc.equals("Operador")) {
-                Ventanas vent = new Ventanas("operadorOficina", new AddContent());
+                Ventanas vent = new Ventanas("operadorOficina", new AddContent(), pantalla);
             } else if (rolAcc.equals("Auxiliar")) {
-                Ventanas vent = new Ventanas("operadorAuxiliar", new AddContent());
+                Ventanas vent = new Ventanas("operadorAuxiliar", new AddContent(), pantalla);
             } else if (rolAcc.equals("Contador")) {
-                Ventanas vent = new Ventanas("contador", new AddContent());
+                Ventanas vent = new Ventanas("contador", new AddContent(), pantalla);
             }
         }
     }
