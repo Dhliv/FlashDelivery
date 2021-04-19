@@ -64,13 +64,20 @@ public class UserRegister {
     }
 
     String name = nombreT.getText();
+    int id = Integer.valueOf(identificacionT.getText());
+    String telefono = telefonoT.getText();
+    // String rol = rolT.getValue();
     String dir = direccionT.getText();
+    // String fc = fechaT.getValue();
+    // int idSede = idsedeT.getValue();
+    String username = usernameT.getText();
+    String password = passwordT.getText();
 
-    Empleado emp = new Empleado(ID, nombres, apellidos, rol, direccion, telefono, birthdate, sede);
+    Empleado emp = new Empleado(id, name, "", "Gerente", direccion, telefono, fc, idSede);
     EmpleadoDAO empD = new EmpleadoDAO();
     empD.crearEmpleado(emp);
 
-    Usuario user = new Usuario(ID, username, password, enabled);
+    Usuario user = new Usuario(id, username, password, true);
     UsuarioDAO userD = new UsuarioDAO();
     userD.crearUsuario(user);
   }
