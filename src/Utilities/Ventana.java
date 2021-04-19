@@ -1,4 +1,4 @@
-package view;
+package Utilities;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ public class Ventana extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource(ventana + ".fxml"));
+        var loader = new FXMLLoader(getClass().getResource("../view/" + ventana + ".fxml"));
         loader.setController(cont);
 
         Parent root = loader.load();

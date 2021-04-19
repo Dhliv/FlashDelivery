@@ -1,7 +1,6 @@
 package controller;
 
 import model.*;
-import view.Ventana;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +16,7 @@ public class LoginController {
     private Stage pantalla;
     private Roles roles;
     private ArrayList<String> rol;
-    
+
     public LoginController(Stage lgin) {
         this.pantalla = lgin;
         roles = new Roles();
@@ -60,7 +59,7 @@ public class LoginController {
 
             // Abrir nueva ventana
             Ventana vent = new Ventana(null, null);
-            
+
             if (rolAcc.equals(rol.get(0))) {
                 vent = new Ventana("main", new AddContent());
                 vent.start(pantalla);
