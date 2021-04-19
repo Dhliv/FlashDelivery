@@ -24,10 +24,12 @@ import model.Empleado;
 import model.EmpleadoDAO;
 import model.Usuario;
 import model.UsuarioDAO;
+import Utilities.*;
 
 public class UserRegister implements Initializable {
   private AnchorPane content;
   private Object contAnterior;
+  private Roles roles;
 
   @FXML
   private TextField nombreT;
@@ -71,9 +73,10 @@ public class UserRegister implements Initializable {
       sedes.add(i);
     }
 
+    roles = new Roles();
     s.removeAll(s);
     l.removeAll(l);
-    l.addAll("Gerente", "Secretario(a)", "Operador de oficina", "Auxiliar", "Vendedor de cocaina");
+    l.addAll(roles.rol);
     s.addAll(sedes);
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
