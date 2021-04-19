@@ -1,10 +1,18 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -16,12 +24,8 @@ import model.EmpleadoDAO;
 import model.Usuario;
 import model.UsuarioDAO;
 
-public class UserRegister {
+public class UserRegister implements Initializable {
   private AnchorPane content;
-
-  public UserRegister() {
-
-  }
 
   @FXML
   private TextField nombreT;
@@ -39,7 +43,7 @@ public class UserRegister {
   private DatePicker fechaT;
 
   @FXML
-  private ChoiceBox<?> rolT;
+  private ChoiceBox<String> rolT;
 
   @FXML
   private TextField usernameT;
@@ -50,11 +54,33 @@ public class UserRegister {
   @FXML
   private PasswordField passwordT;
 
+  public UserRegister(AnchorPane contenido) {
+    content = contenido;
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
+    ObservableList l = FXCollections.observableArrayList();
+    ObservableList s = FXCollections.observableArrayList();
+    ArrayList<Integer> sedes = new ArrayList<>();
+
+    for (int i = 0; i < 10; i++) {
+      sedes.add(i);
+    }
+
+    s.removeAll(s);
+    l.removeAll(l);
+    l.addAll("cosa1", "cosa2", "cosa3");
+    s.addAll(sedes);
+    rolT.getItems().addAll(l);
+    idsedeT.getItems().addAll(s);
+  }
+
   @FXML
   void goToUsuariosConsulta(ActionEvent event) {
     content.getChildren().clear();
     var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-    loader.setController(this);
+    loader.setController(new AddContent());
     Parent root;
     try {
       root = loader.load();
@@ -63,20 +89,27 @@ public class UserRegister {
       e.printStackTrace();
     }
 
-    /*
-     * String name = nombreT.getText(); int id =
-     * Integer.valueOf(identificacionT.getText()); String telefono =
-     * telefonoT.getText(); // String rol = rolT.getValue(); String dir =
-     * direccionT.getText(); // String fc = fechaT.getValue(); // int idSede =
-     * idsedeT.getValue(); String username = usernameT.getText(); String password =
-     * passwordT.getText();
-     * 
-     * Empleado emp = new Empleado(id, name, "", "Gerente", direccion, telefono, fc,
-     * idSede); EmpleadoDAO empD = new EmpleadoDAO(); empD.crearEmpleado(emp);
-     * 
-     * Usuario user = new Usuario(id, username, password, true); UsuarioDAO userD =
-     * new UsuarioDAO(); userD.crearUsuario(user);
-     */
+    try {
+      String name = nombreT.getText();
+      int id = Integer.valueOf(identificacionT.getText());
+      String telefono = telefonoT.getText();
+      String rol = rolT.getValue().toString();
+      String dir = direccionT.getText();
+      LocalDate fc = LocalDate.parse(fechaT.getValue().toString());
+      int idSede = Integer.valueOf(idsedeT.getValue().toString());
+      String username = usernameT.getText();
+      String password = passwordT.getText();
+
+      Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
+      EmpleadoDAO empD = new EmpleadoDAO();
+      empD.crearEmpleado(emp);
+
+      Usuario user = new Usuario(id, username, password, true);
+      UsuarioDAO userD = new UsuarioDAO();
+      userD.crearUsuario(user);
+    } catch (NumberFormatException error) {
+      System.out.println("MORÍ");
+    }
   }
 
 }
