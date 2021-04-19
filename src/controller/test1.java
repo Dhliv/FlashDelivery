@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import controller.*;
 
 public class test1 {
     private Parent sedeConsulta;
@@ -66,17 +67,8 @@ public class test1 {
 
     @FXML
     void goToUsuariosConsulta(ActionEvent event) {
-        content.getChildren().clear();
-        var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-        loader.setController(this);
-        Parent root;
-        try {
-            root = loader.load();
-            content.getChildren().add(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        Prueba2 prueba2 = new Prueba2();
+        prueba2.verConsulta(content, this);
     }
 
     @FXML
