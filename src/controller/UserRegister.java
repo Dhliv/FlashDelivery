@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.lang.ModuleLayer.Controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ import model.UsuarioDAO;
 
 public class UserRegister implements Initializable {
   private AnchorPane content;
-  
+  private Object contAnterior;
+
   @FXML
   private TextField nombreT;
 
@@ -54,8 +56,9 @@ public class UserRegister implements Initializable {
   @FXML
   private PasswordField passwordT;
 
-  public UserRegister(AnchorPane contenido) {
+  public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
+    contAnterior = controlador;
   }
 
   @Override
@@ -80,7 +83,7 @@ public class UserRegister implements Initializable {
   void goToUsuariosConsulta(ActionEvent event) {
     content.getChildren().clear();
     var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-    loader.setController(new AddContent());
+    loader.setController(contAnterior);
     Parent root;
     try {
       root = loader.load();

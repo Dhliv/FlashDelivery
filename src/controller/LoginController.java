@@ -55,10 +55,10 @@ public class LoginController {
             Empleado userActual = ed.cargarEmpleado(acc);
             var rolAcc = userActual.getRol();
 
-            //Cerrar ventana actual
+            // Cerrar ventana actual
             pantalla.close();
 
-            //Abrir nueva ventana
+            // Abrir nueva ventana
             Ventana vent = new Ventana(null, null);
             
             if (rolAcc.equals(rol.get(0))) {
