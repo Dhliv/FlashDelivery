@@ -1,7 +1,7 @@
 package controller;
 
 import model.*;
-import view.Ventanas;
+import view.Ventana;
 import javax.swing.JOptionPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class LoginController {
     private TextField txtUsuario;
 
     @FXML
-    void clicksoide(ActionEvent event) {
+    void clicksoide(ActionEvent event) throws Exception {
         ed = new EmpleadoDAO();
         ud = new UsuarioDAO();
         String user = txtUsuario.getText();
@@ -47,18 +47,24 @@ public class LoginController {
             System.out.println("entre");
             Empleado userActual = ed.cargarEmpleado(acc);
             var rolAcc = userActual.getRol();
+
+            //Cerrar ventana actual
             pantalla.close();
 
+
+            //Abrir nueva ventana
+            Ventana vent = new Ventana(null, null);
             if (rolAcc.equals("Gerente")) {
-                Ventanas vent = new Ventanas("main", new AddContent());
+                vent = new Ventana("main", new AddContent());
+                vent.start(pantalla);
             } else if (rolAcc.equals("Secretaria")) {
-                Ventanas vent = new Ventanas("main", new AddContent());
+                vent = new Ventana("main", new AddContent());
             } else if (rolAcc.equals("Operador")) {
-                Ventanas vent = new Ventanas("operadorOficina", new AddContent());
+                vent = new Ventana("operadorOficina", new AddContent());
             } else if (rolAcc.equals("Auxiliar")) {
-                Ventanas vent = new Ventanas("operadorAuxiliar", new AddContent());
+                vent = new Ventana("operadorAuxiliar", new AddContent());
             } else if (rolAcc.equals("Contador")) {
-                Ventanas vent = new Ventanas("contador", new AddContent());
+                vent = new Ventana("contador", new AddContent());
             }
         }
     }

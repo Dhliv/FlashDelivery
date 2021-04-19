@@ -91,7 +91,7 @@
          <children>
             <Pane layoutY="14.0" maxHeight="100.0" maxWidth="500.0" prefHeight="69.0" prefWidth="500.0">
                <children>
-                  <ImageView fitHeight="70.0" fitWidth="141.0" pickOnBounds="true">
+                  <ImageView fitHeight="70.0" fitWidth="141.0" layoutX="10.0" pickOnBounds="true">
                      <image>
                         <Image url="@../resources/Images/logoEmpresa.jpg" />
                      </image>

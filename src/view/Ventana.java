@@ -6,18 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.lang.ModuleLayer.Controller;
-
-import controller.*;
-
-public class Ventanas extends Application {
+public class Ventana extends Application {
     private String ventana;
     private Object cont;
 
-    public Ventanas(String ventana, Object controlador) {
+    public Ventana(String ventana, Object controlador) {
         this.ventana = ventana;
         this.cont = controlador;
-        launch(new String[] {});
     }
 
     @Override
@@ -31,5 +26,6 @@ public class Ventanas extends Application {
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);
         stage.show();
+        System.out.println("Ventana " + ventana + " abierta");
     }
 }
