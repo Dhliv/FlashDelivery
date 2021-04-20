@@ -135,7 +135,6 @@ public class UserRegister implements Initializable {
       } else
         cVacios.show();
     } catch (NumberFormatException error) {
-      System.out.println("MORÍ");
       cVacios.show();
     }
 
