@@ -34,13 +34,6 @@ public class UserRegister implements Initializable {
   private Roles roles;
   private Alert cVacios;
 
-  public UserRegister() {
-    Alert a = new Alert(AlertType.NONE);
-    a.setAlertType(AlertType.WARNING);
-    a.setContentText("Ningún campo debe estar vacío");
-    a.setTitle("Campos Vacíos");
-  }
-
   @FXML
   private TextField nombreT;
 
@@ -71,6 +64,11 @@ public class UserRegister implements Initializable {
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     contAnterior = controlador;
+    cVacios = new Alert(AlertType.NONE);
+    cVacios.setAlertType(AlertType.WARNING);
+    cVacios.setContentText("Ningún campo debe estar vacío");
+    cVacios.setTitle("Campos Vacíos");
+    cVacios.setHeaderText("Campos vacíos");
   }
 
   @Override
