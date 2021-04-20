@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,10 +15,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import model.Empleado;
 import model.EmpleadoDAO;
@@ -93,27 +97,46 @@ public class UserRegister implements Initializable {
       e.printStackTrace();
     }
 
+    Alert a = new Alert(AlertType.NONE);
+    a.setAlertType(AlertType.WARNING);
+
     try {
+
       String name = nombreT.getText();
-      int id = Integer.valueOf(identificacionT.getText());
       String telefono = telefonoT.getText();
-      String rol = rolT.getValue().toString();
+      String rol = rolT.getValue();
       String dir = direccionT.getText();
-      LocalDate fc = LocalDate.parse(fechaT.getValue().toString());
-      int idSede = Integer.valueOf(idsedeT.getValue().toString());
+      String ident = identificacionT.getText();
+      var fecha = fechaT.getValue();
+      var idS = idsedeT.getValue();
       String username = usernameT.getText();
       String password = passwordT.getText();
+      Object campo[] = { name, telefono, rol, dir, ident, fecha, idS, username, password };
+      for (int i = 0; i < 9; i++) {
+
+        if (campo[i] == null || campo[i].equals("")) {
+          System.out.println("Error");
+          campo[i] = "rellenado";
+        } else {
+          campo[i].toString();
+        }
+      }
+      // #TODO Cambiar a String en base de datos
+      int id = Integer.valueOf(ident);
+      LocalDate fc = LocalDate.parse(fecha.toString());
+      int idSede = Integer.valueOf(idS.toString());
 
       Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
       EmpleadoDAO empD = new EmpleadoDAO();
       empD.crearEmpleado(emp);
-
       Usuario user = new Usuario(id, username, password, true);
       UsuarioDAO userD = new UsuarioDAO();
       userD.crearUsuario(user);
     } catch (NumberFormatException error) {
       System.out.println("MORÍ");
+      a.show();
     }
+
   }
 
 }
