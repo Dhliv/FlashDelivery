@@ -23,7 +23,6 @@ public class AddContent {
         sedeConsulta = loadView("sede.consulta");
         userConsulta = loadView("user.consulta");
         reportes = loadView("reportes");
-        // userRegister = aRegistrar();
     }
 
     private Parent loadView(String name) {
