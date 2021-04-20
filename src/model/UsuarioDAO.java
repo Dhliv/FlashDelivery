@@ -1,7 +1,8 @@
 package model;
 
-import Utilities.Conexion;
 import java.sql.*;
+
+import utilities.Conexion;
 
 public class UsuarioDAO {
     public int crearUsuario(Usuario u) {

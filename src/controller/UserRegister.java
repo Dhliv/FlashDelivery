@@ -1,11 +1,9 @@
 package controller;
 
 import java.io.IOException;
-import java.lang.ModuleLayer.Controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -24,10 +22,12 @@ import model.Empleado;
 import model.EmpleadoDAO;
 import model.Usuario;
 import model.UsuarioDAO;
+import utilities.*;
 
 public class UserRegister implements Initializable {
   private AnchorPane content;
   private Object contAnterior;
+  private Roles roles;
 
   @FXML
   private TextField nombreT;
@@ -71,9 +71,10 @@ public class UserRegister implements Initializable {
       sedes.add(i);
     }
 
+    roles = new Roles();
     s.removeAll(s);
     l.removeAll(l);
-    l.addAll("cosa1", "cosa2", "cosa3");
+    l.addAll(roles.rol);
     s.addAll(sedes);
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);

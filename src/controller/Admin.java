@@ -6,10 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.chart.AreaChart;
 import javafx.scene.layout.AnchorPane;
 
-public class AddContent {
+public class Admin {
 
     @FXML
     private AnchorPane content;
@@ -19,27 +18,15 @@ public class AddContent {
     private Parent reportes;
     private Parent userRegister;
 
-    public AddContent() {
-        sedeConsulta = loadView("sede.consulta");
-        userConsulta = loadView("user.consulta");
-        reportes = loadView("reportes");
+    public Admin() {
+        sedeConsulta = loadView("sede.consulta", this);
+        userConsulta = loadView("user.consulta", this);
+        reportes = loadView("reportes", this);
     }
 
-    private Parent loadView(String name) {
+    private Parent loadView(String name, Object control) {
         var loader = new FXMLLoader(getClass().getResource("../view/" + name + ".fxml"));
-        loader.setController(this);
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return root;
-    }
-
-    private Parent aRegistrar() {
-        var loader = new FXMLLoader(getClass().getResource("../view/user.register.fxml"));
-        loader.setController(new UserRegister(content, this));
+        loader.setController(control);
         Parent root = null;
         try {
             root = loader.load();
@@ -70,7 +57,7 @@ public class AddContent {
     @FXML
     void goToUsuariosRegistro(ActionEvent event) {
         content.getChildren().clear();
-        userRegister = aRegistrar();
+        userRegister = loadView("user.register", new UserRegister(content, this));
         content.getChildren().add(userRegister);
     }
 

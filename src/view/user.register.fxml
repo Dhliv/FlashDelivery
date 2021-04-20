@@ -14,7 +14,7 @@
    <children>
       <Pane layoutX="494.0" layoutY="26.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToUsuariosRegistro" text="Registrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -87,7 +87,12 @@
             <TextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
             <ChoiceBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
             <PasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
-            <Button layoutX="463.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" text="Registrar">
+            <Button layoutX="538.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" text="Registrar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="384.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
                <font>
                   <Font size="18.0" />
                </font>

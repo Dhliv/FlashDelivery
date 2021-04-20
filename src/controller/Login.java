@@ -1,8 +1,7 @@
 package controller;
 
 import model.*;
-import view.Ventana;
-import javax.swing.JOptionPane;
+import utilities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,11 +9,17 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController {
-    private Stage pantalla;
+import java.util.ArrayList;
 
-    public LoginController(Stage lgin) {
+public class Login {
+    private Stage pantalla;
+    private Roles roles;
+    private ArrayList<String> rol;
+
+    public Login(Stage lgin) {
         this.pantalla = lgin;
+        roles = new Roles();
+        this.rol = roles.rol;
     }
 
     private UsuarioDAO ud;
@@ -53,17 +58,18 @@ public class LoginController {
 
             // Abrir nueva ventana
             Ventana vent = new Ventana(null, null);
-            if (rolAcc.equals("Gerente")) {
-                vent = new Ventana("main", new AddContent());
+
+            if (rolAcc.equals(rol.get(0))) {
+                vent = new Ventana("admin", new Admin());
                 vent.start(pantalla);
-            } else if (rolAcc.equals("Secretaria")) {
-                vent = new Ventana("main", new AddContent());
-            } else if (rolAcc.equals("Operador")) {
-                vent = new Ventana("operadorOficina", new AddContent());
-            } else if (rolAcc.equals("Auxiliar")) {
-                vent = new Ventana("operadorAuxiliar", new AddContent());
-            } else if (rolAcc.equals("Contador")) {
-                vent = new Ventana("contador", new AddContent());
+            } else if (rolAcc.equals(rol.get(1))) {
+                vent = new Ventana("admin", new Admin());
+            } else if (rolAcc.equals(rol.get(2))) {
+                vent = new Ventana("operadorOficina", new Admin());
+            } else if (rolAcc.equals(rol.get(3))) {
+                vent = new Ventana("operadorAuxiliar", new Admin());
+            } else if (rolAcc.equals(rol.get(4))) {
+                vent = new Ventana("contador", new Admin());
             }
         }
     }
