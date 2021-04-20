@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="494.0" layoutY="26.0">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToUsuariosRegistro" text="Registrar" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0">
+         <children>
+            <Label layoutX="250.0" layoutY="160.0" text="Identificación">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="250.0" layoutY="60.0" text="Nombre">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="250.0" layoutY="360.0" text="Cargo">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="250.0" layoutY="260.0" text="Dirección">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="585.0" layoutY="160.0" text="Teléfono">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="585.0" layoutY="260.0" prefHeight="27.0" prefWidth="184.0" text="Fecha de nacimiento" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="250.0" layoutY="460.0" text="Sede">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="585.0" layoutY="360.0" text="Usuario">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="585.0" layoutY="460.0" text="Contraseña">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nombreT" layoutX="250.0" layoutY="85.0" prefHeight="25.0" prefWidth="519.0" />
+            <TextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
+            <DatePicker fx:id="fechaT" layoutX="585.0" layoutY="285.0" prefWidth="184.0" />
+            <ChoiceBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
+            <ChoiceBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
+            <PasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
+            <Button layoutX="542.0" layoutY="552.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Modificar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="385.0" layoutY="552.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Separator layoutY="90.0" prefWidth="1020.0" />
+      <Label layoutX="30.0" layoutY="35.0" text="Modificando a Nombre">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

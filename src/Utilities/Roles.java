@@ -14,8 +14,3 @@ public class Roles {
   }
 
 }
-
-public enum Roles {
-  Gerente, Secretario, OperadorOficina, Auxiliar, Vendedor
-
-}
