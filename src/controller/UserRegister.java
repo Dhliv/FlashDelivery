@@ -32,6 +32,14 @@ public class UserRegister implements Initializable {
   private AnchorPane content;
   private Object contAnterior;
   private Roles roles;
+  private Alert cVacios;
+
+  public UserRegister() {
+    Alert a = new Alert(AlertType.NONE);
+    a.setAlertType(AlertType.WARNING);
+    a.setContentText("Ningún campo debe estar vacío");
+    a.setTitle("Campos Vacíos");
+  }
 
   @FXML
   private TextField nombreT;
@@ -91,13 +99,8 @@ public class UserRegister implements Initializable {
 
   @FXML
   void registrarUser(ActionEvent event) {
-    Alert a = new Alert(AlertType.NONE);
-    a.setAlertType(AlertType.WARNING);
-    a.setContentText("Ningún campo debe estar vacío");
-    a.setTitle("Campos Vacíos");
-
     try {
-
+      boolean empty = false;
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
       String rol = rolT.getValue();
@@ -109,30 +112,31 @@ public class UserRegister implements Initializable {
       String password = passwordT.getText();
       Object campo[] = { name, telefono, rol, dir, ident, fecha, idS, username, password };
       for (int i = 0; i < 9; i++) {
-
         if (campo[i] == null || campo[i].equals("")) {
-          System.out.println("Error");
-          campo[i] = "rellenado";
-        } else {
-          campo[i].toString();
+          empty = true;
+          break;
         }
       }
-      // #TODO Cambiar a String en base de datos
-      int id = Integer.valueOf(ident);
-      LocalDate fc = LocalDate.parse(fecha.toString());
-      int idSede = Integer.valueOf(idS.toString());
 
-      Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
-      EmpleadoDAO empD = new EmpleadoDAO();
-      empD.crearEmpleado(emp);
-      Usuario user = new Usuario(id, username, password, true);
-      UsuarioDAO userD = new UsuarioDAO();
-      userD.crearUsuario(user);
+      if (!empty) {
+        // #TODO Cambiar a String en base de datos
+        int id = Integer.valueOf(ident);
+        LocalDate fc = LocalDate.parse(fecha.toString());
+        int idSede = Integer.valueOf(idS.toString());
 
-      volver();
+        Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
+        EmpleadoDAO empD = new EmpleadoDAO();
+        empD.crearEmpleado(emp);
+        Usuario user = new Usuario(id, username, password, true);
+        UsuarioDAO userD = new UsuarioDAO();
+        userD.crearUsuario(user);
+
+        volver();
+      } else
+        cVacios.show();
     } catch (NumberFormatException error) {
       System.out.println("MORÍ");
-      a.show();
+      cVacios.show();
     }
 
   }
