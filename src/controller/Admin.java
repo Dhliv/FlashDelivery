@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.chart.AreaChart;
 import javafx.scene.layout.AnchorPane;
 
 public class Admin {
@@ -23,7 +22,6 @@ public class Admin {
         sedeConsulta = loadView("sede.consulta", this);
         userConsulta = loadView("user.consulta", this);
         reportes = loadView("reportes", this);
-        // userRegister = aRegistrar();
     }
 
     private Parent loadView(String name, Object control) {
