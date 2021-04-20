@@ -86,19 +86,15 @@ public class UserRegister implements Initializable {
 
   @FXML
   void goToUsuariosConsulta(ActionEvent event) {
-    content.getChildren().clear();
-    var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-    loader.setController(contAnterior);
-    Parent root;
-    try {
-      root = loader.load();
-      content.getChildren().add(root);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    volver();
+  }
 
+  @FXML
+  void registrarUser(ActionEvent event) {
     Alert a = new Alert(AlertType.NONE);
     a.setAlertType(AlertType.WARNING);
+    a.setContentText("Ningún campo debe estar vacío");
+    a.setTitle("Campos Vacíos");
 
     try {
 
@@ -132,11 +128,26 @@ public class UserRegister implements Initializable {
       Usuario user = new Usuario(id, username, password, true);
       UsuarioDAO userD = new UsuarioDAO();
       userD.crearUsuario(user);
+
+      volver();
     } catch (NumberFormatException error) {
       System.out.println("MORÍ");
       a.show();
     }
 
+  }
+
+  void volver() {
+    content.getChildren().clear();
+    var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
+    loader.setController(contAnterior);
+    Parent root;
+    try {
+      root = loader.load();
+      content.getChildren().add(root);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }
