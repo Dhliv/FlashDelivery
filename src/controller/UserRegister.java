@@ -34,7 +34,7 @@ public class UserRegister implements Initializable {
   private UserRegisterChecker userRegisterChecker;
   private int userNoExist;
   private Alerta alerta;
-  private Object contAnterior;
+  private Object controladorAnterior;
 
   @FXML
   private TextField nombreT;
@@ -65,7 +65,7 @@ public class UserRegister implements Initializable {
 
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
-    contAnterior = contenido;
+    controladorAnterior = controlador;
     alerta = new Alerta();
     userRegisterChecker = new UserRegisterChecker();
   }
@@ -102,29 +102,30 @@ public class UserRegister implements Initializable {
   @FXML
   void registrarUser(ActionEvent event) {
     try {
-      
+
       boolean forbidchar = false;
       boolean emptyCamps = false;
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
-      String rol = rolT.getValue();
+      Object rl = rolT.getValue();
       String dir = direccionT.getText();
       String ident = identificacionT.getText();
       Object fecha = fechaT.getValue();
       Object idS = idsedeT.getValue();
       String username = usernameT.getText();
       String password = passwordT.getText();
-      String campo[] = { name, telefono, rol, dir, ident, username, password };
+      String campo[] = { name, telefono, dir, ident, username, password };
 
-      forbidchar = userRegisterChecker.checkEmpty(campo, fecha, idS);
-      emptyCamps = userRegisterChecker.checkChar(campo);
+      forbidchar = userRegisterChecker.checkChar(campo);
+      emptyCamps = userRegisterChecker.checkEmpty(campo, fecha, idS, rl);
 
-      if (forbidchar && emptyCamps) {
-        //funcionIntroducir();
+      if (!forbidchar && !emptyCamps) {
+        // funcionIntroducir();
         // #TODO Cambiar a String en base de datos
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
         int idSede = Integer.valueOf(idS.toString());
+        String rol = rl.toString();
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
         EmpleadoDAO empD = new EmpleadoDAO();
@@ -155,7 +156,7 @@ public class UserRegister implements Initializable {
   void volver() {
     content.getChildren().clear();
     var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-    loader.setController(contAnterior);
+    loader.setController(controladorAnterior);
     Parent root;
     try {
       root = loader.load();

@@ -2,8 +2,8 @@ package utilities;
 
 public class UserRegisterChecker {
 
-  public UserRegisterChecker(){
-    
+  public UserRegisterChecker() {
+
   }
 
   /*
@@ -31,18 +31,17 @@ public class UserRegisterChecker {
   Return true significa que encontró un espacio vacio.
   De lo contrario está todo ok.
   */
-  public boolean checkEmpty(String campo[], Object fecha, Object idSede) {
+  public boolean checkEmpty(String campo[], Object fecha, Object idSede, Object rol) {
     boolean ch = false;
 
     for (int i = 0; i < campo.length; i++) {
-      if (campo[i] == null || campo[i].equals("")) {
+      if (campo[i] == "") {
         ch = true;
-        if (campo[i] == null)
-          campo[i] = "";
+        break;
       }
     }
 
-    if (fecha == null || idSede == null)
+    if (fecha == null || idSede == null || rol == null)
       ch = true;
 
     return ch;
