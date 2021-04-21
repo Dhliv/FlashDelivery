@@ -21,7 +21,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
+            <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" onAction="#borrar" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
