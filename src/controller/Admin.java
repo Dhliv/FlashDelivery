@@ -67,4 +67,9 @@ public class Admin {
         JOptionPane.showMessageDialog(null, "Does it works?", "Test", 0);
     }
 
+    @FXML
+    void borrar(ActionEvent event){
+        String user = "juanito";
+        JOptionPane.showOptionDialog(null, "Desea borrar a "+user+"?", "Eliminar registro", 0, 0, null, null, user);
+    }
 }

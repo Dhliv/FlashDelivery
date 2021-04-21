@@ -51,7 +51,7 @@ public class UserRegister implements Initializable {
   private TextField usernameT;
 
   @FXML
-  private ChoiceBox<?> idsedeT;
+  private ChoiceBox<Integer> idsedeT;
 
   @FXML
   private PasswordField passwordT;
@@ -63,8 +63,8 @@ public class UserRegister implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    ObservableList l = FXCollections.observableArrayList();
-    ObservableList s = FXCollections.observableArrayList();
+    ObservableList<String> l = FXCollections.observableArrayList();
+    ObservableList<Integer> s = FXCollections.observableArrayList();
     ArrayList<Integer> sedes = new ArrayList<>();
 
     for (int i = 0; i < 10; i++) {
@@ -81,7 +81,18 @@ public class UserRegister implements Initializable {
   }
 
   @FXML
+  void goToUsuariosRegistro(ActionEvent event){
+    content.getChildren().clear();
+  }
+
+  @FXML
   void goToUsuariosConsulta(ActionEvent event) {
+    
+
+  }
+
+  @FXML
+  void registrar(ActionEvent event) {
     content.getChildren().clear();
     var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
     loader.setController(contAnterior);

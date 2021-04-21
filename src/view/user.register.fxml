@@ -87,7 +87,7 @@
             <TextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
             <ChoiceBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
             <PasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
-            <Button layoutX="538.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" text="Registrar">
+            <Button layoutX="538.0" layoutY="548.0" mnemonicParsing="false" onAction="#registrar" text="Registrar">
                <font>
                   <Font size="18.0" />
                </font>
