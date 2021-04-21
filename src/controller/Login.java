@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -34,7 +36,20 @@ public class Login {
     private TextField txtUsuario;
 
     @FXML
+    void loginKeyboard(KeyEvent event) throws Exception {
+        System.out.println(event);
+        KeyCode key = event.getCode();
+        if  (key.equals(KeyCode.ENTER)){
+            login();
+        }
+    }
+
+    @FXML
     void clicksoide(ActionEvent event) throws Exception {
+        login();
+    }
+
+    void login() throws Exception{
         ed = new EmpleadoDAO();
         ud = new UsuarioDAO();
         String user = txtUsuario.getText();

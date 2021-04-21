@@ -87,7 +87,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="300.0" maxWidth="500.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="300.0" maxWidth="500.0" onKeyPressed="#loginKeyboard" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Pane layoutY="14.0" maxHeight="100.0" maxWidth="500.0" prefHeight="69.0" prefWidth="500.0">
                <children>
