@@ -79,7 +79,7 @@ public class UserRegister implements Initializable {
 
     charForbi = new Alert(AlertType.NONE);
     charForbi.setAlertType(AlertType.WARNING);
-    charForbi.setContentText("No es posible utilizar los siguientes caracteres: . , \' \" * = + - _ !");
+    charForbi.setContentText("No es posible utilizar los siguientes caracteres: . , \' \" * = + _ !");
     charForbi.setTitle("Caracteres Prohibidos");
     charForbi.setHeaderText("Se detectó el uso de caracteres prohibidos");
 
@@ -116,7 +116,7 @@ public class UserRegister implements Initializable {
   }
 
   @FXML
-  void goToUsuariosRegistro(ActionEvent event){
+  void goToUsuariosRegistro(ActionEvent event) {
     content.getChildren().clear();
   }
 
@@ -191,7 +191,7 @@ public class UserRegister implements Initializable {
   boolean checkChar(String campo[]) {
     boolean ch = false;
     forbidchar = false;
-    char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
+    char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '_', '!' };
 
     for (int i = 0; i < campo.length; i++) {
       for (int j = 0; j < campo[i].length(); j++) {
