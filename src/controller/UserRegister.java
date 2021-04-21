@@ -35,6 +35,7 @@ public class UserRegister implements Initializable {
   private Alert cVacios;
   private Alert charForbi;
   private Alert userExist;
+  private Alert regExitoso;
   private boolean emptyCamps;
   private boolean forbidchar;
   private int userNoExist;
@@ -87,6 +88,12 @@ public class UserRegister implements Initializable {
     userExist.setContentText("Por favor rellene los campos para un nuevo empleado.");
     userExist.setTitle("Empleado Repetido");
     userExist.setHeaderText("Ya existe este empleado");
+
+    regExitoso = new Alert(AlertType.NONE);
+    regExitoso.setAlertType(AlertType.INFORMATION);
+    regExitoso.setContentText("El empleado se ha registrado con exito.");
+    regExitoso.setTitle("Registro Exitoso");
+    regExitoso.setHeaderText("");
   }
 
   @Override
@@ -149,6 +156,7 @@ public class UserRegister implements Initializable {
           userExist.show();
         }
 
+        regExitoso.show();
         volver();
       } else {
         if (emptyCamps)
