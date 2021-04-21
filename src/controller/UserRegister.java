@@ -34,7 +34,7 @@ public class UserRegister implements Initializable {
   private UserRegisterChecker userRegisterChecker;
   private int userNoExist;
   private Alerta alerta;
-  private Object contAnterior;
+  private Object controladorAnterior;
 
   @FXML
   private TextField nombreT;
@@ -65,7 +65,7 @@ public class UserRegister implements Initializable {
 
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
-    contAnterior = contenido;
+    controladorAnterior = controlador;
     alerta = new Alerta();
     userRegisterChecker = new UserRegisterChecker();
   }
@@ -102,7 +102,7 @@ public class UserRegister implements Initializable {
   @FXML
   void registrarUser(ActionEvent event) {
     try {
-      
+
       boolean forbidchar = false;
       boolean emptyCamps = false;
       String name = nombreT.getText();
@@ -119,8 +119,8 @@ public class UserRegister implements Initializable {
       forbidchar = userRegisterChecker.checkEmpty(campo, fecha, idS);
       emptyCamps = userRegisterChecker.checkChar(campo);
 
-      if (forbidchar && emptyCamps) {
-        //funcionIntroducir();
+      if (!forbidchar && !emptyCamps) {
+        // funcionIntroducir();
         // #TODO Cambiar a String en base de datos
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
@@ -155,7 +155,7 @@ public class UserRegister implements Initializable {
   void volver() {
     content.getChildren().clear();
     var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-    loader.setController(contAnterior);
+    loader.setController(controladorAnterior);
     Parent root;
     try {
       root = loader.load();
