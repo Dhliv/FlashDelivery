@@ -1,5 +1,7 @@
 package utilities;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,9 +25,9 @@ public class Ventana extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
-        stage.setTitle("FXML Welcome");
+        stage.setTitle(ventana);
         stage.setScene(scene);
         stage.show();
-        System.out.println("Ventana " + ventana + " abierta");
     }
+     
 }
