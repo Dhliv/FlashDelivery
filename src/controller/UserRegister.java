@@ -33,7 +33,7 @@ public class UserRegister implements Initializable {
   private Roles roles;
   private UserRegisterChecker userRegisterChecker;
   private int userNoExist;
-  private Alerta alerta;
+  private UserRegisterAlert alerta;
   private Object controladorAnterior;
 
   @FXML
@@ -66,7 +66,7 @@ public class UserRegister implements Initializable {
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
-    alerta = new Alerta();
+    alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
   }
 
