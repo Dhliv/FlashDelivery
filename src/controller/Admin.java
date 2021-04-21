@@ -22,7 +22,6 @@ public class Admin {
         sedeConsulta = loadView("sede.consulta", this);
         userConsulta = loadView("user.consulta", this);
         reportes = loadView("reportes", this);
-        // userRegister = aRegistrar();
     }
 
     private Parent loadView(String name, Object control) {
