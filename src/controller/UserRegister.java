@@ -107,17 +107,17 @@ public class UserRegister implements Initializable {
       boolean emptyCamps = false;
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
-      String rol = rolT.getValue();
+      Object rl = rolT.getValue();
       String dir = direccionT.getText();
       String ident = identificacionT.getText();
       Object fecha = fechaT.getValue();
       Object idS = idsedeT.getValue();
       String username = usernameT.getText();
       String password = passwordT.getText();
-      String campo[] = { name, telefono, rol, dir, ident, username, password };
+      String campo[] = { name, telefono, dir, ident, username, password };
 
-      forbidchar = userRegisterChecker.checkEmpty(campo, fecha, idS);
-      emptyCamps = userRegisterChecker.checkChar(campo);
+      forbidchar = userRegisterChecker.checkChar(campo);
+      emptyCamps = userRegisterChecker.checkEmpty(campo, fecha, idS, rl);
 
       if (!forbidchar && !emptyCamps) {
         // funcionIntroducir();
@@ -125,6 +125,7 @@ public class UserRegister implements Initializable {
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
         int idSede = Integer.valueOf(idS.toString());
+        String rol = rl.toString();
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
         EmpleadoDAO empD = new EmpleadoDAO();

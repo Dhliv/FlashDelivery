@@ -2,11 +2,11 @@ package utilities;
 
 public class UserRegisterChecker {
 
-  public UserRegisterChecker(){
-    
+  public UserRegisterChecker() {
+
   }
 
-  //Revisa si hay un caracter prohibido
+  // Revisa si hay un caracter prohibido
   public boolean checkChar(String campo[]) {
     boolean ch = false;
     char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
@@ -24,19 +24,18 @@ public class UserRegisterChecker {
     return ch;
   }
 
-  //Revisa si existe algun campo vacio
-  public boolean checkEmpty(String campo[], Object fecha, Object idSede) {
+  // Revisa si existe algun campo vacio
+  public boolean checkEmpty(String campo[], Object fecha, Object idSede, Object rol) {
     boolean ch = false;
 
     for (int i = 0; i < campo.length; i++) {
-      if (campo[i] == null || campo[i].equals("")) {
+      if (campo[i] == "") {
         ch = true;
-        if (campo[i] == null)
-          campo[i] = "";
+        break;
       }
     }
 
-    if (fecha == null || idSede == null)
+    if (fecha == null || idSede == null || rol == null)
       ch = true;
 
     return ch;
