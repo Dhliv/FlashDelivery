@@ -33,6 +33,11 @@ public class UserRegister implements Initializable {
   private Object contAnterior;
   private Roles roles;
   private Alert cVacios;
+  private Alert charForbi;
+  private Alert userExist;
+  private boolean emptyCamps;
+  private boolean forbidchar;
+  private int userNoExist;
 
   @FXML
   private TextField nombreT;
@@ -64,11 +69,24 @@ public class UserRegister implements Initializable {
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     contAnterior = controlador;
+
     cVacios = new Alert(AlertType.NONE);
     cVacios.setAlertType(AlertType.WARNING);
-    cVacios.setContentText("Ningún campo debe estar vacío");
+    cVacios.setContentText("Por favor rellene los campos restantes.");
     cVacios.setTitle("Campos Vacíos");
-    cVacios.setHeaderText("Campos vacíos");
+    cVacios.setHeaderText("Existen campos vacíos");
+
+    charForbi = new Alert(AlertType.NONE);
+    charForbi.setAlertType(AlertType.WARNING);
+    charForbi.setContentText("No es posible utilizar los siguientes caracteres: . , \' \" * = + - _ !");
+    charForbi.setTitle("Caracteres Prohibidos");
+    charForbi.setHeaderText("Se detectó el uso de caracteres prohibidos");
+
+    userExist = new Alert(AlertType.NONE);
+    userExist.setAlertType(AlertType.WARNING);
+    userExist.setContentText("Por favor rellene los campos para un nuevo empleado.");
+    userExist.setTitle("Empleado Repetido");
+    userExist.setHeaderText("Ya existe este empleado");
   }
 
   @Override
@@ -98,25 +116,22 @@ public class UserRegister implements Initializable {
   @FXML
   void registrarUser(ActionEvent event) {
     try {
-      boolean empty = false;
+      boolean check = false;
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
       String rol = rolT.getValue();
       String dir = direccionT.getText();
       String ident = identificacionT.getText();
-      var fecha = fechaT.getValue();
-      var idS = idsedeT.getValue();
+      Object fecha = fechaT.getValue();
+      Object idS = idsedeT.getValue();
       String username = usernameT.getText();
       String password = passwordT.getText();
-      Object campo[] = { name, telefono, rol, dir, ident, fecha, idS, username, password };
-      for (int i = 0; i < 9; i++) {
-        if (campo[i] == null || campo[i].equals("")) {
-          empty = true;
-          break;
-        }
-      }
+      String campo[] = { name, telefono, rol, dir, ident, username, password };
 
-      if (!empty) {
+      check = checkEmpty(campo, fecha, idS);
+      check = checkChar(campo);
+
+      if (!check) {
         // #TODO Cambiar a String en base de datos
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
@@ -124,14 +139,23 @@ public class UserRegister implements Initializable {
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
         EmpleadoDAO empD = new EmpleadoDAO();
-        empD.crearEmpleado(emp);
-        Usuario user = new Usuario(id, username, password, true);
-        UsuarioDAO userD = new UsuarioDAO();
-        userD.crearUsuario(user);
+        userNoExist = empD.crearEmpleado(emp);
+
+        if (userNoExist == 1) {
+          Usuario user = new Usuario(id, username, password, true);
+          UsuarioDAO userD = new UsuarioDAO();
+          userD.crearUsuario(user);
+        } else {
+          userExist.show();
+        }
 
         volver();
-      } else
-        cVacios.show();
+      } else {
+        if (emptyCamps)
+          cVacios.show();
+        else if (forbidchar)
+          charForbi.show();
+      }
     } catch (NumberFormatException error) {
       cVacios.show();
     }
@@ -149,6 +173,44 @@ public class UserRegister implements Initializable {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  boolean checkChar(String campo[]) {
+    boolean ch = false;
+    forbidchar = false;
+    char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
+
+    for (int i = 0; i < campo.length; i++) {
+      for (int j = 0; j < campo[i].length(); j++) {
+        for (int k = 0; k < F.length; k++) {
+          if (campo[i].charAt(j) == F[k]) {
+            ch = true;
+            forbidchar = true;
+          }
+        }
+      }
+    }
+
+    return ch;
+  }
+
+  boolean checkEmpty(String campo[], Object fecha, Object idSede) {
+    boolean ch = false;
+    emptyCamps = false;
+
+    for (int i = 0; i < campo.length; i++) {
+      if (campo[i] == null || campo[i].equals("")) {
+        ch = true;
+        emptyCamps = true;
+        if (campo[i] == null)
+          campo[i] = "";
+      }
+    }
+
+    if (fecha == null || idSede == null)
+      ch = true;
+
+    return ch;
   }
 
 }
