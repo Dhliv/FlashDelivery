@@ -66,7 +66,6 @@ public class UserRegister implements Initializable {
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     contAnterior = contenido;
-    new Ventana("user.consulta", controlador);
     alerta = new Alerta();
     userRegisterChecker = new UserRegisterChecker();
   }
@@ -91,7 +90,7 @@ public class UserRegister implements Initializable {
   }
 
   @FXML
-  void goToUsuariosRegistro(ActionEvent event){
+  void goToUsuariosRegistro(ActionEvent event) {
     content.getChildren().clear();
   }
 
@@ -139,6 +138,7 @@ public class UserRegister implements Initializable {
           alerta.showUserExistAlert();
         }
 
+        alerta.showRegSuccess();
         volver();
       } else {
         if (emptyCamps)
