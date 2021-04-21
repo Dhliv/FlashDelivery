@@ -3,14 +3,20 @@ package utilities;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class Alerta {
+/*
+Esta clase está diseñada para construir y mostrar los mensajes de alerta pertinentes en UserRegiter
+cEmpty = Mensaje cuando existen campos vacíos.
+cForbi = Mensaje cuando existen caracteres extraños.
+regSuccess = Mensaje cuando se registra correctamente un usuario.
+*/
+public class UserRegisterAlert {
     
     private Alert cEmpty;
     private Alert cForbi;
     private Alert userExist;
-    private Alert regExitoso;
+    private Alert regSuccess;
     
-    public Alerta(){
+    public UserRegisterAlert(){
         cEmpty = new Alert(AlertType.NONE);
         cEmpty.setAlertType(AlertType.WARNING);
         cEmpty.setContentText("Por favor rellene los campos restantes.");
@@ -29,11 +35,11 @@ public class Alerta {
         userExist.setTitle("Empleado Repetido");
         userExist.setHeaderText("Ya existe este empleado");
 
-        regExitoso = new Alert(AlertType.NONE);
-        regExitoso.setAlertType(AlertType.INFORMATION);
-        regExitoso.setContentText("El empleado se ha registrado con exito.");
-        regExitoso.setTitle("Registro Exitoso");
-        regExitoso.setHeaderText("");
+        regSuccess = new Alert(AlertType.NONE);
+        regSuccess.setAlertType(AlertType.INFORMATION);
+        regSuccess.setContentText("El empleado se ha registrado con exito.");
+        regSuccess.setTitle("Registro Exitoso");
+        regSuccess.setHeaderText("");
     }
 
     //Panel con información de que hay un campo vacio
@@ -50,6 +56,6 @@ public class Alerta {
     }
 
     public void showRegSuccess(){
-        regExitoso.show();
+        regSuccess.show();
     }
 }

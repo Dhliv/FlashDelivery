@@ -6,7 +6,10 @@ public class UserRegisterChecker {
     
   }
 
-  //Revisa si hay un caracter prohibido
+  /*
+  Return true significa que encontró un caracter prohibido.
+  De lo contrario está todo ok.
+  */
   public boolean checkChar(String campo[]) {
     boolean ch = false;
     char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
@@ -24,7 +27,10 @@ public class UserRegisterChecker {
     return ch;
   }
 
-  //Revisa si existe algun campo vacio
+  /*
+  Return true significa que encontró un espacio vacio.
+  De lo contrario está todo ok.
+  */
   public boolean checkEmpty(String campo[], Object fecha, Object idSede) {
     boolean ch = false;
 
