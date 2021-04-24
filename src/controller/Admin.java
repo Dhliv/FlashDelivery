@@ -15,7 +15,6 @@ public class Admin {
     private Parent sedeConsulta;
     private Parent userConsulta;
     private Parent reportes;
-    private Parent userRegister;
     private LoadView vista;
 
     public Admin() {
