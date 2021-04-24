@@ -31,6 +31,7 @@ public class UserRegister implements Initializable {
   private int userNoExist;
   private UserRegisterAlert alerta;
   private Object controladorAnterior;
+  private LoadView vista;
 
   @FXML
   private TextField nombreT;
@@ -60,19 +61,22 @@ public class UserRegister implements Initializable {
   private PasswordField passwordT;
 
   /*
-   * Constructor de la clase UserRegister. Almacena en la clase el 'contenido'
-   * (ventana actual donde se hace el registro) y 'controlador' lo almacena, para
-   * evitar crear uno nuevo con parametros iniciales distintos. Adicionalmente se
-   * crea un objeto de la clase Alerta con la que se invocarán a las alertas
-   * pertinentes a la creación de un usuario, ademas de un objeto de la clase
-   * UserRegisterChecker para hacer las validaciones pertinentes al registro de un
-   * usuario.
+   * Constructor de la clase UserRegister.
+   * 
+   * Almacena en la clase el 'contenido' (ventana actual donde se hace el
+   * registro) y 'controlador' lo almacena, para evitar crear uno nuevo con
+   * parametros iniciales distintos. Adicionalmente se crea un objeto de la clase
+   * Alerta con la que se invocarán a las alertas pertinentes a la creación de un
+   * usuario, ademas de un objeto de la clase UserRegisterChecker para hacer las
+   * validaciones pertinentes al registro de un usuario, y finalmente crea un
+   * objeto de la clase LoadView para cargar "pestañas".
    */
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
     alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
+    vista = new LoadView();
   }
 
   /*
@@ -178,14 +182,7 @@ public class UserRegister implements Initializable {
    */
   void volver() {
     content.getChildren().clear();
-    var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
-    loader.setController(controladorAnterior);
-    Parent root;
-    try {
-      root = loader.load();
-      content.getChildren().add(root);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    Parent root = vista.loadView("user.consulta", controladorAnterior);
+    content.getChildren().add(root);
   }
 }

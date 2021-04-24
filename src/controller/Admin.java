@@ -1,12 +1,11 @@
 package controller;
 
-import java.io.IOException;
 import javax.swing.JOptionPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import utilities.LoadView;
 
 public class Admin {
 
@@ -17,23 +16,12 @@ public class Admin {
     private Parent userConsulta;
     private Parent reportes;
     private Parent userRegister;
+    private LoadView vista;
 
     public Admin() {
-        sedeConsulta = loadView("sede.consulta", this);
-        userConsulta = loadView("user.consulta", this);
-        reportes = loadView("reportes", this);
-    }
-
-    private Parent loadView(String name, Object control) {
-        var loader = new FXMLLoader(getClass().getResource("../view/" + name + ".fxml"));
-        loader.setController(control);
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return root;
+        vista = new LoadView();
+        sedeConsulta = vista.loadView("sede.consulta", this);
+        reportes = vista.loadView("reportes", this);
     }
 
     @FXML
@@ -45,6 +33,7 @@ public class Admin {
     @FXML
     void goToUsuariosConsulta(ActionEvent event) {
         content.getChildren().clear();
+        userConsulta = vista.loadView("user.consulta", new UserConsulta(content));
         content.getChildren().add(userConsulta);
     }
 
@@ -55,20 +44,13 @@ public class Admin {
     }
 
     @FXML
-    void goToUsuariosRegistro(ActionEvent event) {
-        content.getChildren().clear();
-        userRegister = loadView("user.register", new UserRegister(content, this));
-        content.getChildren().add(userRegister);
-    }
-
-    @FXML
     void clicksoide(ActionEvent event) {
         JOptionPane.showMessageDialog(null, "Does it works?", "Test", 0);
     }
 
     @FXML
-    void borrar(ActionEvent event){
+    void borrar(ActionEvent event) {
         String user = "juanito";
-        JOptionPane.showOptionDialog(null, "Desea borrar a "+user+"?", "Eliminar registro", 0, 0, null, null, user);
+        JOptionPane.showOptionDialog(null, "Desea borrar a " + user + "?", "Eliminar registro", 0, 0, null, null, user);
     }
 }

@@ -10,7 +10,7 @@
    <children>
       <Pane layoutX="494.0" layoutY="26.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToUsuariosRegistro" text="Registrar" textAlignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
