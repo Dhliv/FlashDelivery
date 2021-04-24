@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,12 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import model.Empleado;
 import model.EmpleadoDAO;
@@ -63,6 +59,15 @@ public class UserRegister implements Initializable {
   @FXML
   private PasswordField passwordT;
 
+  /*
+   * Constructor de la clase UserRegister. Almacena en la clase el 'contenido'
+   * (ventana actual donde se hace el registro) y 'controlador' lo almacena, para
+   * evitar crear uno nuevo con parametros iniciales distintos. Adicionalmente se
+   * crea un objeto de la clase Alerta con la que se invocarán a las alertas
+   * pertinentes a la creación de un usuario, ademas de un objeto de la clase
+   * UserRegisterChecker para hacer las validaciones pertinentes al registro de un
+   * usuario.
+   */
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
@@ -70,6 +75,9 @@ public class UserRegister implements Initializable {
     userRegisterChecker = new UserRegisterChecker();
   }
 
+  /*
+   * Inicializa las elecciones disponibles en las ChoiceBox.
+   */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
@@ -89,22 +97,32 @@ public class UserRegister implements Initializable {
     idsedeT.getItems().addAll(s);
   }
 
-  @FXML
-  void goToUsuariosRegistro(ActionEvent event) {
-    content.getChildren().clear();
-  }
-
+  /*
+   * Carga en 'content' la pantalla de consulta de usuarios.
+   */
   @FXML
   void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
+  /*
+   * Registra a un usuario.
+   * 
+   * Se obtienen los datos registrados en cada campo habilitado, y se hacen las
+   * respectivas verificaciones: no pueden haber campos vacíos, no puede haber
+   * caracteres prohibidos, y un usuario no puede registrarse dos veces.
+   * 
+   * En caso de obtener una verificación aceptada, se le indica al usuario que su
+   * registro fue exitoso, de lo contrario se desplegará en pantalla un pop-up
+   * donde indique la clase de 'error' en la que incurrió.
+   */
   @FXML
   void registrarUser(ActionEvent event) {
     try {
 
       boolean forbidchar = false;
       boolean emptyCamps = false;
+
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
       Object rl = rolT.getValue();
@@ -114,10 +132,12 @@ public class UserRegister implements Initializable {
       Object idS = idsedeT.getValue();
       String username = usernameT.getText();
       String password = passwordT.getText();
+
       String campo[] = { name, telefono, dir, ident, username, password };
+      Object multOpcion[] = { rl, fecha, idS };
 
       forbidchar = userRegisterChecker.checkChar(campo);
-      emptyCamps = userRegisterChecker.checkEmpty(campo, fecha, idS, rl);
+      emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion);
 
       if (!forbidchar && !emptyCamps) {
         // funcionIntroducir();
@@ -153,6 +173,9 @@ public class UserRegister implements Initializable {
 
   }
 
+  /*
+   * Retorna a la pantalla de consulta de usuarios.
+   */
   void volver() {
     content.getChildren().clear();
     var loader = new FXMLLoader(getClass().getResource("../view/user.consulta.fxml"));
