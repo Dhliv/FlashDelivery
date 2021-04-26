@@ -10,11 +10,6 @@ import utilities.LoadView;
 
 public class Admin {
 
-    @FXML
-    private AnchorPane content;
-
-    @FXML
-    private Label labelNameUser;
     private Parent sedeConsulta;
     private Parent userConsulta;
     private Parent reportes;
@@ -23,18 +18,27 @@ public class Admin {
 
     public Admin(String userName) {
         vista = new LoadView();
-        sedeConsulta = vista.loadView("sede.consulta", this);
-        reportes = vista.loadView("reportes", this);
         this.userName = userName;
     }
 
+    // #---------------------------------------------------------------------------
+    // # FXML: ARCHIVOS DE JAVA FXML
+    // #---------------------------------------------------------------------------
+
+    @FXML
+    private AnchorPane content;
+
+    @FXML
+    private Label labelNameUser;
+
     @FXML
     private void initialize(){
-        labelNameUser = new Label("Bienvenido "+userName);
+        labelNameUser.setText("Bienvenido " + userName);
     }
 
     @FXML
     void goToSedeConsulta(ActionEvent event) {
+        sedeConsulta = vista.loadView("sede.consulta", this);
         content.getChildren().clear();
         content.getChildren().add(sedeConsulta);
     }
@@ -48,6 +52,7 @@ public class Admin {
 
     @FXML
     void goToAdminReportes(ActionEvent event) {
+        reportes = vista.loadView("reportes", this);
         content.getChildren().clear();
         content.getChildren().add(reportes);
     }

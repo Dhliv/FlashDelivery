@@ -78,7 +78,9 @@ public class UserRegister implements Initializable {
   }
 
   /*
-   * Inicializa las elecciones disponibles en las ChoiceBox.
+   * Inicializa los siguientes componentes graficos:
+   *    -Las elecciones disponibles en las ChoiceBox.
+   *    -
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -124,7 +126,7 @@ public class UserRegister implements Initializable {
 
       boolean forbidchar = false;
       boolean emptyCamps = false;
-
+      //funcionGuardarCampos();
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
       Object rl = rolT.getValue();
@@ -138,12 +140,12 @@ public class UserRegister implements Initializable {
       String campo[] = { name, telefono, dir, ident, username, password };
       Object multOpcion[] = { rl, fecha, idS };
 
-      forbidchar = userRegisterChecker.checkChar(campo);
       emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion);
+      forbidchar = userRegisterChecker.checkChar(campo);
 
       if (!forbidchar && !emptyCamps) {
-        // funcionIntroducir();
-        // #TODO Cambiar a String en base de datos
+        // !funcionIntroducir();
+        // #TODO Cambiar id a String en base de datos
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
         int idSede = Integer.valueOf(idS.toString());
@@ -153,7 +155,7 @@ public class UserRegister implements Initializable {
         EmpleadoDAO empD = new EmpleadoDAO();
         userNoExist = empD.crearEmpleado(emp);
 
-        if (userNoExist == 1) {
+        if (userNoExist == 1) { //El 1 significa que el usuario no existía.
           Usuario user = new Usuario(id, username, password, true);
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
