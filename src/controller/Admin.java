@@ -29,8 +29,8 @@ public class Admin {
     }
 
     @FXML
-    private void initialize(){
-        labelNameUser.setText("Bienvenido "+userName);
+    private void initialize() {
+        labelNameUser.setText("Bienvenido " + userName);
     }
 
     @FXML
