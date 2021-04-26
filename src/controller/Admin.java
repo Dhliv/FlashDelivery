@@ -30,7 +30,7 @@ public class Admin {
 
     @FXML
     private void initialize(){
-        labelNameUser.setText("Bienvenido "+userName);
+        labelNameUser = new Label("Bienvenido "+userName);
     }
 
     @FXML
