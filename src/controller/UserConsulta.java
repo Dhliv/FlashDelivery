@@ -15,15 +15,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Usuario;
-import utilities.LoadView;
+import utilities.*;
 
 public class UserConsulta implements Initializable {
 
   private AnchorPane content;
   private Parent userRegister;
   private LoadView vista;
+  private UserConsultaButtons botones;
 
   @FXML
   private TableView<Usuario> tableUsers;
@@ -39,6 +41,7 @@ public class UserConsulta implements Initializable {
   public UserConsulta(AnchorPane cont) {
     content = cont;
     vista = new LoadView();
+    botones = new UserConsultaButtons();
   }
 
   @Override
@@ -49,7 +52,8 @@ public class UserConsulta implements Initializable {
     sede.setCellValueFactory(new PropertyValueFactory<Usuario, Boolean>("enabled"));
     ObservableList<Usuario> s = FXCollections.observableArrayList();
 
-    s.add(new Usuario(1234, "APA", "password", true));
+    s.add(new Usuario(1234, "APA", "APA", true));
+    s.add(new Usuario(1235, "PAPU", "PAPU", true));
 
     tableUsers.setItems(s);
   }
@@ -64,5 +68,11 @@ public class UserConsulta implements Initializable {
     content.getChildren().clear();
     userRegister = vista.loadView("user.register", new UserRegister(content, this));
     content.getChildren().addAll(userRegister);
+  }
+
+  @FXML
+  void userEditButton(ActionEvent event){
+    Usuario usuario = tableUsers.getSelectionModel().getSelectedItem();
+    botones.goToUserEdit(usuario, content);
   }
 }
