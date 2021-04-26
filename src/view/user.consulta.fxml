@@ -31,10 +31,10 @@
       <Separator layoutY="90.0" prefWidth="1020.0" />
       <TableView fx:id="tableUsers" layoutY="90.0" prefHeight="670.0" prefWidth="1020.0">
         <columns>
-            <TableColumn prefWidth="154.0" text="Cédula" />
-          <TableColumn prefWidth="240.0" text="Nombre" />
-          <TableColumn prefWidth="297.0" text="Apellido" />
-            <TableColumn prefWidth="328.0" text="Sede" />
+            <TableColumn fx:id="cedula" prefWidth="154.0" text="Cédula" />
+          <TableColumn fx:id="nombre" prefWidth="240.0" text="Nombre" />
+          <TableColumn fx:id="apellido" prefWidth="297.0" text="Apellido" />
+            <TableColumn fx:id="sede" prefWidth="328.0" text="Sede" />
         </columns>
       </TableView>
    </children>
