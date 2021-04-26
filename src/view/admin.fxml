@@ -95,7 +95,7 @@
                         <Image url="@../resources/Images/logoEmpresa.jpg" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="169.0" prefHeight="124.0" prefWidth="151.0" text="Bienvenido 'USER'" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="labelNameUser" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="169.0" prefHeight="124.0" prefWidth="151.0" text="Bienvenido 'USER'" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>

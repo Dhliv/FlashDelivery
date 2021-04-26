@@ -17,6 +17,7 @@ public class Login {
     private Stage pantalla;
     private Roles roles;
     private ArrayList<String> rol;
+    private String user;
 
     public Login(Stage lgin) {
         this.pantalla = lgin;
@@ -52,7 +53,7 @@ public class Login {
     void login() throws Exception{
         ed = new EmpleadoDAO();
         ud = new UsuarioDAO();
-        String user = txtUsuario.getText();
+        user = txtUsuario.getText();
         String pass = txtPass.getText();
         int acc = ud.entradaUsuario(user, pass);
         if (acc == -2) {
@@ -75,9 +76,11 @@ public class Login {
             Ventana vent = new Ventana(null, null);
 
             if (rolAcc.equals(rol.get(0))) {
-                vent = new Ventana("admin", new Admin());
+                vent = new Ventana("admin", new Admin(user));
                 vent.start(pantalla);
-            } else if (rolAcc.equals(rol.get(1))) {
+            }
+            /*TODO
+            else if (rolAcc.equals(rol.get(1))) {
                 vent = new Ventana("admin", new Admin());
             } else if (rolAcc.equals(rol.get(2))) {
                 vent = new Ventana("operadorOficina", new Admin());
@@ -85,7 +88,7 @@ public class Login {
                 vent = new Ventana("operadorAuxiliar", new Admin());
             } else if (rolAcc.equals(rol.get(4))) {
                 vent = new Ventana("contador", new Admin());
-            }
+            }*/
         }
     }
 
