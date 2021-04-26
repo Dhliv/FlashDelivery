@@ -1,4 +1,5 @@
 
+import controller.Admin;
 import controller.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -10,8 +11,10 @@ public class Main extends Application {
     }
 
     public void start(Stage stage) throws Exception {
+
         Ventana login = new Ventana("login", new Login(stage));
         login.start(stage);
+
     }
 
 }
