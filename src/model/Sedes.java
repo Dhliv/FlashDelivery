@@ -22,10 +22,14 @@ public class Sedes {
                 .values(nombre, direccion).execute();
     }
 
+    /**
+     * Obtiene todas las sedes que existen en la base de datos.
+     * 
+     * @return listado de sedes.
+     */
     public static List<Sede> getSedes() {
         String sql = "select * from sede;";
         Result<Record> resultSet = Globals.db().fetch(sql); // Ejecuto la query 'sql'.
-
         List<Sede> sedes = resultSet.into(Sede.class);
 
         return sedes;

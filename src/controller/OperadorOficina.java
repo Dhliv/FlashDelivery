@@ -34,6 +34,11 @@ public class OperadorOficina {
   public OperadorOficina() {
   }
 
+  /**
+   * Accede a la pantalla de registro de paquetes.
+   * 
+   * @param event not used.
+   */
   @FXML
   void registrarPaquete(ActionEvent event) {
     Globals.pantalla.close();
@@ -50,6 +55,11 @@ public class OperadorOficina {
 
   }
 
+  /**
+   * Vuelve al login.
+   * 
+   * @param event not used.
+   */
   @FXML
   void logOut(ActionEvent event) {
     Globals.logOut();

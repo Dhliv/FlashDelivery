@@ -47,6 +47,11 @@ public class OperadorRegister implements Initializable {
   @FXML
   private Button btnRegresar;
 
+  /**
+   * Vuelve a la pantalla principal de Operador de Oficina.
+   * 
+   * @param event not used.
+   */
   @FXML
   void goToOperadorOficina(ActionEvent event) {
     Globals.pantalla.close();
@@ -63,6 +68,12 @@ public class OperadorRegister implements Initializable {
 
   }
 
+  /**
+   * Inicializa algunos componentes gráficos.
+   * 
+   * @param location  not used.
+   * @param resources not used.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ObservableList<String> sedes = FXCollections.observableArrayList();

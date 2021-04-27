@@ -2,8 +2,6 @@ package controller;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -58,12 +56,6 @@ public class UserRegister implements Initializable {
    *                    pestaña.
    * @param controlador Controller de la pestaña anterior.
    */
-  /**
-   * Constructor
-   * 
-   * @param contenido
-   * @param controlador
-   */
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
@@ -113,7 +105,7 @@ public class UserRegister implements Initializable {
 
       boolean forbidchar = false;
       boolean emptyCamps = false;
-      // funcionGuardarCampos();
+
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
       Object rl = rolT.getValue();
@@ -131,12 +123,11 @@ public class UserRegister implements Initializable {
       forbidchar = userRegisterChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
 
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
-        // !funcionIntroducir();
-        // #TODO Cambiar id a String en base de datos
+
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
         int idSede = Globals.getIdSede(idS.toString());
-        String rol = rl.toString();
+        String rol = rl.toString(); // Se transforman los tipos de datos que tienen tipo distinto a string.
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
         EmpleadoDAO empD = new EmpleadoDAO();

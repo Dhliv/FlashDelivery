@@ -68,6 +68,12 @@ public class Globals {
         }
     }
 
+    /**
+     * Obtiene las sedes existentes en la BD y las retorna.
+     * 
+     * @return Formatea el id y el nombre de la sede y retorna su respectivo
+     *         listado.
+     */
     public static ArrayList<String> getSedes() {
         sedes = model.Sedes.getSedes();
         ArrayList<String> idSedes = new ArrayList<>();
@@ -78,6 +84,12 @@ public class Globals {
         return idSedes;
     }
 
+    /**
+     * Obtiene el id de una sede respecto a su nombre.
+     * 
+     * @param name nombre de la sede.
+     * @return id de la sede.
+     */
     public static int getIdSede(String name) {
         for (int i = 0; i < sedes.size(); i++) {
             if (name.equals(sedes.get(i).nombre))
@@ -86,6 +98,9 @@ public class Globals {
         return -1; // Nunca llega aquí, pero me pedía el return Xd
     }
 
+    /**
+     * Desconecta al usuario actual del sistema.
+     */
     public static void logOut() {
         pantalla.close();
         ventana = new Ventana("login", new Login());

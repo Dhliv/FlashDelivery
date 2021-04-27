@@ -38,6 +38,12 @@ public class UserConsulta implements Initializable {
     botones = new UserConsultaButtons();
   }
 
+  /**
+   * Inicializa los datos de la tabla de empleados.
+   * 
+   * @param location  not used.
+   * @param resources not used.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     cedula.setCellValueFactory(new PropertyValueFactory<Usuario, Integer>("ID"));
@@ -58,6 +64,11 @@ public class UserConsulta implements Initializable {
 
   }
 
+  /**
+   * Accede a la pestaña de registro de usuarios.
+   * 
+   * @param event not used.
+   */
   @FXML
   void goToUsuariosRegistro(ActionEvent event) {
     content.getChildren().clear();
@@ -65,6 +76,11 @@ public class UserConsulta implements Initializable {
     content.getChildren().addAll(userRegister);
   }
 
+  /**
+   * Accede a la pestaña de edicion de empleado segúm el empleado seleccionado.
+   * 
+   * @param event not used.
+   */
   @FXML
   void userEditButton(ActionEvent event) {
     Usuario usuario = tableUsers.getSelectionModel().getSelectedItem();
