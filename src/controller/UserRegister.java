@@ -23,6 +23,7 @@ import model.UsuarioDAO;
 import utilities.*;
 
 public class UserRegister implements Initializable {
+  private int NOEXISTE;
   private AnchorPane content;
   private Roles roles;
   private UserRegisterChecker userRegisterChecker;
@@ -57,28 +58,26 @@ public class UserRegister implements Initializable {
   @FXML
   private PasswordField passwordT;
 
-  /*
-   * Constructor de la clase UserRegister.
+  /**
+   * Constructor de la clase UserRegister
    * 
-   * Almacena en la clase el 'contenido' (ventana actual donde se hace el
-   * registro) y 'controlador' lo almacena, para evitar crear uno nuevo con
-   * parametros iniciales distintos. Adicionalmente se crea un objeto de la clase
-   * Alerta con la que se invocarán a las alertas pertinentes a la creación de un
-   * usuario, ademas de un objeto de la clase UserRegisterChecker para hacer las
-   * validaciones pertinentes al registro de un usuario, y finalmente crea un
-   * objeto de la clase LoadView para cargar "pestañas".
+   * @param contenido   Contenedor de todos los componentes visuales de la actual
+   *                    pestaña.
+   * @param controlador Controller de la pestaña anterior.
    */
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
     alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
+    NOEXISTE = 1;
   }
 
-  /*
-   * Inicializa los siguientes componentes graficos:
-   *    -Las elecciones disponibles en las ChoiceBox.
-   *    -
+  /**
+   * Inicializador de algunos componentes gráficos.
+   * 
+   * @param url not used.
+   * @param rb  not used.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -99,24 +98,20 @@ public class UserRegister implements Initializable {
     idsedeT.getItems().addAll(s);
   }
 
-  /*
+  /**
    * Carga en 'content' la pantalla de consulta de usuarios.
+   * 
+   * @param event not used.
    */
   @FXML
   void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
-  /*
+  /**
    * Registra a un usuario.
    * 
-   * Se obtienen los datos registrados en cada campo habilitado, y se hacen las
-   * respectivas verificaciones: no pueden haber campos vacíos, no puede haber
-   * caracteres prohibidos, y un usuario no puede registrarse dos veces.
-   * 
-   * En caso de obtener una verificación aceptada, se le indica al usuario que su
-   * registro fue exitoso, de lo contrario se desplegará en pantalla un pop-up
-   * donde indique la clase de 'error' en la que incurrió.
+   * @param event not used.
    */
   @FXML
   void registrarUser(ActionEvent event) {
@@ -124,7 +119,7 @@ public class UserRegister implements Initializable {
 
       boolean forbidchar = false;
       boolean emptyCamps = false;
-      //funcionGuardarCampos();
+      // funcionGuardarCampos();
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
       Object rl = rolT.getValue();
@@ -138,10 +133,10 @@ public class UserRegister implements Initializable {
       String campo[] = { name, telefono, dir, ident, username, password };
       Object multOpcion[] = { rl, fecha, idS };
 
-      emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion);
-      forbidchar = userRegisterChecker.checkChar(campo);
+      emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
+      forbidchar = userRegisterChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
 
-      if (!forbidchar && !emptyCamps) {
+      if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         // !funcionIntroducir();
         // #TODO Cambiar id a String en base de datos
         int id = Integer.valueOf(ident);
@@ -151,9 +146,10 @@ public class UserRegister implements Initializable {
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
         EmpleadoDAO empD = new EmpleadoDAO();
-        userNoExist = empD.crearEmpleado(emp);
+        userNoExist = empD.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el empleado
+                                               // ya existía.
 
-        if (userNoExist == 1) { //El 1 significa que el usuario no existía.
+        if (userNoExist == NOEXISTE) {
           Usuario user = new Usuario(id, username, password, true);
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
@@ -163,7 +159,7 @@ public class UserRegister implements Initializable {
 
         alerta.showRegSuccess();
         volver();
-      } else {
+      } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           alerta.showEmptyFieldAlert();
         else if (forbidchar)
@@ -175,10 +171,10 @@ public class UserRegister implements Initializable {
 
   }
 
-  /*
+  /**
    * Retorna a la pantalla de consulta de usuarios.
    */
-  void volver() {
+  private void volver() {
     content.getChildren().clear();
     Parent root = Globals.loadView("user.consulta", controladorAnterior);
     content.getChildren().add(root);
