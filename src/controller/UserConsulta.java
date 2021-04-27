@@ -52,6 +52,7 @@ public class UserConsulta implements Initializable {
 
     s.add(new Usuario(1234, "APA", "APA", true));
     s.add(new Usuario(1235, "PAPU", "PAPU", true));
+    //insertData();
 
     tableUsers.setItems(s);
   }

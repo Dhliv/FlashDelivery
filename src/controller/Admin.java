@@ -10,11 +10,6 @@ import utilities.Globals;
 
 public class Admin {
 
-    @FXML
-    private AnchorPane content;
-
-    @FXML
-    private Label labelNameUser;
     private Parent sedeConsulta;
     private Parent userConsulta;
     private Parent reportes;
@@ -26,6 +21,16 @@ public class Admin {
         this.userName = userName;
     }
 
+    // #---------------------------------------------------------------------------
+    // # FXML: ARCHIVOS DE JAVA FXML
+    // #---------------------------------------------------------------------------
+
+    @FXML
+    private Label labelNameUser;
+
+    @FXML
+    private AnchorPane content;
+
     @FXML
     private void initialize() {
         Globals.adminViewPane = content;
@@ -34,6 +39,7 @@ public class Admin {
 
     @FXML
     void goToSedeConsulta(ActionEvent event) {
+        sedeConsulta = Globals.loadView("sede.consulta", this);
         content.getChildren().clear();
         content.getChildren().add(sedeConsulta);
     }
@@ -47,6 +53,7 @@ public class Admin {
 
     @FXML
     void goToAdminReportes(ActionEvent event) {
+        reportes = Globals.loadView("reportes", this);
         content.getChildren().clear();
         content.getChildren().add(reportes);
     }
