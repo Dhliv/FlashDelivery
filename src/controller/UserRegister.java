@@ -65,6 +65,12 @@ public class UserRegister implements Initializable {
    *                    pestaña.
    * @param controlador Controller de la pestaña anterior.
    */
+  /**
+   * Constructor
+   * 
+   * @param contenido
+   * @param controlador
+   */
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
