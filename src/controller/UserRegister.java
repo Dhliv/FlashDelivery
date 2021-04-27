@@ -31,7 +31,6 @@ public class UserRegister implements Initializable {
   private int userNoExist;
   private UserRegisterAlert alerta;
   private Object controladorAnterior;
-  private List<model.Sedes.Sede> sedes;
 
   @FXML
   private TextField nombreT;
@@ -71,7 +70,6 @@ public class UserRegister implements Initializable {
     alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
     NOEXISTE = 1;
-    sedes = model.Sedes.getSedes();
   }
 
   /**
@@ -84,17 +82,12 @@ public class UserRegister implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
-    ArrayList<String> idSedes = new ArrayList<>();
-
-    for (int i = 0; i < sedes.size(); i++) {
-      idSedes.add(sedes.get(i).ID_Sede + " - " + sedes.get(i).nombre);
-    }
 
     roles = new Roles();
     s.removeAll(s);
     l.removeAll(l);
     l.addAll(roles.rol);
-    s.addAll(idSedes);
+    s.addAll(Globals.getSedes());
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
   }
@@ -142,7 +135,7 @@ public class UserRegister implements Initializable {
         // #TODO Cambiar id a String en base de datos
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
-        int idSede = Globals.getIdSede(idS.toString(), sedes);
+        int idSede = Globals.getIdSede(idS.toString());
         String rol = rl.toString();
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);

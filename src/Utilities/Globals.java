@@ -11,6 +11,7 @@ import model.Sedes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.DSLContext;
@@ -24,6 +25,7 @@ public class Globals {
     public static Pane adminViewPane;
     public static Stage pantalla;
     private static Ventana ventana;
+    private static List<model.Sedes.Sede> sedes;
 
     public static void init(Object obj) {
         referenceObject = obj;
@@ -66,7 +68,17 @@ public class Globals {
         }
     }
 
-    public static int getIdSede(String name, List<Sedes.Sede> sedes) {
+    public static ArrayList<String> getSedes() {
+        sedes = model.Sedes.getSedes();
+        ArrayList<String> idSedes = new ArrayList<>();
+
+        for (int i = 0; i < sedes.size(); i++) {
+            idSedes.add(sedes.get(i).ID_Sede + " - " + sedes.get(i).nombre);
+        }
+        return idSedes;
+    }
+
+    public static int getIdSede(String name) {
         for (int i = 0; i < sedes.size(); i++) {
             if (name.equals(sedes.get(i).nombre))
                 return sedes.get(i).ID_Sede;

@@ -1,7 +1,14 @@
 package controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -11,7 +18,7 @@ import javafx.scene.control.TextField;
 import utilities.Globals;
 import utilities.Ventana;
 
-public class OperadorRegister {
+public class OperadorRegister implements Initializable {
   private Ventana ventana;
   @FXML
   private TextField cedulaClienteT;
@@ -20,11 +27,11 @@ public class OperadorRegister {
   @FXML
   private TextField direccionEntregaT;
   @FXML
-  private ChoiceBox<?> sedeEnvioT;
+  private ChoiceBox<String> sedeEnvioT;
   @FXML
   private TextField pesoPaqueteT;
   @FXML
-  private ChoiceBox<?> metodoPagoT;
+  private ChoiceBox<String> metodoPagoT;
   @FXML
   private TextField valorPaqueteT;
   @FXML
@@ -54,6 +61,24 @@ public class OperadorRegister {
   @FXML
   void registrarEnvio(ActionEvent event) {
 
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    ObservableList<String> sedes = FXCollections.observableArrayList();
+    ObservableList<String> metodosPago = FXCollections.observableArrayList();
+    ArrayList<String> mp = new ArrayList<>();
+    mp.add("Efectivo");
+    mp.add("Tarjeta de Crédito");
+    mp.add("Tarjeda Débito");
+
+    sedes.removeAll(sedes);
+    sedes.addAll(Globals.getSedes());
+    sedeEnvioT.getItems().addAll(sedes);
+
+    metodosPago.removeAll(metodosPago);
+    metodosPago.addAll(mp);
+    metodoPagoT.getItems().addAll(metodosPago);
   }
 
 }
