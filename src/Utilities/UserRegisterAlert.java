@@ -11,10 +11,11 @@ regSuccess = Mensaje cuando se registra correctamente un usuario.
 */
 public class UserRegisterAlert {
     
-    private Alert cEmpty;
-    private Alert cForbi;
-    private Alert userExist;
-    private Alert regSuccess;
+    private Alert cEmpty; //Alerta para campos vacios
+    private Alert cForbi; //Alerta para caracteres prohibidos
+    private Alert userExist; //Alerta para usuarios ya existentes
+    private Alert regSuccess; //Alerta para registro exitoso
+    private Alert errorUnexpt; //Alerta para un error fuera de los previsto
     
     public UserRegisterAlert(){
         cEmpty = new Alert(AlertType.NONE);
@@ -40,6 +41,12 @@ public class UserRegisterAlert {
         regSuccess.setContentText("El empleado se ha registrado con exito.");
         regSuccess.setTitle("Registro Exitoso");
         regSuccess.setHeaderText("");
+
+        errorUnexpt = new Alert(AlertType.NONE);
+        errorUnexpt.setAlertType(AlertType.INFORMATION);
+        errorUnexpt.setContentText("No se ha podido registrar el usuario por un error inesperado");
+        errorUnexpt.setTitle("Error inesperado");
+        errorUnexpt.setHeaderText("Error inesperado");
     }
 
     //Panel con información de que hay un campo vacio
@@ -53,6 +60,10 @@ public class UserRegisterAlert {
     //Panel cuando existe un empleado
     public void showUserExistAlert(){
         userExist.show();
+    }
+    //Panel de error inesperado
+    public void showErrorUnexpt(){
+        errorUnexpt.show();
     }
 
     public void showRegSuccess(){

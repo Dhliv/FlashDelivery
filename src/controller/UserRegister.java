@@ -22,27 +22,33 @@ import model.UsuarioDAO;
 import utilities.*;
 
 public class UserRegister implements Initializable {
-  private int NOEXISTE;
-  private AnchorPane content;
-  private Roles roles;
-  private UserRegisterChecker userRegisterChecker;
+  private static final int NOEXISTE = 1; //Usuario no se encuentra en la BD
+  private AnchorPane content; //Componente grafico padre
+  private Roles roles; //Cargos de la empresa
+  private UserRegisterChecker userRegisterChecker; //Clase auxiliar para comprobar validez
   private int userNoExist;
-  private UserRegisterAlert alerta;
+  private UserRegisterAlert alerta; //Objeto encargado de imprimir alertas
   private Object controladorAnterior;
-  private String name;
+
+  //Auxiliares para los datos del usuario.
+  private Object fecha; //Dato parcial de fecha de nacimiento
+  private Object idS; //Dato parcial de id sede
+  private Object rl; //Dato parcial de rol
+
+  //Variables que contienen los datos del usuario.
+  private String name; //Nombre
   private String telefono;
-  private Object rl;
-  private String dir;
-  private String ident;
-  private Object fecha;
-  private Object idS;
+  private String dir; //Dirección
+  private String ident; //Identificación
   private String username;
   private String password;
-  private int id;
-  private LocalDate fc;
-  private int idSede;
   private String rol;
+  private LocalDate fc; //Fecha de nacimiento
+  private int id;
+  private int idSede;
 
+
+  //Campos de texto que se pueden rellenar en user.register view
   @FXML
   private TextField nombreT;
   @FXML
@@ -61,6 +67,7 @@ public class UserRegister implements Initializable {
   private ChoiceBox<String> idsedeT;
   @FXML
   private PasswordField passwordT;
+  //FIN de los campos.
 
   /**
    * Constructor de la clase UserRegister
@@ -74,7 +81,6 @@ public class UserRegister implements Initializable {
     controladorAnterior = controlador;
     alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
-    NOEXISTE = 1;
   }
 
   /**
@@ -98,17 +104,7 @@ public class UserRegister implements Initializable {
   }
 
   /**
-   * Carga en 'content' la pantalla de consulta de usuarios.
-   * 
-   * @param event not used.
-   */
-  @FXML
-  void goToUsuariosConsulta(ActionEvent event) {
-    volver();
-  }
-
-  /**
-   * Obtiene los datos de los campos de registro.
+   * Obtiene los datos de los campos de registro y los almacena en las variables de la linea 38.
    */
   private void getData() {
     name = nombreT.getText();
@@ -133,6 +129,29 @@ public class UserRegister implements Initializable {
   }
 
   /**
+   * Retorna a la pantalla de consulta de usuarios.
+   */
+  private void volver() {
+    content.getChildren().clear();
+    Parent root = Globals.loadView("user.consulta", controladorAnterior);
+    content.getChildren().add(root);
+  }
+
+  // #---------------------------------------------------------------------------
+    // # FXML: ARCHIVOS DE JAVA FXML
+    // #---------------------------------------------------------------------------
+
+    /**
+   * Carga en 'content' la pantalla de consulta de usuarios.
+   * 
+   * @param event not used.
+   */
+  @FXML
+  void goToUsuariosConsulta(ActionEvent event) {
+    volver();
+  }
+
+    /**
    * Registra a un usuario.
    * 
    * @param event not used.
@@ -181,12 +200,4 @@ public class UserRegister implements Initializable {
 
   }
 
-  /**
-   * Retorna a la pantalla de consulta de usuarios.
-   */
-  private void volver() {
-    content.getChildren().clear();
-    Parent root = Globals.loadView("user.consulta", controladorAnterior);
-    content.getChildren().add(root);
-  }
 }
