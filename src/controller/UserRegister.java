@@ -29,6 +29,19 @@ public class UserRegister implements Initializable {
   private int userNoExist;
   private UserRegisterAlert alerta;
   private Object controladorAnterior;
+  private String name;
+  private String telefono;
+  private Object rl;
+  private String dir;
+  private String ident;
+  private Object fecha;
+  private Object idS;
+  private String username;
+  private String password;
+  private int id;
+  private LocalDate fc;
+  private int idSede;
+  private String rol;
 
   @FXML
   private TextField nombreT;
@@ -95,6 +108,31 @@ public class UserRegister implements Initializable {
   }
 
   /**
+   * Obtiene los datos de los campos de registro.
+   */
+  private void getData() {
+    name = nombreT.getText();
+    telefono = telefonoT.getText();
+    rl = rolT.getValue();
+    dir = direccionT.getText();
+    ident = identificacionT.getText();
+    fecha = fechaT.getValue();
+    idS = idsedeT.getValue();
+    username = usernameT.getText();
+    password = passwordT.getText();
+  }
+
+  /**
+   * Se transforman los tipos de datos que tienen tipo distinto a string.
+   */
+  private void parseData() {
+    id = Integer.valueOf(ident);
+    fc = LocalDate.parse(fecha.toString());
+    idSede = Globals.getIdSede(idS.toString());
+    rol = rl.toString();
+  }
+
+  /**
    * Registra a un usuario.
    * 
    * @param event not used.
@@ -106,16 +144,7 @@ public class UserRegister implements Initializable {
       boolean forbidchar = false;
       boolean emptyCamps = false;
 
-      String name = nombreT.getText();
-      String telefono = telefonoT.getText();
-      Object rl = rolT.getValue();
-      String dir = direccionT.getText();
-      String ident = identificacionT.getText();
-      Object fecha = fechaT.getValue();
-      Object idS = idsedeT.getValue();
-      String username = usernameT.getText();
-      String password = passwordT.getText();
-
+      getData();
       String campo[] = { name, telefono, dir, ident, username, password };
       Object multOpcion[] = { rl, fecha, idS };
 
@@ -123,11 +152,7 @@ public class UserRegister implements Initializable {
       forbidchar = userRegisterChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
 
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
-
-        int id = Integer.valueOf(ident);
-        LocalDate fc = LocalDate.parse(fecha.toString());
-        int idSede = Globals.getIdSede(idS.toString());
-        String rol = rl.toString(); // Se transforman los tipos de datos que tienen tipo distinto a string.
+        parseData();
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
         EmpleadoDAO empD = new EmpleadoDAO();
