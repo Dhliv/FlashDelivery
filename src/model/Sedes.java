@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import org.jooq.DSLContext;
+import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.*;
+import org.jooq.Record;
 
 import utilities.Globals;
 
@@ -18,16 +20,15 @@ public class Sedes {
                 .values(nombre, direccion).execute();
     }
 
-    public static ArrayList<Sede> selectSedes() {
+    public static ArrayList<Sede> getSedes() {
         String sql = "select * from sede;";
-        var rs = Globals.db().fetch(sql);
-        int numSedes = rs.size();
+        Result<Record> resultSet = Globals.db().fetch(sql);
 
         ArrayList<Sede> sedes = new ArrayList<>();
-        for (int i = 0; i < numSedes; i++) {
-            int id = (int) rs.get(i).get("ID_Sede");
-            String name = (String) rs.get(i).get("Nombre");
-            String dir = (String) rs.get(i).get("Direccion");
+        for (Record rs : resultSet) {
+            int id = (int) rs.get("ID_Sede");
+            String name = (String) rs.get("Nombre");
+            String dir = (String) rs.get("Direccion");
             Sede sede = new Sede(id, name, dir);
             sedes.add(sede);
         }

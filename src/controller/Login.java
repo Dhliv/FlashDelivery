@@ -73,7 +73,7 @@ public class Login {
             pantalla.close();
 
             // Abrir nueva ventana
-            Ventana vent = new Ventana(null, null);
+            Ventana vent;
 
             if (rolAcc.equals(rol.get(roles.ADMIN))) {
                 vent = new Ventana("admin", new Admin(user));
@@ -81,8 +81,8 @@ public class Login {
             } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
                 vent = new Ventana("admin", new Admin(user));
             } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
-                // vent = new Ventana("operadorOficina", new Admin(user));
-                System.out.println("Bienvenido");
+                vent = new Ventana("operadorOficina", new OperadorOficina());
+                vent.start(pantalla);
             } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
                 vent = new Ventana("operadorAuxiliar", new Admin(user));
             } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {

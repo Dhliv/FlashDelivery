@@ -79,7 +79,7 @@ public class UserRegister implements Initializable {
     alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
     NOEXISTE = 1;
-    sedes = model.Sedes.selectSedes();
+    sedes = model.Sedes.getSedes();
   }
 
   /**
@@ -95,7 +95,7 @@ public class UserRegister implements Initializable {
     ArrayList<String> idSedes = new ArrayList<>();
 
     for (int i = 0; i < sedes.size(); i++) {
-      idSedes.add(sedes.get(i).getNombre());
+      idSedes.add(sedes.get(i).id_sede + " - " + sedes.get(i).nombre);
     }
 
     roles = new Roles();

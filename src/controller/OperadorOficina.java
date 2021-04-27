@@ -28,6 +28,10 @@ public class OperadorOficina {
   @FXML
   private Label labelUsuario;
 
+  public OperadorOficina() {
+
+  }
+
   @FXML
   void registrarPaquete(ActionEvent event) {
 

@@ -63,8 +63,8 @@ public class Globals {
 
     public static int getIdSede(String name, ArrayList<Sede> sedes) {
         for (int i = 0; i < sedes.size(); i++) {
-            if (name.equals(sedes.get(i).getNombre()))
-                return sedes.get(i).getId_sede();
+            if (name.equals(sedes.get(i).nombre))
+                return sedes.get(i).id_sede;
         }
         return -1; // Nunca llega aquí, pero me pedía el return Xd
     }
