@@ -68,6 +68,12 @@ public class UserRegister implements Initializable {
    * validaciones pertinentes al registro de un usuario, y finalmente crea un
    * objeto de la clase LoadView para cargar "pestañas".
    */
+  /**
+   * Constructor
+   * 
+   * @param contenido
+   * @param controlador
+   */
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
@@ -76,9 +82,8 @@ public class UserRegister implements Initializable {
   }
 
   /*
-   * Inicializa los siguientes componentes graficos:
-   *    -Las elecciones disponibles en las ChoiceBox.
-   *    -
+   * Inicializa los siguientes componentes graficos: -Las elecciones disponibles
+   * en las ChoiceBox. -
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -111,8 +116,8 @@ public class UserRegister implements Initializable {
    * Registra a un usuario.
    * 
    * Se obtienen los datos registrados en cada campo habilitado, y se hacen las
-   * respectivas verificaciones: no pueden haber campos vacíos, no puede haber
-   * caracteres prohibidos, y un usuario no puede registrarse dos veces.
+   * respectivas verificaciones: no pueden haber campos vacíos, , y un usuario no
+   * puede registrarse dos veces.
    * 
    * En caso de obtener una verificación aceptada, se le indica al usuario que su
    * registro fue exitoso, de lo contrario se desplegará en pantalla un pop-up
@@ -124,7 +129,7 @@ public class UserRegister implements Initializable {
 
       boolean forbidchar = false;
       boolean emptyCamps = false;
-      //funcionGuardarCampos();
+      // funcionGuardarCampos();
       String name = nombreT.getText();
       String telefono = telefonoT.getText();
       Object rl = rolT.getValue();
@@ -138,8 +143,9 @@ public class UserRegister implements Initializable {
       String campo[] = { name, telefono, dir, ident, username, password };
       Object multOpcion[] = { rl, fecha, idS };
 
-      emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion);
-      forbidchar = userRegisterChecker.checkChar(campo);
+      // se hacen las respectivas verificaciones
+      emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion); // no pueden haber campos vacíos
+      forbidchar = userRegisterChecker.checkChar(campo); // no puede haber caracteres prohibidos
 
       if (!forbidchar && !emptyCamps) {
         // !funcionIntroducir();
@@ -153,7 +159,7 @@ public class UserRegister implements Initializable {
         EmpleadoDAO empD = new EmpleadoDAO();
         userNoExist = empD.crearEmpleado(emp);
 
-        if (userNoExist == 1) { //El 1 significa que el usuario no existía.
+        if (userNoExist == 1) { // El 1 significa que el usuario no existía.
           Usuario user = new Usuario(id, username, password, true);
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);

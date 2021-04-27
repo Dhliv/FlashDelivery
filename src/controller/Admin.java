@@ -39,7 +39,6 @@ public class Admin {
 
     @FXML
     void goToSedeConsulta(ActionEvent event) {
-        sedeConsulta = Globals.loadView("sede.consulta", this);
         content.getChildren().clear();
         content.getChildren().add(sedeConsulta);
     }
@@ -53,7 +52,6 @@ public class Admin {
 
     @FXML
     void goToAdminReportes(ActionEvent event) {
-        reportes = Globals.loadView("reportes", this);
         content.getChildren().clear();
         content.getChildren().add(reportes);
     }
