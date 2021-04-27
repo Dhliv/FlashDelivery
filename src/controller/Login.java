@@ -40,7 +40,7 @@ public class Login {
     void loginKeyboard(KeyEvent event) throws Exception {
         System.out.println(event);
         KeyCode key = event.getCode();
-        if  (key.equals(KeyCode.ENTER)){
+        if (key.equals(KeyCode.ENTER)) {
             login();
         }
     }
@@ -50,7 +50,7 @@ public class Login {
         login();
     }
 
-    void login() throws Exception{
+    void login() throws Exception {
         ed = new EmpleadoDAO();
         ud = new UsuarioDAO();
         user = txtUsuario.getText();
@@ -75,20 +75,18 @@ public class Login {
             // Abrir nueva ventana
             Ventana vent = new Ventana(null, null);
 
-            if (rolAcc.equals(rol.get(0))) {
+            if (rolAcc.equals(rol.get(roles.ADMIN))) {
                 vent = new Ventana("admin", new Admin(user));
                 vent.start(pantalla);
+            } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
+                vent = new Ventana("admin", new Admin(user));
+            } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
+                vent = new Ventana("operadorOficina", new Admin(user));
+            } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
+                vent = new Ventana("operadorAuxiliar", new Admin(user));
+            } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {
+                vent = new Ventana("contador", new Admin(user));
             }
-            /*TODO
-            else if (rolAcc.equals(rol.get(1))) {
-                vent = new Ventana("admin", new Admin());
-            } else if (rolAcc.equals(rol.get(2))) {
-                vent = new Ventana("operadorOficina", new Admin());
-            } else if (rolAcc.equals(rol.get(3))) {
-                vent = new Ventana("operadorAuxiliar", new Admin());
-            } else if (rolAcc.equals(rol.get(4))) {
-                vent = new Ventana("contador", new Admin());
-            }*/
         }
     }
 
