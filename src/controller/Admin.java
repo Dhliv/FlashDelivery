@@ -16,8 +16,6 @@ public class Admin {
     private String userName;
 
     public Admin(String userName) {
-        sedeConsulta = Globals.loadView("sede.consulta");
-        reportes = Globals.loadView("reportes");
         this.userName = userName;
     }
 
@@ -40,6 +38,7 @@ public class Admin {
     @FXML
     void goToSedeConsulta(ActionEvent event) {
         content.getChildren().clear();
+        sedeConsulta = Globals.loadView("sede.consulta");
         content.getChildren().add(sedeConsulta);
     }
 
@@ -53,6 +52,7 @@ public class Admin {
     @FXML
     void goToAdminReportes(ActionEvent event) {
         content.getChildren().clear();
+        reportes = Globals.loadView("reportes", this);
         content.getChildren().add(reportes);
     }
 
