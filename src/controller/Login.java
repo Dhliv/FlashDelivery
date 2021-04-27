@@ -14,13 +14,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Login {
-    private Stage pantalla;
     private Roles roles;
     private ArrayList<String> rol;
     private String user;
 
-    public Login(Stage lgin) {
-        this.pantalla = lgin;
+    public Login() {
         roles = new Roles();
         this.rol = roles.rol;
     }
@@ -70,19 +68,19 @@ public class Login {
             var rolAcc = userActual.getRol();
 
             // Cerrar ventana actual
-            pantalla.close();
+            Globals.pantalla.close();
 
             // Abrir nueva ventana
             Ventana vent;
 
             if (rolAcc.equals(rol.get(roles.ADMIN))) {
                 vent = new Ventana("admin", new Admin(user));
-                vent.start(pantalla);
+                vent.start(Globals.pantalla);
             } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
                 vent = new Ventana("admin", new Admin(user));
             } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
                 vent = new Ventana("operadorOficina", new OperadorOficina());
-                vent.start(pantalla);
+                vent.start(Globals.pantalla);
             } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
                 vent = new Ventana("operadorAuxiliar", new Admin(user));
             } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {

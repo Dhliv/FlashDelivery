@@ -12,7 +12,8 @@ public class Main extends Application {
 
     public void start(Stage stage) throws Exception {
         Globals.init(this);
-        Ventana login = new Ventana("login", new Login(stage));
+        Globals.pantalla = stage;
+        Ventana login = new Ventana("login", new Login());
         login.start(stage);
     }
 

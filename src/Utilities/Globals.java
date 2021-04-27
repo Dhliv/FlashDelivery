@@ -5,20 +5,25 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import model.Sede;
+import javafx.stage.Stage;
+import model.Sedes;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import controller.Login;
+
 public class Globals {
     private static Object referenceObject;
     public static Pane adminViewPane;
+    public static Stage pantalla;
+    private static Ventana ventana;
 
     public static void init(Object obj) {
         referenceObject = obj;
@@ -61,11 +66,21 @@ public class Globals {
         }
     }
 
-    public static int getIdSede(String name, ArrayList<Sede> sedes) {
+    public static int getIdSede(String name, List<Sedes.Sede> sedes) {
         for (int i = 0; i < sedes.size(); i++) {
             if (name.equals(sedes.get(i).nombre))
-                return sedes.get(i).id_sede;
+                return sedes.get(i).ID_Sede;
         }
         return -1; // Nunca llega aquí, pero me pedía el return Xd
+    }
+
+    public static void logOut() {
+        pantalla.close();
+        ventana = new Ventana("login", new Login());
+        try {
+            ventana.start(pantalla);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

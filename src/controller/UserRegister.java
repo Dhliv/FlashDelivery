@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -18,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.Empleado;
 import model.EmpleadoDAO;
-import model.Sede;
 import model.Usuario;
 import model.UsuarioDAO;
 import utilities.*;
@@ -31,32 +31,24 @@ public class UserRegister implements Initializable {
   private int userNoExist;
   private UserRegisterAlert alerta;
   private Object controladorAnterior;
-  private ArrayList<Sede> sedes;
+  private List<model.Sedes.Sede> sedes;
 
   @FXML
   private TextField nombreT;
-
   @FXML
   private TextField identificacionT;
-
   @FXML
   private TextField telefonoT;
-
   @FXML
   private TextField direccionT;
-
   @FXML
   private DatePicker fechaT;
-
   @FXML
   private ChoiceBox<String> rolT;
-
   @FXML
   private TextField usernameT;
-
   @FXML
   private ChoiceBox<String> idsedeT;
-
   @FXML
   private PasswordField passwordT;
 
@@ -95,7 +87,7 @@ public class UserRegister implements Initializable {
     ArrayList<String> idSedes = new ArrayList<>();
 
     for (int i = 0; i < sedes.size(); i++) {
-      idSedes.add(sedes.get(i).id_sede + " - " + sedes.get(i).nombre);
+      idSedes.add(sedes.get(i).ID_Sede + " - " + sedes.get(i).nombre);
     }
 
     roles = new Roles();
@@ -135,12 +127,12 @@ public class UserRegister implements Initializable {
       String dir = direccionT.getText();
       String ident = identificacionT.getText();
       Object fecha = fechaT.getValue();
-      String idS = idsedeT.getValue().toString();
+      Object idS = idsedeT.getValue();
       String username = usernameT.getText();
       String password = passwordT.getText();
 
-      String campo[] = { name, telefono, dir, ident, username, password, idS };
-      Object multOpcion[] = { rl, fecha };
+      String campo[] = { name, telefono, dir, ident, username, password };
+      Object multOpcion[] = { rl, fecha, idS };
 
       emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
       forbidchar = userRegisterChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
@@ -150,7 +142,7 @@ public class UserRegister implements Initializable {
         // #TODO Cambiar id a String en base de datos
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
-        int idSede = Globals.getIdSede(idS, sedes);
+        int idSede = Globals.getIdSede(idS.toString(), sedes);
         String rol = rl.toString();
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
@@ -162,11 +154,11 @@ public class UserRegister implements Initializable {
           Usuario user = new Usuario(id, username, password, true);
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
+          alerta.showRegSuccess();
         } else {
           alerta.showUserExistAlert();
         }
 
-        alerta.showRegSuccess();
         volver();
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)

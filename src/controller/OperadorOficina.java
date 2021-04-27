@@ -6,9 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+import utilities.Globals;
+import utilities.Ventana;
 
 public class OperadorOficina {
-
+  public Ventana ventana;
   @FXML
   private TableView<?> tablePaquetes;
   @FXML
@@ -29,12 +32,17 @@ public class OperadorOficina {
   private Label labelUsuario;
 
   public OperadorOficina() {
-
   }
 
   @FXML
   void registrarPaquete(ActionEvent event) {
-
+    Globals.pantalla.close();
+    ventana = new Ventana("operador.registrar", new OperadorRegister());
+    try {
+      ventana.start(Globals.pantalla);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @FXML
@@ -42,4 +50,8 @@ public class OperadorOficina {
 
   }
 
+  @FXML
+  void logOut(ActionEvent event) {
+    Globals.logOut();
+  }
 }

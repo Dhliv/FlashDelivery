@@ -89,33 +89,33 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField layoutY="25.0" prefWidth="240.0" />
-                              <TextField layoutX="370.0" layoutY="25.0" prefWidth="240.0" />
-                              <TextField layoutY="115.0" prefWidth="240.0" />
-                              <ChoiceBox layoutX="370.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
-                              <TextField layoutY="205.0" prefHeight="25.0" prefWidth="240.0" />
-                              <ChoiceBox layoutX="370.0" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" />
-                              <TextField layoutY="295.0" prefWidth="240.0" />
-                              <Label layoutX="370.0" layoutY="293.0" text="0$">
+                              <TextField fx:id="cedulaClienteT" layoutY="25.0" prefWidth="240.0" />
+                              <TextField fx:id="cedulaDestinoT" layoutX="370.0" layoutY="25.0" prefWidth="240.0" />
+                              <TextField fx:id="direccionEntregaT" layoutY="115.0" prefWidth="240.0" />
+                              <ChoiceBox fx:id="sedeEnvioT" layoutX="370.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
+                              <TextField fx:id="pesoPaqueteT" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" />
+                              <ChoiceBox fx:id="metodoPagoT" layoutX="370.0" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" />
+                              <TextField fx:id="valorPaqueteT" layoutY="295.0" prefWidth="240.0" />
+                              <Label fx:id="labelImpuesto" layoutX="370.0" layoutY="293.0" text="0$">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutY="360.0" prefWidth="240.0" text="Total: #total">
+                              <Label fx:id="labelTotalCosto" layoutY="360.0" prefWidth="240.0" text="Total: #total">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextArea layoutY="465.0" prefHeight="140.0" prefWidth="610.0" />
-                              <CheckBox layoutY="610.0" mnemonicParsing="false" text="Seguro" />
+                              <TextArea fx:id="descripcionT" layoutY="465.0" prefHeight="140.0" prefWidth="610.0" />
+                              <CheckBox fx:id="seguroChoice" layoutY="610.0" mnemonicParsing="false" text="Seguro" />
                               <Pane layoutX="318.0" layoutY="619.0">
                                  <children>
-                                    <Button layoutX="127.0" layoutY="3.0" mnemonicParsing="false" text="Registrar paquete">
+                                    <Button fx:id="btnRegistrar" layoutX="127.0" layoutY="3.0" mnemonicParsing="false" onAction="#registrarEnvio" text="Registrar envío">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="Regresar">
+                                    <Button fx:id="btnRegresar" layoutY="3.0" mnemonicParsing="false" onAction="#goToOperadorOficina" prefHeight="32.0" prefWidth="94.0" text="Regresar">
                                        <font>
                                           <Font size="18.0" />
                                        </font>

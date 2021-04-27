@@ -113,7 +113,7 @@
                      </font>
                   </Label>
                   <Pane layoutY="210.0" />
-                  <Button fx:id="btnSolicitudRecogida" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="516.0" mnemonicParsing="false" onAction="#registrarRecogida" prefHeight="70.0" prefWidth="160.0" text="Generar solitud de recogida" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="btnSolicitudRecogida" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="516.0" mnemonicParsing="false" onAction="#registrarRecogida" prefHeight="70.0" prefWidth="160.0" text="Generar solitud de recogida" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -128,6 +128,11 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Button fx:id="btnLogOut" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="669.0" mnemonicParsing="false" onAction="#logOut" prefHeight="70.0" prefWidth="160.0" text="Log Out" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>

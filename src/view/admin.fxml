@@ -115,7 +115,7 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" layoutX="65.0" layoutY="686.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="127.0" text="Log Out" textAlignment="CENTER">
+                  <Button alignment="CENTER" layoutX="65.0" layoutY="686.0" mnemonicParsing="false" onAction="#logOut" prefHeight="42.0" prefWidth="127.0" text="Log Out" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
