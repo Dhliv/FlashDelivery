@@ -13,12 +13,16 @@ public class Roles {
   public Roles() {
     rol.add("Gerente");
     ADMIN = 0;
+
     rol.add("Secretario(a)");
     SECRETARIO = 1;
+
     rol.add("Operador de oficina");
     OPERADOR = 2;
+
     rol.add("Auxiliar");
     AUXILIAR = 3;
+
     rol.add("Contador");
     CONTADOR = 4;
   }
