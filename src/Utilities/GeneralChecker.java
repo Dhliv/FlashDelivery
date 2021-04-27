@@ -1,17 +1,15 @@
 package utilities;
 
-public class UserRegisterChecker {
+public class GeneralChecker {
 
-  public UserRegisterChecker() {
-
-  }
-
-  /*
+  /**
    * La función revisa si en un conjunto de strings existe algún caracter
-   * prohibido. Return true significa que encontró un caracter prohibido. De lo
-   * contrario está todo ok.
+   * prohibido.
+   * 
+   * @param campo conjunto de Strings a revisar.
+   * @return True si existe un caracter prohibido.
    */
-  public boolean checkChar(String campo[]) {
+  public static boolean checkChar(String campo[]) {
     boolean ch = false;
     char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
 
@@ -28,12 +26,15 @@ public class UserRegisterChecker {
     return ch;
   }
 
-  /*
+  /**
    * La función revisa que un conjunto de strings y un conjunto de Objects no sean
-   * vacíos o nulos. Return true significa que encontró un campo vacío o nulo. De
-   * lo contrario está todo ok.
+   * vacíos o nulos.
+   * 
+   * @param campo   conjunto de Strings a revisar.
+   * @param objetos conjunto de objetos a revisar.
+   * @return True si se encontró algún string u objeto vacío.
    */
-  public boolean checkEmpty(String campo[], Object objetos[]) {
+  public static boolean checkEmpty(String campo[], Object objetos[]) {
     boolean ch = false;
 
     for (int i = 0; i < campo.length; i++) {

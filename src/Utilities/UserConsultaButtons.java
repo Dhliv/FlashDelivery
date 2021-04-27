@@ -10,11 +10,11 @@ import model.*;
 */
 public class UserConsultaButtons {
 
-  private UserConsultaAlert userAlert;
+  private GeneralAlerts userAlert;
   private Parent userModify;
 
   public void goToUserEdit(Usuario user, AnchorPane content) {
-    userAlert = new UserConsultaAlert();
+    userAlert = new GeneralAlerts();
     if (user == null)
       userAlert.showUserNullAlert();
     else {

@@ -91,11 +91,13 @@ public class Globals {
      * @return id de la sede.
      */
     public static int getIdSede(String name) {
-        for (int i = 0; i < sedes.size(); i++) {
-            if (name.equals(sedes.get(i).nombre))
-                return sedes.get(i).ID_Sede;
+        String idAux = "";
+        for (int i = 0; i < name.length(); i++) {
+            if (Character.isWhitespace(name.charAt(i)))
+                break;
+            idAux += name.charAt(i);
         }
-        return -1; // Nunca llega aquí, pero me pedía el return Xd
+        return Integer.parseInt(idAux);
     }
 
     /**

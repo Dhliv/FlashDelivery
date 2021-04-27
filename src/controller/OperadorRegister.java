@@ -15,10 +15,25 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import utilities.GeneralAlerts;
+import utilities.GeneralChecker;
 import utilities.Globals;
 import utilities.Ventana;
 
 public class OperadorRegister implements Initializable {
+  private String cedCliente;
+  private String cedDestino;
+  private String dirDestino;
+  private String pesoPaquete;
+  private String valorPaquete;
+  private String descripcion;
+  private Object sedeEnvio;
+  private Object metodoPago;
+  private Boolean seguro;
+  private String[] textos;
+  private Object[] multOpcion;
+  private GeneralAlerts alerta;
+
   private Ventana ventana;
   @FXML
   private TextField cedulaClienteT;
@@ -42,10 +57,6 @@ public class OperadorRegister implements Initializable {
   private TextArea descripcionT;
   @FXML
   private CheckBox seguroChoice;
-  @FXML
-  private Button btnRegistrar;
-  @FXML
-  private Button btnRegresar;
 
   /**
    * Vuelve a la pantalla principal de Operador de Oficina.
@@ -65,7 +76,22 @@ public class OperadorRegister implements Initializable {
 
   @FXML
   void registrarEnvio(ActionEvent event) {
+    boolean charForbiden = false;
+    boolean emptyCamps = false;
 
+    getData();
+    charForbiden = GeneralChecker.checkChar(textos);
+    emptyCamps = GeneralChecker.checkEmpty(textos, multOpcion);
+
+    if (!(charForbiden || emptyCamps)) {
+      ingresarDatos();
+      alerta.showRegSuccess();
+    } else {
+      if (charForbiden)
+        alerta.showCharForbidenAlert();
+      else
+        alerta.showEmptyFieldAlert();
+    }
   }
 
   /**
@@ -92,4 +118,35 @@ public class OperadorRegister implements Initializable {
     metodoPagoT.getItems().addAll(metodosPago);
   }
 
+  /**
+   * Obtiene los datos de los campos de registro y los guarda en listas.
+   */
+  private void getData() {
+    cedCliente = cedulaClienteT.getText();
+    cedDestino = cedulaDestinoT.getText();
+    dirDestino = direccionEntregaT.getText();
+    pesoPaquete = pesoPaqueteT.getText();
+    valorPaquete = valorPaqueteT.getText();
+    descripcion = descripcionT.getText();
+    sedeEnvio = sedeEnvioT.getValue();
+    metodoPago = metodoPagoT.getValue();
+    seguro = seguroChoice.isSelected();
+
+    textos = new String[6];
+    multOpcion = new Object[2];
+
+    textos[0] = cedCliente;
+    textos[1] = cedDestino;
+    textos[2] = dirDestino;
+    textos[3] = pesoPaquete;
+    textos[4] = valorPaquete;
+    textos[5] = descripcion;
+
+    multOpcion[0] = sedeEnvio;
+    multOpcion[1] = metodoPago;
+  }
+
+  private void ingresarDatos() {
+
+  }
 }

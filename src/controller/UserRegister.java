@@ -25,9 +25,8 @@ public class UserRegister implements Initializable {
   private int NOEXISTE;
   private AnchorPane content;
   private Roles roles;
-  private UserRegisterChecker userRegisterChecker;
   private int userNoExist;
-  private UserRegisterAlert alerta;
+  private GeneralAlerts alerta;
   private Object controladorAnterior;
   private String name;
   private String telefono;
@@ -72,8 +71,7 @@ public class UserRegister implements Initializable {
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
-    alerta = new UserRegisterAlert();
-    userRegisterChecker = new UserRegisterChecker();
+    alerta = new GeneralAlerts();
     NOEXISTE = 1;
   }
 
@@ -148,8 +146,8 @@ public class UserRegister implements Initializable {
       String campo[] = { name, telefono, dir, ident, username, password };
       Object multOpcion[] = { rl, fecha, idS };
 
-      emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
-      forbidchar = userRegisterChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
+      emptyCamps = GeneralChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
+      forbidchar = GeneralChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
 
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         parseData();
@@ -164,11 +162,10 @@ public class UserRegister implements Initializable {
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
           alerta.showRegSuccess();
+          volver();
         } else {
           alerta.showUserExistAlert();
         }
-
-        volver();
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           alerta.showEmptyFieldAlert();
