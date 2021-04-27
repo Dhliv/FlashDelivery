@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:controller="controller.Sedes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sedes">
    <children>
       <Button alignment="CENTER" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onAction="#atras" text="Atras" textAlignment="CENTER">
          <font>
@@ -18,8 +18,8 @@
          </font>
       </Button>
       <Label layoutX="44.0" layoutY="120.0" text="Nombre:" />
-      <TextField layoutX="105.0" layoutY="116.0" prefHeight="25.0" prefWidth="182.0" />
-      <TextField layoutX="424.0" layoutY="116.0" prefHeight="25.0" prefWidth="176.0" />
+      <TextField fx:id="nombre" layoutX="105.0" layoutY="116.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField fx:id="direccion" layoutX="424.0" layoutY="116.0" prefHeight="25.0" prefWidth="176.0" />
       <Label layoutX="359.0" layoutY="120.0" prefHeight="17.0" prefWidth="65.0" text="Dirección:" />
    </children>
 </Pane>

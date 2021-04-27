@@ -92,12 +92,12 @@
             <Pane prefHeight="90.0" prefWidth="1280.0" />
             <Pane layoutX="260.0" layoutY="10.0" prefHeight="760.0" prefWidth="1010.0">
                <children>
-                  <TableView focusTraversable="false" prefHeight="760.0" prefWidth="1010.0">
+                  <TableView fx:id="tablePaquetes" focusTraversable="false" prefHeight="760.0" prefWidth="1010.0">
                     <columns>
-                        <TableColumn prefWidth="315.9999809265137" text="Destinatario" />
-                        <TableColumn prefWidth="110.4000244140625" text="ID del paquete" />
-                        <TableColumn prefWidth="309.5999755859375" text="Peso del paquete" />
-                        <TableColumn prefWidth="280.800048828125" text="Estado" />
+                        <TableColumn fx:id="columnDestinatario" prefWidth="315.9999809265137" text="Destinatario" />
+                        <TableColumn fx:id="columnIdPaquete" prefWidth="110.4000244140625" text="ID del paquete" />
+                        <TableColumn fx:id="columnPesoPaquete" prefWidth="309.5999755859375" text="Peso del paquete" />
+                        <TableColumn fx:id="columnEstado" prefWidth="280.800048828125" text="Estado" />
                     </columns>
                   </TableView>
                </children>
@@ -107,23 +107,23 @@
             </Pane>
             <Pane layoutY="-1.0" prefHeight="781.0" prefWidth="260.0">
                <children>
-                  <Label layoutX="42.0" layoutY="103.0" prefHeight="70.0" prefWidth="176.0" text="Punto de venta Nombre" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="labelPOS" layoutX="42.0" layoutY="103.0" prefHeight="70.0" prefWidth="176.0" text="Punto de venta Nombre" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
                   <Pane layoutY="210.0" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="516.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" text="Generar solitud de recogida" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="btnSolicitudRecogida" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="516.0" mnemonicParsing="false" onAction="#registrarRecogida" prefHeight="70.0" prefWidth="160.0" text="Generar solitud de recogida" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="47.0" layoutY="363.0" mnemonicParsing="false" onAction="#clicksoide" prefHeight="70.0" prefWidth="160.0" text="Registrar paquete" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="btnRegistrarPaquete" layoutX="47.0" layoutY="363.0" mnemonicParsing="false" onAction="#registrarPaquete" prefHeight="70.0" prefWidth="160.0" text="Registrar paquete" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Label layoutX="47.0" layoutY="228.0" prefHeight="70.0" prefWidth="160.0" text="Bienvenido nombreUsuario" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="labelUsuario" layoutX="47.0" layoutY="228.0" prefHeight="70.0" prefWidth="160.0" text="Bienvenido nombreUsuario" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
