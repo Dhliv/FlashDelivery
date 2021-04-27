@@ -81,7 +81,8 @@ public class Login {
             } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
                 vent = new Ventana("admin", new Admin(user));
             } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
-                vent = new Ventana("operadorOficina", new Admin(user));
+                // vent = new Ventana("operadorOficina", new Admin(user));
+                System.out.println("Bienvenido");
             } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
                 vent = new Ventana("operadorAuxiliar", new Admin(user));
             } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {

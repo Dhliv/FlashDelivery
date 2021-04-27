@@ -37,8 +37,8 @@ public class Conexion {
     }
 
     static class MiShDwnHook extends Thread {
-        // Justo antes de finaliza el programa la JVM invocará
-        // este método donde podemos cerra la conexión
+        // Justo antes de finalizar el programa la JVM invocará
+        // este método donde podemos cerrar la conexión
         @Override
         public void run() {
             try {

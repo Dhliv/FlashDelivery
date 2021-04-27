@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.Empleado;
 import model.EmpleadoDAO;
+import model.Sede;
 import model.Usuario;
 import model.UsuarioDAO;
 import utilities.*;
@@ -30,6 +31,7 @@ public class UserRegister implements Initializable {
   private int userNoExist;
   private UserRegisterAlert alerta;
   private Object controladorAnterior;
+  private ArrayList<Sede> sedes;
 
   @FXML
   private TextField nombreT;
@@ -53,7 +55,7 @@ public class UserRegister implements Initializable {
   private TextField usernameT;
 
   @FXML
-  private ChoiceBox<Integer> idsedeT;
+  private ChoiceBox<String> idsedeT;
 
   @FXML
   private PasswordField passwordT;
@@ -77,6 +79,7 @@ public class UserRegister implements Initializable {
     alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
     NOEXISTE = 1;
+    sedes = model.Sedes.selectSedes();
   }
 
   /**
@@ -88,18 +91,18 @@ public class UserRegister implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
-    ObservableList<Integer> s = FXCollections.observableArrayList();
-    ArrayList<Integer> sedes = new ArrayList<>();
+    ObservableList<String> s = FXCollections.observableArrayList();
+    ArrayList<String> idSedes = new ArrayList<>();
 
-    for (int i = 0; i < 10; i++) {
-      sedes.add(i);
+    for (int i = 0; i < sedes.size(); i++) {
+      idSedes.add(sedes.get(i).getNombre());
     }
 
     roles = new Roles();
     s.removeAll(s);
     l.removeAll(l);
     l.addAll(roles.rol);
-    s.addAll(sedes);
+    s.addAll(idSedes);
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
   }
@@ -132,12 +135,12 @@ public class UserRegister implements Initializable {
       String dir = direccionT.getText();
       String ident = identificacionT.getText();
       Object fecha = fechaT.getValue();
-      Object idS = idsedeT.getValue();
+      String idS = idsedeT.getValue().toString();
       String username = usernameT.getText();
       String password = passwordT.getText();
 
-      String campo[] = { name, telefono, dir, ident, username, password };
-      Object multOpcion[] = { rl, fecha, idS };
+      String campo[] = { name, telefono, dir, ident, username, password, idS };
+      Object multOpcion[] = { rl, fecha };
 
       emptyCamps = userRegisterChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
       forbidchar = userRegisterChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
@@ -147,7 +150,7 @@ public class UserRegister implements Initializable {
         // #TODO Cambiar id a String en base de datos
         int id = Integer.valueOf(ident);
         LocalDate fc = LocalDate.parse(fecha.toString());
-        int idSede = Integer.valueOf(idS.toString());
+        int idSede = Globals.getIdSede(idS, sedes);
         String rol = rl.toString();
 
         Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);

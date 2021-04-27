@@ -5,10 +5,12 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import model.Sede;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -59,4 +61,11 @@ public class Globals {
         }
     }
 
+    public static int getIdSede(String name, ArrayList<Sede> sedes) {
+        for (int i = 0; i < sedes.size(); i++) {
+            if (name.equals(sedes.get(i).getNombre()))
+                return sedes.get(i).getId_sede();
+        }
+        return -1; // Nunca llega aquí, pero me pedía el return Xd
+    }
 }
