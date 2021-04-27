@@ -195,7 +195,7 @@ public class UserRegister implements Initializable {
           alerta.showCharForbidenAlert();
       }
     } catch (NumberFormatException error) {
-      alerta.showEmptyFieldAlert();
+      alerta.showErrorUnexpt();
     }
 
   }
