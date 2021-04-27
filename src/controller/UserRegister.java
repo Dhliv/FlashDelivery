@@ -29,7 +29,6 @@ public class UserRegister implements Initializable {
   private int userNoExist;
   private UserRegisterAlert alerta;
   private Object controladorAnterior;
-  private LoadView vista;
 
   @FXML
   private TextField nombreT;
@@ -74,7 +73,6 @@ public class UserRegister implements Initializable {
     controladorAnterior = controlador;
     alerta = new UserRegisterAlert();
     userRegisterChecker = new UserRegisterChecker();
-    vista = new LoadView();
   }
 
   /*
@@ -180,7 +178,7 @@ public class UserRegister implements Initializable {
    */
   void volver() {
     content.getChildren().clear();
-    Parent root = vista.loadView("user.consulta", controladorAnterior);
+    Parent root = Globals.loadView("user.consulta", controladorAnterior);
     content.getChildren().add(root);
   }
 }

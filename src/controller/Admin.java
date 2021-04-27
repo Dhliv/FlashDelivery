@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import utilities.LoadView;
+import utilities.Globals;
 
 public class Admin {
 
@@ -18,18 +18,17 @@ public class Admin {
     private Parent sedeConsulta;
     private Parent userConsulta;
     private Parent reportes;
-    private LoadView vista;
     private String userName;
 
     public Admin(String userName) {
-        vista = new LoadView();
-        sedeConsulta = vista.loadView("sede.consulta", this);
-        reportes = vista.loadView("reportes", this);
+        sedeConsulta = Globals.loadView("sede.consulta");
+        reportes = Globals.loadView("reportes");
         this.userName = userName;
     }
 
     @FXML
     private void initialize() {
+        Globals.adminViewPane = content;
         labelNameUser.setText("Bienvenido " + userName);
     }
 
@@ -42,7 +41,7 @@ public class Admin {
     @FXML
     void goToUsuariosConsulta(ActionEvent event) {
         content.getChildren().clear();
-        userConsulta = vista.loadView("user.consulta", new UserConsulta(content));
+        userConsulta = Globals.loadView("user.consulta", new UserConsulta(content));
         content.getChildren().add(userConsulta);
     }
 

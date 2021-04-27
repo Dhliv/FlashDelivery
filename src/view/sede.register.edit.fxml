@@ -5,29 +5,21 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="controller.Sedes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button alignment="CENTER" layoutX="271.0" layoutY="21.0" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
+      <Button alignment="CENTER" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onAction="#atras" text="Atras" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="380.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+      <Button alignment="CENTER" layoutX="897.0" layoutY="46.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="487.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <TreeTableView layoutX="14.0" layoutY="100.0" prefHeight="286.0" prefWidth="569.0">
-         <columns>
-            <TreeTableColumn prefWidth="176.0" text="ID Sede" />
-            <TreeTableColumn prefWidth="265.0" text="Direccion" />
-         </columns>
-      </TreeTableView>
+      <Label layoutX="44.0" layoutY="120.0" text="Nombre:" />
+      <TextField layoutX="105.0" layoutY="116.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField layoutX="424.0" layoutY="116.0" prefHeight="25.0" prefWidth="176.0" />
+      <Label layoutX="359.0" layoutY="120.0" prefHeight="17.0" prefWidth="65.0" text="Dirección:" />
    </children>
 </Pane>

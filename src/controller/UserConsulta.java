@@ -24,7 +24,6 @@ public class UserConsulta implements Initializable {
 
   private AnchorPane content;
   private Parent userRegister;
-  private LoadView vista;
   private UserConsultaButtons botones;
 
   @FXML
@@ -40,7 +39,6 @@ public class UserConsulta implements Initializable {
 
   public UserConsulta(AnchorPane cont) {
     content = cont;
-    vista = new LoadView();
     botones = new UserConsultaButtons();
   }
 
@@ -66,12 +64,12 @@ public class UserConsulta implements Initializable {
   @FXML
   void goToUsuariosRegistro(ActionEvent event) {
     content.getChildren().clear();
-    userRegister = vista.loadView("user.register", new UserRegister(content, this));
+    userRegister = Globals.loadView("user.register", new UserRegister(content, this));
     content.getChildren().addAll(userRegister);
   }
 
   @FXML
-  void userEditButton(ActionEvent event){
+  void userEditButton(ActionEvent event) {
     Usuario usuario = tableUsers.getSelectionModel().getSelectedItem();
     botones.goToUserEdit(usuario, content);
   }
