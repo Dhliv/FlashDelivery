@@ -36,7 +36,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane prefHeight="800.0" prefWidth="1020.0">
+      <AnchorPane prefHeight="780.0" prefWidth="1020.0">
          <children>
             <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="10.0" prefHeight="760.0" prefWidth="1010.0">
                <content>
