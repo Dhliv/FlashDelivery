@@ -58,6 +58,10 @@ public class OperadorRegister implements Initializable {
   @FXML
   private CheckBox seguroChoice;
 
+  public OperadorRegister() {
+    alerta = new GeneralAlerts();
+  }
+
   /**
    * Vuelve a la pantalla principal de Operador de Oficina.
    * 

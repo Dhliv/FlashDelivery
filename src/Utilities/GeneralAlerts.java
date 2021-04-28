@@ -13,7 +13,7 @@ public class GeneralAlerts {
     private Alert userExist; // Alerta para usuarios ya existentes
     private Alert regSuccess; // Alerta para registro exitoso
     private Alert errorUnexpt; // Alerta para un error fuera de los previsto
-    private Alert userNull;
+    private Alert userNull; // Alerta para usuarios nulos(no seleccionados).
 
     public GeneralAlerts() {
         cEmpty = new Alert(AlertType.NONE);
