@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import model.Clientes;
 import utilities.GeneralAlerts;
 import utilities.GeneralChecker;
 import utilities.Globals;
@@ -22,7 +23,7 @@ public class ClienteRegister implements Initializable {
   private Object[] objetos; // conjunto vacío de objetos para validaciones
   private int iteracion; // indica si estoy resgistrando al remitente o destinatario
   private Ventana ventana; // objeto para abrir la siguiente ventana
-  private static final int DESTINATARIO = 0; // distingue la iteracion
+  private static final int REMITENTE = 0; // distingue la iteracion
   private OperadorRegister operadorRegister; // controlador para registrar el envio de un paquete
 
   @FXML
@@ -73,9 +74,9 @@ public class ClienteRegister implements Initializable {
     boolean emptyCamps = GeneralChecker.checkEmpty(textos, objetos);
 
     if (!(forbidchar || emptyCamps)) {
-
-      GeneralAlerts.showRegSuccess();
+      Clientes.createCliente(cedula, nombre, direccion, telefono);
       volver();
+      GeneralAlerts.showRegSuccess();
     } else {
       if (emptyCamps)
         GeneralAlerts.showEmptyFieldAlert();
@@ -106,17 +107,19 @@ public class ClienteRegister implements Initializable {
    * destinatario o lanzar directamente al registro del envío del paquete.
    */
   private void volver() {
-    if (iteracion == DESTINATARIO) {
+    Globals.pantalla.close();
+    if (iteracion == REMITENTE) {
       operadorRegister.cedulaRemitente = cedula;
+      ventana = new Ventana("cliente.check", new ClienteCheck(iteracion + 1, operadorRegister));
     } else {
       operadorRegister.cedulaDestinatario = cedula;
-      Globals.pantalla.close();
-      ventana = new Ventana("operador.register", operadorRegister);
-      try {
-        ventana.start(Globals.pantalla);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      ventana = new Ventana("operador.registrar", operadorRegister);
+    }
+
+    try {
+      ventana.start(Globals.pantalla);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }

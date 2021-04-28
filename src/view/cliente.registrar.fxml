@@ -86,18 +86,35 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="cedulaT" layoutX="255.0" layoutY="150.0" />
-            <Button layoutX="274.0" layoutY="268.0" mnemonicParsing="false" onAction="#validarCliente" text="Validar">
+            <TextField fx:id="cedulaT" layoutX="83.0" layoutY="89.0" />
+            <Button layoutX="274.0" layoutY="268.0" mnemonicParsing="false" onAction="#registrarCliente" text="Registrar">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="184.0" layoutY="152.0" text="Cédula">
+            <Label layoutX="83.0" layoutY="69.0" text="Cédula">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="305.0" layoutY="60.0" text="Se validará si el usuario existe e la base de datos." />
+            <TextField fx:id="nombreT" layoutX="401.0" layoutY="87.0" />
+            <Label layoutX="401.0" layoutY="67.0" text="Nombre">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="direccionT" layoutX="81.0" layoutY="191.0" />
+            <Label layoutX="81.0" layoutY="171.0" text="Dirección">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="telefonoT" layoutX="399.0" layoutY="189.0" />
+            <Label layoutX="399.0" layoutY="169.0" text="Telefono">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
     </AnchorPane>
   </children>
