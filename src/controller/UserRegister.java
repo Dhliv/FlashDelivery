@@ -133,10 +133,6 @@ public class UserRegister implements Initializable {
     content.getChildren().add(root);
   }
 
-  // #---------------------------------------------------------------------------
-  // # FXML: ARCHIVOS DE JAVA FXML
-  // #---------------------------------------------------------------------------
-
   /**
    * Carga en 'content' la pantalla de consulta de usuarios.
    * 
