@@ -17,6 +17,7 @@ public class Sedes {
     public static void createSede(String nombre, String direccion) {
         Globals.db().insertInto(DSL.table("sede"), DSL.field("\"Nombre\""), DSL.field("\"Direccion\""))
                 .values(nombre, direccion).execute();
+        Globals.closeConnection();
     }
 
     /**
@@ -25,9 +26,8 @@ public class Sedes {
      * @return listado de sedes.
      */
     public static List<Sede> getSedes() {
-        String sql = "select * from sede;";
-        Result<Record> resultSet = Globals.db().fetch(sql); // Ejecuto la query 'sql'.
-        List<Sede> sedes = resultSet.into(Sede.class);
+        List<Sede> sedes = Globals.db().select().from("sede").fetch().into(Sede.class); // Ejecuto la query 'sql'.
+        Globals.closeConnection();
 
         return sedes;
     }
