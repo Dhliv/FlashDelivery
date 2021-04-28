@@ -108,10 +108,10 @@ public class ClienteRegister implements Initializable {
    */
   private void volver() {
     Globals.pantalla.close();
-    if (iteracion == REMITENTE) {
+    if (iteracion == REMITENTE) { // Si el registro es para el remitente del paquete:
       operadorRegister.cedulaRemitente = cedula;
       ventana = new Ventana("cliente.check", new ClienteCheck(iteracion + 1, operadorRegister));
-    } else {
+    } else { // Si el registro era el del destinatario:
       operadorRegister.cedulaDestinatario = cedula;
       ventana = new Ventana("operador.registrar", operadorRegister);
     }
