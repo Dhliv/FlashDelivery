@@ -2,12 +2,9 @@ package model;
 
 import org.jooq.Result;
 import org.jooq.impl.*;
-
-import java.util.List;
-
 import org.jooq.Record;
-
 import utilities.Globals;
+import java.util.List;
 
 public class Sedes {
 
