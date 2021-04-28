@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -32,6 +31,8 @@ public class OperadorRegister implements Initializable {
   private Boolean seguro;
   private String[] textos;
   private Object[] multOpcion;
+  public String cedulaRemitente; // almacena la cedula del remitente para llenar campos a futuro
+  public String cedulaDestinatario; // almacena la cedula del destinatario para llenar campos a futuro.
 
   private Ventana ventana;
   @FXML
