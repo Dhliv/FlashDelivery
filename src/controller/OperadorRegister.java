@@ -3,6 +3,8 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.EmpleadoDAO;
+import model.Envios;
 import utilities.GeneralAlerts;
 import utilities.GeneralChecker;
 import utilities.Globals;
@@ -29,6 +33,9 @@ public class OperadorRegister implements Initializable {
   private Object sedeEnvio;
   private Object metodoPago;
   private Boolean seguro;
+  private Double costo;
+  private Double impuesto;
+  private Integer id_sede;
   private String[] textos;
   private Object[] multOpcion;
   public String cedulaRemitente; // almacena la cedula del remitente para llenar campos a futuro
@@ -87,6 +94,7 @@ public class OperadorRegister implements Initializable {
     emptyCamps = GeneralChecker.checkEmpty(textos, multOpcion);
 
     if (!(charForbiden || emptyCamps)) {
+      transformData();
       ingresarDatos();
       volver();
       GeneralAlerts.showRegSuccess();
@@ -153,10 +161,20 @@ public class OperadorRegister implements Initializable {
     multOpcion[1] = metodoPago;
   }
 
-  private void ingresarDatos() {
-
+  private void transformData() {
+    id_sede = Globals.getIdSede(sedeEnvio.toString());
+    costo = Double.parseDouble(valorPaquete);
+    impuesto = 0.0;
   }
 
+  private void ingresarDatos() {
+    Envios.createEnvio(Date.valueOf(LocalDate.now()), metodoPago.toString(), costo, seguro, impuesto, dirDestino,
+        id_sede, Globals.id_usuario, cedulaRemitente, cedulaDestinatario);
+  }
+
+  /**
+   * Vuelve a la ventana principal de Operador de Oficina.
+   */
   private void volver() {
     Globals.pantalla.close();
     ventana = new Ventana("operadorOficina", new OperadorOficina());
