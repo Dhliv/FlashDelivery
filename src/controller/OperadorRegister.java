@@ -33,8 +33,8 @@ public class OperadorRegister implements Initializable {
   private Object[] multOpcion;
   public String cedulaRemitente; // almacena la cedula del remitente para llenar campos a futuro
   public String cedulaDestinatario; // almacena la cedula del destinatario para llenar campos a futuro.
-
   private Ventana ventana;
+
   @FXML
   private TextField cedulaClienteT;
   @FXML
@@ -88,6 +88,7 @@ public class OperadorRegister implements Initializable {
 
     if (!(charForbiden || emptyCamps)) {
       ingresarDatos();
+      volver();
       GeneralAlerts.showRegSuccess();
     } else {
       if (charForbiden)
@@ -154,5 +155,15 @@ public class OperadorRegister implements Initializable {
 
   private void ingresarDatos() {
 
+  }
+
+  private void volver() {
+    Globals.pantalla.close();
+    ventana = new Ventana("operadorOficina", new OperadorOficina());
+    try {
+      ventana.start(Globals.pantalla);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
