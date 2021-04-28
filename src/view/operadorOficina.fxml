@@ -89,22 +89,6 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane prefHeight="90.0" prefWidth="1280.0" />
-            <Pane layoutX="260.0" layoutY="10.0" prefHeight="760.0" prefWidth="1010.0">
-               <children>
-                  <TableView fx:id="tablePaquetes" focusTraversable="false" prefHeight="760.0" prefWidth="1010.0">
-                    <columns>
-                        <TableColumn fx:id="columnDestinatario" prefWidth="315.9999809265137" text="Destinatario" />
-                        <TableColumn fx:id="columnIdPaquete" prefWidth="110.4000244140625" text="ID del paquete" />
-                        <TableColumn fx:id="columnPesoPaquete" prefWidth="309.5999755859375" text="Peso del paquete" />
-                        <TableColumn fx:id="columnEstado" prefWidth="280.800048828125" text="Estado" />
-                    </columns>
-                  </TableView>
-               </children>
-               <padding>
-                  <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
-               </padding>
-            </Pane>
             <Pane layoutY="-1.0" prefHeight="781.0" prefWidth="260.0">
                <children>
                   <Label fx:id="labelPOS" layoutX="42.0" layoutY="103.0" prefHeight="70.0" prefWidth="176.0" text="Punto de venta Nombre" textAlignment="CENTER" wrapText="true">
@@ -134,6 +118,21 @@
                      </font>
                   </Button>
                </children>
+            </Pane>
+            <Pane fx:id="leftContent" layoutX="260.0" prefHeight="780.0" prefWidth="1020.0">
+               <children>
+                  <TableView fx:id="tablePaquetes" focusTraversable="false" layoutY="10.0" prefHeight="760.0" prefWidth="1010.0">
+                    <columns>
+                        <TableColumn fx:id="columnDestinatario" prefWidth="315.9999809265137" text="Destinatario" />
+                        <TableColumn fx:id="columnIdPaquete" prefWidth="110.4000244140625" text="ID del paquete" />
+                        <TableColumn fx:id="columnPesoPaquete" prefWidth="309.5999755859375" text="Peso del paquete" />
+                        <TableColumn fx:id="columnEstado" prefWidth="280.800048828125" text="Estado" />
+                    </columns>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+               </padding>
             </Pane>
          </children>
          <VBox.margin>

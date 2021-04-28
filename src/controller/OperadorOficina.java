@@ -43,10 +43,10 @@ public class OperadorOficina {
    */
   @FXML
   void registrarPaquete(ActionEvent event) {
-    Globals.pantalla.close();
+    Stage stage = new Stage();
     ventana = new Ventana("cliente.check", new ClienteCheck(REMITENTE, new OperadorRegister()));
     try {
-      ventana.start(Globals.pantalla);
+      ventana.start(stage);
     } catch (Exception e) {
       e.printStackTrace();
     }
