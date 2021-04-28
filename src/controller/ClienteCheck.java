@@ -3,6 +3,8 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import model.Clientes;
+import model.Clientes.Cliente;
 import utilities.GeneralAlerts;
 import utilities.GeneralChecker;
 import utilities.Globals;
@@ -33,7 +35,7 @@ public class ClienteCheck {
     boolean forbidchar = GeneralChecker.checkChar(textos);
 
     if (!(emptyCamps || forbidchar)) {
-      boolean existeCliente = true;
+      boolean existeCliente = Clientes.clientExists(cedula);
 
       if (!existeCliente)
         goToRegisterCliente();
@@ -69,7 +71,7 @@ public class ClienteCheck {
 
   void goToRegisterCliente() {
     Globals.pantalla.close();
-    ventana = new Ventana("cliente.register", new ClienteRegister(cedula, iteracion, operadorRegister));
+    ventana = new Ventana("cliente.registrar", new ClienteRegister(cedula, iteracion, operadorRegister));
     try {
       ventana.start(Globals.pantalla);
     } catch (Exception e) {

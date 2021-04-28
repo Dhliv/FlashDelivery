@@ -2,9 +2,6 @@ package model;
 
 import org.jooq.Result;
 import org.jooq.impl.*;
-
-import java.util.List;
-
 import org.jooq.Record;
 import utilities.Globals;
 
@@ -23,8 +20,9 @@ public class Clientes {
   }
 
   public static boolean clientExists(String cedula) {
-    String sql = "select * from cliente where \"Cedula\"=" + cedula;
+    String sql = "select * from cliente where \"Cedula\"='" + cedula + "'";
     Result<Record> rs = Globals.db().fetch(sql);
+    Globals.closeConnection();
 
     if (rs.size() == 1)
       return true;
