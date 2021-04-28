@@ -8,11 +8,11 @@ import javafx.scene.control.Alert.AlertType;
  * pertinentes a diversas pantallas.
  */
 public class GeneralAlerts {
-
-    private Alert cEmpty;
-    private Alert cForbi;
-    private Alert userExist;
-    private Alert regSuccess;
+    private Alert cEmpty; // Alerta para campos vacios
+    private Alert cForbi; // Alerta para caracteres prohibidos
+    private Alert userExist; // Alerta para usuarios ya existentes
+    private Alert regSuccess; // Alerta para registro exitoso
+    private Alert errorUnexpt; // Alerta para un error fuera de los previsto
     private Alert userNull;
 
     public GeneralAlerts() {
@@ -45,6 +45,12 @@ public class GeneralAlerts {
         userNull.setContentText("Por favor, seleccione el usuario que desea modificar.");
         userNull.setTitle("Usuario no seleccionado");
         userNull.setHeaderText("No ha sido seleccionado un usuario");
+
+        errorUnexpt = new Alert(AlertType.NONE);
+        errorUnexpt.setAlertType(AlertType.INFORMATION);
+        errorUnexpt.setContentText("No se ha podido registrar el usuario por un error inesperado");
+        errorUnexpt.setTitle("Error inesperado");
+        errorUnexpt.setHeaderText("Error inesperado");
     }
 
     // Panel con información de que hay un campo vacio
@@ -60,6 +66,11 @@ public class GeneralAlerts {
     // Panel cuando existe un empleado
     public void showUserExistAlert() {
         userExist.show();
+    }
+
+    // Panel de error inesperado
+    public void showErrorUnexpt() {
+        errorUnexpt.show();
     }
 
     public void showRegSuccess() {
