@@ -8,14 +8,15 @@ import javafx.scene.control.Alert.AlertType;
  * pertinentes a diversas pantallas.
  */
 public class GeneralAlerts {
-    private Alert cEmpty; // Alerta para campos vacios
-    private Alert cForbi; // Alerta para caracteres prohibidos
-    private Alert userExist; // Alerta para usuarios ya existentes
-    private Alert regSuccess; // Alerta para registro exitoso
-    private Alert errorUnexpt; // Alerta para un error fuera de los previsto
-    private Alert userNull; // Alerta para usuarios nulos(no seleccionados).
+    private static Alert cEmpty; // Alerta para campos vacios
+    private static Alert cForbi; // Alerta para caracteres prohibidos
+    private static Alert userExist; // Alerta para usuarios ya existentes
+    private static Alert regSuccess; // Alerta para registro exitoso
+    private static Alert errorUnexpt; // Alerta para un error fuera de los previsto
+    private static Alert userNull; // Alerta para usuarios nulos(no seleccionados).
+    private static Boolean inicializado = false; // Indica si se han inicializado las alertas.
 
-    public GeneralAlerts() {
+    private static void init() {
         cEmpty = new Alert(AlertType.NONE);
         cEmpty.setAlertType(AlertType.WARNING);
         cEmpty.setContentText("Por favor rellene los campos restantes.");
@@ -51,33 +52,47 @@ public class GeneralAlerts {
         errorUnexpt.setContentText("No se ha podido registrar el usuario por un error inesperado");
         errorUnexpt.setTitle("Error inesperado");
         errorUnexpt.setHeaderText("Error inesperado");
+
+        inicializado = true;
     }
 
     // Panel con información de que hay un campo vacio
-    public void showEmptyFieldAlert() {
+    public static void showEmptyFieldAlert() {
+        if (!inicializado)
+            init();
         cEmpty.show();
     }
 
     // Panel con información de que se usan pasos prohibidos
-    public void showCharForbidenAlert() {
+    public static void showCharForbidenAlert() {
+        if (!inicializado)
+            init();
         cForbi.show();
     }
 
     // Panel cuando existe un empleado
-    public void showUserExistAlert() {
+    public static void showUserExistAlert() {
+        if (!inicializado)
+            init();
         userExist.show();
     }
 
     // Panel de error inesperado
-    public void showErrorUnexpt() {
+    public static void showErrorUnexpt() {
+        if (!inicializado)
+            init();
         errorUnexpt.show();
     }
 
-    public void showRegSuccess() {
+    public static void showRegSuccess() {
+        if (!inicializado)
+            init();
         regSuccess.show();
     }
 
-    public void showUserNullAlert() {
+    public static void showUserNullAlert() {
+        if (!inicializado)
+            init();
         userNull.show();
     }
 }

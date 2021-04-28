@@ -26,7 +26,6 @@ public class UserRegister implements Initializable {
   private AnchorPane content; // Componente grafico padre
   private Roles roles; // Cargos de la empresa
   private int userNoExist;
-  private GeneralAlerts alerta; // Objeto encargado de imprimir alertas
   private Object controladorAnterior;
 
   // Auxiliares para los datos del usuario.
@@ -77,7 +76,6 @@ public class UserRegister implements Initializable {
   public UserRegister(AnchorPane contenido, Object controlador) {
     content = contenido;
     controladorAnterior = controlador;
-    alerta = new GeneralAlerts();
   }
 
   /**
@@ -180,19 +178,19 @@ public class UserRegister implements Initializable {
           Usuario user = new Usuario(id, username, password, true);
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
-          alerta.showRegSuccess();
+          GeneralAlerts.showRegSuccess();
           volver();
         } else {
-          alerta.showUserExistAlert();
+          GeneralAlerts.showUserExistAlert();
         }
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
-          alerta.showEmptyFieldAlert();
+          GeneralAlerts.showEmptyFieldAlert();
         else if (forbidchar)
-          alerta.showCharForbidenAlert();
+          GeneralAlerts.showCharForbidenAlert();
       }
     } catch (NumberFormatException error) {
-      alerta.showErrorUnexpt();
+      GeneralAlerts.showErrorUnexpt();
     }
 
   }

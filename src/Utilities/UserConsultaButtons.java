@@ -10,13 +10,11 @@ import model.*;
 */
 public class UserConsultaButtons {
 
-  private GeneralAlerts userAlert;
   private Parent userModify;
 
   public void goToUserEdit(Usuario user, AnchorPane content) {
-    userAlert = new GeneralAlerts();
     if (user == null)
-      userAlert.showUserNullAlert();
+      GeneralAlerts.showUserNullAlert();
     else {
       content.getChildren().clear();
       userModify = Globals.loadView("user.edit", new UserEdit(content, this));

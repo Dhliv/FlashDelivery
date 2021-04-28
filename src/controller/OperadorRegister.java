@@ -32,7 +32,6 @@ public class OperadorRegister implements Initializable {
   private Boolean seguro;
   private String[] textos;
   private Object[] multOpcion;
-  private GeneralAlerts alerta;
 
   private Ventana ventana;
   @FXML
@@ -59,7 +58,6 @@ public class OperadorRegister implements Initializable {
   private CheckBox seguroChoice;
 
   public OperadorRegister() {
-    alerta = new GeneralAlerts();
   }
 
   /**
@@ -89,12 +87,12 @@ public class OperadorRegister implements Initializable {
 
     if (!(charForbiden || emptyCamps)) {
       ingresarDatos();
-      alerta.showRegSuccess();
+      GeneralAlerts.showRegSuccess();
     } else {
       if (charForbiden)
-        alerta.showCharForbidenAlert();
+        GeneralAlerts.showCharForbidenAlert();
       else
-        alerta.showEmptyFieldAlert();
+        GeneralAlerts.showEmptyFieldAlert();
     }
   }
 
