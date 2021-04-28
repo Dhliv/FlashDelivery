@@ -11,6 +11,8 @@ import utilities.Globals;
 import utilities.Ventana;
 
 public class OperadorOficina {
+  private static final int REMITENTE = 0;
+
   public Ventana ventana;
   @FXML
   private TableView<?> tablePaquetes;
@@ -42,7 +44,7 @@ public class OperadorOficina {
   @FXML
   void registrarPaquete(ActionEvent event) {
     Globals.pantalla.close();
-    ventana = new Ventana("operador.registrar", new OperadorRegister());
+    ventana = new Ventana("cliente.check", new ClienteCheck(REMITENTE, new OperadorRegister()));
     try {
       ventana.start(Globals.pantalla);
     } catch (Exception e) {

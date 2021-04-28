@@ -44,6 +44,7 @@ public class ClienteCheck {
           operadorRegister.cedulaRemitente = cedula;
           cedulaT.setText("");
           // mostrar alerta de registrar al cliente destinatario.
+          iteracion++;
         } else {
           operadorRegister.cedulaDestinatario = cedula;
           goToRegisterPacket();

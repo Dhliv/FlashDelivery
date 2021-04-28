@@ -119,6 +119,9 @@ public class OperadorRegister implements Initializable {
     metodosPago.removeAll(metodosPago);
     metodosPago.addAll(mp);
     metodoPagoT.getItems().addAll(metodosPago);
+
+    cedulaClienteT.setText(cedulaRemitente);
+    cedulaDestinoT.setText(cedulaDestinatario);
   }
 
   /**
