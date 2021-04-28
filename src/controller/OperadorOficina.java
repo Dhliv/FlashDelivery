@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utilities.Globals;
 import utilities.Ventana;
@@ -32,6 +33,8 @@ public class OperadorOficina {
   private Button btnRegistrarPaquete;
   @FXML
   private Label labelUsuario;
+  @FXML 
+  private Pane leftContent;
 
   public OperadorOficina() {
   }
@@ -43,10 +46,18 @@ public class OperadorOficina {
    */
   @FXML
   void registrarPaquete(ActionEvent event) {
-    Stage stage = new Stage();
-    ventana = new Ventana("cliente.check", new ClienteCheck(REMITENTE, new OperadorRegister()));
+    Stage clienteCheckInterfaz = new Stage();
+    ventana = new Ventana("cliente.check", 
+                          new ClienteCheck
+                            (REMITENTE, 
+                            new OperadorRegister(),
+                            clienteCheckInterfaz,
+                            leftContent
+                            )
+                          );
     try {
-      ventana.start(stage);
+      ventana.start(clienteCheckInterfaz);
+      //Globals.pantalla.wait();
     } catch (Exception e) {
       e.printStackTrace();
     }

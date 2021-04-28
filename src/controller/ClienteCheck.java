@@ -2,7 +2,10 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import model.Clientes;
 import utilities.GeneralAlerts;
 import utilities.GeneralChecker;
@@ -17,6 +20,8 @@ public class ClienteCheck {
   private static final int REMITENTE = 0; // distingue la iteracion
   private Ventana ventana; // objeto para cargar la siguiente ventana
   private OperadorRegister operadorRegister; // controlador de la clase OperadorRegister
+  private Stage windowCheckStage; //Estado en donde se ejecuta la ventana de ClienteCheck.
+  private Pane windowMainPane; //Panel de la izquierda de la pantalla principal.
 
   @FXML
   private TextField cedulaT;
@@ -27,9 +32,11 @@ public class ClienteCheck {
    * @param it         iteracion en la que se encuentra el programa.
    * @param controller controlador de la clase OperadorRegister.
    */
-  public ClienteCheck(int it, OperadorRegister controller) {
+  public ClienteCheck(int it, OperadorRegister controller, Stage windowCheckStage, Pane windowMainPane) {
     iteracion = it;
     operadorRegister = controller;
+    this.windowCheckStage = windowCheckStage;
+    this.windowMainPane = windowMainPane;
   }
 
   /**
@@ -87,10 +94,10 @@ public class ClienteCheck {
    * Dirige a la ventana de registrar cliente.
    */
   void goToRegisterCliente() {
-    Globals.pantalla.close();
+    windowCheckStage.close();
     ventana = new Ventana("cliente.registrar", new ClienteRegister(cedula, iteracion, operadorRegister));
     try {
-      ventana.start(Globals.pantalla);
+      ventana.start(windowCheckStage);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -100,12 +107,11 @@ public class ClienteCheck {
    * Dirige a la ventana para registrar el envio de un paquete.
    */
   void goToRegisterPacket() {
-    Globals.pantalla.close();
-    ventana = new Ventana("operador.registrar", operadorRegister);
-    try {
-      ventana.start(Globals.pantalla);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    windowCheckStage.close(); //Cierra la ventana emergente ClienteCheck.
+
+    Parent root = Globals.loadView("operador.registrar", operadorRegister);
+    windowMainPane.getChildren().clear(); //Limpio la pantalla
+    windowMainPane.getChildren().add(root); //Añade el contenido de operador.register en el panel principal.
+    //Globals.pantalla.notify();
   }
 }

@@ -1,4 +1,5 @@
 import controller.Login;
+import controller.OperadorOficina;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utilities.Globals;
@@ -13,7 +14,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Globals.init(this);
         Globals.pantalla = stage;
-        Ventana login = new Ventana("login", new Login());
+        Ventana login = new Ventana("OperadorOficina", new OperadorOficina());
         login.start(stage);
     }
 
