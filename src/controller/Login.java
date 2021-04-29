@@ -67,10 +67,8 @@ public class Login {
             Empleado userActual = ed.cargarEmpleado(acc);
             var rolAcc = userActual.getRol();
 
-            // Cerrar ventana actual
             Globals.pantalla.close();
-
-            // Abrir nueva ventana
+            Globals.id_usuario = userActual.getID();
             Ventana vent;
 
             if (rolAcc.equals(rol.get(roles.ADMIN))) {

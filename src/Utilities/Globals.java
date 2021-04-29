@@ -24,8 +24,10 @@ public class Globals {
     private static Object referenceObject;
     public static Pane adminViewPane;
     public static Stage pantalla;
+    public static Integer id_usuario;
     private static Ventana ventana;
     private static List<model.Sedes.Sede> sedes;
+    private static Connection conn;
 
     public static void init(Object obj) {
         referenceObject = obj;
@@ -65,12 +67,17 @@ public class Globals {
         String usr = "ikwnggozhnxhvp";
         String pwd = "a933d68a3c21b7b24a2e05104117b487091c7b880a72fe25f4ae721fadbbae9a";
         try {
-            Connection conn = DriverManager.getConnection(url, usr, pwd);
-            return DSL.using(conn, SQLDialect.POSTGRES);
+            conn = DriverManager.getConnection(url, usr, pwd);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
+
+        return DSL.using(conn, SQLDialect.POSTGRES);
+    }
+
+    public static void closeConnection() {
+        conn = null;
     }
 
     /**
