@@ -37,6 +37,11 @@ public class Globals {
         return loadView(name, null);
     }
 
+    public static void cambiarVista(String name) {
+        adminViewPane.getChildren().clear();
+        adminViewPane.getChildren().add(loadView(name));
+    }
+
     /**
      * Carga vista desde FXML
      * 
