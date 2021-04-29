@@ -35,7 +35,8 @@ public class RegistrarEnvio {
     }
 
     @FXML void registrarPaquetes(ActionEvent event) {
-
+        envio.setCliente(RCedula.getText(), RNombre.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
+        envio.setCliente(DCedula.getText(), DNombre.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
     }
 
     @FXML void onActionRemitente() {

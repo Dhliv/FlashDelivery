@@ -7,7 +7,7 @@ import utilities.Ventana;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        System.getProperties().setProperty("org.jooq.no-logo", "true");
+        System.getProperties().setProperty("org.jooq.no-logo", "true"); // no mostrar logo de jOOQ
         launch(args);
     }
 
