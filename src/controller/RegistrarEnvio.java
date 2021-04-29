@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.TipoCliente;
+import utilities.Globals;
 
 /**
  * Controlador para las vistar operador.cliente y operador.paquetes
@@ -36,11 +37,8 @@ public class RegistrarEnvio {
 
     public void initialize() {
         envio = new model.RegistrarEnvio();
-        if(RCedula !=null && DCedula!= null){
-            RCedula.focusedProperty().addListener(onRemitenteFocusOut);
-            DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
-        }
-        
+        if(RCedula !=null) RCedula.focusedProperty().addListener(onRemitenteFocusOut);
+        if(DCedula !=null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
     }
 
     @FXML void atras(ActionEvent event) {
@@ -50,6 +48,8 @@ public class RegistrarEnvio {
     @FXML void registrarPaquetes(ActionEvent event) {
         envio.setCliente(RCedula.getText(), RNombre.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
         envio.setCliente(DCedula.getText(), DNombre.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
+        Globals.cambiarVista("");
+
     }
 
     @FXML void onActionRemitente() {
