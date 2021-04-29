@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrarEnvio">
+   <children>
+      <Button layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" text="Atras" />
+      <Label layoutX="576.0" layoutY="29.0" text="Registro de paquetes">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Pane layoutX="26.0" layoutY="92.0" prefHeight="663.0" prefWidth="973.0" style="-fx-border-color: #9B9B9B; -fx-border-width: 2px;">
+         <children>
+            <Button fx:id="btRegistrarEnvios" layoutX="810.0" layoutY="583.0" mnemonicParsing="false" onAction="#registrarPaquetes" prefHeight="42.0" prefWidth="125.0" text="Registrar Paquetes" />
+            <Pane layoutX="38.0" layoutY="41.0" prefHeight="518.0" prefWidth="396.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Registrar nuevo paquete">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtPeso" layoutX="15.0" layoutY="94.0" />
+                  <Label layoutX="14.0" layoutY="60.0" text="Peso:" />
+                  <Label layoutX="13.0" layoutY="174.0" text="Valor:" />
+                  <TextField fx:id="txtValor" layoutX="15.0" layoutY="200.0" />
+                  <TextArea fx:id="txtDescripcion" layoutX="13.0" layoutY="292.0" prefHeight="63.0" prefWidth="230.0" />
+                  <Label layoutX="15.0" layoutY="259.0" text="Descripción:" />
+                  <CheckBox fx:id="btCheckSeguro" layoutX="18.0" layoutY="383.0" mnemonicParsing="false" text="Seguro" />
+                  <Button fx:id="btEliminar" layoutX="18.0" layoutY="450.0" mnemonicParsing="false" text="Eliminar" />
+                  <Button fx:id="btEditar" layoutX="105.0" layoutY="450.0" mnemonicParsing="false" text="Editar" />
+                  <Button fx:id="btRegistrar" layoutX="211.0" layoutY="450.0" mnemonicParsing="false" text="Registrar" />
+               </children>
+            </Pane>
+            <Pane layoutX="539.0" layoutY="41.0" prefHeight="491.0" prefWidth="408.0">
+               <children>
+                  <TreeTableView fx:id="tbPaquetes" layoutY="81.0" prefHeight="404.0" prefWidth="396.0">
+                    <columns>
+                      <TreeTableColumn prefWidth="58.0" text="Peso" />
+                      <TreeTableColumn prefWidth="75.0" text="Valor" />
+                        <TreeTableColumn prefWidth="187.0" text="Descripción" />
+                        <TreeTableColumn prefWidth="75.0" text="Seguro" />
+                    </columns>
+                  </TreeTableView>
+                  <Label layoutX="133.0" layoutY="30.0" text="Paquetes en este envío">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Line endX="367.0" endY="606.0" layoutX="127.0" layoutY="-6.0" startX="360.0" startY="40.0" stroke="#9b9b9b" strokeWidth="2.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
