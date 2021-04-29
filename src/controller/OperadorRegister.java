@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.EmpleadoDAO;
-import model.Envios;
+import model.RegistrarEnvio;
 import utilities.GeneralAlerts;
 import utilities.GeneralChecker;
 import utilities.Globals;
@@ -168,8 +168,8 @@ public class OperadorRegister implements Initializable {
   }
 
   private void ingresarDatos() {
-    Envios.createEnvio(Date.valueOf(LocalDate.now()), metodoPago.toString(), costo, seguro, impuesto, dirDestino,
-        id_sede, Globals.id_usuario, cedulaRemitente, cedulaDestinatario);
+    RegistrarEnvio.createEnvio(Date.valueOf(LocalDate.now()), metodoPago.toString(), costo, seguro, impuesto,
+        dirDestino, id_sede, Globals.id_usuario, cedulaRemitente, cedulaDestinatario);
   }
 
   /**

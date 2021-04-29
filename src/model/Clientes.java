@@ -7,10 +7,10 @@ import utilities.Globals;
 
 public class Clientes {
   public static class Cliente {
-    public static String Cedula;
-    public static String Direccion;
-    public static String Telefono;
-    public static String Nombre;
+    public String cedula;
+    public String direccion;
+    public String telefono;
+    public String nombre;
   }
 
   /**

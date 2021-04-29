@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Sedes;
@@ -33,26 +34,28 @@ public class Globals {
         referenceObject = obj;
     }
 
-    public static Parent loadView(String name) {
-        return loadView(name, null);
-    }
-
     public static void cambiarVista(String name) {
         adminViewPane.getChildren().clear();
         adminViewPane.getChildren().add(loadView(name));
     }
 
+    public static Scene loadScene(String name) {
+        return new Scene(loadView(name, null));
+    }
+
+    public static Parent loadView(String name) {
+        return loadView(name, null);
+    }
+
     /**
      * Carga vista desde FXML
-     * 
      * @param name    filename
      * @param control control a asignar a la vista
      * @return la vista
      */
     public static Parent loadView(String name, Object control) {
         FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-        if (control != null)
-            loader.setController(control);
+        if (control != null) loader.setController(control);
         Parent root = null;
         try {
             root = loader.load();
@@ -72,12 +75,14 @@ public class Globals {
             e.printStackTrace();
             return null;
         }
-
         return DSL.using(conn, SQLDialect.POSTGRES);
     }
 
     public static void closeConnection() {
         conn = null;
+        /*
+         * try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+         */
     }
 
     /**
@@ -105,8 +110,7 @@ public class Globals {
     public static int getIdSede(String name) {
         String idAux = "";
         for (int i = 0; i < name.length(); i++) {
-            if (Character.isWhitespace(name.charAt(i)))
-                break;
+            if (Character.isWhitespace(name.charAt(i))) break;
             idAux += name.charAt(i);
         }
         return Integer.parseInt(idAux);
