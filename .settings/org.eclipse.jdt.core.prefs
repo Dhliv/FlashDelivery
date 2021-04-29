@@ -1,6 +1,8 @@
-org.eclipse.jdt.core.formatter.keep_imple_if_on_one_line=true
-org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags=do not insert
-org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_method=do not insert
+eclipse.preferences.version=1
+org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures=disabled
 org.eclipse.jdt.core.formatter.comment.format_block_comments=false
+org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags=do not insert
 org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_field=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_method=do not insert
+org.eclipse.jdt.core.formatter.keep_imple_if_on_one_line=true
 org.eclipse.jdt.core.formatter.lineSplit=240
