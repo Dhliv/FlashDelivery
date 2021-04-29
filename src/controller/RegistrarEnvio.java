@@ -4,7 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.TipoCliente;
 
@@ -24,10 +24,23 @@ public class RegistrarEnvio {
     @FXML private TextField DTelefono;
     private model.RegistrarEnvio envio;
 
+    @FXML private Button btRegistrarEnvios;
+    @FXML private TextField txtPeso;
+    @FXML private TextField txtValor;
+    @FXML private TextArea txtDescripcion;
+    @FXML private CheckBox btCheckSeguro;
+    @FXML private Button btEliminar;
+    @FXML private Button btEditar;
+    @FXML private Button btRegistrar;
+    @FXML private TreeTableView<?> tbPaquetes;
+
     public void initialize() {
         envio = new model.RegistrarEnvio();
-        RCedula.focusedProperty().addListener(onRemitenteFocusOut);
-        DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
+        if(RCedula !=null && DCedula!= null){
+            RCedula.focusedProperty().addListener(onRemitenteFocusOut);
+            DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
+        }
+        
     }
 
     @FXML void atras(ActionEvent event) {
