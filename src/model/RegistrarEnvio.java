@@ -48,13 +48,10 @@ public class RegistrarEnvio {
    * @param remi  cédula del cliente que envía el paquete.
    * @param desti cédula del cliente que recibe el paquete.
    */
-  public static void createEnvio(Date fcreg, String mp, Double cost, Boolean seg, Double impe, String dir, Integer idS,
-      Integer emp, String remi, String desti) {
+  public static void createEnvio(Date fcreg, String mp, Double cost, Boolean seg, Double impe, String dir, Integer idS, Integer emp, String remi, String desti) {
     Globals.db()
-        .insertInto(DSL.table("envio"), DSL.field("\"Fecha_registro\""), DSL.field("\"Metodo_pago\""),
-            DSL.field("\"Costo\""), DSL.field("\"Seguro\""), DSL.field("\"Impuesto_envio\""),
-            DSL.field("\"Direccion_entrega\""), DSL.field("\"ID_Sede\""), DSL.field("\"Emp_Entrega\""),
-            DSL.field("\"Delivered\""), DSL.field("\"Cliente_Envio\""), DSL.field("\"Cliente_Recogida\""))
+        .insertInto(DSL.table("envio"), DSL.field("\"Fecha_registro\""), DSL.field("\"Metodo_pago\""), DSL.field("\"Costo\""), DSL.field("\"Seguro\""), DSL.field("\"Impuesto_envio\""), DSL.field("\"Direccion_entrega\""),
+            DSL.field("\"ID_Sede\""), DSL.field("\"Emp_Entrega\""), DSL.field("\"Delivered\""), DSL.field("\"Cliente_Envio\""), DSL.field("\"Cliente_Recogida\""))
         .values(fcreg, mp, cost, seg, impe, dir, idS, emp, false, remi, desti).execute();
     Globals.closeConnection();
   }
@@ -71,7 +68,7 @@ public class RegistrarEnvio {
   // # POJOs
   // #---------------------------------------------------------------------------
 
-  public class Envio {
+  public static class Envio {
     public Integer ID_Envio;
     public Date Fecha_registro;
     public String Metodo_pago;
@@ -84,5 +81,12 @@ public class RegistrarEnvio {
     public Boolean Delivered;
     public String Cliente_Envio;
     public String Cliente_Recogida;
+  }
+
+  public static class Paquete {
+    public String descripcion;
+    public Double peso;
+    public Double valor;
+    public Integer id_envio;
   }
 }
