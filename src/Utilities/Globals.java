@@ -79,6 +79,11 @@ public class Globals {
     }
 
     public static void closeConnection() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         conn = null;
         /*
          * try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
