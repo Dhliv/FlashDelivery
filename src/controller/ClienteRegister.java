@@ -26,14 +26,10 @@ public class ClienteRegister implements Initializable {
   private static final int REMITENTE = 0; // distingue la iteracion
   private OperadorRegister operadorRegister; // controlador para registrar el envio de un paquete
 
-  @FXML
-  private TextField cedulaT;
-  @FXML
-  private TextField nombreT;
-  @FXML
-  private TextField direccionT;
-  @FXML
-  private TextField telefonoT;
+  @FXML private TextField cedulaT;
+  @FXML private TextField nombreT;
+  @FXML private TextField direccionT;
+  @FXML private TextField telefonoT;
 
   /**
    * Constructor de la clase ClienteRegister.
@@ -56,18 +52,14 @@ public class ClienteRegister implements Initializable {
    * @param location  not used.
    * @param resources not used.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  @Override public void initialize(URL location, ResourceBundle resources) {
     cedulaT.setText(cedula);
   }
 
   /**
    * Se registra a un Cliente en la base de datos.
-   * 
-   * @param event not used.
    */
-  @FXML
-  void registrarCliente(ActionEvent event) {
+  @FXML void registrarCliente(ActionEvent event) {
     getData();
 
     boolean forbidchar = GeneralChecker.checkChar(textos);

@@ -34,6 +34,15 @@ public class RegistrarEnvio {
     return cliente;
   }
 
+  public void setCliente(String cedula, String nombre, String direccion, String telefono, TipoCliente tipo) {
+    Cliente cliente = tipo == TipoCliente.Remitente ? remitente : destinatario;
+    if (cliente == null) cliente = new Cliente();
+    cliente.cedula = cedula;
+    cliente.nombre = nombre;
+    cliente.direccion = direccion;
+    cliente.telefono = telefono;
+  }
+
   /**
    * Inserta un nuevo envío en la base de datos.
    * 
