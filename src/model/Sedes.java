@@ -28,11 +28,7 @@ public class Sedes {
      * @return listado de sedes.
      */
     public static List<Sede> getSedes() {
-        String sql = "select * from sede;";
-        Result<Record> resultSet = Globals.db().fetch(sql); // Ejecuto la query 'sql'.
-        List<Sede> sedes = resultSet.into(Sede.class);
-
-        return sedes;
+        return Globals.db().select().from("sede").fetch().into(Sede.class);
     }
 
 }
