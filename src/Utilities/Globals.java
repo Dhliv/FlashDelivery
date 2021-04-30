@@ -38,22 +38,26 @@ public class Globals {
     }
 
     public static void cambiarVista(String name) {
-        if(views.get(name) == null)
-            cambiarVista(name, null);
-        else
-            cambiarVista(views.get(name));
+        cambiarVista(name, null);
     }
 
     public static void cambiarVista(String name, Object control) {
-        
-        viewPane.getChildren().clear();
-        views.put(name, loadView(name, control));
-        viewPane.getChildren().add(views.get(name));
+        if (views.get(name) == null) {
+            Parent view = loadView(name, control);
+            views.put(name, view);
+            cambiarVista(view);
+        } else {
+            cambiarVista(views.get(name));
+        }
     }
 
     public static void cambiarVista(Parent view) {
         viewPane.getChildren().clear();
         viewPane.getChildren().add(view);
+    }
+
+    public static void clearViews() {
+        views.clear();
     }
 
     public static Parent loadView(String name) {
@@ -83,8 +87,8 @@ public class Globals {
     }
 
     // #---------------------------------------------------------------------------
-  // # Base de Datos
-  // #---------------------------------------------------------------------------
+    // # Base de Datos
+    // #---------------------------------------------------------------------------
 
     public static DSLContext db() {
         String url = "jdbc:postgresql://ec2-52-87-107-83.compute-1.amazonaws.com:5432/d622m7j3h054ts";
