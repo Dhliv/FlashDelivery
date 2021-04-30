@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
@@ -44,7 +45,15 @@ public class RegistrarEnvio {
     @FXML private TextField Alto;
     @FXML private TextField Largo;
     @FXML private TextField Ancho;
+
+
     @FXML private TableView<PaqueteT> tbPaquetes;
+    @FXML private TableColumn<PaqueteT, Integer> tcPeso;
+    @FXML private TableColumn<PaqueteT, Integer> tcValor;
+    @FXML private TableColumn<PaqueteT, String> tcDescripcion;
+    @FXML private TableColumn<PaqueteT, Integer> tcVolumen;
+    @FXML private TableColumn<PaqueteT, Integer> tcValorEnvio;
+    @FXML private TableColumn<PaqueteT, Integer> tcTotal;
     // #------------------------------------
     private model.RegistrarEnvio envio;
 
@@ -54,6 +63,14 @@ public class RegistrarEnvio {
         if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {
             // Cargar cosas en la tabla
+
+            tcPeso.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("peso"));
+            tcValor.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("valor"));
+            tcDescripcion.setCellValueFactory(new PropertyValueFactory<PaqueteT, String>("descripcion"));
+            tcVolumen.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("volumen"));
+            tcValorEnvio.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("valorenvio"));
+            tcTotal.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("total"));
+
             ObservableList<PaqueteT> list = FXCollections.observableArrayList();
             Paquete p = new Paquete();
             p.peso = 1;
@@ -67,16 +84,15 @@ public class RegistrarEnvio {
             p.costo = 1;
             p.total = 1;
             p.valor_declarado = 1;
-            /*list.add(new PaqueteT(p));
-            tbPaquetes.setItems(list);*/
-            tbPaquetes.getItems().add(new PaqueteT(p));
-            tbPaquetes.getItems().add(new PaqueteT(p));
-            tbPaquetes.getItems().add(new PaqueteT(p));
+
+            list.add(new PaqueteT(p));
+            tbPaquetes.setItems(list);
+
         }
     }
 
     @FXML void atras(ActionEvent event) {
-        if(event.getSource()==atrasPaquete) Globals.cambiarVista("operador.cliente");
+        if (event.getSource() == atrasPaquete) Globals.cambiarVista("operador.cliente");
     }
 
     @FXML void registrarPaquetes(ActionEvent event) {
@@ -147,15 +163,17 @@ public class RegistrarEnvio {
     }
 
     public static class PaqueteT {
-        SimpleStringProperty peso, valor, descripcion, volumen, valor_envio, total;
+        int peso, valor;
+        String descripcion;
+        int volumen, valorenvio, total;
 
         public PaqueteT(Paquete p) {
-            peso = new SimpleStringProperty(p.peso + "");
-            valor = new SimpleStringProperty(p.valor_declarado + "");
-            descripcion = new SimpleStringProperty(p.descripcion);
-            volumen = new SimpleStringProperty(p.volumen.volumen() + "");
-            valor_envio = new SimpleStringProperty("xd");
-            total = new SimpleStringProperty(p.total + "");
+            peso = p.peso;
+            valor = p.valor_declarado;
+            descripcion = p.descripcion;
+            volumen = p.volumen.volumen();
+            valorenvio = 10;
+            total = p.total;
         }
     }
 

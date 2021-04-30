@@ -59,12 +59,12 @@
                      <children>
                         <TableView fx:id="tbPaquetes" layoutX="1.0" layoutY="-2.0" prefHeight="411.0" prefWidth="519.0">
                           <columns>
-                            <TableColumn prefWidth="61.0" text="Peso" />
-                            <TableColumn prefWidth="77.0" text="Valor" />
-                              <TableColumn prefWidth="137.0" text="Descripcion" />
-                              <TableColumn prefWidth="66.0" text="Volumen" />
-                              <TableColumn prefWidth="93.0" text="Valor del envío" />
-                              <TableColumn prefWidth="84.0" text="Total" />
+                            <TableColumn fx:id="tcPeso" prefWidth="61.0" text="Peso" />
+                            <TableColumn fx:id="tcValor" prefWidth="77.0" text="Valor" />
+                              <TableColumn fx:id="tcDescripcion" prefWidth="137.0" text="Descripcion" />
+                              <TableColumn fx:id="tcVolumen" prefWidth="66.0" text="Volumen" />
+                              <TableColumn fx:id="tcValorEnvio" prefWidth="93.0" text="Valor del envío" />
+                              <TableColumn fx:id="tcTotal" prefWidth="84.0" text="Total" />
                           </columns>
                         </TableView>
                      </children>
