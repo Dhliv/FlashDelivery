@@ -35,6 +35,8 @@ public class RegistrarEnvio {
     @FXML private TextField DTelefono;
     @FXML private Button atrasCliente;
     // #------------------------------------
+    private int selectedP;
+    private boolean modify;
     @FXML private Button btRegistrarEnvios;
     @FXML private Button atrasPaquete;
     @FXML private TextField Peso;
@@ -60,12 +62,13 @@ public class RegistrarEnvio {
     private model.RegistrarEnvio envio;
 
     public void initialize() {
+        selectedP = -1;
         envio = new model.RegistrarEnvio();
         if (RCedula != null) RCedula.focusedProperty().addListener(onRemitenteFocusOut);
         if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {
             // Cargar cosas en la tabla
-
+            modify = false;
             tcPeso.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("peso"));
             tcValor.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("valor"));
             tcDescripcion.setCellValueFactory(new PropertyValueFactory<PaqueteT, String>("descripcion"));
@@ -74,23 +77,6 @@ public class RegistrarEnvio {
             tcTotal.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("total"));
 
             list = FXCollections.observableArrayList();
-            Paquete p = new Paquete();
-            p.peso = 1;
-            p.costo = 1;
-            p.descripcion = "a";
-            Dim d = new Dim();
-            d.alto = 1;
-            d.ancho = 1;
-            d.largo = 1;
-            p.volumen = d;
-            p.costo = 1;
-            p.total = 1;
-            p.valor_declarado = 1;
-
-            PaqueteT pt = new PaqueteT(p);
-            list.add(pt);
-            list.add(pt);
-            list.add(pt);
             tbPaquetes.setItems(list);
 
         }
@@ -147,7 +133,7 @@ public class RegistrarEnvio {
             Integer alto = Integer.parseInt(Alto.getText());
             Boolean seguro = Seguro.isPressed();
 
-            Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro);
+            Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, -1);
             list.add(new PaqueteT(p));
         } catch (NumberFormatException e) {
             // Colocar un joptionPane o alert
@@ -157,14 +143,49 @@ public class RegistrarEnvio {
     }
 
     @FXML void editarPaquete(ActionEvent event) {
-        // Obtener el index seleccionado?
         int index = tbPaquetes.getSelectionModel().getFocusedIndex();
-        System.out.println(index);
-        envio.eliminarPaquete(index);
+        if (index == -1) return;
+        if (!modify) {
+            selectedP = index;
+            PaqueteT pt = list.get(index);
+            Peso.setText(pt.peso + "");
+            Valor.setText(pt.valor + "");
+            Descripcion.setText(pt.descripcion);
+            Ancho.setText(pt.d.ancho + "");
+            Largo.setText(pt.d.largo + "");
+            Alto.setText(pt.d.alto + "");
+            tbPaquetes.setDisable(true);
+            btEditar.setText("Confirmar");
+        } else {
+            try { // Faltan validaciones
+                Integer peso = Integer.parseInt(Peso.getText());
+                Integer valor = Integer.parseInt(Valor.getText());
+                String descripcion = Descripcion.getText();
+                Integer ancho = Integer.parseInt(Ancho.getText());
+                Integer largo = Integer.parseInt(Largo.getText());
+                Integer alto = Integer.parseInt(Alto.getText());
+                Boolean seguro = Seguro.isPressed();
+                envio.eliminarPaquete(index);
+                Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, selectedP);
+                list.remove(index);
+                list.add(index, new PaqueteT(p));
+                tbPaquetes.setDisable(false);
+                selectedP = -1;
+            } catch (NumberFormatException e) {
+                // Colocar un joptionPane o alert
+                System.out.println("Ingrese correctamente los datos");
+            }
+        }
+        modify = !modify;
+        // Obtener el index seleccionado?
+
     }
 
     @FXML void eliminarPaquete(ActionEvent event) {
         int index = tbPaquetes.getSelectionModel().getFocusedIndex();
+        if(index == -1)
+        return;
+        envio.eliminarPaquete(index);
         list.remove(index);
 
     }
@@ -178,6 +199,7 @@ public class RegistrarEnvio {
         private int peso, valor;
         private String descripcion;
         private int volumen, valorenvio, total;
+        private Dim d;
 
         public PaqueteT(Paquete p) {
             peso = p.peso;
@@ -186,6 +208,7 @@ public class RegistrarEnvio {
             volumen = p.volumen.volumen();
             valorenvio = 10;
             total = p.total;
+            d = p.volumen;
         }
 
         public int getPeso() {

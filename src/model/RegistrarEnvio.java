@@ -60,7 +60,7 @@ public class RegistrarEnvio {
   }
   
   
-  public Paquete agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
+  public Paquete agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro, int index) {
     Paquete p = new Paquete();
     p.descripcion = descripcion;
     p.peso = peso;
@@ -74,7 +74,10 @@ public class RegistrarEnvio {
 
     
     p.total = getTotal(p.costo, valor, seguro);
-    paquetes.add(p);
+    if(index == -1)
+      paquetes.add(p);
+    else
+      paquetes.add(index, p);
     return p;
   }
 
