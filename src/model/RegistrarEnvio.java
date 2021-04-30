@@ -44,11 +44,12 @@ public class RegistrarEnvio {
   /**
    * Modifica el estado del cliente.
    */
-  public void setCliente(String cedula, String nombre, String direccion, String telefono, TipoCliente tipo) {
+  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
     Cliente cliente = tipo == TipoCliente.Remitente ? remitente : destinatario;
     if (cliente == null) cliente = new Cliente();
     cliente.cedula = cedula;
     cliente.nombre = nombre;
+    cliente.ciudad = ciudad;
     cliente.direccion = direccion;
     cliente.telefono = telefono;
   }
@@ -57,7 +58,7 @@ public class RegistrarEnvio {
     Paquete p = new Paquete();
     p.descripcion = descripcion;
     p.peso = peso;
-    p.valor_declarado= valor;
+    p.valor_declarado = valor;
     Dim d = new Dim();
     d.alto = alto;
     d.largo = largo;
@@ -81,19 +82,19 @@ public class RegistrarEnvio {
     paquetes.remove(index);
   }
 
-  public List<Paquete> getPaquetes(){
+  public List<Paquete> getPaquetes() {
     return paquetes;
   }
 
-  public Integer getCost(Integer peso, Integer volumen, Integer valor) { //añadir parametros int ciudadOrigen, int ciudadDestino
+  public Integer getCost(Integer peso, Integer volumen, Integer valor) { // añadir parametros int ciudadOrigen, int ciudadDestino
     Integer cost = 0;
-    
+
     return cost;
   }
 
   public Integer getTotal(Integer costo, Integer valor_declarado, Boolean seguro) {
     Integer cost = 0;
-    
+
     return cost;
   }
 
@@ -103,8 +104,9 @@ public class RegistrarEnvio {
 
   public static class Dim {
     public Integer alto, ancho, largo;
-    public Integer volumen(){
-      return alto*ancho*largo;
+
+    public Integer volumen() {
+      return alto * ancho * largo;
     }
   }
 
@@ -144,7 +146,7 @@ public class RegistrarEnvio {
     public Integer total;
     public Integer id_envio;
     public Boolean seguro;
-    
+
   }
 
 }

@@ -25,10 +25,12 @@ import utilities.Globals;
 public class RegistrarEnvio {
     @FXML private TextField RCedula;
     @FXML private TextField RNombre;
+    @FXML private TextField RCiudad;
     @FXML private TextField RDireccion;
     @FXML private TextField RTelefono;
     @FXML private TextField DCedula;
     @FXML private TextField DNombre;
+    @FXML private TextField DCiudad;
     @FXML private TextField DDireccion;
     @FXML private TextField DTelefono;
     @FXML private Button atrasCliente;
@@ -96,13 +98,13 @@ public class RegistrarEnvio {
     }
 
     @FXML void registrarPaquetes(ActionEvent event) {
-        envio.setCliente(RCedula.getText(), RNombre.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
-        envio.setCliente(DCedula.getText(), DNombre.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
+        envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
+        envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
         Globals.cambiarVista("operador.paquetes", this);
     }
 
     @FXML void onActionRemitente() {
-        onChangeCedula(RCedula, RNombre, RDireccion, RTelefono, TipoCliente.Remitente);
+        onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);
     }
 
     ChangeListener<Boolean> onRemitenteFocusOut = (ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) -> {
@@ -110,18 +112,19 @@ public class RegistrarEnvio {
     };
 
     @FXML void onActionDestinatario() {
-        onChangeCedula(DCedula, DNombre, DDireccion, DTelefono, TipoCliente.Destinatario);
+        onChangeCedula(DCedula, DNombre, DCiudad, DDireccion, DTelefono, TipoCliente.Destinatario);
     }
 
     ChangeListener<Boolean> onDestinatarioFocusOut = (ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) -> {
         if (!arg2) onActionDestinatario();
     };
 
-    private void onChangeCedula(TextField Cedula, TextField Nombre, TextField Direccion, TextField Telefono, TipoCliente tipo) {
+    private void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion, TextField Telefono, TipoCliente tipo) {
         if (Cedula.getText() == "") return;
         Cliente cliente = envio.buscarCliente(Cedula.getText(), tipo);
         if (cliente != null) {
             Nombre.setText(cliente.nombre);
+            Ciudad.setText(cliente.ciudad);
             Direccion.setText(cliente.direccion);
             Telefono.setText(cliente.telefono);
         }
