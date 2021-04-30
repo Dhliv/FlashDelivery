@@ -15,66 +15,36 @@ public class OperadorOficina {
   private static final int REMITENTE = 0;
 
   public Ventana ventana;
-  @FXML
-  private TableView<?> tablePaquetes;
-  @FXML
-  private TableColumn<?, ?> columnDestinatario;
-  @FXML
-  private TableColumn<?, ?> columnIdPaquete;
-  @FXML
-  private TableColumn<?, ?> columnPesoPaquete;
-  @FXML
-  private TableColumn<?, ?> columnEstado;
-  @FXML
-  private Label labelPOS;
-  @FXML
-  private Button btnSolicitudRecogida;
-  @FXML
-  private Button btnRegistrarPaquete;
-  @FXML
-  private Label labelUsuario;
-  @FXML 
-  private Pane leftContent;
+  @FXML private TableView<?> tablePaquetes;
+  @FXML private TableColumn<?, ?> columnDestinatario;
+  @FXML private TableColumn<?, ?> columnIdPaquete;
+  @FXML private TableColumn<?, ?> columnPesoPaquete;
+  @FXML private TableColumn<?, ?> columnEstado;
+  @FXML private Label labelPOS;
+  @FXML private Button btnSolicitudRecogida;
+  @FXML private Button btnRegistrarPaquete;
+  @FXML private Label labelUsuario;
+  @FXML private Pane rightContent;
 
-  public OperadorOficina() {
+  public void initialize(){
+    Globals.viewPane = rightContent;
   }
 
   /**
    * Accede a la pantalla de registro de paquetes.
-   * 
-   * @param event not used.
    */
-  @FXML
-  void registrarPaquete(ActionEvent event) {
-    Stage clienteCheckInterfaz = new Stage();
-    ventana = new Ventana("cliente.check", 
-                          new ClienteCheck
-                            (REMITENTE, 
-                            new OperadorRegister(),
-                            clienteCheckInterfaz,
-                            leftContent
-                            )
-                          );
-    try {
-      ventana.start(clienteCheckInterfaz);
-      //Globals.pantalla.wait();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  @FXML void registrarEnvio(ActionEvent event) {
+    Globals.cambiarVista("operador.cliente");
   }
 
-  @FXML
-  void registrarRecogida(ActionEvent event) {
+  @FXML void registrarRecogida(ActionEvent event) {
 
   }
 
   /**
    * Vuelve al login.
-   * 
-   * @param event not used.
    */
-  @FXML
-  void logOut(ActionEvent event) {
+  @FXML void logOut(ActionEvent event) {
     Globals.logOut();
   }
 }

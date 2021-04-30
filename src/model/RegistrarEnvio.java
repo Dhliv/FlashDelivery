@@ -53,27 +53,60 @@ public class RegistrarEnvio {
     cliente.telefono = telefono;
   }
 
-  public void agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto) {
+  public void agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
+    Paquete p = new Paquete();
+    p.descripcion = descripcion;
+    p.peso = peso;
+    p.valor_declarado= valor;
+    Dim d = new Dim();
+    d.alto = alto;
+    d.largo = largo;
+    d.ancho = ancho;
+    p.volumen = d;
+    p.seguro = seguro;
+    p.costo = getCost(peso, d.volumen(), valor);
 
+    p.total = getTotal(p.costo, valor, seguro);
+    paquetes.add(p);
   }
 
-  public void editarPaquete() {
-
+  public void editarPaquete(int index, Paquete p) {
+    paquetes.get(index).descripcion = p.descripcion;
+    paquetes.get(index).peso = p.peso;
+    paquetes.get(index).volumen = p.volumen;
+    paquetes.get(index).valor_declarado = p.valor_declarado;
   }
 
-  public void eliminarPaquete() {
-
+  public void eliminarPaquete(int index) {
+    paquetes.remove(index);
   }
 
-  public Integer getCost(Integer peso, Integer volumen, Integer valor, int ciudadOrigen, int ciudadDestino) {
+  public List<Paquete> getPaquetes(){
+    return paquetes;
+  }
+
+  public Integer getCost(Integer peso, Integer volumen, Integer valor) { //añadir parametros int ciudadOrigen, int ciudadDestino
     Integer cost = 0;
+    
+    return cost;
+  }
 
+  public Integer getTotal(Integer costo, Integer valor_declarado, Boolean seguro) {
+    Integer cost = 0;
+    
     return cost;
   }
 
   // #---------------------------------------------------------------------------
-  // # AUXILIARES
+  // # FUNCIONES AUXILIARES
   // #---------------------------------------------------------------------------
+
+  public static class Dim {
+    public Integer alto, ancho, largo;
+    public Integer volumen(){
+      return alto*ancho*largo;
+    }
+  }
 
   // #---------------------------------------------------------------------------
   // # ENUMS
@@ -106,11 +139,12 @@ public class RegistrarEnvio {
     public String descripcion;
     public Integer peso;
     public Dim volumen;
-    public Integer valor;
+    public Integer valor_declarado;
+    public Integer costo;
+    public Integer total;
     public Integer id_envio;
+    public Boolean seguro;
+    
   }
 
-  public static class Dim {
-    public Integer alto, ancho, largo;
-  }
 }

@@ -168,8 +168,10 @@ public class OperadorRegister implements Initializable {
   }
 
   private void ingresarDatos() {
+    /*
     RegistrarEnvio.createEnvio(Date.valueOf(LocalDate.now()), metodoPago.toString(), costo, seguro, impuesto,
         dirDestino, id_sede, Globals.id_usuario, cedulaRemitente, cedulaDestinatario);
+        */
   }
 
   /**

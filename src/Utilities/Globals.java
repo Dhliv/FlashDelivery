@@ -7,13 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Sedes;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -23,24 +24,36 @@ import controller.Login;
 
 public class Globals {
     private static Object referenceObject;
-    public static Pane adminViewPane;
+    public static Pane viewPane;
     public static Stage pantalla;
     public static Integer id_usuario;
     private static Ventana ventana;
     private static List<model.Sedes.Sede> sedes;
     private static Connection conn;
+    private static Map<String, Parent> views;
 
     public static void init(Object obj) {
         referenceObject = obj;
+        views = new HashMap<String, Parent>();
     }
 
     public static void cambiarVista(String name) {
-        adminViewPane.getChildren().clear();
-        adminViewPane.getChildren().add(loadView(name));
+        if(views.get(name) == null)
+            cambiarVista(name, null);
+        else
+            cambiarVista(views.get(name));
     }
 
-    public static Scene loadScene(String name) {
-        return new Scene(loadView(name, null));
+    public static void cambiarVista(String name, Object control) {
+        
+        viewPane.getChildren().clear();
+        views.put(name, loadView(name, control));
+        viewPane.getChildren().add(views.get(name));
+    }
+
+    public static void cambiarVista(Parent view) {
+        viewPane.getChildren().clear();
+        viewPane.getChildren().add(view);
     }
 
     public static Parent loadView(String name) {
@@ -64,6 +77,14 @@ public class Globals {
         }
         return root;
     }
+
+    public static Scene loadScene(String name) {
+        return new Scene(loadView(name, null));
+    }
+
+    // #---------------------------------------------------------------------------
+  // # Base de Datos
+  // #---------------------------------------------------------------------------
 
     public static DSLContext db() {
         String url = "jdbc:postgresql://ec2-52-87-107-83.compute-1.amazonaws.com:5432/d622m7j3h054ts";
