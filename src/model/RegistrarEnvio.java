@@ -53,8 +53,14 @@ public class RegistrarEnvio {
     cliente.direccion = direccion;
     cliente.telefono = telefono;
   }
-
-  public void agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
+  public void agregarPaqueteP(Paquete p) {
+    p.costo = getCost(p.peso, p.volumen.volumen(), p.valor_declarado);
+    p.total = getTotal(p.costo, p.valor_declarado, p.seguro);
+    paquetes.add(p);
+  }
+  
+  
+  public Paquete agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
     Paquete p = new Paquete();
     p.descripcion = descripcion;
     p.peso = peso;
@@ -64,11 +70,12 @@ public class RegistrarEnvio {
     d.largo = largo;
     d.ancho = ancho;
     p.volumen = d;
-    p.seguro = seguro;
-    p.costo = getCost(peso, d.volumen(), valor);
+    p.seguro = seguro;    p.costo = getCost(peso, d.volumen(), valor);
 
+    
     p.total = getTotal(p.costo, valor, seguro);
     paquetes.add(p);
+    return p;
   }
 
   public void editarPaquete(int index, Paquete p) {

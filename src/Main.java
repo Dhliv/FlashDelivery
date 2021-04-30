@@ -18,7 +18,7 @@ public class Main extends Application {
         login.start(stage);*/
 
         // # prueba para la vista operador.cliente
-        stage.setScene(Globals.loadScene("operador.paquetes"));
+        stage.setScene(Globals.loadScene("operadorOficina"));
         stage.show();
     }
 
