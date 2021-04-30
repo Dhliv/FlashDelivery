@@ -7,7 +7,7 @@ import utilities.Ventana;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        System.getProperties().setProperty("org.jooq.no-logo", "true");
+        System.getProperties().setProperty("org.jooq.no-logo", "true"); // no mostrar logo de jOOQ
         launch(args);
     }
 
@@ -18,7 +18,7 @@ public class Main extends Application {
         login.start(stage);*/
 
         // # prueba para la vista operador.cliente
-        stage.setScene(Globals.loadScene("operador.cliente"));
+        stage.setScene(Globals.loadScene("operador.paquetes"));
         stage.show();
     }
 

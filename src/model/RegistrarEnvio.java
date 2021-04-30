@@ -4,6 +4,8 @@ import org.jooq.Result;
 import org.jooq.impl.*;
 import java.sql.Date;
 import org.jooq.Record;
+import java.util.List;
+import java.util.ArrayList;
 
 import static utilities.Globals.db;
 import utilities.Globals;
@@ -18,6 +20,11 @@ import model.Clientes.Cliente;
 public class RegistrarEnvio {
   private Cliente remitente;
   private Cliente destinatario;
+  private List<Paquete> paquetes;
+
+  public RegistrarEnvio() {
+    paquetes = new ArrayList<>();
+  }
 
   /**
    * Busca si un cliente ya se encuentra registrado en la base de datos.
@@ -35,29 +42,38 @@ public class RegistrarEnvio {
   }
 
   /**
-   * Inserta un nuevo envío en la base de datos.
-   * 
-   * @param fcreg fecha de registro.
-   * @param mp    metodo de pago.
-   * @param cost  costo del envio.
-   * @param seg   define si el paquete tiene seguro o no.
-   * @param impe  valor del impuesto del envío.
-   * @param dir   dirección de entrega del paquete.
-   * @param idS   ID de la sede donde se registra el envío.
-   * @param emp   ID del empleado que registra el envío.
-   * @param remi  cédula del cliente que envía el paquete.
-   * @param desti cédula del cliente que recibe el paquete.
+   * Modifica el estado del cliente.
    */
-  public static void createEnvio(Date fcreg, String mp, Double cost, Boolean seg, Double impe, String dir, Integer idS,
-      Integer emp, String remi, String desti) {
-    Globals.db()
-        .insertInto(DSL.table("envio"), DSL.field("\"Fecha_registro\""), DSL.field("\"Metodo_pago\""),
-            DSL.field("\"Costo\""), DSL.field("\"Seguro\""), DSL.field("\"Impuesto_envio\""),
-            DSL.field("\"Direccion_entrega\""), DSL.field("\"ID_Sede\""), DSL.field("\"Emp_Entrega\""),
-            DSL.field("\"Delivered\""), DSL.field("\"Cliente_Envio\""), DSL.field("\"Cliente_Recogida\""))
-        .values(fcreg, mp, cost, seg, impe, dir, idS, emp, false, remi, desti).execute();
-    Globals.closeConnection();
+  public void setCliente(String cedula, String nombre, String direccion, String telefono, TipoCliente tipo) {
+    Cliente cliente = tipo == TipoCliente.Remitente ? remitente : destinatario;
+    if (cliente == null) cliente = new Cliente();
+    cliente.cedula = cedula;
+    cliente.nombre = nombre;
+    cliente.direccion = direccion;
+    cliente.telefono = telefono;
   }
+
+  public void agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto) {
+
+  }
+
+  public void editarPaquete() {
+
+  }
+
+  public void eliminarPaquete() {
+
+  }
+
+  public Integer getCost(Integer peso, Integer volumen, Integer valor, int ciudadOrigen, int ciudadDestino) {
+    Integer cost = 0;
+
+    return cost;
+  }
+
+  // #---------------------------------------------------------------------------
+  // # AUXILIARES
+  // #---------------------------------------------------------------------------
 
   // #---------------------------------------------------------------------------
   // # ENUMS
@@ -71,7 +87,7 @@ public class RegistrarEnvio {
   // # POJOs
   // #---------------------------------------------------------------------------
 
-  public class Envio {
+  public static class Envio {
     public Integer ID_Envio;
     public Date Fecha_registro;
     public String Metodo_pago;
@@ -84,5 +100,17 @@ public class RegistrarEnvio {
     public Boolean Delivered;
     public String Cliente_Envio;
     public String Cliente_Recogida;
+  }
+
+  public static class Paquete {
+    public String descripcion;
+    public Integer peso;
+    public Dim volumen;
+    public Integer valor;
+    public Integer id_envio;
+  }
+
+  public static class Dim {
+    public Integer alto, ancho, largo;
   }
 }
