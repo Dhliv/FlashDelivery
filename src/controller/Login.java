@@ -61,14 +61,16 @@ public class Login {
         } else if (acc == -1) {
             // JOptionPane.showMessageDialog(null, "No se ha encontrado su usuario");
             System.out.println("fake");
-        } else {
+        } else if (acc == 0){
+            System.out.println("sql error");
+        }else{
             // JOptionPane.showMessageDialog(null, "Entraste!");
             System.out.println("entre");
             Empleado userActual = ed.cargarEmpleado(acc);
             var rolAcc = userActual.getRol();
 
             Globals.pantalla.close();
-            Globals.id_usuario = userActual.getID();
+            Globals.id_usuario = userActual.getCedula();
             Ventana vent;
 
             if (rolAcc.equals(rol.get(roles.ADMIN))) {

@@ -25,8 +25,7 @@ public class UsuarioDAO {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (instruccion != null)
-                    instruccion.close();
+                if (instruccion != null) instruccion.close();
                 if (conexion != null) {
                     conexion.close();
                     Conexion.closeConnection();
@@ -63,8 +62,7 @@ public class UsuarioDAO {
 
         } finally {
             try {
-                if (instruccion != null)
-                    instruccion.close();
+                if (instruccion != null) instruccion.close();
                 if (conexion != null) {
                     conexion.close();
                     Conexion.closeConnection();
@@ -87,7 +85,7 @@ public class UsuarioDAO {
 
             try {
                 conexion = Conexion.startConnection();
-                sqlStatement = "SELECT * FROM usuario WHERE \"Username\" = ? AND \"Password\" = ?";
+                sqlStatement = "SELECT * FROM usuario WHERE Username = ? AND Password = ?";
                 instruccion = conexion.prepareStatement(sqlStatement);
                 instruccion.setString(1, user);
                 instruccion.setString(2, pass);
@@ -111,8 +109,7 @@ public class UsuarioDAO {
                 code = -1;
             } finally {
                 try {
-                    if (instruccion != null)
-                        instruccion.close();
+                    if (instruccion != null) instruccion.close();
                     if (conexion != null) {
                         conexion.close();
                         Conexion.closeConnection();
@@ -134,31 +131,35 @@ public class UsuarioDAO {
         int resultado = 0;
         String sqlStatement;
         conexion = Conexion.startConnection();
-        sqlStatement = "UPDATE cliente SET username = ?, password = ? WHERE ID = ?";
-
-        try {
-
-            instrucciones = conexion.prepareStatement(sqlStatement);
-
-            instrucciones.setString(1, u.getUsername());
-            instrucciones.setString(2, u.getPassword());
-            instrucciones.setInt(3, u.getID());
-
-            resultado = instrucciones.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        } finally {
+        if (!verificarUsuario(u.getUsername()) || !verificarPassword(u.getPassword())) {
+            resultado = -1;
+        } else {
+            sqlStatement = "UPDATE cliente SET username = ?, password = ?, enabled = ? WHERE ID = ?";
             try {
-                if (instrucciones != null)
-                    instrucciones.close();
-                if (conexion != null) {
-                    conexion.close();
-                    Conexion.closeConnection();
+
+                instrucciones = conexion.prepareStatement(sqlStatement);
+
+                instrucciones.setString(1, u.getUsername());
+                instrucciones.setString(2, u.getPassword());
+                instrucciones.setBoolean(3, u.isEnabled());
+                instrucciones.setInt(4, u.getID());
+
+                resultado = instrucciones.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            } finally {
+                try {
+                    if (instrucciones != null) instrucciones.close();
+                    if (conexion != null) {
+                        conexion.close();
+                        Conexion.closeConnection();
+                    }
+                } catch (SQLException ex) {
+                    // Do something ...
                 }
-            } catch (SQLException ex) {
-                // Do something ...
             }
         }
+
         return resultado;
     }
 
@@ -179,8 +180,7 @@ public class UsuarioDAO {
             // Do something ...
         } finally {
             try {
-                if (instrucciones != null)
-                    instrucciones.close();
+                if (instrucciones != null) instrucciones.close();
                 if (conexion != null) {
                     conexion.close();
                     Conexion.closeConnection();
@@ -192,11 +192,40 @@ public class UsuarioDAO {
         return resultado;
     }
 
+    /**
+     * Verifica que el user tenga el formato correcto, comprobando caracteres
+     * erroneos como #'.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' , y también
+     * verificando si está vacía o no
+     * 
+     * @param user La contraseña ingresada.
+     * @return true si es correcta la contraseña, false si tiene algún error de los
+     *         antes descritos.
+     */
     private boolean verificarUsuario(String user) {
+        char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
+        for (int i = 0; i < user.length(); ++i)
+            for (int j = 0; j < F.length; ++j)
+                if (user.charAt(i) == F[j]) return false;
         return true;
     }
 
+    /**
+     * Verifica que el password tenga el formato correcto, comprobando caracteres
+     * erroneos como #'.', ',', '\'', '\"', '+', '-', '_', '!' , y también
+     * verificando si está vacía o no
+     * 
+     * @param pass La contraseña ingresada.
+     * @return true si es correcta la contraseña, false si tiene algún error de los
+     *         antes descritos.
+     */
     private boolean verificarPassword(String pass) {
-        return true;
+        boolean valid = false;
+        if (pass.trim().equals("") || !pass.trim().equals(pass)) return valid;
+        char F[] = { '.', ',', '\'', '\"', '+', '-', '_', '!' };
+        for (int i = 0; i < pass.length(); ++i)
+            for (int j = 0; j < F.length; ++j)
+                if (pass.charAt(i) == F[j]) return valid;
+        valid = true;
+        return valid;
     }
 }
