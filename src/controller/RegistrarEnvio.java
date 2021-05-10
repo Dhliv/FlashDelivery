@@ -104,7 +104,7 @@ public class RegistrarEnvio {
     @FXML void registrarPaquetes(ActionEvent event) {
         envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
         envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
-        Globals.cambiarVista("operador.resumen", this);
+        Globals.cambiarVista("operador.paquetes", this);
     }
 
     @FXML void onActionRemitente() {
@@ -175,7 +175,7 @@ public class RegistrarEnvio {
             btEliminar.setDisable(true);
             btEditar.setText("Confirmar");
         } else {
-            try { 
+            try {
                 Integer peso = Integer.parseInt(Peso.getText());
                 Integer valor = Integer.parseInt(Valor.getText());
                 String descripcion = Descripcion.getText();
@@ -191,6 +191,8 @@ public class RegistrarEnvio {
                 btEliminar.setDisable(false);
                 tbPaquetes.setDisable(false);
                 selectedP = -1;
+                btEditar.setText("Editar");
+                clearCampsPaquetes();
             } catch (NumberFormatException e) {
                 // Colocar un joptionPane o alert
                 System.out.println("Ingrese correctamente los datos");
