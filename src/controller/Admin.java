@@ -31,7 +31,7 @@ public class Admin {
 
     @FXML
     private void initialize() {
-        Globals.adminViewPane = content;
+        Globals.viewPane = content;
         labelNameUser.setText("Bienvenido " + userName);
     }
 

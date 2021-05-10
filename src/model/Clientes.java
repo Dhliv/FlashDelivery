@@ -8,9 +8,10 @@ import utilities.Globals;
 public class Clientes {
   public static class Cliente {
     public String cedula;
+    public String nombre;
+    public String ciudad;
     public String direccion;
     public String telefono;
-    public String nombre;
   }
 
   /**
@@ -22,8 +23,7 @@ public class Clientes {
    * @param telefono  del cliente.
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono) {
-    Globals.db().insertInto(DSL.table("cliente"), DSL.field("\"Cedula\""), DSL.field("\"Direccion\""),
-        DSL.field("\"Telefono\""), DSL.field("\"Nombre\"")).values(cedula, direccion, telefono, nombre).execute();
+    Globals.db().insertInto(DSL.table("cliente"), DSL.field("\"Cedula\""), DSL.field("\"Direccion\""), DSL.field("\"Telefono\""), DSL.field("\"Nombre\"")).values(cedula, direccion, telefono, nombre).execute();
     Globals.closeConnection();
   }
 
