@@ -162,6 +162,7 @@ public class RegistrarEnvio {
         int index = tbPaquetes.getSelectionModel().getFocusedIndex();
         if (index == -1) return;
         if (!modify) {
+            btRegistrar.setDisable(true);
             selectedP = index;
             PaqueteT pt = list.get(index);
             Peso.setText(pt.peso + "");
@@ -171,9 +172,10 @@ public class RegistrarEnvio {
             Largo.setText(pt.d.largo + "");
             Alto.setText(pt.d.alto + "");
             tbPaquetes.setDisable(true);
+            btEliminar.setDisable(true);
             btEditar.setText("Confirmar");
         } else {
-            try { // Faltan validaciones
+            try { 
                 Integer peso = Integer.parseInt(Peso.getText());
                 Integer valor = Integer.parseInt(Valor.getText());
                 String descripcion = Descripcion.getText();
@@ -185,6 +187,8 @@ public class RegistrarEnvio {
                 Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, selectedP);
                 list.remove(index);
                 list.add(index, new PaqueteT(p));
+                btRegistrar.setDisable(false);
+                btEliminar.setDisable(false);
                 tbPaquetes.setDisable(false);
                 selectedP = -1;
             } catch (NumberFormatException e) {
