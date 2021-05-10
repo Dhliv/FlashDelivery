@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
@@ -59,6 +60,20 @@ public class RegistrarEnvio {
     @FXML private TableColumn<PaqueteT, Integer> tcTotal;
     private ObservableList<PaqueteT> list;
     // #------------------------------------
+
+    // Componentes gráficos de la ventana Resumen.
+    @FXML private Label lblCedulaR; // label Cedula del Remitente
+    @FXML private Label lblNameR; // label nombre de remitente
+    @FXML private Label lblCedulaD; // label cedula del destinatario
+    @FXML private Label lblNameD; // label Nombre del Destinatario
+    @FXML private Label lblDirD; // direccion del destinatario
+    @FXML private Label lblnumP; // numero del paquete
+    @FXML private Label labelCostoEnvio; // costo del envio
+    @FXML private Label lblImpuesto; // valor del impuesto
+    @FXML private Label lblSeguro; // Costo de los seguros de los paquetes.
+    @FXML private Label lblTotal; // Costo total del envío.
+    // #------------------------------------
+
     private model.RegistrarEnvio envio;
 
     public void initialize() {
@@ -89,7 +104,7 @@ public class RegistrarEnvio {
     @FXML void registrarPaquetes(ActionEvent event) {
         envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
         envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
-        Globals.cambiarVista("operador.paquetes", this);
+        Globals.cambiarVista("operador.resumen", this);
     }
 
     @FXML void onActionRemitente() {
@@ -245,4 +260,19 @@ public class RegistrarEnvio {
         }
     }
 
+    // #---------------------------------------------------------------------------
+    // # VISTA RESUMEN
+    // #---------------------------------------------------------------------------
+
+    @FXML void btnClickCredito(MouseEvent event) {
+
+    }
+
+    @FXML void btnClickDebito(MouseEvent event) {
+
+    }
+
+    @FXML void btnClickEfectivo(MouseEvent event) {
+
+    }
 }
