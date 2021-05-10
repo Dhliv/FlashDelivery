@@ -140,6 +140,7 @@ public class RegistrarEnvio {
             System.out.println("Ingrese correctamente los datos");
         }
 
+        clearCampsPaquetes();
     }
 
     @FXML void editarPaquete(ActionEvent event) {
@@ -183,8 +184,7 @@ public class RegistrarEnvio {
 
     @FXML void eliminarPaquete(ActionEvent event) {
         int index = tbPaquetes.getSelectionModel().getFocusedIndex();
-        if(index == -1)
-        return;
+        if (index == -1) return;
         envio.eliminarPaquete(index);
         list.remove(index);
 
@@ -193,6 +193,15 @@ public class RegistrarEnvio {
     private void updatePaquetesTable() {
         // tbPaquetes.getItems().addAll(enviar.getPaquetes());
 
+    }
+
+    private void clearCampsPaquetes() {
+        Peso.setText("");
+        Valor.setText("");
+        Descripcion.setText("");
+        Alto.setText("");
+        Largo.setText("");
+        Ancho.setText("");
     }
 
     public static class PaqueteT {

@@ -3,8 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.sql.Date;
-import java.time.LocalDate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +14,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import model.EmpleadoDAO;
-import model.RegistrarEnvio;
 import utilities.GeneralAlerts;
 import utilities.GeneralChecker;
 import utilities.Globals;
