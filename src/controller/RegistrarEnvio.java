@@ -36,28 +36,32 @@ public class RegistrarEnvio {
     @FXML private TextField DTelefono;
     @FXML private Button atrasCliente;
     // #------------------------------------
-    private int selectedP;
-    private boolean modify;
-    @FXML private Button btRegistrarEnvios;
-    @FXML private Button atrasPaquete;
-    @FXML private TextField Peso;
-    @FXML private TextField Valor;
-    @FXML private TextArea Descripcion;
-    @FXML private CheckBox Seguro;
-    @FXML private Button btEliminar;
-    @FXML private Button btEditar;
-    @FXML private Button btRegistrar;
-    @FXML private TextField Alto;
-    @FXML private TextField Largo;
-    @FXML private TextField Ancho;
+    
+    private int selectedP; // Índice de la fila seleccionada en la tabla de paquetes
+    private boolean modify; // Boolean que indica si se está modificando un paquete o no
+    // Componentes gráficos de la ventana de registro paquetes
+    @FXML private Button btRegistrarEnvios; //
+    @FXML private Button atrasPaquete; //Botón para devolverse a la vista de clientes
+    @FXML private TextField Peso; // TextField para leer el peso del paquete 
+    @FXML private TextField Valor; // TextField para leer el valor del paquete
+    @FXML private TextArea Descripcion; // TextField para leer la descripción adjunta al paquete
+    @FXML private CheckBox Seguro; // CheckBox para marcar si se le aplica o no el seguro al paquete
+    @FXML private Button btEliminar; // Botón para eliminar un paquete de la lista
+    @FXML private Button btEditar; // Botón para editar un paquete de la lista
+    @FXML private Button btRegistrar; // Botón para registrar un paquete de la lista
+    @FXML private TextField Alto; // TextField para ingresar el alto del paquete
+    @FXML private TextField Largo; // TextField para ingresar el largo del paquete
+    @FXML private TextField Ancho; // TextField para ingresar el ancho del paquete
 
-    @FXML private TableView<PaqueteT> tbPaquetes;
+    @FXML private TableView<PaqueteT> tbPaquetes; //Tabla para mostrar la lista de paquetes
+    //Columnas de la tabla 
     @FXML private TableColumn<PaqueteT, Integer> tcPeso;
     @FXML private TableColumn<PaqueteT, Integer> tcValor;
     @FXML private TableColumn<PaqueteT, String> tcDescripcion;
     @FXML private TableColumn<PaqueteT, Integer> tcVolumen;
     @FXML private TableColumn<PaqueteT, Integer> tcValorEnvio;
     @FXML private TableColumn<PaqueteT, Integer> tcTotal;
+    // Lista de elementos de la tabla
     private ObservableList<PaqueteT> list;
     // #------------------------------------
 
