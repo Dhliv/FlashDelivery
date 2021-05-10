@@ -33,8 +33,6 @@ public class OperadorRegister implements Initializable {
   private Object sedeEnvio;
   private Object metodoPago;
   private Boolean seguro;
-  private Double costo;
-  private Double impuesto;
   private Integer id_sede;
   private String[] textos;
   private Object[] multOpcion;
@@ -42,28 +40,17 @@ public class OperadorRegister implements Initializable {
   public String cedulaDestinatario; // almacena la cedula del destinatario para llenar campos a futuro.
   private Ventana ventana;
 
-  @FXML
-  private TextField cedulaClienteT;
-  @FXML
-  private TextField cedulaDestinoT;
-  @FXML
-  private TextField direccionEntregaT;
-  @FXML
-  private ChoiceBox<String> sedeEnvioT;
-  @FXML
-  private TextField pesoPaqueteT;
-  @FXML
-  private ChoiceBox<String> metodoPagoT;
-  @FXML
-  private TextField valorPaqueteT;
-  @FXML
-  private Label labelImpuesto;
-  @FXML
-  private Label labelTotalCosto;
-  @FXML
-  private TextArea descripcionT;
-  @FXML
-  private CheckBox seguroChoice;
+  @FXML private TextField cedulaClienteT;
+  @FXML private TextField cedulaDestinoT;
+  @FXML private TextField direccionEntregaT;
+  @FXML private ChoiceBox<String> sedeEnvioT;
+  @FXML private TextField pesoPaqueteT;
+  @FXML private ChoiceBox<String> metodoPagoT;
+  @FXML private TextField valorPaqueteT;
+  @FXML private Label labelImpuesto;
+  @FXML private Label labelTotalCosto;
+  @FXML private TextArea descripcionT;
+  @FXML private CheckBox seguroChoice;
 
   public OperadorRegister() {
   }
@@ -73,8 +60,7 @@ public class OperadorRegister implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToOperadorOficina(ActionEvent event) {
+  @FXML void goToOperadorOficina(ActionEvent event) {
     Globals.pantalla.close();
     ventana = new Ventana("operadorOficina", new OperadorOficina());
     try {
@@ -84,8 +70,7 @@ public class OperadorRegister implements Initializable {
     }
   }
 
-  @FXML
-  void registrarEnvio(ActionEvent event) {
+  @FXML void registrarEnvio(ActionEvent event) {
     boolean charForbiden = false;
     boolean emptyCamps = false;
 
@@ -95,7 +80,6 @@ public class OperadorRegister implements Initializable {
 
     if (!(charForbiden || emptyCamps)) {
       transformData();
-      ingresarDatos();
       volver();
       GeneralAlerts.showRegSuccess();
     } else {
@@ -112,8 +96,7 @@ public class OperadorRegister implements Initializable {
    * @param location  not used.
    * @param resources not used.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  @Override public void initialize(URL location, ResourceBundle resources) {
     ObservableList<String> sedes = FXCollections.observableArrayList();
     ObservableList<String> metodosPago = FXCollections.observableArrayList();
     ArrayList<String> mp = new ArrayList<>();
@@ -163,13 +146,6 @@ public class OperadorRegister implements Initializable {
 
   private void transformData() {
     id_sede = Globals.getIdSede(sedeEnvio.toString());
-    costo = Double.parseDouble(valorPaquete);
-    impuesto = 0.0;
-  }
-
-  private void ingresarDatos() {
-    RegistrarEnvio.createEnvio(Date.valueOf(LocalDate.now()), metodoPago.toString(), costo, seguro, impuesto,
-        dirDestino, id_sede, Globals.id_usuario, cedulaRemitente, cedulaDestinatario);
   }
 
   /**
