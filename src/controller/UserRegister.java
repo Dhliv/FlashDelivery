@@ -165,7 +165,7 @@ public class UserRegister implements Initializable {
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         parseData();
 
-        Empleado emp = new Empleado(id, name, "", rol, dir, telefono, fc, idSede);
+        Empleado emp = new Empleado(id+"", name, "", rol, dir, telefono, fc, idSede);
         EmpleadoDAO empD = new EmpleadoDAO();
         userNoExist = empD.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el empleado
                                                // ya existía.

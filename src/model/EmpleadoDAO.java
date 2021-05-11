@@ -20,7 +20,7 @@ public class EmpleadoDAO {
             conexion = Conexion.startConnection();
             sqlStatement = "INSERT INTO empleado VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             ins = conexion.prepareStatement(sqlStatement);
-            ins.setInt(1, emp.getID());
+            ins.setString(1, emp.getCedula());
             ins.setString(2, emp.getNombres());
             ins.setString(3, emp.getApellidos());
             ins.setString(4, emp.getRol());
@@ -55,9 +55,9 @@ public class EmpleadoDAO {
 
         try {
             conexion = Conexion.startConnection();
-            sqlStatement = "SELECT * FROM empleado WHERE \"ID\" = ?";
+            sqlStatement = "SELECT * FROM empleado WHERE cedula = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
-            instruccion.setInt(1, id);
+            instruccion.setString(1, id+"");
             rs = instruccion.executeQuery();
 
             if (rs.next()) {
@@ -85,39 +85,6 @@ public class EmpleadoDAO {
         return em;
     }
 
-    public int modificarUsuario(Usuario u) {
-        Connection conexion = null;
-        PreparedStatement instrucciones = null;
-        int resultado = 0;
-        String sqlStatement;
-        conexion = Conexion.startConnection();
-        sqlStatement = "UPDATE cliente SET username = ?, password = ? WHERE ID = ?";
-
-        try {
-
-            instrucciones = conexion.prepareStatement(sqlStatement);
-
-            instrucciones.setString(1, u.getUsername());
-            instrucciones.setString(2, u.getPassword());
-            instrucciones.setInt(3, u.getID());
-
-            resultado = instrucciones.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        } finally {
-            try {
-                if (instrucciones != null)
-                    instrucciones.close();
-                if (conexion != null) {
-                    conexion.close();
-                    Conexion.closeConnection();
-                }
-            } catch (SQLException ex) {
-                // Do something ...
-            }
-        }
-        return resultado;
-    }
 
     public int borrarUsuario(int id) {
         Connection conexion = null;

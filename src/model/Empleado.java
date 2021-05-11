@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 public class Empleado implements Entity {
-    private int ID;
+    private String cedula;
     private String nombres, apellidos, rol, direccion, telefono;
     private LocalDate birthdate;
     private int sede;
@@ -11,9 +11,9 @@ public class Empleado implements Entity {
     public Empleado() {
     }
 
-    public Empleado(int ID, String nombres, String apellidos, String rol, String direccion, String telefono,
+    public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
             LocalDate birthdate, int sede) {
-        this.ID = ID;
+        this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.rol = rol;
@@ -23,8 +23,8 @@ public class Empleado implements Entity {
         this.sede = sede;
     }
 
-    public int getID() {
-        return ID;
+    public String getCedula() {
+        return cedula;
     }
 
     public String getNombres() {
@@ -55,8 +55,8 @@ public class Empleado implements Entity {
         return sede;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public void setNombres(String nombres) {
@@ -89,7 +89,7 @@ public class Empleado implements Entity {
 
     @Override
     public void Charge(Object[] info) {
-        this.ID = (int) info[0];
+        this.cedula =  (String)info[0];
         this.nombres = (String) info[1];
         this.apellidos = (String) info[2];
         this.rol = (String) info[3];
@@ -101,7 +101,7 @@ public class Empleado implements Entity {
 
     @Override
     public String toString() {
-        return "Empleado{" + "ID=" + ID + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
+        return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
                 + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede
                 + '}';
     }
