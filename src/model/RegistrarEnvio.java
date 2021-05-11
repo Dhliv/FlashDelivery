@@ -23,6 +23,8 @@ public class RegistrarEnvio {
   private List<Paquete> paquetes;
 
   public RegistrarEnvio() {
+    remitente = new Cliente();
+    destinatario = new Cliente();
     paquetes = new ArrayList<>();
   }
 

@@ -17,7 +17,7 @@ import utilities.Globals;
  * la pantalla principal de operador Credito = Muestra la vista de credito
  * Debito = Muestra la vista de debito
  */
-public class OperadorResumen implements Initializable {
+public class OperadorResumen{
   private model.RegistrarEnvio envio;
 
   private static final Double IMPUESTO = 0.19;
@@ -47,8 +47,13 @@ public class OperadorResumen implements Initializable {
    * Iniciliaza los caomponentes gráficos con los datos del cliente y los costos
    * de su envío.
    */
-  @Override public void initialize(URL location, ResourceBundle resources) {
+  public void initialize() {
+    
+    //envio = Globals.getEnvio();
+    //chargeInformation();
+  }
 
+  public void chargeInformation() {
     // Actualiza los datos en pantalla.
     lblCedulaR.setText(lblCedulaR.getText() + ": " + envio.getRemitente().cedula);
     lblNameR.setText(lblNameR.getText() + ": " + envio.getRemitente().nombre);
@@ -108,4 +113,5 @@ public class OperadorResumen implements Initializable {
   @FXML void btnClickEfectivo(MouseEvent event) {
 
   }
+
 }
