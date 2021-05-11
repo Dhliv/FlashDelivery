@@ -16,8 +16,9 @@ import utilities.Globals;
  * la pantalla principal de operador Credito = Muestra la vista de credito
  * Debito = Muestra la vista de debito
  */
-public class OperadorResumen{
+public class OperadorResumen {
   private model.RegistrarEnvio envio;
+  private RegistrarEnvio befCtr;
 
   private static final Double IMPUESTO = 0.19;
   @FXML private Label lblCedulaR; // label Cedula del Remitente
@@ -38,8 +39,9 @@ public class OperadorResumen{
    *              paquetes del envío.
    */
 
-  public OperadorResumen(model.RegistrarEnvio envio) {
+  public void update(model.RegistrarEnvio envio, RegistrarEnvio ah) {
     this.envio = envio;
+    befCtr = ah;
   }
 
   /**
@@ -47,9 +49,11 @@ public class OperadorResumen{
    * de su envío.
    */
   public void initialize() {
-    
-    //envio = Globals.getEnvio();
-    //chargeInformation();
+    chargeInformation();
+  }
+
+  public void setEnvio(model.RegistrarEnvio r) {
+
   }
 
   public void chargeInformation() {
@@ -93,24 +97,7 @@ public class OperadorResumen{
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
-    Globals.cambiarVista("operador.paquetes");
-  }
-
-  @FXML void btnClickCredito(MouseEvent event) {
-
-  }
-
-  @FXML void btnClickDebito(MouseEvent event) {
-
-  }
-
-  /**
-   * El pago se hace efectivo (o eso asumimos) y se vuelve a la pantalla principal
-   * del Operador de Oficina.
-   * @param event
-   */
-  @FXML void btnClickEfectivo(MouseEvent event) {
-
+    Globals.cambiarVista(Globals.loadView("operador.paquetes", befCtr));
   }
 
 }

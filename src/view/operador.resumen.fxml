@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OperadorResumen">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="atrasPaquete" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" text="Atras" />
       <Label layoutX="951.0" layoutY="29.0" text="Pago">
@@ -39,15 +39,15 @@
                <children>
                   <Pane layoutX="28.0" layoutY="172.0" prefHeight="145.0" prefWidth="504.0">
                      <children>
-                        <Label layoutX="207.0" layoutY="64.0" onMouseClicked="#btnClickDebito" text="Tarjeta de debito" />
+                        <Label layoutX="207.0" layoutY="64.0" text="Tarjeta de debito" />
                      </children>
                   </Pane>
                   <Pane layoutX="26.0" layoutY="304.0" prefHeight="145.0" prefWidth="504.0">
                      <children>
-                        <Label layoutX="206.0" layoutY="64.0" onMouseClicked="#btnClickCredito" text="Tarjeta de credito" />
+                        <Label layoutX="206.0" layoutY="64.0" text="Tarjeta de credito" />
                      </children>
                   </Pane>
-                  <Pane layoutX="26.0" layoutY="14.0" onMouseClicked="#btnClickEfectivo" prefHeight="145.0" prefWidth="504.0">
+                  <Pane layoutX="26.0" layoutY="14.0" prefHeight="145.0" prefWidth="504.0">
                      <children>
                         <Label layoutX="231.0" layoutY="64.0" text="Efectivo" />
                      </children>
