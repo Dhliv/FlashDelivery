@@ -97,7 +97,28 @@ public class OperadorResumen {
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
+<<<<<<< HEAD
     Globals.cambiarVista(Globals.loadView("operador.paquetes", befCtr));
+=======
+    Globals.cambiarVista("operador.paquetes");
+  }
+
+  @FXML void btnClickCredito(MouseEvent event) {
+
+  }
+
+  @FXML void btnClickDebito(MouseEvent event) {
+    Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta());
+  }
+
+  /**
+   * El pago se hace efectivo (o eso asumimos) y se vuelve a la pantalla principal
+   * del Operador de Oficina.
+   * @param event
+   */
+  @FXML void btnClickEfectivo(MouseEvent event) {
+
+>>>>>>> 43fdf736cc4ba5a5b6de49fbe0af30507c687447
   }
 
 }
