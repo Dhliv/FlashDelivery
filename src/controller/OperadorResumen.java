@@ -16,10 +16,12 @@ import utilities.Globals;
  * la pantalla principal de operador Credito = Muestra la vista de credito
  * Debito = Muestra la vista de debito
  */
-public class OperadorResumen{
+public class OperadorResumen {
   private model.RegistrarEnvio envio;
 
   private static final Double IMPUESTO = 0.19;
+  private static final Integer DEBITO = 0;
+  private static final Integer CREDITO = 1;
   @FXML private Label lblCedulaR; // label Cedula del Remitente
   @FXML private Label lblNameR; // label nombre de remitente
   @FXML private Label lblCedulaD; // label cedula del destinatario
@@ -47,9 +49,9 @@ public class OperadorResumen{
    * de su envío.
    */
   public void initialize() {
-    
-    //envio = Globals.getEnvio();
-    //chargeInformation();
+
+    // envio = Globals.getEnvio();
+    // chargeInformation();
   }
 
   public void chargeInformation() {
@@ -96,12 +98,16 @@ public class OperadorResumen{
     Globals.cambiarVista("operador.paquetes");
   }
 
-  @FXML void btnClickCredito(MouseEvent event) {
+  void pagar(Integer tipo) {
+    Globals.cambiarVista(Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio)));
+  }
 
+  @FXML void btnClickCredito(MouseEvent event) {
+    pagar(CREDITO);
   }
 
   @FXML void btnClickDebito(MouseEvent event) {
-    Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta());
+    pagar(DEBITO);
   }
 
   /**
