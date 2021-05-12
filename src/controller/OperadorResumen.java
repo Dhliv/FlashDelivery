@@ -96,7 +96,7 @@ public class OperadorResumen implements Initializable {
   }
 
   @FXML void btnClickDebito(MouseEvent event) {
-
+    Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta());
   }
 
   /**
