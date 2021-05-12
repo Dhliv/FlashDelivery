@@ -97,9 +97,6 @@ public class OperadorResumen {
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
-<<<<<<< HEAD
-    Globals.cambiarVista(Globals.loadView("operador.paquetes", befCtr));
-=======
     Globals.cambiarVista("operador.paquetes");
   }
 
@@ -118,7 +115,6 @@ public class OperadorResumen {
    */
   @FXML void btnClickEfectivo(MouseEvent event) {
 
->>>>>>> 43fdf736cc4ba5a5b6de49fbe0af30507c687447
   }
 
 }
