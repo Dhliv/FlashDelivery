@@ -18,6 +18,7 @@ import utilities.Globals;
  */
 public class OperadorResumen {
   private model.RegistrarEnvio envio;
+  private RegistrarEnvio befCtr;
 
   private static final Double IMPUESTO = 0.19;
   private static final Integer DEBITO = 0;
@@ -40,8 +41,9 @@ public class OperadorResumen {
    *              paquetes del envío.
    */
 
-  public OperadorResumen(model.RegistrarEnvio envio) {
+  public void update(model.RegistrarEnvio envio, RegistrarEnvio ah) {
     this.envio = envio;
+    befCtr = ah;
   }
 
   /**
@@ -49,9 +51,11 @@ public class OperadorResumen {
    * de su envío.
    */
   public void initialize() {
+    chargeInformation();
+  }
 
-    // envio = Globals.getEnvio();
-    // chargeInformation();
+  public void setEnvio(model.RegistrarEnvio r) {
+
   }
 
   public void chargeInformation() {
@@ -95,7 +99,7 @@ public class OperadorResumen {
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
-    Globals.cambiarVista("operador.paquetes");
+    Globals.cambiarVista(Globals.loadView("operador.paquetes", befCtr));
   }
 
   void pagar(Integer tipo) {

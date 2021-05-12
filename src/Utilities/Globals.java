@@ -37,7 +37,7 @@ public class Globals {
         views = new HashMap<String, Parent>();
     }
     public static void setEnvio(model.RegistrarEnvio r){
-        r = envio;
+        envio = r;
     }
     public static model.RegistrarEnvio getEnvio(){
         return envio;
