@@ -31,10 +31,16 @@ public class Globals {
     private static List<model.Sedes.Sede> sedes;
     private static Connection conn;
     private static Map<String, Parent> views;
-
+    private static model.RegistrarEnvio envio;
     public static void init(Object obj) {
         referenceObject = obj;
         views = new HashMap<String, Parent>();
+    }
+    public static void setEnvio(model.RegistrarEnvio r){
+        r = envio;
+    }
+    public static model.RegistrarEnvio getEnvio(){
+        return envio;
     }
 
     public static void cambiarVista(String name) {
@@ -47,7 +53,8 @@ public class Globals {
             views.put(name, view);
             cambiarVista(view);
         } else {
-            cambiarVista(views.get(name));
+            Parent t = views.get(name);
+            cambiarVista(t);
         }
     }
 

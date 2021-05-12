@@ -37,13 +37,13 @@ public class RegistrarEnvio {
     @FXML private TextField DTelefono;
     @FXML private Button atrasCliente;
     // #------------------------------------
-    
+
     private int selectedP; // Índice de la fila seleccionada en la tabla de paquetes
     private boolean modify; // Boolean que indica si se está modificando un paquete o no
     // Componentes gráficos de la ventana de registro paquetes
     @FXML private Button btRegistrarEnvios; //
-    @FXML private Button atrasPaquete; //Botón para devolverse a la vista de clientes
-    @FXML private TextField Peso; // TextField para leer el peso del paquete 
+    @FXML private Button atrasPaquete; // Botón para devolverse a la vista de clientes
+    @FXML private TextField Peso; // TextField para leer el peso del paquete
     @FXML private TextField Valor; // TextField para leer el valor del paquete
     @FXML private TextArea Descripcion; // TextField para leer la descripción adjunta al paquete
     @FXML private CheckBox Seguro; // CheckBox para marcar si se le aplica o no el seguro al paquete
@@ -54,8 +54,8 @@ public class RegistrarEnvio {
     @FXML private TextField Largo; // TextField para ingresar el largo del paquete
     @FXML private TextField Ancho; // TextField para ingresar el ancho del paquete
 
-    @FXML private TableView<PaqueteT> tbPaquetes; //Tabla para mostrar la lista de paquetes
-    //Columnas de la tabla 
+    @FXML private TableView<PaqueteT> tbPaquetes; // Tabla para mostrar la lista de paquetes
+    // Columnas de la tabla
     @FXML private TableColumn<PaqueteT, Integer> tcPeso;
     @FXML private TableColumn<PaqueteT, Integer> tcValor;
     @FXML private TableColumn<PaqueteT, String> tcDescripcion;
@@ -71,6 +71,7 @@ public class RegistrarEnvio {
     public void initialize() {
         selectedP = -1;
         if (envio == null) envio = new model.RegistrarEnvio();
+        Globals.setEnvio(envio);
         if (RCedula != null) RCedula.focusedProperty().addListener(onRemitenteFocusOut);
         if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {
@@ -89,7 +90,7 @@ public class RegistrarEnvio {
     }
 
     @FXML void atras(ActionEvent event) {
-        if (event.getSource() == atrasPaquete) Globals.cambiarVista("operador.cliente, this");
+        if (event.getSource() == atrasPaquete) Globals.cambiarVista("operador.cliente", this);
     }
 
     @FXML void registrarPaquetes(ActionEvent event) {
@@ -258,6 +259,9 @@ public class RegistrarEnvio {
     }
 
     @FXML void resumenEnvio(ActionEvent event) {
-        Globals.cambiarVista("operador.resumen", new OperadorResumen(envio));
+        OperadorResumen jaja = new OperadorResumen(envio);
+
+        Globals.cambiarVista("operador.resumen");
+        // jaja.chargeInformation();
     }
 }
