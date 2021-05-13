@@ -3,6 +3,8 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.Action;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -106,11 +108,11 @@ public class OperadorResumen {
     Globals.cambiarVista(Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio)));
   }
 
-  @FXML void btnClickCredito(MouseEvent event) {
+  @FXML void pagoCredito(ActionEvent event) {
     pagar(CREDITO);
   }
 
-  @FXML void btnClickDebito(MouseEvent event) {
+  @FXML void pagoDebito(ActionEvent event) {
     pagar(DEBITO);
   }
 
@@ -119,7 +121,7 @@ public class OperadorResumen {
    * del Operador de Oficina.
    * @param event
    */
-  @FXML void btnClickEfectivo(MouseEvent event) {
+  @FXML void pagoEfectivo(ActionEvent event) {
 
   }
 

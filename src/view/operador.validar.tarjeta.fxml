@@ -59,13 +59,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNumerotarjeta" layoutX="106.0" layoutY="223.0" prefHeight="25.0" prefWidth="350.0" />
+            <TextField fx:id="txtNumerotarjeta" layoutX="106.0" layoutY="223.0" onKeyPressed="#eraseNumeroTarjeta" onKeyTyped="#addNumeroTarjeta" prefHeight="25.0" prefWidth="350.0" />
             <Label layoutX="564.0" layoutY="200.0" text="Titular">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTitular" layoutX="564.0" layoutY="223.0" prefHeight="25.0" prefWidth="350.0" />
+            <TextField fx:id="txtTitular" layoutX="564.0" layoutY="223.0" onKeyPressed="#eraseTitular" onKeyTyped="#addTitular" prefHeight="25.0" prefWidth="350.0" />
             <Label layoutX="106.0" layoutY="324.0" text="CVV">
                <font>
                   <Font size="18.0" />
@@ -78,7 +78,7 @@
                </font>
             </Label>
             <DatePicker fx:id="dateFechaVencimiento" layoutX="564.0" layoutY="347.0" />
-            <Label layoutX="317.0" layoutY="324.0" text="Número de cuotas">
+            <Label fx:id="lblNumeroCuotas" layoutX="317.0" layoutY="324.0" text="Número de cuotas">
                <font>
                   <Font size="18.0" />
                </font>
@@ -134,7 +134,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblAño1" layoutX="384.0" layoutY="598.0" text="/" textFill="WHITE">
+            <Label layoutX="384.0" layoutY="598.0" text="/" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
