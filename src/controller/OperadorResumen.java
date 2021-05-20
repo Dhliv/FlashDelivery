@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.Action;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import model.Envios;
 import utilities.Globals;
 
 /**
@@ -25,6 +27,8 @@ public class OperadorResumen {
   private static final Double IMPUESTO = 0.19;
   private static final Integer DEBITO = 0;
   private static final Integer CREDITO = 1;
+  private Integer total;
+  private Integer impuesto;
   @FXML private Label lblCedulaR; // label Cedula del Remitente
   @FXML private Label lblNameR; // label nombre de remitente
   @FXML private Label lblCedulaD; // label cedula del destinatario
@@ -70,8 +74,8 @@ public class OperadorResumen {
     lblnumP.setText(lblnumP.getText() + ": " + Integer.toString(envio.getPaquetes().size()));
 
     // Calcula el total del envio y su respectivo impuesto.
-    int total = calcularTotal(envio);
-    int impuesto = calcularImpuesto(total);
+    total = calcularTotal(envio);
+    impuesto = calcularImpuesto(total);
 
     // Actualiza los datos en pantalla.
     labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Integer.toString(total - impuesto));
@@ -122,7 +126,11 @@ public class OperadorResumen {
    * @param event
    */
   @FXML void pagoEfectivo(ActionEvent event) {
-
+    Integer SEDE = 1; // Cambiar por la del empleado.
+    String EMPLEADO = "2"; // Cambiar por la cedula del empleado.
+    Date DATE = Date.valueOf("2021-05-19"); // Obtener desde el sistema.
+    Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, Boolean.FALSE, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
+    System.out.println(idEnvio);
   }
 
 }

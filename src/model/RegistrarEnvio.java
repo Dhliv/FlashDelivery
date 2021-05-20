@@ -1,7 +1,5 @@
 package model;
 
-import org.jooq.Result;
-import org.jooq.impl.*;
 import java.sql.Date;
 import org.jooq.Record;
 import java.util.List;
@@ -61,9 +59,9 @@ public class RegistrarEnvio {
     cliente.ciudad = ciudad;
     cliente.direccion = direccion;
     cliente.telefono = telefono;
-    if(tipo == TipoCliente.Destinatario){
+    if (tipo == TipoCliente.Destinatario) {
       destinatario = cliente;
-    }else{
+    } else {
       remitente = cliente;
     }
   }

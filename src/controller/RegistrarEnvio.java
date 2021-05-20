@@ -72,8 +72,8 @@ public class RegistrarEnvio {
     public void initialize() {
         selectedP = -1;
         if (envio == null) envio = new model.RegistrarEnvio();
-        if(operadorResumen == null) operadorResumen = new OperadorResumen();
-        
+        if (operadorResumen == null) operadorResumen = new OperadorResumen();
+
         if (RCedula != null) RCedula.focusedProperty().addListener(onRemitenteFocusOut);
         if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {

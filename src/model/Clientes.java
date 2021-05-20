@@ -12,6 +12,7 @@ public class Clientes {
     public String ciudad;
     public String direccion;
     public String telefono;
+    public Boolean existInDB;
   }
 
   /**
