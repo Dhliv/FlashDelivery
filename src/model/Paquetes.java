@@ -1,8 +1,9 @@
 package model;
 
+import java.util.List;
 import org.jooq.impl.DSL;
 
-import controller.RegistrarEnvio.PaqueteT;
+import model.RegistrarEnvio.Paquete;
 import utilities.Globals;
 
 public class Paquetes {
@@ -18,9 +19,9 @@ public class Paquetes {
     Globals.closeConnection();
   }
 
-  public static void createPaquetes(PaqueteT[] p, Integer id_envio) {
-    for (int i = 0; i < p.length; i++) {
-      createPaquete(p[i].getDescripcion(), p[i].getPeso(), id_envio);
+  public static void createPaquetes(List<RegistrarEnvio.Paquete> p, Integer id_envio) {
+    for (int i = 0; i < p.size(); i++) {
+      createPaquete(p.get(i).descripcion, p.get(i).peso, id_envio);
     }
   }
 }

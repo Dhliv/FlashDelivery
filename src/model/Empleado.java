@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Empleado implements Entity {
@@ -11,8 +12,7 @@ public class Empleado implements Entity {
     public Empleado() {
     }
 
-    public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
-            LocalDate birthdate, int sede) {
+    public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono, LocalDate birthdate, int sede) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -87,23 +87,19 @@ public class Empleado implements Entity {
         this.sede = sede;
     }
 
-    @Override
-    public void Charge(Object[] info) {
-        this.cedula =  (String)info[0];
+    @Override public void Charge(Object[] info) {
+        this.cedula = (String) info[0];
         this.nombres = (String) info[1];
         this.apellidos = (String) info[2];
         this.rol = (String) info[3];
         this.direccion = (String) info[4];
         this.telefono = (String) info[5];
-        this.birthdate = ((java.sql.Date) info[6]).toLocalDate();
+        this.birthdate = (info[6] == null) ? LocalDate.now() : ((java.sql.Date) info[6]).toLocalDate();
         this.sede = (int) info[7];
     }
 
-    @Override
-    public String toString() {
-        return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
-                + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede
-                + '}';
+    @Override public String toString() {
+        return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede + '}';
     }
 
 }

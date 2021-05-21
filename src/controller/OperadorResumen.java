@@ -2,6 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javax.swing.Action;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import model.Envios;
+import model.Paquetes;
 import utilities.Globals;
 
 /**
@@ -126,11 +128,12 @@ public class OperadorResumen {
    * @param event
    */
   @FXML void pagoEfectivo(ActionEvent event) {
-    Integer SEDE = 1; // Cambiar por la del empleado.
-    String EMPLEADO = "2"; // Cambiar por la cedula del empleado.
-    Date DATE = Date.valueOf("2021-05-19"); // Obtener desde el sistema.
+    Integer SEDE = Globals.empleado.getSede();
+    String EMPLEADO = Globals.empleado.getCedula();
+    Date DATE = Date.valueOf(LocalDate.now());
+
     Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, Boolean.FALSE, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
-    System.out.println(idEnvio);
+    Paquetes.createPaquetes(envio.getPaquetes(), idEnvio);
   }
 
 }

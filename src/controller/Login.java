@@ -25,17 +25,13 @@ public class Login {
 
     private UsuarioDAO ud;
     private EmpleadoDAO ed;
-    @FXML
-    private Button btIngresar;
+    @FXML private Button btIngresar;
 
-    @FXML
-    private PasswordField txtPass;
+    @FXML private PasswordField txtPass;
 
-    @FXML
-    private TextField txtUsuario;
+    @FXML private TextField txtUsuario;
 
-    @FXML
-    void loginKeyboard(KeyEvent event) throws Exception {
+    @FXML void loginKeyboard(KeyEvent event) throws Exception {
         System.out.println(event);
         KeyCode key = event.getCode();
         if (key.equals(KeyCode.ENTER)) {
@@ -43,8 +39,7 @@ public class Login {
         }
     }
 
-    @FXML
-    void clicksoide(ActionEvent event) throws Exception {
+    @FXML void clicksoide(ActionEvent event) throws Exception {
         login();
     }
 
@@ -61,16 +56,16 @@ public class Login {
         } else if (acc == -1) {
             // JOptionPane.showMessageDialog(null, "No se ha encontrado su usuario");
             System.out.println("fake");
-        } else if (acc == 0){
+        } else if (acc == 0) {
             System.out.println("sql error");
-        }else{
+        } else {
             // JOptionPane.showMessageDialog(null, "Entraste!");
             System.out.println("entre");
             Empleado userActual = ed.cargarEmpleado(acc);
             var rolAcc = userActual.getRol();
 
             Globals.pantalla.close();
-            Globals.id_usuario = userActual.getCedula();
+            Globals.empleado = userActual;
             Ventana vent;
 
             if (rolAcc.equals(rol.get(roles.ADMIN))) {
@@ -82,7 +77,8 @@ public class Login {
                 vent = new Ventana("operadorOficina", new OperadorOficina());
                 vent.start(Globals.pantalla);
             } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
-                vent = new Ventana("operadorAuxiliar", new Admin(user));
+                vent = new Ventana("operadorOficina", null);
+                vent.start(Globals.pantalla);
             } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {
                 vent = new Ventana("contador", new Admin(user));
             }
