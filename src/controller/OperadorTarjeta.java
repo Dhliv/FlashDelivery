@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import model.Pago;
 import utilities.Globals;
 import utilities.Ventana;
 
@@ -88,15 +89,7 @@ public class OperadorTarjeta implements Initializable {
 
     getData();
     parseData();
-
-    // Solucion temporal:
-    /*Globals.pantalla.close();
-    Ventana v = new Ventana("operadorOficina", null);
-    try {
-      v.start(Globals.pantalla);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }*/
+    // Pago.ejecutarPago(envio);
   }
 
   /**
