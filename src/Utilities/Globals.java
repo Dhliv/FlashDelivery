@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Empleado;
-import model.Usuario;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
