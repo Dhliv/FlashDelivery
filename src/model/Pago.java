@@ -8,12 +8,12 @@ import controller.OperadorConsulta;
 import utilities.Globals;
 
 public class Pago {
-  private static Integer total;
-  private static Integer impuesto;
-  private static Integer seguro;
-  private static final double IMPUESTO = 0.19;
-  private static final double SEGURO = 0.06;
-  private static final double VALOR = 0.01;
+  private static Integer total; // Almacena el costo total del envío.
+  private static Integer impuesto; // Almacena el impuesto del envío.
+  private static Integer seguro; // Almacena el valor del seguro del envío.
+  private static final double IMPUESTO = 0.19; // porcentaje de impuesto.
+  private static final double SEGURO = 0.06; // porcentaje de seguro.
+  private static final double VALOR = 0.01; // porcentaje de valor de paquete.
 
   /**
    * Inicializa los valores del total e impuesto del envio.
