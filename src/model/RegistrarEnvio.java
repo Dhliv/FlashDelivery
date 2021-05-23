@@ -1,7 +1,5 @@
 package model;
 
-import org.jooq.Result;
-import org.jooq.impl.*;
 import java.sql.Date;
 import org.jooq.Record;
 import java.util.List;
@@ -55,13 +53,17 @@ public class RegistrarEnvio {
    * Modifica el estado del cliente.
    */
   public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
-    Cliente cliente = tipo == TipoCliente.Remitente ? remitente : destinatario;
-    if (cliente == null) cliente = new Cliente();
+    Cliente cliente = new Cliente();
     cliente.cedula = cedula;
     cliente.nombre = nombre;
     cliente.ciudad = ciudad;
     cliente.direccion = direccion;
     cliente.telefono = telefono;
+    if (tipo == TipoCliente.Destinatario) {
+      destinatario = cliente;
+    } else {
+      remitente = cliente;
+    }
   }
 
   public void agregarPaqueteP(Paquete p) {

@@ -14,12 +14,12 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Globals.init(this);
         Globals.pantalla = stage;
-        /*Ventana login = new Ventana("OperadorOficina", new OperadorOficina());
-        login.start(stage);*/
+        Ventana login = new Ventana("login", new Login());
+        login.start(stage);
 
         // # prueba para la vista operador.cliente
-        stage.setScene(Globals.loadScene("operador.resumen"));
-        stage.show();
+        /*stage.setScene(Globals.loadScene("operadorOficina"));
+        stage.show();*/
     }
 
 }

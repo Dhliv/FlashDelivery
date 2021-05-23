@@ -67,11 +67,13 @@ public class RegistrarEnvio {
     // #------------------------------------
 
     private model.RegistrarEnvio envio;
+    private OperadorResumen operadorResumen;
 
     public void initialize() {
         selectedP = -1;
         if (envio == null) envio = new model.RegistrarEnvio();
-        Globals.setEnvio(envio);
+        if (operadorResumen == null) operadorResumen = new OperadorResumen();
+
         if (RCedula != null) RCedula.focusedProperty().addListener(onRemitenteFocusOut);
         if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {
@@ -259,9 +261,7 @@ public class RegistrarEnvio {
     }
 
     @FXML void resumenEnvio(ActionEvent event) {
-        OperadorResumen jaja = new OperadorResumen(envio);
-
-        Globals.cambiarVista("operador.resumen");
-        // jaja.chargeInformation();
+        operadorResumen.update(envio, this);
+        Globals.cambiarVista(Globals.loadView("operador.resumen", operadorResumen));
     }
 }
