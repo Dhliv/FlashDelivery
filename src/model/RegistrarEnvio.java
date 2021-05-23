@@ -67,8 +67,6 @@ public class RegistrarEnvio {
   }
 
   public void agregarPaqueteP(Paquete p) {
-    p.costo = getCost(p.peso, p.volumen.volumen(), p.valor_declarado);
-    p.total = getTotal(p.costo, p.valor_declarado, p.seguro);
     paquetes.add(p);
   }
 
@@ -83,9 +81,7 @@ public class RegistrarEnvio {
     d.ancho = ancho;
     p.volumen = d;
     p.seguro = seguro;
-    p.costo = getCost(peso, d.volumen(), valor);
 
-    p.total = getTotal(p.costo, valor, seguro);
     if (index == -1)
       paquetes.add(p);
     else
@@ -164,11 +160,8 @@ public class RegistrarEnvio {
     public Integer peso;
     public Dim volumen;
     public Integer valor_declarado;
-    public Integer costo;
-    public Integer total;
     public Integer id_envio;
     public Boolean seguro;
-
   }
 
 }

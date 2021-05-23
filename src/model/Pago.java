@@ -18,7 +18,6 @@ public class Pago {
    */
   public static void initialize(RegistrarEnvio envio) {
     calcularTotal(envio);
-    calcularImpuesto();
   }
 
   /**
@@ -52,15 +51,24 @@ public class Pago {
   private static void calcularTotal(model.RegistrarEnvio envio) {
     total = 0;
     for (int i = 0; i < envio.getPaquetes().size(); i++) {
-      total += envio.getPaquetes().get(i).total;
+      if (envio.getPaquetes().get(i).seguro) {
+        total += (int) (envio.getPaquetes().get(i).valor_declarado * SEGURO);
+      }
     }
+
+    calcularImpuesto(envio);
+    total += impuesto;
   }
 
   /**
    * Calcula el valor en impuestos del envío.
    */
-  private static void calcularImpuesto() {
-    impuesto = (int) (total * IMPUESTO);
+  private static void calcularImpuesto(model.RegistrarEnvio envio) {
+    impuesto = 0;
+
+    for (int i = 0; i < envio.getPaquetes().size(); i++) {
+      impuesto += (int) (envio.getPaquetes().get(i).valor_declarado * IMPUESTO);
+    }
   }
 
   /**
