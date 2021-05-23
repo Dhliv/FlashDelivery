@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Pago;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
@@ -227,7 +228,8 @@ public class RegistrarEnvio {
             valor = p.valor_declarado;
             descripcion = p.descripcion;
             volumen = p.volumen.volumen();
-            valorenvio = 10;
+            valorenvio = volumen * Pago.ValorCM3 + peso * Pago.ValorKG;
+            total = valorenvio + (int) (valorenvio * Pago.IMPUESTO);
             d = p.volumen;
         }
 

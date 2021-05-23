@@ -11,9 +11,10 @@ public class Pago {
   private static Integer total; // Almacena el costo total del envío.
   private static Integer impuesto; // Almacena el impuesto del envío.
   private static Integer seguro; // Almacena el valor del seguro del envío.
-  private static final double IMPUESTO = 0.19; // porcentaje de impuesto.
-  private static final double SEGURO = 0.06; // porcentaje de seguro.
-  private static final double VALOR = 0.01; // porcentaje de valor de paquete.
+  public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
+  public static final double SEGURO = 0.06; // porcentaje de seguro.
+  public static final int ValorKG = 1000;
+  public static final int ValorCM3 = 10;
 
   /**
    * Inicializa los valores del total e impuesto del envio.
@@ -49,6 +50,7 @@ public class Pago {
 
   /**
    * Calcula el costo total del envío.
+   * 
    * @param envio Contiene los datos relacionados al envio.
    */
   private static void calcularTotal(model.RegistrarEnvio envio) {
@@ -63,42 +65,23 @@ public class Pago {
       if (p.get(i).seguro) {
         s += (p.get(i).valor_declarado * SEGURO);
       }
-      c += ((p.get(i).peso * 5000 + p.get(i).volumen.volumen() * 100) * VALOR);
+      c += (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3);
     }
 
     seguro = (int) s;
     costo = (int) c;
-    calcularImpuesto(costo);
+    impuesto = (int) (costo * IMPUESTO);
     total = impuesto + costo + seguro;
   }
 
-  /**
-   * Calcula el valor en impuestos del envío.
-   */
-  private static void calcularImpuesto(Integer costo) {
-    impuesto = (int) (costo * IMPUESTO);
-  }
-
-  /**
-   * 
-   * @return el costo total del envío.
-   */
   public static Integer getTotal() {
     return total;
   }
 
-  /**
-   * 
-   * @return el impuesto del envío.
-   */
   public static Integer getImpuesto() {
     return impuesto;
   }
 
-  /**
-   * 
-   * @return el costo de seguro del envío.
-   */
   public static Integer getSeguro() {
     return seguro;
   }
