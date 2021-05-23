@@ -9,8 +9,10 @@ import utilities.Globals;
 public class Pago {
   private static Integer total;
   private static Integer impuesto;
+  private static Integer seguro;
   private static final Double IMPUESTO = 0.19;
   private static final Double SEGURO = 0.06;
+  private static final Double VALOR = 0.01;
 
   /**
    * Inicializa los valores del total e impuesto del envio.
@@ -50,25 +52,24 @@ public class Pago {
    */
   private static void calcularTotal(model.RegistrarEnvio envio) {
     total = 0;
+    seguro = 0;
+    Integer costo = 0;
     for (int i = 0; i < envio.getPaquetes().size(); i++) {
       if (envio.getPaquetes().get(i).seguro) {
-        total += (int) (envio.getPaquetes().get(i).valor_declarado * SEGURO);
+        seguro += (int) (envio.getPaquetes().get(i).valor_declarado * SEGURO);
       }
+      costo += (int) (envio.getPaquetes().get(i).volumen.volumen() * VALOR);
     }
 
-    calcularImpuesto(envio);
+    calcularImpuesto(envio, costo);
     total += impuesto;
   }
 
   /**
    * Calcula el valor en impuestos del envío.
    */
-  private static void calcularImpuesto(model.RegistrarEnvio envio) {
-    impuesto = 0;
-
-    for (int i = 0; i < envio.getPaquetes().size(); i++) {
-      impuesto += (int) (envio.getPaquetes().get(i).valor_declarado * IMPUESTO);
-    }
+  private static void calcularImpuesto(model.RegistrarEnvio envio, Integer costo) {
+    impuesto = (int) (total * IMPUESTO);
   }
 
   /**
