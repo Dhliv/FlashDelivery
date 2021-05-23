@@ -39,8 +39,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -118,21 +116,6 @@
                      </font>
                   </Button>
                </children>
-            </Pane>
-            <Pane fx:id="rightContent" layoutX="260.0" prefHeight="780.0" prefWidth="1020.0">
-               <children>
-                  <TableView fx:id="tablePaquetes" focusTraversable="false" layoutY="10.0" prefHeight="760.0" prefWidth="1010.0">
-                    <columns>
-                        <TableColumn fx:id="columnDestinatario" prefWidth="315.9999809265137" text="Destinatario" />
-                        <TableColumn fx:id="columnIdPaquete" prefWidth="110.4000244140625" text="ID del paquete" />
-                        <TableColumn fx:id="columnPesoPaquete" prefWidth="309.5999755859375" text="Peso del paquete" />
-                        <TableColumn fx:id="columnEstado" prefWidth="280.800048828125" text="Estado" />
-                    </columns>
-                  </TableView>
-               </children>
-               <padding>
-                  <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
-               </padding>
             </Pane>
          </children>
          <VBox.margin>
