@@ -120,14 +120,18 @@ public class OperadorTarjeta implements Initializable {
 
   @FXML void printDigitsTarjeta(KeyEvent event) {
     checkErase(event);
-    String tT = txtNumerotarjeta.getText();
-    txtNumerotarjeta.clear();
-    txtNumerotarjeta.textProperty().set(tT);
+
     if (borrar) {
       if (counter > 0 && counter <= tNTM()) eraseNumber();
       if (counter > 0) counter--;
     } else if (agregar) {
-      if (counter < tNTM()) addNumber();
+      if (counter < tNTM())
+        addNumber();
+      else {
+        String tT = txtNumerotarjeta.getText();
+        txtNumerotarjeta.clear();
+        txtNumerotarjeta.textProperty().set(tT.substring(0, tNTM()));
+      }
       counter++;
     }
     System.out.println(counter);
