@@ -117,6 +117,7 @@ public class OperadorTarjeta implements Initializable {
       if (counter < 16) addNumber();
       counter++;
     }
+    System.out.println(counter);
   }
 
   @FXML void eraseTitular(KeyEvent event) {
