@@ -31,6 +31,7 @@ public class OperadorTarjeta implements Initializable {
   private String nombre;
   private Integer counter;
   private Boolean agregar;
+  private Boolean borrar;
 
   @FXML private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
   @FXML private TextField txtNumerotarjeta; // textField donde se ingresa el numero de la tarjeta
@@ -103,7 +104,7 @@ public class OperadorTarjeta implements Initializable {
 
   @FXML void eraseNumeroTarjeta(KeyEvent event) {
     checkErase(event);
-    if (!agregar) {
+    if (borrar) {
       if (counter > 0 && counter <= 16) eraseNumber();
       counter--;
     }
@@ -192,8 +193,26 @@ public class OperadorTarjeta implements Initializable {
   }
 
   private void checkErase(KeyEvent event) {
-    agregar = true;
+    borrar = false;
     KeyCode key = event.getCode();
-    if (key.equals(KeyCode.BACK_SPACE)) agregar = false;
+
+    if (key.equals(KeyCode.BACK_SPACE)) {
+      borrar = true;
+      agregar = false;
+      return;
+    }
+
+    if (keyEqualNumber(key))
+      agregar = true;
+    else
+      agregar = false;
+  }
+
+  public boolean keyEqualNumber(KeyCode key) {
+    if (key.equals(KeyCode.DIGIT0) || key.equals(KeyCode.DIGIT1) || key.equals(KeyCode.DIGIT2) || key.equals(KeyCode.DIGIT3) || key.equals(KeyCode.DIGIT4) || key.equals(KeyCode.DIGIT5) || key.equals(KeyCode.DIGIT6)
+        || key.equals(KeyCode.DIGIT7) || key.equals(KeyCode.DIGIT8) || key.equals(KeyCode.DIGIT9)) {
+      return true;
+    }
+    return false;
   }
 }
