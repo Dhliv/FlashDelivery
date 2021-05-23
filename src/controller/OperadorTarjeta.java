@@ -102,18 +102,20 @@ public class OperadorTarjeta implements Initializable {
     Globals.cambiarVista(Globals.loadView("operador.resumen", befCtr));
   }
 
+  /**
+   * Evento key pressed
+   * @param event
+   */
+
   @FXML void eraseNumeroTarjeta(KeyEvent event) {
     checkErase(event);
     if (borrar) {
       if (counter > 0 && counter <= 16) eraseNumber();
       counter--;
+    } else if (agregar) {
+      if (counter < 16) addNumber(event.getCharacter());
+      counter++;
     }
-  }
-
-  @FXML void addNumeroTarjeta(KeyEvent event) {
-    if (!agregar) return;
-    if (counter < 16) addNumber(event.getCharacter());
-    counter++;
   }
 
   @FXML void eraseTitular(KeyEvent event) {
@@ -192,7 +194,7 @@ public class OperadorTarjeta implements Initializable {
     return (s + add);
   }
 
-  private void checkErase(KeyEvent event) {
+  public void checkErase(KeyEvent event) {
     borrar = false;
     KeyCode key = event.getCode();
 
