@@ -24,6 +24,14 @@ public class OperadorTarjeta implements Initializable {
   private model.RegistrarEnvio envio;
   private static final Integer DEBITO = 0;
   private static final Integer CREDITO = 1;
+
+  /**
+   * NUMERO MAXIMO DE CARACTERES DEL CAMPO txtNumeroTarjeta
+   */
+  private static final Integer tNTM() {
+    return 16;
+  }
+
   private String numeroTarjeta;
   private String cvv;
   private String mes;
@@ -65,6 +73,7 @@ public class OperadorTarjeta implements Initializable {
   }
 
   @Override public void initialize(URL location, ResourceBundle resources) {
+
     lblTipoTarjeta.setText("Tarjeta de " + ((tipoTarjeta == CREDITO) ? "Crédito" : "Debito"));
     lblNumero1.setText("");
     lblNumero2.setText("");
@@ -91,7 +100,7 @@ public class OperadorTarjeta implements Initializable {
 
     getData();
     parseData();
-    // Pago.ejecutarPago(envio);
+    Pago.ejecutarPago(envio);
   }
 
   /**
@@ -101,20 +110,24 @@ public class OperadorTarjeta implements Initializable {
    */
   @FXML void atras(ActionEvent event) {
     Globals.cambiarVista(Globals.loadView("operador.resumen", befCtr));
+
   }
 
   /**
-   * Evento key pressed
-   * @param event
+   * Imprime los numeros correspondientes a la tarjeta.
+   * @param event not used.
    */
 
-  @FXML void eraseNumeroTarjeta(KeyEvent event) {
+  @FXML void printDigitsTarjeta(KeyEvent event) {
     checkErase(event);
+    String tT = txtNumerotarjeta.getText();
+    txtNumerotarjeta.clear();
+    txtNumerotarjeta.textProperty().set(tT);
     if (borrar) {
-      if (counter > 0 && counter <= 16) eraseNumber();
-      counter--;
+      if (counter > 0 && counter <= tNTM()) eraseNumber();
+      if (counter > 0) counter--;
     } else if (agregar) {
-      if (counter < 16) addNumber();
+      if (counter < tNTM()) addNumber();
       counter++;
     }
     System.out.println(counter);

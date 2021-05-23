@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Empleado;
@@ -15,6 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.UnaryOperator;
+
+import javax.swing.event.ChangeListener;
+
 import java.util.HashMap;
 
 import org.jooq.DSLContext;
@@ -169,4 +174,5 @@ public class Globals {
             e.printStackTrace();
         }
     }
+
 }
