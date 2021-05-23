@@ -32,6 +32,7 @@ public class OperadorTarjeta implements Initializable {
   private Integer counter;
   private Boolean agregar;
   private Boolean borrar;
+  private String addToText;
 
   @FXML private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
   @FXML private TextField txtNumerotarjeta; // textField donde se ingresa el numero de la tarjeta
@@ -113,7 +114,7 @@ public class OperadorTarjeta implements Initializable {
       if (counter > 0 && counter <= 16) eraseNumber();
       counter--;
     } else if (agregar) {
-      if (counter < 16) addNumber(event.getCharacter());
+      if (counter < 16) addNumber();
       counter++;
     }
   }
@@ -145,7 +146,8 @@ public class OperadorTarjeta implements Initializable {
    * 
    * @param n el numero a agregar.
    */
-  private void addNumber(String n) {
+  private void addNumber() {
+    String n = addToText;
     if (counter < 4) {
       lblNumero1.setText(addTo(lblNumero1.getText(), n + " "));
     } else if (counter < 8) {
@@ -204,17 +206,53 @@ public class OperadorTarjeta implements Initializable {
       return;
     }
 
-    if (keyEqualNumber(key))
-      agregar = true;
-    else
-      agregar = false;
+    addToText = keyEqualNumber(key);
   }
 
-  public boolean keyEqualNumber(KeyCode key) {
-    if (key.equals(KeyCode.DIGIT0) || key.equals(KeyCode.DIGIT1) || key.equals(KeyCode.DIGIT2) || key.equals(KeyCode.DIGIT3) || key.equals(KeyCode.DIGIT4) || key.equals(KeyCode.DIGIT5) || key.equals(KeyCode.DIGIT6)
-        || key.equals(KeyCode.DIGIT7) || key.equals(KeyCode.DIGIT8) || key.equals(KeyCode.DIGIT9)) {
-      return true;
+  public String keyEqualNumber(KeyCode key) {
+    agregar = false;
+
+    if (key.equals(KeyCode.DIGIT0)) {
+      agregar = true;
+      return "0";
     }
-    return false;
+    if (key.equals(KeyCode.DIGIT1)) {
+      agregar = true;
+      return "1";
+    }
+    if (key.equals(KeyCode.DIGIT2)) {
+      agregar = true;
+      return "2";
+    }
+    if (key.equals(KeyCode.DIGIT3)) {
+      agregar = true;
+      return "3";
+    }
+    if (key.equals(KeyCode.DIGIT4)) {
+      agregar = true;
+      return "4";
+    }
+    if (key.equals(KeyCode.DIGIT5)) {
+      agregar = true;
+      return "5";
+    }
+    if (key.equals(KeyCode.DIGIT6)) {
+      agregar = true;
+      return "6";
+    }
+    if (key.equals(KeyCode.DIGIT7)) {
+      agregar = true;
+      return "7";
+    }
+    if (key.equals(KeyCode.DIGIT8)) {
+      agregar = true;
+      return "8";
+    }
+    if (key.equals(KeyCode.DIGIT9)) {
+      agregar = true;
+      return "9";
+    }
+
+    return "";
   }
 }
