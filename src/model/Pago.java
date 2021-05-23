@@ -2,13 +2,15 @@ package model;
 
 import java.sql.Date;
 import java.time.LocalDate;
+
+import controller.OperadorConsulta;
 import utilities.Globals;
-import utilities.Ventana;
 
 public class Pago {
   private static Integer total;
   private static Integer impuesto;
   private static final Double IMPUESTO = 0.19;
+  private static final Double SEGURO = 0.06;
 
   /**
    * Inicializa los valores del total e impuesto del envio.
@@ -39,13 +41,8 @@ public class Pago {
    * Vuelve a la pantalla principal del Operador de Oficina.
    */
   private static void goBack() {
-    Globals.pantalla.close();
-    Ventana v = new Ventana("operadorOficina", null);
-    try {
-      v.start(Globals.pantalla);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    Globals.clearViews();
+    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta());
   }
 
   /**

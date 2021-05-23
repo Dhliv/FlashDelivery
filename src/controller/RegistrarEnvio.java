@@ -1,8 +1,6 @@
 package controller;
 
 import java.util.Observable;
-
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
