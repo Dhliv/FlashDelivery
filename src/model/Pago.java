@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import controller.OperadorConsulta;
 import utilities.Globals;
@@ -10,9 +11,9 @@ public class Pago {
   private static Integer total;
   private static Integer impuesto;
   private static Integer seguro;
-  private static final Double IMPUESTO = 0.19;
-  private static final Double SEGURO = 0.06;
-  private static final Double VALOR = 0.01;
+  private static final double IMPUESTO = 0.19;
+  private static final double SEGURO = 0.06;
+  private static final double VALOR = 0.01;
 
   /**
    * Inicializa los valores del total e impuesto del envio.
@@ -53,23 +54,29 @@ public class Pago {
   private static void calcularTotal(model.RegistrarEnvio envio) {
     total = 0;
     seguro = 0;
+    double c = 0.0;
+    double s = 0.0;
     Integer costo = 0;
-    for (int i = 0; i < envio.getPaquetes().size(); i++) {
-      if (envio.getPaquetes().get(i).seguro) {
-        seguro += (int) (envio.getPaquetes().get(i).valor_declarado * SEGURO);
+    List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();
+
+    for (int i = 0; i < p.size(); i++) {
+      if (p.get(i).seguro) {
+        s += (p.get(i).valor_declarado * SEGURO);
       }
-      costo += (int) (envio.getPaquetes().get(i).volumen.volumen() * VALOR);
+      c += ((p.get(i).peso * 5000 + p.get(i).volumen.volumen() * 100) * VALOR);
     }
 
-    calcularImpuesto(envio, costo);
-    total += impuesto;
+    seguro = (int) s;
+    costo = (int) c;
+    calcularImpuesto(costo);
+    total = impuesto + costo + seguro;
   }
 
   /**
    * Calcula el valor en impuestos del envío.
    */
-  private static void calcularImpuesto(model.RegistrarEnvio envio, Integer costo) {
-    impuesto = (int) (total * IMPUESTO);
+  private static void calcularImpuesto(Integer costo) {
+    impuesto = (int) (costo * IMPUESTO);
   }
 
   /**
@@ -86,5 +93,13 @@ public class Pago {
    */
   public static Integer getImpuesto() {
     return impuesto;
+  }
+
+  /**
+   * 
+   * @return el costo de seguro del envío.
+   */
+  public static Integer getSeguro() {
+    return seguro;
   }
 }

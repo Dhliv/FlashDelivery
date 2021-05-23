@@ -81,6 +81,7 @@ public class OperadorResumen {
     // Actualiza los datos en pantalla.
     labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Integer.toString(total - impuesto));
     lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(Pago.getSeguro()));
     lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
   }
 

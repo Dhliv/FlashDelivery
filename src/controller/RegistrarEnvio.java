@@ -228,7 +228,6 @@ public class RegistrarEnvio {
             descripcion = p.descripcion;
             volumen = p.volumen.volumen();
             valorenvio = 10;
-            total = p.total;
             d = p.volumen;
         }
 
