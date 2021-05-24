@@ -3,6 +3,8 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.event.ChangeListener;
+
 import org.jooq.False;
 
 import javafx.event.ActionEvent;
@@ -12,11 +14,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Pago;
 import utilities.Globals;
 import utilities.Ventana;
+import utilities.SobreTarjeta;
+import utilities.TextFieldRestrictions;
 
 public class OperadorTarjeta implements Initializable {
   private Integer tipoTarjeta;
@@ -24,13 +29,6 @@ public class OperadorTarjeta implements Initializable {
   private model.RegistrarEnvio envio;
   private static final Integer DEBITO = 0;
   private static final Integer CREDITO = 1;
-
-  /**
-   * NUMERO MAXIMO DE CARACTERES DEL CAMPO txtNumeroTarjeta
-   */
-  private static final Integer tNTM() {
-    return 16;
-  }
 
   private String numeroTarjeta;
   private String cvv;
@@ -88,6 +86,9 @@ public class OperadorTarjeta implements Initializable {
       chboxNumeroCuotas.setVisible(false);
       lblNumeroCuotas.setVisible(false);
     }
+
+    TextFieldRestrictions.textFieldNumeric(txtNumerotarjeta);
+    TextFieldRestrictions.textFieldMaxLength(txtNumerotarjeta, 16);
   }
 
   /**
@@ -110,41 +111,34 @@ public class OperadorTarjeta implements Initializable {
    */
   @FXML void atras(ActionEvent event) {
     Globals.cambiarVista(Globals.loadView("operador.resumen", befCtr));
-
   }
 
   /**
    * Imprime los numeros correspondientes a la tarjeta.
    * @param event not used.
    */
-
   @FXML void printDigitsTarjeta(KeyEvent event) {
-    checkErase(event);
+    checkErase(event, true);
 
     if (borrar) {
-      if (counter > 0 && counter <= tNTM()) eraseNumber();
+      if (counter > 0 && counter <= SobreTarjeta.tNTM()) SobreTarjeta.eraseNumber(counter, lblNumero1, lblNumero2, lblNumero3, lblNumero4);
       if (counter > 0) counter--;
-    } else if (agregar) {
-      if (counter < tNTM())
-        addNumber();
-      else {
-        String tT = txtNumerotarjeta.getText();
-        txtNumerotarjeta.clear();
-        txtNumerotarjeta.textProperty().set(tT.substring(0, tNTM()));
-      }
+    } else if (agregar && counter < SobreTarjeta.tNTM()) {
+      SobreTarjeta.addNumber(event.getText(), counter, lblNumero1, lblNumero2, lblNumero3, lblNumero4);
       counter++;
     }
     System.out.println(counter);
   }
 
   @FXML void eraseTitular(KeyEvent event) {
-    checkErase(event);
-    if (!agregar) lblNombreEnTarjeta.setText(eraseFrom(lblNombreEnTarjeta.getText(), 1));
+    Object[] validados = SobreTarjeta.checkErase(event, false);
+    if (borrar) lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
   }
 
   @FXML void addTitular(KeyEvent event) {
-    if (!agregar) return;
-    lblNombreEnTarjeta.setText(addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
+    Object[] validados = SobreTarjeta.checkErase(event, false);
+    if (borrar) return;
+    lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
 
   private void getData() {
@@ -159,118 +153,4 @@ public class OperadorTarjeta implements Initializable {
     mes = mes.substring(5, 7);
   }
 
-  /**
-   * Agrega un numero a la parte visual de la tarjeta.
-   * 
-   * @param n el numero a agregar.
-   */
-  private void addNumber() {
-    String n = addToText;
-    if (counter < 4) {
-      lblNumero1.setText(addTo(lblNumero1.getText(), n + " "));
-    } else if (counter < 8) {
-      lblNumero2.setText(addTo(lblNumero2.getText(), n + " "));
-    } else if (counter < 12) {
-      lblNumero3.setText(addTo(lblNumero3.getText(), n + " "));
-    } else {
-      lblNumero4.setText(addTo(lblNumero4.getText(), n + " "));
-    }
-  }
-
-  /**
-   * Borra numeros de la parte visual de la tarjeta.
-   */
-  private void eraseNumber() {
-    if (counter > 12) {
-      lblNumero4.setText(eraseFrom(lblNumero4.getText(), 2));
-    } else if (counter > 8) {
-      lblNumero3.setText(eraseFrom(lblNumero3.getText(), 2));
-    } else if (counter > 4) {
-      lblNumero2.setText(eraseFrom(lblNumero2.getText(), 2));
-    } else {
-      lblNumero1.setText(eraseFrom(lblNumero1.getText(), 2));
-    }
-  }
-
-  /**
-   * Borra un número de caracteres al final de un string.
-   * 
-   * @param s string al que borrarle caracteres.
-   * @param n numero de caracteres a borrar.
-   * @return string con caracteres borrados.
-   */
-  private String eraseFrom(String s, Integer n) {
-    return s.substring(0, s.length() - n);
-  }
-
-  /**
-   * Concatena dos strings.
-   * 
-   * @param s   String a
-   * @param add String b
-   * @return a concatenado b
-   */
-  private String addTo(String s, String add) {
-    return (s + add);
-  }
-
-  public void checkErase(KeyEvent event) {
-    borrar = false;
-    KeyCode key = event.getCode();
-
-    if (key.equals(KeyCode.BACK_SPACE)) {
-      borrar = true;
-      agregar = false;
-      return;
-    }
-
-    addToText = keyEqualNumber(key);
-  }
-
-  public String keyEqualNumber(KeyCode key) {
-    agregar = false;
-
-    if (key.equals(KeyCode.DIGIT0)) {
-      agregar = true;
-      return "0";
-    }
-    if (key.equals(KeyCode.DIGIT1)) {
-      agregar = true;
-      return "1";
-    }
-    if (key.equals(KeyCode.DIGIT2)) {
-      agregar = true;
-      return "2";
-    }
-    if (key.equals(KeyCode.DIGIT3)) {
-      agregar = true;
-      return "3";
-    }
-    if (key.equals(KeyCode.DIGIT4)) {
-      agregar = true;
-      return "4";
-    }
-    if (key.equals(KeyCode.DIGIT5)) {
-      agregar = true;
-      return "5";
-    }
-    if (key.equals(KeyCode.DIGIT6)) {
-      agregar = true;
-      return "6";
-    }
-    if (key.equals(KeyCode.DIGIT7)) {
-      agregar = true;
-      return "7";
-    }
-    if (key.equals(KeyCode.DIGIT8)) {
-      agregar = true;
-      return "8";
-    }
-    if (key.equals(KeyCode.DIGIT9)) {
-      agregar = true;
-      return "9";
-    }
-
-    return "";
-  }
 }

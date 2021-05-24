@@ -16,6 +16,7 @@ import model.Envios;
 import model.Pago;
 import model.Paquetes;
 import utilities.Globals;
+import javafx.scene.Parent;
 
 /**
  * Clase encargada de controlar la vista OperadorResumen Despliega el metodo de
@@ -100,7 +101,8 @@ public class OperadorResumen {
    * @param tipo de la tarjeta.
    */
   void pagar(Integer tipo) {
-    Globals.cambiarVista(Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio)));
+    Parent xd = Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio));
+    Globals.cambiarVista(xd);
   }
 
   /**
