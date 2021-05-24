@@ -17,7 +17,7 @@ public class Roles {
     rol.add("Secretario(a)");
     SECRETARIO = 1;
 
-    rol.add("Operador de oficina");
+    rol.add("Operador");
     OPERADOR = 2;
 
     rol.add("Auxiliar");

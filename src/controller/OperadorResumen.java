@@ -1,14 +1,22 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import javax.swing.Action;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import model.Envios;
+import model.Pago;
+import model.Paquetes;
 import utilities.Globals;
+import javafx.scene.Parent;
 
 /**
  * Clase encargada de controlar la vista OperadorResumen Despliega el metodo de
@@ -20,7 +28,10 @@ public class OperadorResumen {
   private model.RegistrarEnvio envio;
   private RegistrarEnvio befCtr;
 
-  private static final Double IMPUESTO = 0.19;
+  private static final Integer DEBITO = 0;
+  private static final Integer CREDITO = 1;
+  private int total;
+  private int impuesto;
   @FXML private Label lblCedulaR; // label Cedula del Remitente
   @FXML private Label lblNameR; // label nombre de remitente
   @FXML private Label lblCedulaD; // label cedula del destinatario
@@ -38,7 +49,6 @@ public class OperadorResumen {
    * @param envio Clase que almacena métodos e informacion de los clientes y
    *              paquetes del envío.
    */
-
   public void update(model.RegistrarEnvio envio, RegistrarEnvio ah) {
     this.envio = envio;
     befCtr = ah;
@@ -52,10 +62,9 @@ public class OperadorResumen {
     chargeInformation();
   }
 
-  public void setEnvio(model.RegistrarEnvio r) {
-
-  }
-
+  /**
+   * Carga la información relacionada al envío en la interfaz grafica.
+   */
   public void chargeInformation() {
     // Actualiza los datos en pantalla.
     lblCedulaR.setText(lblCedulaR.getText() + ": " + envio.getRemitente().cedula);
@@ -66,29 +75,15 @@ public class OperadorResumen {
     lblnumP.setText(lblnumP.getText() + ": " + Integer.toString(envio.getPaquetes().size()));
 
     // Calcula el total del envio y su respectivo impuesto.
-    int total = calcularTotal(envio);
-    int impuesto = calcularImpuesto(total);
+    Pago.initialize(envio);
+    total = Pago.getTotal();
+    impuesto = Pago.getImpuesto();
 
     // Actualiza los datos en pantalla.
     labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Integer.toString(total - impuesto));
     lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(Pago.getSeguro()));
     lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
-  }
-
-  // TODO Pasarlo a un .java de auxiliares
-  public int calcularTotal(model.RegistrarEnvio envio) {
-    int total = 0;
-    for (int i = 0; i < envio.getPaquetes().size(); i++) {
-      total += envio.getPaquetes().get(i).total;
-    }
-    return total;
-  }
-
-  // TODO Pasarlo a un .java de auxiliares
-  public int calcularImpuesto(int total) {
-    int impuesto = total;
-    impuesto *= IMPUESTO;
-    return impuesto;
   }
 
   /**
@@ -97,24 +92,41 @@ public class OperadorResumen {
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
-    Globals.cambiarVista("operador.paquetes");
+    Globals.cambiarVista(Globals.loadView("operador.paquetes", befCtr));
   }
 
-  @FXML void btnClickCredito(MouseEvent event) {
-
+  /**
+   * Accede a la pantalla de pago con tarjeta. Se deshabilitan componentes
+   * gráficos según el tipo de la tarjeta.
+   * @param tipo de la tarjeta.
+   */
+  void pagar(Integer tipo) {
+    Parent xd = Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio));
+    Globals.cambiarVista(xd);
   }
 
-  @FXML void btnClickDebito(MouseEvent event) {
-    Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta());
+  /**
+   * Se ejecuta pagar con el tipo de tarjeta de credito.
+   * @param event not used.
+   */
+  @FXML void pagoCredito(ActionEvent event) {
+    pagar(CREDITO);
+  }
+
+  /**
+   * Se ejecuta pagar con el tipo de tarjeta de debito.
+   * @param event not used.
+   */
+  @FXML void pagoDebito(ActionEvent event) {
+    pagar(DEBITO);
   }
 
   /**
    * El pago se hace efectivo (o eso asumimos) y se vuelve a la pantalla principal
    * del Operador de Oficina.
-   * @param event
+   * @param event not used.
    */
-  @FXML void btnClickEfectivo(MouseEvent event) {
-
+  @FXML void pagoEfectivo(ActionEvent event) {
+    Pago.ejecutarPago(envio);
   }
-
 }

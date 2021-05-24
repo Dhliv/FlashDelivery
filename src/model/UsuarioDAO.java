@@ -85,7 +85,7 @@ public class UsuarioDAO {
 
             try {
                 conexion = Conexion.startConnection();
-                sqlStatement = "SELECT * FROM usuario WHERE Username = ? AND Password = ?";
+                sqlStatement = "SELECT * FROM usuario WHERE username = ? AND password = ?";
                 instruccion = conexion.prepareStatement(sqlStatement);
                 instruccion.setString(1, user);
                 instruccion.setString(2, pass);
@@ -220,7 +220,7 @@ public class UsuarioDAO {
      */
     private boolean verificarPassword(String pass) {
         boolean valid = false;
-        if (pass.trim().equals("") || !pass.trim().equals(pass)) return valid;
+        if (!pass.trim().equals(pass)) return valid;
         char F[] = { '.', ',', '\'', '\"', '+', '-', '_', '!' };
         for (int i = 0; i < pass.length(); ++i)
             for (int j = 0; j < F.length; ++j)

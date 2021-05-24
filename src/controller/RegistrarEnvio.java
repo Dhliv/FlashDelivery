@@ -1,8 +1,6 @@
 package controller;
 
 import java.util.Observable;
-
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,7 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import model.Pago;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
@@ -72,8 +70,8 @@ public class RegistrarEnvio {
     public void initialize() {
         selectedP = -1;
         if (envio == null) envio = new model.RegistrarEnvio();
-        if(operadorResumen == null) operadorResumen = new OperadorResumen();
-        
+        if (operadorResumen == null) operadorResumen = new OperadorResumen();
+
         if (RCedula != null) RCedula.focusedProperty().addListener(onRemitenteFocusOut);
         if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {
@@ -230,8 +228,8 @@ public class RegistrarEnvio {
             valor = p.valor_declarado;
             descripcion = p.descripcion;
             volumen = p.volumen.volumen();
-            valorenvio = 10;
-            total = p.total;
+            valorenvio = volumen * Pago.ValorCM3 + peso * Pago.ValorKG;
+            total = valorenvio + (int) (valorenvio * Pago.IMPUESTO);
             d = p.volumen;
         }
 

@@ -5,8 +5,10 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Empleado;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.UnaryOperator;
+
+import javax.swing.event.ChangeListener;
+
 import java.util.HashMap;
 
 import org.jooq.DSLContext;
@@ -26,20 +32,23 @@ public class Globals {
     private static Object referenceObject;
     public static Pane viewPane;
     public static Stage pantalla;
-    public static String id_usuario;
+    public static Empleado empleado;
     private static Ventana ventana;
     private static List<model.Sedes.Sede> sedes;
     private static Connection conn;
     private static Map<String, Parent> views;
     private static model.RegistrarEnvio envio;
+
     public static void init(Object obj) {
         referenceObject = obj;
         views = new HashMap<String, Parent>();
     }
-    public static void setEnvio(model.RegistrarEnvio r){
+
+    public static void setEnvio(model.RegistrarEnvio r) {
         envio = r;
     }
-    public static model.RegistrarEnvio getEnvio(){
+
+    public static model.RegistrarEnvio getEnvio() {
         return envio;
     }
 
@@ -165,4 +174,5 @@ public class Globals {
             e.printStackTrace();
         }
     }
+
 }
