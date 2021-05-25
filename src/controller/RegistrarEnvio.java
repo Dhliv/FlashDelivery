@@ -14,7 +14,9 @@ import model.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
 import model.RegistrarEnvio.TipoCliente;
+import utilities.GeneralAlerts;
 import utilities.Globals;
+import utilities.TextFieldRestrictions;
 
 /**
  * Controlador para las vistar operador.cliente y operador.paquetes
@@ -76,6 +78,12 @@ public class RegistrarEnvio {
         if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {
             // Cargar cosas en la tabla
+            TextFieldRestrictions.textFieldNumeric(Peso);
+            TextFieldRestrictions.textFieldNumeric(Valor);
+            TextFieldRestrictions.textFieldNumeric(Ancho);
+            TextFieldRestrictions.textFieldNumeric(Largo);
+            TextFieldRestrictions.textFieldNumeric(Alto);
+
             modify = false;
             tcPeso.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("peso"));
             tcValor.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("valor"));
@@ -142,12 +150,12 @@ public class RegistrarEnvio {
 
             Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, -1);
             list.add(new PaqueteT(p));
+            clearCampsPaquetes();
         } catch (NumberFormatException e) {
-            // Colocar un joptionPane o alert
-            System.out.println("Ingrese correctamente los datos");
+            GeneralAlerts.showEmptyFieldAlert();
         }
 
-        clearCampsPaquetes();
+        
     }
 
     @FXML void editarPaquete(ActionEvent event) {
@@ -186,8 +194,7 @@ public class RegistrarEnvio {
                 btEditar.setText("Editar");
                 clearCampsPaquetes();
             } catch (NumberFormatException e) {
-                // Colocar un joptionPane o alert
-                System.out.println("Ingrese correctamente los datos");
+                GeneralAlerts.showEmptyFieldAlert();
             }
         }
         modify = !modify;

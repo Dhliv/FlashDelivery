@@ -12,40 +12,14 @@ public class SobreTarjeta {
   public static final Integer tNTM() {
     return 16;
   }
-
+  /**
+   * Método para comprobar si la tecla presionada corresponde a una tecla numerica
+   * 
+   * @param key Objeto representando la tecla presionada.
+   * @return un numero o string vacio.
+   */
   public static String keyEqualNumber(KeyCode key) {
-    if (key.equals(KeyCode.DIGIT0) || key.equals(KeyCode.NUMPAD0)) {
-      return "0";
-    }
-    if (key.equals(KeyCode.DIGIT1) || key.equals(KeyCode.NUMPAD1)) {
-      return "1";
-    }
-    if (key.equals(KeyCode.DIGIT2) || key.equals(KeyCode.NUMPAD2)) {
-      return "2";
-    }
-    if (key.equals(KeyCode.DIGIT3) || key.equals(KeyCode.NUMPAD3)) {
-      return "3";
-    }
-    if (key.equals(KeyCode.DIGIT4) || key.equals(KeyCode.NUMPAD4)) {
-      return "4";
-    }
-    if (key.equals(KeyCode.DIGIT5) || key.equals(KeyCode.NUMPAD5)) {
-      return "5";
-    }
-    if (key.equals(KeyCode.DIGIT6) || key.equals(KeyCode.NUMPAD6)) {
-      return "6";
-    }
-    if (key.equals(KeyCode.DIGIT7) || key.equals(KeyCode.NUMPAD7)) {
-      return "7";
-    }
-    if (key.equals(KeyCode.DIGIT8) || key.equals(KeyCode.NUMPAD8)) {
-      return "8";
-    }
-    if (key.equals(KeyCode.DIGIT9) || key.equals(KeyCode.NUMPAD9)) {
-      return "9";
-    }
-
-    return "";
+    return key.isDigitKey() ? key.getChar() : "";
   }
 
   /**
@@ -116,12 +90,12 @@ public class SobreTarjeta {
   }
 
   /**
-   * Retorna una tripleta de datos: si se debe borrar datos, si se debe agregar
-   * datos y el dato a agregar.
+   * Verifica si es necesario borrar o agregar la tecla presionada.
    * 
-   * @param event
-   * @param numTarjeta
-   * @return
+   * @param event la tecla presionada.
+   * @param numTarjeta si es necesario identifcar si es un numero.
+   * @return una tripleta de datos: si se debe borrar datos, si se debe agregar
+   * datos y el dato a agregar.
    */
   public static Object[] checkErase(KeyEvent event, Boolean numTarjeta) {
     Boolean borrar = false;

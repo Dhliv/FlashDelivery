@@ -87,8 +87,8 @@ public class OperadorTarjeta implements Initializable {
       lblNumeroCuotas.setVisible(false);
     }
 
-    TextFieldRestrictions.textFieldNumeric(txtNumerotarjeta);
     TextFieldRestrictions.textFieldMaxLength(txtNumerotarjeta, 16);
+    TextFieldRestrictions.textFieldNumeric(txtNumerotarjeta);
   }
 
   /**
@@ -118,7 +118,10 @@ public class OperadorTarjeta implements Initializable {
    * @param event not used.
    */
   @FXML void printDigitsTarjeta(KeyEvent event) {
-    checkErase(event, true);
+    Object[] validados = SobreTarjeta.checkErase(event, true);
+    borrar = (Boolean) validados[0];
+    agregar = (Boolean) validados[1];
+    addToText = (String) validados[2];
 
     if (borrar) {
       if (counter > 0 && counter <= SobreTarjeta.tNTM()) SobreTarjeta.eraseNumber(counter, lblNumero1, lblNumero2, lblNumero3, lblNumero4);
@@ -127,16 +130,23 @@ public class OperadorTarjeta implements Initializable {
       SobreTarjeta.addNumber(event.getText(), counter, lblNumero1, lblNumero2, lblNumero3, lblNumero4);
       counter++;
     }
-    System.out.println(counter);
   }
 
   @FXML void eraseTitular(KeyEvent event) {
     Object[] validados = SobreTarjeta.checkErase(event, false);
+    borrar = (Boolean) validados[0];
+    agregar = (Boolean) validados[1];
+    addToText = (String) validados[2];
+
     if (borrar) lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
   }
 
   @FXML void addTitular(KeyEvent event) {
     Object[] validados = SobreTarjeta.checkErase(event, false);
+    borrar = (Boolean) validados[0];
+    agregar = (Boolean) validados[1];
+    addToText = (String) validados[2];
+
     if (borrar) return;
     lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
