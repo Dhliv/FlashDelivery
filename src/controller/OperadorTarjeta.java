@@ -89,6 +89,9 @@ public class OperadorTarjeta implements Initializable {
 
     TextFieldRestrictions.textFieldMaxLength(txtNumerotarjeta, 16);
     TextFieldRestrictions.textFieldNumeric(txtNumerotarjeta);
+
+    TextFieldRestrictions.textFieldMaxLength(txtCVV, 4);
+    TextFieldRestrictions.textFieldNumeric(txtCVV);
   }
 
   /**
