@@ -1,9 +1,6 @@
 package controller;
 
-import org.postgresql.hostchooser.GlobalHostStatusTracker;
-
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import utilities.Globals;
