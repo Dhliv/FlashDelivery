@@ -4,10 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.event.ChangeListener;
-
-import org.jooq.False;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,14 +13,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Pago;
 import utilities.GeneralChecker;
 import utilities.GeneralAlerts;
 import utilities.Globals;
-import utilities.Ventana;
 import utilities.SobreTarjeta;
 import utilities.TextFieldRestrictions;
 
