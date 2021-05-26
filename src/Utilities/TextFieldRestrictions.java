@@ -37,11 +37,17 @@ public class TextFieldRestrictions {
       if (change.isDeleted()) return change;
       if (aux.length() > 0 && Character.isDigit(aux.charAt(0))) return change;
       else return null;
-    });
+    }
+    );
 
     txt.setTextFormatter(formatterNOnly);
   }
-
+  /**
+   * 
+   * @param txt
+   * @param change
+   * @return
+   */
   private static boolean checkPreviousFilter(TextFormatter txt, TextFormatter.Change change){
     if(txt != null){
       UnaryOperator<TextFormatter.Change> fil = txt.getFilter();
@@ -51,7 +57,12 @@ public class TextFieldRestrictions {
     }
     return true;
   }
-
+  /**
+   * INCOMPLETO
+   * Método para evaluar un filtro de cambios obligatorios (usos del ratón y flechitas (teclas direccionales).
+   * @param change
+   * @return true si change corresponde a alguno de los ya citados, false en caso contrario.
+   */
   private static boolean imperativeFilter(TextFormatter.Change change){
     String aux = change.toString();
     return true;

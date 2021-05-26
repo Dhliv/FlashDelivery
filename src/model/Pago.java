@@ -14,7 +14,7 @@ public class Pago {
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
-  public static final int ValorCM3 = 10;
+  public static final double ValorCM3 = 0.1;
 
   /**
    * Inicializa los valores del total e impuesto del envio.

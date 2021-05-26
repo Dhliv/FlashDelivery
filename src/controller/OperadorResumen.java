@@ -80,7 +80,7 @@ public class OperadorResumen {
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
-    Globals.cambiarVista(Globals.loadView("operador.paquetes", befCtr));
+    Globals.cambiarVista("operador.paquetes", befCtr);
   }
 
   /**
