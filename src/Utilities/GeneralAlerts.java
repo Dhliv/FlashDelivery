@@ -14,6 +14,7 @@ public class GeneralAlerts {
     private static Alert regSuccess; // Alerta para registro exitoso
     private static Alert errorUnexpt; // Alerta para un error fuera de los previsto
     private static Alert userNull; // Alerta para usuarios nulos(no seleccionados).
+    private static Alert pagoExitoso; // Alerta para pago exitoso.
     private static Boolean inicializado = false; // Indica si se han inicializado las alertas.
 
     private static void init() {
@@ -43,9 +44,9 @@ public class GeneralAlerts {
 
         userNull = new Alert(AlertType.NONE);
         userNull.setAlertType(AlertType.WARNING);
-        userNull.setContentText("Por favor, seleccione el usuario que desea modificar.");
-        userNull.setTitle("Usuario no seleccionado");
-        userNull.setHeaderText("No ha sido seleccionado un usuario");
+        userNull.setContentText("Por favor, seleccione el empleado que desea modificar.");
+        userNull.setTitle("Empleado no seleccionado");
+        userNull.setHeaderText("No ha sido seleccionado un empleado");
 
         errorUnexpt = new Alert(AlertType.NONE);
         errorUnexpt.setAlertType(AlertType.INFORMATION);
@@ -53,46 +54,51 @@ public class GeneralAlerts {
         errorUnexpt.setTitle("Error inesperado");
         errorUnexpt.setHeaderText("Error inesperado");
 
+        pagoExitoso = new Alert(AlertType.NONE);
+        pagoExitoso.setAlertType(AlertType.INFORMATION);
+        pagoExitoso.setContentText("El pago se ha efectuado con exito.");
+        pagoExitoso.setTitle("Pago Exitoso");
+        pagoExitoso.setHeaderText("Pago Exitoso");
+
         inicializado = true;
     }
 
     // Panel con información de que hay un campo vacio
     public static void showEmptyFieldAlert() {
-        if (!inicializado)
-            init();
+        if (!inicializado) init();
         cEmpty.show();
     }
 
     // Panel con información de que se usan pasos prohibidos
     public static void showCharForbidenAlert() {
-        if (!inicializado)
-            init();
+        if (!inicializado) init();
         cForbi.show();
     }
 
     // Panel cuando existe un empleado
     public static void showUserExistAlert() {
-        if (!inicializado)
-            init();
+        if (!inicializado) init();
         userExist.show();
     }
 
     // Panel de error inesperado
     public static void showErrorUnexpt() {
-        if (!inicializado)
-            init();
+        if (!inicializado) init();
         errorUnexpt.show();
     }
 
     public static void showRegSuccess() {
-        if (!inicializado)
-            init();
+        if (!inicializado) init();
         regSuccess.show();
     }
 
     public static void showUserNullAlert() {
-        if (!inicializado)
-            init();
+        if (!inicializado) init();
         userNull.show();
+    }
+
+    public static void showPagoExitoso() {
+        if (!inicializado) init();
+        pagoExitoso.show();
     }
 }

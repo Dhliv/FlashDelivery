@@ -46,24 +46,15 @@ public class UserRegister implements Initializable {
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
-  @FXML
-  private TextField nombreT;
-  @FXML
-  private TextField identificacionT;
-  @FXML
-  private TextField telefonoT;
-  @FXML
-  private TextField direccionT;
-  @FXML
-  private DatePicker fechaT;
-  @FXML
-  private ChoiceBox<String> rolT;
-  @FXML
-  private TextField usernameT;
-  @FXML
-  private ChoiceBox<String> idsedeT;
-  @FXML
-  private PasswordField passwordT;
+  @FXML private TextField nombreT;
+  @FXML private TextField identificacionT;
+  @FXML private TextField telefonoT;
+  @FXML private TextField direccionT;
+  @FXML private DatePicker fechaT;
+  @FXML private ChoiceBox<String> rolT;
+  @FXML private TextField usernameT;
+  @FXML private ChoiceBox<String> idsedeT;
+  @FXML private PasswordField passwordT;
   // FIN de los campos.
 
   /**

@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -13,6 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import model.Empleado;
+import model.EmpleadoDAO;
 import model.Usuario;
 import utilities.*;
 
@@ -20,22 +23,19 @@ public class UserConsulta implements Initializable {
 
   private AnchorPane content;
   private Parent userRegister;
-  private UserConsultaButtons botones;
 
-  @FXML
-  private TableView<Usuario> tableUsers;
-  @FXML
-  private TableColumn<Usuario, Integer> cedula;
-  @FXML
-  private TableColumn<Usuario, String> nombre;
-  @FXML
-  private TableColumn<Usuario, String> apellido;
-  @FXML
-  private TableColumn<Usuario, Boolean> sede;
+  @FXML private TableView<Empleado> tableUsers;
+  @FXML private TableColumn<Empleado, Integer> cedula;
+  @FXML private TableColumn<Empleado, String> nombre;
+  @FXML private TableColumn<Empleado, String> apellido;
+  @FXML private TableColumn<Empleado, Integer> sede;
+  @FXML private TableColumn<Empleado, String> rol;
+  @FXML private TableColumn<Empleado, String> direccion;
+  @FXML private TableColumn<Empleado, String> telefono;
+  @FXML private TableColumn<Empleado, LocalDate> birthdate;
 
   public UserConsulta(AnchorPane cont) {
     content = cont;
-    botones = new UserConsultaButtons();
   }
 
   /**
@@ -44,23 +44,22 @@ public class UserConsulta implements Initializable {
    * @param location  not used.
    * @param resources not used.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    cedula.setCellValueFactory(new PropertyValueFactory<Usuario, Integer>("ID"));
-    nombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("username"));
-    apellido.setCellValueFactory(new PropertyValueFactory<Usuario, String>("password"));
-    sede.setCellValueFactory(new PropertyValueFactory<Usuario, Boolean>("enabled"));
-    ObservableList<Usuario> s = FXCollections.observableArrayList();
-
-    s.add(new Usuario(1234, "APA", "APA", true));
-    s.add(new Usuario(1235, "PAPU", "PAPU", true));
-    // insertData();
+  @Override public void initialize(URL location, ResourceBundle resources) {
+    cedula.setCellValueFactory(new PropertyValueFactory<Empleado, Integer>("cedula"));
+    nombre.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombres"));
+    apellido.setCellValueFactory(new PropertyValueFactory<Empleado, String>("apellidos"));
+    sede.setCellValueFactory(new PropertyValueFactory<Empleado, Integer>("sede"));
+    rol.setCellValueFactory(new PropertyValueFactory<Empleado, String>("rol"));
+    direccion.setCellValueFactory(new PropertyValueFactory<Empleado, String>("direccion"));
+    telefono.setCellValueFactory(new PropertyValueFactory<Empleado, String>("telefono"));
+    birthdate.setCellValueFactory(new PropertyValueFactory<Empleado, LocalDate>("birthdate"));
+    ObservableList<Empleado> s = FXCollections.observableArrayList();
+    s.addAll(Empleado.getSedes());
 
     tableUsers.setItems(s);
   }
 
-  @FXML
-  void borrar(ActionEvent event) {
+  @FXML void borrar(ActionEvent event) {
 
   }
 
@@ -69,11 +68,8 @@ public class UserConsulta implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosRegistro(ActionEvent event) {
-    content.getChildren().clear();
-    userRegister = Globals.loadView("user.register", new UserRegister(content, this));
-    content.getChildren().addAll(userRegister);
+  @FXML void goToUsuariosRegistro(ActionEvent event) {
+    Globals.cambiarVista(Globals.loadView("user.register", new UserRegister(content, this)));
   }
 
   /**
@@ -81,9 +77,9 @@ public class UserConsulta implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void userEditButton(ActionEvent event) {
-    Usuario usuario = tableUsers.getSelectionModel().getSelectedItem();
-    botones.goToUserEdit(usuario, content);
+  @FXML void userEditButton(ActionEvent event) {
+    Empleado e = tableUsers.getSelectionModel().getSelectedItem();
+    if(e != null) Globals.cambiarVista(Globals.loadView("user.edit", new UserEdit(e, this)));
+    else GeneralAlerts.showUserNullAlert();
   }
 }

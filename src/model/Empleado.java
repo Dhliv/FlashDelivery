@@ -2,12 +2,15 @@ package model;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+
+import utilities.Globals;
 
 public class Empleado implements Entity {
     private String cedula;
     private String nombres, apellidos, rol, direccion, telefono;
     private LocalDate birthdate;
-    private int sede;
+    public int sede;
 
     public Empleado() {
     }
@@ -100,6 +103,13 @@ public class Empleado implements Entity {
 
     @Override public String toString() {
         return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede + '}';
+    }
+
+    public static List<Empleado> getSedes() {
+        List<Empleado> sedes = Globals.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query 'sql'.
+        Globals.closeConnection();
+
+        return sedes;
     }
 
 }
