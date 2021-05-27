@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
@@ -63,17 +62,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="250.0" layoutY="460.0" text="Sede">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="585.0" layoutY="360.0" text="Usuario">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="585.0" layoutY="460.0" text="Contraseña">
+            <Label layoutX="585.0" layoutY="360.0" text="Sede">
                <font>
                   <Font size="18.0" />
                </font>
@@ -84,10 +73,8 @@
             <TextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
             <DatePicker fx:id="fechaT" layoutX="585.0" layoutY="285.0" prefWidth="184.0" />
             <ChoiceBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
-            <ChoiceBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
-            <PasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
-            <Button layoutX="542.0" layoutY="552.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Modificar">
+            <ChoiceBox fx:id="idsedeT" layoutX="585.0" layoutY="385.0" prefWidth="184.0" />
+            <Button layoutX="542.0" layoutY="552.0" mnemonicParsing="false" onAction="#updateEmpleado" prefWidth="100.0" text="Modificar">
                <font>
                   <Font size="18.0" />
                </font>
@@ -100,7 +87,7 @@
          </children>
       </Pane>
       <Separator layoutY="90.0" prefWidth="1020.0" />
-      <Label layoutX="30.0" layoutY="35.0" text="Modificando a Nombre">
+      <Label fx:id="lblEmpleadoEditar" layoutX="30.0" layoutY="35.0" text="Modificando a">
          <font>
             <Font size="18.0" />
          </font>

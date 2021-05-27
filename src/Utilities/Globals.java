@@ -132,37 +132,6 @@ public class Globals {
     }
 
     /**
-     * Obtiene las sedes existentes en la BD y las retorna.
-     * 
-     * @return Formatea el id y el nombre de la sede y retorna su respectivo
-     *         listado.
-     */
-    public static ArrayList<String> getSedes() {
-        sedes = model.Sedes.getSedes();
-        ArrayList<String> idSedes = new ArrayList<>();
-
-        for (int i = 0; i < sedes.size(); i++) {
-            idSedes.add(sedes.get(i).ID_Sede + " - " + sedes.get(i).nombre);
-        }
-        return idSedes;
-    }
-
-    /**
-     * Obtiene el id de una sede respecto a su nombre.
-     * 
-     * @param name nombre de la sede.
-     * @return id de la sede.
-     */
-    public static int getIdSede(String name) {
-        String idAux = "";
-        for (int i = 0; i < name.length(); i++) {
-            if (Character.isWhitespace(name.charAt(i))) break;
-            idAux += name.charAt(i);
-        }
-        return Integer.parseInt(idAux);
-    }
-
-    /**
      * Desconecta al usuario actual del sistema.
      */
     public static void logOut() {

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="494.0" layoutY="26.0">
          <children>
@@ -38,7 +38,7 @@
             <TableColumn fx:id="rol" prefWidth="124.0" text="Rol" />
             <TableColumn fx:id="direccion" prefWidth="192.0" text="Direccion" />
             <TableColumn fx:id="telefono" prefWidth="96.0" text="Telefono" />
-            <TableColumn fx:id="birthdate" prefWidth="141.0" text="Fecha de cumpleaños" />
+            <TableColumn fx:id="birthdate" prefWidth="141.0" text="Fecha de Nacimiento" />
         </columns>
       </TableView>
    </children>

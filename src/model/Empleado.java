@@ -104,11 +104,23 @@ public class Empleado implements Entity {
         return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede + '}';
     }
 
+    /**
+     * Obtiene todos los empleados en la base de datos y los retorna.
+     * 
+     * @return lista de empleados existentes en la BD.
+     */
     public static List<Empleado> getSedes() {
         List<Empleado> sedes = Globals.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query 'sql'.
         Globals.closeConnection();
 
         return sedes;
+    }
+
+    public static void updateEmpleado(Empleado empleado) {
+        String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol() + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
+                + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
+
+        Globals.db().execute(sql);
     }
 
 }

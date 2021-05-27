@@ -9,40 +9,32 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import model.Empleado;
-import model.EmpleadoDAO;
-import model.Usuario;
-import model.UsuarioDAO;
 import utilities.*;
 
 public class UserEdit implements Initializable {
-  private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
   private Roles roles; // Cargos de la empresa
-  private int userNoExist;
   private UserConsulta controladorAnterior;
   private Empleado aEditar;
 
   // Auxiliares para los datos del usuario.
-  private Object fecha; // Dato parcial de fecha de nacimiento
+  private Object fc; // Dato parcial de fecha de nacimiento
   private Object idS; // Dato parcial de id sede
   private Object rl; // Dato parcial de rol
+  private Boolean camposVacios;
+  private Boolean forbidChar;
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
   private String telefono;
   private String dir; // Dirección
   private String ident; // Identificación
-  private String username;
-  private String password;
   private String rol;
-  private LocalDate fc; // Fecha de nacimiento
-  private int id;
+  private LocalDate fecha; // Fecha de nacimiento
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
@@ -52,9 +44,8 @@ public class UserEdit implements Initializable {
   @FXML private TextField direccionT;
   @FXML private DatePicker fechaT;
   @FXML private ChoiceBox<String> rolT;
-  @FXML private TextField usernameT;
   @FXML private ChoiceBox<String> idsedeT;
-  @FXML private PasswordField passwordT;
+  @FXML private Label lblEmpleadoEditar;
   // FIN de los campos.
 
   /**
@@ -75,8 +66,7 @@ public class UserEdit implements Initializable {
    * @param url not used.
    * @param rb  not used.
    */
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
+  @Override public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 
@@ -84,72 +74,96 @@ public class UserEdit implements Initializable {
     s.removeAll(s);
     l.removeAll(l);
     l.addAll(roles.rol);
-    s.addAll(Globals.getSedes());
+    s.addAll(model.Sedes.getSedesParsed());
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
 
-    usernameT.setVisible(false);
-    passwordT.setVisible(false);
     nombreT.setText(aEditar.getNombres());
     identificacionT.setText(aEditar.getCedula());
     telefonoT.setText(aEditar.getTelefono());
     direccionT.setText(aEditar.getDireccion());
     fechaT.setValue(aEditar.getBirthdate());
     rolT.setValue(aEditar.getRol());
-    //idsedeT.setValue(aEditar.getSede());;
+    idsedeT.setValue(model.Sedes.parseSede(aEditar.getSede()));
+
+    lblEmpleadoEditar.setText(lblEmpleadoEditar.getText() + " " + aEditar.getNombres());
+    identificacionT.setEditable(false);
   }
 
   /**
-   * Obtiene los datos de los campos de registro y los almacena en las variables
-   * de la linea 38.
+   * Obtiene los datos de los campos de registro.
    */
   private void getData() {
     name = nombreT.getText();
     telefono = telefonoT.getText();
-    rl = rolT.getValue();
     dir = direccionT.getText();
     ident = identificacionT.getText();
-    fecha = fechaT.getValue();
+
+    fc = fechaT.getValue();
     idS = idsedeT.getValue();
-    username = usernameT.getText();
-    password = passwordT.getText();
+    rl = rolT.getValue();
   }
 
   /**
    * Se transforman los tipos de datos que tienen tipo distinto a string.
    */
   private void parseData() {
-    id = Integer.valueOf(ident);
-    fc = LocalDate.parse(fecha.toString());
-    idSede = Globals.getIdSede(idS.toString());
+    fecha = LocalDate.parse(fc.toString());
+    idSede = model.Sedes.getIdSede(idS.toString());
     rol = rl.toString();
   }
 
   /**
-   * Retorna a la pantalla de consulta de usuarios.
+   * Retorna a la pantalla de consulta de empleados.
    */
   private void volver() {
     Globals.cambiarVista(Globals.loadView("user.consulta", controladorAnterior));
   }
 
   /**
-   * Carga en 'content' la pantalla de consulta de usuarios.
+   * Vuelve al apartado de consulta de Empleados.
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosConsulta(ActionEvent event) {
+  @FXML void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
   /**
-   * Registra a un usuario.
+   * Accede a la pantalla de registrar un usuario nuevo.
    * 
    * @param event not used.
    */
-  @FXML
-  void registrarUser(ActionEvent event) {
+  @FXML void goToUsuariosRegistro(ActionEvent event) {
+    Globals.cambiarVista(Globals.loadView("user.register", new UserRegister(controladorAnterior)));
+  }
 
+  /**
+   * Actualiza los datos de un usuario en la base de datos.
+   * 
+   * @param event not used.
+   */
+  @FXML void updateEmpleado(ActionEvent event) {
+    getData();
+
+    String campos[] = { name, telefono, dir, ident };
+    Object objetos[] = { fc, idS, rl };
+
+    camposVacios = GeneralChecker.checkEmpty(campos, objetos);
+    forbidChar = GeneralChecker.checkChar(campos);
+
+    if (!(camposVacios || forbidChar)) {
+      parseData();
+      Empleado updated = new Empleado(ident, name, "", rol, dir, telefono, fecha, idSede);
+      Empleado.updateEmpleado(updated);
+      GeneralAlerts.showUpdSucces();
+      volver();
+    } else {
+      if (camposVacios)
+        GeneralAlerts.showEmptyFieldAlert();
+      else
+        GeneralAlerts.showCharForbidenAlert();
+    }
   }
 
 }

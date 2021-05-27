@@ -9,20 +9,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import model.Empleado;
-import model.EmpleadoDAO;
-import model.Usuario;
 import utilities.*;
 
 public class UserConsulta implements Initializable {
-
-  private AnchorPane content;
-  private Parent userRegister;
 
   @FXML private TableView<Empleado> tableUsers;
   @FXML private TableColumn<Empleado, Integer> cedula;
@@ -33,10 +26,6 @@ public class UserConsulta implements Initializable {
   @FXML private TableColumn<Empleado, String> direccion;
   @FXML private TableColumn<Empleado, String> telefono;
   @FXML private TableColumn<Empleado, LocalDate> birthdate;
-
-  public UserConsulta(AnchorPane cont) {
-    content = cont;
-  }
 
   /**
    * Inicializa los datos de la tabla de empleados.
@@ -69,7 +58,7 @@ public class UserConsulta implements Initializable {
    * @param event not used.
    */
   @FXML void goToUsuariosRegistro(ActionEvent event) {
-    Globals.cambiarVista(Globals.loadView("user.register", new UserRegister(content, this)));
+    Globals.cambiarVista(Globals.loadView("user.register", new UserRegister(this)));
   }
 
   /**
@@ -79,7 +68,9 @@ public class UserConsulta implements Initializable {
    */
   @FXML void userEditButton(ActionEvent event) {
     Empleado e = tableUsers.getSelectionModel().getSelectedItem();
-    if(e != null) Globals.cambiarVista(Globals.loadView("user.edit", new UserEdit(e, this)));
-    else GeneralAlerts.showUserNullAlert();
+    if (e != null)
+      Globals.cambiarVista(Globals.loadView("user.edit", new UserEdit(e, this)));
+    else
+      GeneralAlerts.showUserNullAlert();
   }
 }

@@ -15,6 +15,7 @@ public class GeneralAlerts {
     private static Alert errorUnexpt; // Alerta para un error fuera de los previsto
     private static Alert userNull; // Alerta para usuarios nulos(no seleccionados).
     private static Alert pagoExitoso; // Alerta para pago exitoso.
+    private static Alert updSucces; // Alerta para actualización exitosa.
     private static Boolean inicializado = false; // Indica si se han inicializado las alertas.
 
     private static void init() {
@@ -60,6 +61,11 @@ public class GeneralAlerts {
         pagoExitoso.setTitle("Pago Exitoso");
         pagoExitoso.setHeaderText("Pago Exitoso");
 
+        updSucces = new Alert(AlertType.INFORMATION);
+        updSucces.setContentText("Los datos se han actualizado con exito.");
+        updSucces.setTitle("Actualización Exitosa");
+        updSucces.setHeaderText("Actualización Exitosa");
+
         inicializado = true;
     }
 
@@ -100,5 +106,10 @@ public class GeneralAlerts {
     public static void showPagoExitoso() {
         if (!inicializado) init();
         pagoExitoso.show();
+    }
+
+    public static void showUpdSucces() {
+        if (!inicializado) init();
+        updSucces.show();
     }
 }
