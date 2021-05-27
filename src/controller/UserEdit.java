@@ -49,11 +49,10 @@ public class UserEdit implements Initializable {
   // FIN de los campos.
 
   /**
-   * Constructor de la clase UserRegister
+   * Constructor del controlador UserEdit.
    * 
-   * @param contenido   Contenedor de todos los componentes visuales de la actual
-   *                    pestaña.
-   * @param controlador Controller de la pestaña anterior.
+   * @param e   empleado que se va a editar.
+   * @param ctr controlador de la vista anterior.
    */
   public UserEdit(Empleado e, UserConsulta ctr) {
     aEditar = e;

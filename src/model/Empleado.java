@@ -116,6 +116,12 @@ public class Empleado implements Entity {
         return sedes;
     }
 
+    /**
+     * Actualiza en la BD los datos del empleadoa los editados (la cedula no cambia
+     * nunca).
+     * 
+     * @param empleado informacion completa a actualizar (incluso sin cambios).
+     */
     public static void updateEmpleado(Empleado empleado) {
         String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol() + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
                 + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
