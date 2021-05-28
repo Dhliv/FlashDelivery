@@ -11,7 +11,7 @@ public class GeneralChecker {
    */
   public static boolean checkChar(String campo[]) {
     boolean ch = false;
-    char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
+    char F[] = { ',', '\'', '\"', '*', '=', '+', '!' };
 
     for (int i = 0; i < campo.length; i++) {
       for (int j = 0; j < campo[i].length(); j++) {

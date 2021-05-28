@@ -7,10 +7,11 @@ import org.jooq.Record;
 import utilities.Globals;
 
 public class Facturas {
-  public static class Factura {
-    public static Date Expdate;
-    public static String Numeracion;
-    public static Integer ID_Envio;
+  public class Factura {
+    public Integer id_factura;
+    public Date expdate;
+    public String numeracion;
+    public Integer id_envio;
   }
 
   /**
@@ -21,8 +22,7 @@ public class Facturas {
    * @param id_envio   de la factura.
    */
   public static void createFactura(Date expdate, String numeracion, Integer id_envio) {
-    Globals.db().insertInto(DSL.table("facturacion"), DSL.field("\"Expdate\""), DSL.field("\"Numeracion\""),
-        DSL.field("\"ID_Envio\"")).values(expdate, numeracion, id_envio).execute();
+    Globals.db().insertInto(DSL.table("facturacion"), DSL.field("expdate"), DSL.field("numeracion"), DSL.field("id_envio")).values(expdate, numeracion, id_envio).execute();
     Globals.closeConnection();
   }
 }

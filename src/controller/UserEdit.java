@@ -25,8 +25,8 @@ public class UserEdit implements Initializable {
   private Object fc; // Dato parcial de fecha de nacimiento
   private Object idS; // Dato parcial de id sede
   private Object rl; // Dato parcial de rol
-  private Boolean camposVacios;
-  private Boolean forbidChar;
+  private Boolean camposVacios; // Identifica si existen campos sin llenar.
+  private Boolean forbidChar; // Identifica si se usaron carácteres prohibidos.
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
