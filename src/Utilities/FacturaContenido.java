@@ -38,6 +38,8 @@ public class FacturaContenido {
     drawText(parseText(contenido), contentStream);
 
     contentStream.endText();
+    drawTable();
+
     contentStream.close();
   }
 
@@ -78,5 +80,10 @@ public class FacturaContenido {
       content.showText(lines.get(i));
       content.newLine();
     }
+    
+  }
+
+  private void drawTable(){
+    
   }
 }
