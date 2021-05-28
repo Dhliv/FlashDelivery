@@ -1,22 +1,11 @@
 package controller;
 
-import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
-
-import javax.swing.Action;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import model.Envios;
 import model.Pago;
-import model.Paquetes;
+import utilities.GeneralAlerts;
 import utilities.Globals;
-import javafx.scene.Parent;
 
 /**
  * Clase encargada de controlar la vista OperadorResumen Despliega el metodo de
@@ -92,7 +81,7 @@ public class OperadorResumen {
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
-    Globals.cambiarVista(Globals.loadView("operador.paquetes", befCtr));
+    Globals.cambiarVista("operador.paquetes", befCtr);
   }
 
   /**
@@ -101,8 +90,7 @@ public class OperadorResumen {
    * @param tipo de la tarjeta.
    */
   void pagar(Integer tipo) {
-    Parent xd = Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio));
-    Globals.cambiarVista(xd);
+    Globals.cambiarVista(Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio)));
   }
 
   /**
@@ -128,5 +116,6 @@ public class OperadorResumen {
    */
   @FXML void pagoEfectivo(ActionEvent event) {
     Pago.ejecutarPago(envio);
+    GeneralAlerts.showPagoExitoso();
   }
 }

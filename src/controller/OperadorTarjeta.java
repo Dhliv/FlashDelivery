@@ -1,12 +1,11 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.event.ChangeListener;
-
-import org.jooq.False;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,12 +13,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Pago;
+import utilities.GeneralChecker;
+import utilities.GeneralAlerts;
 import utilities.Globals;
-import utilities.Ventana;
 import utilities.SobreTarjeta;
 import utilities.TextFieldRestrictions;
 
@@ -29,16 +27,23 @@ public class OperadorTarjeta implements Initializable {
   private model.RegistrarEnvio envio;
   private static final Integer DEBITO = 0;
   private static final Integer CREDITO = 1;
+  private Boolean camposVacios;
+  private Boolean forbidChar;
+  private String[] campos;
+  private Object[] objetos;
 
   private String numeroTarjeta;
   private String cvv;
   private String mes;
   private String año;
   private String nombre;
+  private String numCuotas;
+  private Object nCuotas;
   private Integer counter;
   private Boolean agregar;
   private Boolean borrar;
   private String addToText;
+  private Object mesAux;
 
   @FXML private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
   @FXML private TextField txtNumerotarjeta; // textField donde se ingresa el numero de la tarjeta
@@ -46,7 +51,7 @@ public class OperadorTarjeta implements Initializable {
   @FXML private TextField txtCVV; // textField donde se digita el CVV de la tarjeta.
   @FXML private Label lblNumeroCuotas; // label del Texto de numero de cuotas.
   @FXML private DatePicker dateFechaVencimiento; // datePicker que indica la fecha de vencimiento de la tarjeta.
-  @FXML private ChoiceBox<Integer> chboxNumeroCuotas; // número de cuotas en las que se pagará (depende de la tarjeta).
+  @FXML private ChoiceBox<String> chboxNumeroCuotas; // número de cuotas en las que se pagará (depende de la tarjeta).
   @FXML private Label lblNumero1; // primeros cuatro numeros de la tarjeta.
   @FXML private Label lblNumero2; // segundo cuarteto del numero de la tarjeta.
   @FXML private Label lblNumero3; // tercer cuarteto del numero de la tarjeta.
@@ -71,6 +76,14 @@ public class OperadorTarjeta implements Initializable {
   }
 
   @Override public void initialize(URL location, ResourceBundle resources) {
+    ObservableList<String> l = FXCollections.observableArrayList();
+    ArrayList<String> aux = new ArrayList<>();
+    for(int i = 1; i <= 36; i++){
+      aux.add(String.valueOf(i));
+    }
+    l.removeAll(l);
+    l.addAll(aux);
+    chboxNumeroCuotas.getItems().addAll(l);
 
     lblTipoTarjeta.setText("Tarjeta de " + ((tipoTarjeta == CREDITO) ? "Crédito" : "Debito"));
     lblNumero1.setText("");
@@ -101,10 +114,20 @@ public class OperadorTarjeta implements Initializable {
    * @param event not used.
    */
   @FXML void finalizarPago(ActionEvent event) {
-
     getData();
-    parseData();
-    Pago.ejecutarPago(envio);
+    camposVacios = GeneralChecker.checkEmpty(campos, objetos);
+    forbidChar = GeneralChecker.checkChar(campos);
+
+    if (!(camposVacios || forbidChar)) {
+      parseData();
+      Pago.ejecutarPago(envio);
+      GeneralAlerts.showPagoExitoso();
+    } else {
+      if (camposVacios)
+        GeneralAlerts.showEmptyFieldAlert();
+      else
+        GeneralAlerts.showCharForbidenAlert();
+    }
   }
 
   /**
@@ -158,10 +181,23 @@ public class OperadorTarjeta implements Initializable {
     nombre = txtTitular.getText();
     numeroTarjeta = txtNumerotarjeta.getText();
     cvv = txtCVV.getText();
-    mes = dateFechaVencimiento.getValue().toString();
+    mesAux = dateFechaVencimiento.getValue();
+
+    campos = new String[3];
+    objetos = new Object[1 + tipoTarjeta];
+    campos[0] = nombre;
+    campos[1] = numeroTarjeta;
+    campos[2] = cvv;
+    objetos[0] = mesAux;
+    if (tipoTarjeta == CREDITO) {
+      nCuotas = chboxNumeroCuotas.getValue();
+      objetos[1] = nCuotas;
+    }
   }
 
   private void parseData() {
+    mes = mesAux.toString();
+    if (tipoTarjeta == CREDITO) numCuotas = nCuotas.toString();
     año = mes.substring(2, 4);
     mes = mes.substring(5, 7);
   }

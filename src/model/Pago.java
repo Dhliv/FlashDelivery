@@ -11,10 +11,11 @@ public class Pago {
   private static Integer total; // Almacena el costo total del envío.
   private static Integer impuesto; // Almacena el impuesto del envío.
   private static Integer seguro; // Almacena el valor del seguro del envío.
+  private static String numeracion; // Lista las descripciones de los paquetes.
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
-  public static final int ValorCM3 = 10;
+  public static final double ValorCM3 = 0.1;
 
   /**
    * Inicializa los valores del total e impuesto del envio.
@@ -22,6 +23,7 @@ public class Pago {
    */
   public static void initialize(RegistrarEnvio envio) {
     calcularTotal(envio);
+    parseNumeracion(envio);
   }
 
   /**
@@ -34,8 +36,9 @@ public class Pago {
     String EMPLEADO = Globals.empleado.getCedula();
     Date DATE = Date.valueOf(LocalDate.now());
 
-    Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, Boolean.FALSE, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
+    Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     Paquetes.createPaquetes(envio.getPaquetes(), idEnvio);
+    Facturas.createFactura(DATE, numeracion, idEnvio);
 
     goBack();
   }
@@ -46,6 +49,20 @@ public class Pago {
   private static void goBack() {
     Globals.clearViews();
     Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta());
+  }
+
+  /**
+   * Obtiene la información que debería tener la factura.
+   * 
+   * @param envio Contiene los datos relacionados al envio.
+   */
+  private static void parseNumeracion(model.RegistrarEnvio envio) {
+    numeracion = "";
+    List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();
+
+    for (int i = 0; i < p.size(); i++) {
+      numeracion += (p.get(i).descripcion + " - " + (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3) + "\n");
+    }
   }
 
   /**

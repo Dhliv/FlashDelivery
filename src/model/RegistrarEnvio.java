@@ -104,16 +104,12 @@ public class RegistrarEnvio {
     return paquetes;
   }
 
-  public Integer getCost(Integer peso, Integer volumen, Integer valor) { // añadir parametros int ciudadOrigen, int ciudadDestino
-    Integer cost = 0;
-
-    return cost;
+  public Integer getCost(Integer peso, Integer volumen) { // añadir parametros int ciudadOrigen, int ciudadDestino
+    return (int) (volumen * Pago.ValorCM3 + peso * Pago.ValorKG);
   }
 
   public Integer getTotal(Integer costo, Integer valor_declarado, Boolean seguro) {
-    Integer cost = 0;
-
-    return cost;
+    return (int) (costo + (int) (costo * Pago.IMPUESTO) + (seguro ? (valor_declarado * Pago.SEGURO) : 0.0));
   }
 
   // #---------------------------------------------------------------------------

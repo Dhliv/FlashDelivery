@@ -33,8 +33,7 @@ public class EmpleadoDAO {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (ins != null)
-                    ins.close();
+                if (ins != null) ins.close();
                 if (conexion != null) {
                     conexion.close();
                     Conexion.closeConnection();
@@ -57,7 +56,7 @@ public class EmpleadoDAO {
             conexion = Conexion.startConnection();
             sqlStatement = "SELECT * FROM empleado WHERE cedula = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
-            instruccion.setString(1, id+"");
+            instruccion.setString(1, id + "");
             rs = instruccion.executeQuery();
 
             if (rs.next()) {
@@ -72,8 +71,7 @@ public class EmpleadoDAO {
             System.out.println(e.toString());
         } finally {
             try {
-                if (instruccion != null)
-                    instruccion.close();
+                if (instruccion != null) instruccion.close();
                 if (conexion != null) {
                     conexion.close();
                     Conexion.closeConnection();
@@ -84,7 +82,6 @@ public class EmpleadoDAO {
         }
         return em;
     }
-
 
     public int borrarUsuario(int id) {
         Connection conexion = null;
@@ -103,8 +100,7 @@ public class EmpleadoDAO {
             // Do something ...
         } finally {
             try {
-                if (instrucciones != null)
-                    instrucciones.close();
+                if (instrucciones != null) instrucciones.close();
                 if (conexion != null) {
                     conexion.close();
                     Conexion.closeConnection();
@@ -116,4 +112,14 @@ public class EmpleadoDAO {
         return resultado;
     }
 
+    /**
+     * Actualiza los cambios del empleado identificado con una cedula a lo que haya
+     * en el objeto empleado.
+     * 
+     * @param cedula   del empleado a actualizar.
+     * @param empleado datos del empleado a actualizar.
+     */
+    public static void updateEmpleado(String cedula, Empleado empleado) {
+
+    }
 }

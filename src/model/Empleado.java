@@ -1,13 +1,15 @@
 package model;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+
+import utilities.Globals;
 
 public class Empleado implements Entity {
     private String cedula;
     private String nombres, apellidos, rol, direccion, telefono;
     private LocalDate birthdate;
-    private int sede;
+    public int sede;
 
     public Empleado() {
     }
@@ -100,6 +102,31 @@ public class Empleado implements Entity {
 
     @Override public String toString() {
         return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede + '}';
+    }
+
+    /**
+     * Obtiene todos los empleados en la base de datos y los retorna.
+     * 
+     * @return lista de empleados existentes en la BD.
+     */
+    public static List<Empleado> getSedes() {
+        List<Empleado> sedes = Globals.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query 'sql'.
+        Globals.closeConnection();
+
+        return sedes;
+    }
+
+    /**
+     * Actualiza en la BD los datos del empleadoa los editados (la cedula no cambia
+     * nunca).
+     * 
+     * @param empleado informacion completa a actualizar (incluso sin cambios).
+     */
+    public static void updateEmpleado(Empleado empleado) {
+        String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol() + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
+                + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
+
+        Globals.db().execute(sql);
     }
 
 }
