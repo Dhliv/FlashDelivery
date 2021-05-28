@@ -12,7 +12,7 @@ public class Main extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        CreatePDF pdf = new CreatePDF();
+        CreatePDF pdf = new CreatePDF("");
         pdf.pdfCreate();
         /*
         Globals.init(this);

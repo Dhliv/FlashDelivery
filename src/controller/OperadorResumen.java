@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -47,14 +49,14 @@ public class OperadorResumen {
    * Iniciliaza los caomponentes gráficos con los datos del cliente y los costos
    * de su envío.
    */
-  public void initialize() {
+  public void initialize() throws IOException {
     chargeInformation();
   }
 
   /**
    * Carga la información relacionada al envío en la interfaz grafica.
    */
-  public void chargeInformation() {
+  public void chargeInformation() throws IOException {
     // Actualiza los datos en pantalla.
     lblCedulaR.setText(lblCedulaR.getText() + ": " + envio.getRemitente().cedula);
     lblNameR.setText(lblNameR.getText() + ": " + envio.getRemitente().nombre);

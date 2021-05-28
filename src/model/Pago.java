@@ -1,17 +1,19 @@
 package model;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
 import controller.OperadorConsulta;
+import utilities.CreatePDF;
 import utilities.Globals;
 
 public class Pago {
   private static Integer total; // Almacena el costo total del envío.
   private static Integer impuesto; // Almacena el impuesto del envío.
   private static Integer seguro; // Almacena el valor del seguro del envío.
-  private static String numeracion; // Lista las descripciones de los paquetes.
+  private static String numeracion;
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
@@ -21,7 +23,7 @@ public class Pago {
    * Inicializa los valores del total e impuesto del envio.
    * @param envio Contiene los datos relacionados al envio.
    */
-  public static void initialize(RegistrarEnvio envio) {
+  public static void initialize(RegistrarEnvio envio) throws IOException {
     calcularTotal(envio);
     parseNumeracion(envio);
   }
@@ -38,7 +40,6 @@ public class Pago {
 
     Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     Paquetes.createPaquetes(envio.getPaquetes(), idEnvio);
-    Facturas.createFactura(DATE, numeracion, idEnvio);
 
     goBack();
   }
@@ -56,13 +57,18 @@ public class Pago {
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  private static void parseNumeracion(model.RegistrarEnvio envio) {
+  private static void parseNumeracion(model.RegistrarEnvio envio) throws IOException {
     numeracion = "";
-    List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();
+    List<model.RegistrarEnvio.Paquete> ps = envio.getPaquetes();
+    model.RegistrarEnvio.Paquete p;
 
-    for (int i = 0; i < p.size(); i++) {
-      numeracion += (p.get(i).descripcion + " - " + (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3) + "\n");
+    for (int i = 0; i < ps.size(); i++) {
+      p = ps.get(i);
+      numeracion += (p.descripcion + " - " + (p.peso * ValorKG + p.volumen.volumen() * ValorCM3) + "\n");
     }
+
+    CreatePDF pdf = new CreatePDF(numeracion);
+    pdf.pdfCreate();
   }
 
   /**

@@ -38,6 +38,7 @@ public class RegistrarEnvio {
 
     private int selectedP; // Índice de la fila seleccionada en la tabla de paquetes
     private boolean modify; // Boolean que indica si se está modificando un paquete o no
+
     // Componentes gráficos de la ventana de registro paquetes
     @FXML private Button btRegistrarEnvios; //
     @FXML private Button atrasPaquete; // Botón para devolverse a la vista de clientes
