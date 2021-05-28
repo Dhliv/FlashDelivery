@@ -11,15 +11,14 @@ public class CreatePDF {
     PDDocument document = new PDDocument();
     PDPage page = new PDPage();
     document.addPage(page);
-    FacturaContenido factura = new FacturaContenido(document,page);
+    FacturaContenido factura = new FacturaContenido(document, page);
     factura.crearFactura();
 
-    
-    document.save(urlFactura(document));
+    document.save(urlFactura());
     document.close();
   }
 
-  public String urlFactura(PDDocument document) throws IOException {
+  public String urlFactura() throws IOException {
     String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura.pdf";
     File f = new File(curDir);
     f.delete();
