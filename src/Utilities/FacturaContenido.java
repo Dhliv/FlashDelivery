@@ -29,8 +29,6 @@ public class FacturaContenido {
    * @throws IOException Sino no me deja compilar :c
    */
   public void crearFactura() throws IOException {
-    contenido = "asdasdasd\nasdhasdhjasdkjhasdkjhasd\nkjhsdakjh\n";
-
     PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0));
     contentStream.beginText();
     contentStream.newLineAtOffset(25, 700);

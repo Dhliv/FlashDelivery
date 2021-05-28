@@ -12,18 +12,14 @@ public class Main extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        CreatePDF pdf = new CreatePDF("");
-        pdf.pdfCreate();
-        /*
+
+        // CreatePDF pdf = new CreatePDF("");
+        // pdf.pdfCreate();
+
         Globals.init(this);
         Globals.pantalla = stage;
         Ventana login = new Ventana("login", new Login());
         login.start(stage);
-        */
-
-        // # prueba para la vista operador.cliente
-        /*stage.setScene(Globals.loadScene("operadorOficina"));
-        stage.show();*/
     }
 
 }

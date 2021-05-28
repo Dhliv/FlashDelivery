@@ -64,7 +64,7 @@ public class Pago {
 
     for (int i = 0; i < ps.size(); i++) {
       p = ps.get(i);
-      numeracion += (p.descripcion + " - " + (p.peso * ValorKG + p.volumen.volumen() * ValorCM3) + "\n");
+      numeracion += (p.descripcion + " - " + ((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3)) + "\n");
     }
 
     CreatePDF pdf = new CreatePDF(numeracion);
