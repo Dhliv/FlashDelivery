@@ -1,8 +1,10 @@
 package utilities;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.pdfbox.pdmodel.*;
+
 public class CreatePDF {
 
   public void pdfCreate() throws IOException {
@@ -17,9 +19,11 @@ public class CreatePDF {
     document.close();
   }
 
-  public String urlFactura(PDDocument document) throws IOException{
-    String curDir = System.getProperty("user.dir");
-    curDir = curDir + "/src/resources/facturas/factura.pdf";
+  public String urlFactura(PDDocument document) throws IOException {
+    String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura.pdf";
+    File f = new File(curDir);
+    f.delete();
+
     return curDir;
   }
 }
