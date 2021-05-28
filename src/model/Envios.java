@@ -21,7 +21,7 @@ public class Envios {
     public String cliente_recogida;
   }
 
-  public static Integer createEnvio(Date fecha_registro, String metodo_pago, Integer costo, Boolean seguro, Integer impuesto_envio, String direccion_entrega, Integer id_sede, String emp_entrega, String cliente_envio,
+  public static Integer createEnvio(Date fecha_registro, String metodo_pago, Integer costo, Integer seguro, Integer impuesto_envio, String direccion_entrega, Integer id_sede, String emp_entrega, String cliente_envio,
       String cliente_recogida) {
     String sql = "insert into envio(fecha_registro, metodo_pago, costo, seguro, impuesto_envio, direccion_entrega, id_sede, emp_entrega, delivered, cliente_envio, cliente_recogida) values('" + fecha_registro + "', '" + metodo_pago + "', "
         + costo + ", " + seguro + ", " + impuesto_envio + ", '" + direccion_entrega + "', " + id_sede + ", '" + emp_entrega + "', FALSE, '" + cliente_envio + "', '" + cliente_recogida + "')";

@@ -36,7 +36,7 @@ public class Pago {
     String EMPLEADO = Globals.empleado.getCedula();
     Date DATE = Date.valueOf(LocalDate.now());
 
-    Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, Boolean.FALSE, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
+    Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     Paquetes.createPaquetes(envio.getPaquetes(), idEnvio);
     Facturas.createFactura(DATE, numeracion, idEnvio);
 
@@ -51,6 +51,11 @@ public class Pago {
     Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta());
   }
 
+  /**
+   * Obtiene la información que debería tener la factura.
+   * 
+   * @param envio Contiene los datos relacionados al envio.
+   */
   private static void parseNumeracion(model.RegistrarEnvio envio) {
     numeracion = "";
     List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();

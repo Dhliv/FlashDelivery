@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Pago;
 import model.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
@@ -147,8 +146,6 @@ public class RegistrarEnvio {
             Integer largo = Integer.parseInt(Largo.getText());
             Integer alto = Integer.parseInt(Alto.getText());
             Boolean seguro = Seguro.isSelected();
-            
-            
 
             Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, -1);
             list.add(new PaqueteT(p));
@@ -157,7 +154,6 @@ public class RegistrarEnvio {
             GeneralAlerts.showEmptyFieldAlert();
         }
 
-        
     }
 
     @FXML void editarPaquete(ActionEvent event) {

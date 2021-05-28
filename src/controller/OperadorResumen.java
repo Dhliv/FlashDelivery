@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.Pago;
+import utilities.GeneralAlerts;
 import utilities.Globals;
 
 /**
@@ -115,5 +116,6 @@ public class OperadorResumen {
    */
   @FXML void pagoEfectivo(ActionEvent event) {
     Pago.ejecutarPago(envio);
+    GeneralAlerts.showPagoExitoso();
   }
 }
