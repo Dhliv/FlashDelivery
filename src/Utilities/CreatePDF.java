@@ -41,11 +41,11 @@ public class CreatePDF {
   public String urlFactura() throws IOException {
     //TODO AÑADIR IDENTIFICADOR A LA FACTURA
     String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura.pdf";
-    int repeat = 0; //Veces que se ha intentado cambiar el nombre
+    int repeat = 1; //Veces que se ha intentado cambiar el nombre
     
     //SI EXISTE SE LE AGREGA UN VALOR ENTRE PARENTESIS PARA GUARDAR EL NUEVO ARCHIVO
     while((new File(curDir)).exists()){
-      if(repeat > 0) curDir = curDir.substring(0,curDir.length()-6) + Integer.toString(repeat) + ").pdf";
+      if(repeat > 1) curDir = curDir.substring(0,curDir.length()-6) + Integer.toString(repeat) + ").pdf";
       else curDir = curDir.substring(0,curDir.length()-4) + "(1).pdf";
       repeat++;
       
