@@ -50,6 +50,7 @@ public class PDFTableGenerator {
     drawColumns();
     drawColor(document);
     addText(content);
+    
   }
 
   public static void drawColor(PDDocument document) throws IOException{
