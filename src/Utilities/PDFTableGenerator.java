@@ -1,74 +1,101 @@
 package utilities;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import org.apache.pdfbox.pdmodel.*;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
+/**
+ * Genera una tabla en un pdf
+ */
 public class PDFTableGenerator {
-  /**
-   * @param page
-   * @param contentStream
-   * @param y             the y-coordinate of the first row
-   * @param margin        the padding on left and right of table
-   * @param content       a 2d array containing the table data
-   * @throws IOException
-   */
-  public static void drawTable(PDPage page, PDPageContentStream contentStream, float y, float margin, String[][] content) throws IOException {
-    final int rows = content.length;
-    final int cols = content[0].length;
-    final float rowHeight = 20f;
-    final float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
-    final float tableHeight = rowHeight * rows;
-    final float colWidth = tableWidth / (float) cols;
-    final float cellMargin = 5f;
 
-    // draw the rows
-    float nexty = y;
+  private static PDImageXObject pdImage;            //Imagen de una linea negra
+  private static final float WIDTHLASTCOL = 50;     // Ancho de la ultima columna
+  private static final int MAXLENGTHSTRING = 90;  //Maximo numero de caracteres que puede ocupar una cadena en la tabla.
+  private static int rows;
+  private static float rowHeight;
+  private static float tableWidth;                  // Ancho de la tabla
+  private static float tableHeight;                 // Largo de la tabla
+  private static float cellMargin;                  //
+  private static float marginWidth;                 //Grosor de los bordes
+  private static float margin;                      // Espacio en blanco desde el margen de la izquierda/derecha.
+  private static float yFirstCol;                   // Coordenada y de la primera fila de la tabla.
+  private static PDPageContentStream contentStream; //contentStream del PDF
+
+  public static void init(PDDocument document, float margen, float y, String[][] content, PDPageContentStream cs) throws IOException{
+    margin = margen;
+    yFirstCol = y;
+    rows = content.length;
+    rowHeight = 20f;
+    tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
+    tableHeight = rowHeight * rows;
+    cellMargin = 5f;
+    marginWidth = 0.4f;
+    contentStream = cs;
+    pdImage = PDImageXObject.createFromFile("src/resources/images/blackLine.png", document);
+  }
+  
+  /**
+   * 
+   * @param document PDF en donde se insertará la tabla.
+   * @param cs ContentStream del PDF.
+   * @param content Contenido de la tabla.
+   * @param margen Separación entre la tabla y el borde izquierdo de la página.
+   * @param y Coordenada y de la primer fila.
+   */
+  public static void drawTable(PDDocument document, PDPageContentStream cs, String[][] content, float margen, float y) throws IOException {
+    init(document, margen, y, content, cs);
+    drawRow();
+    drawColumns();
+    addText(content);
+  }
+
+  /**
+   * Dibuja las lineas que separan las columnas
+   */
+  public static void drawColumns() throws IOException{
+    contentStream.drawImage(pdImage, margin, yFirstCol - tableHeight, marginWidth, tableHeight + marginWidth);
+    contentStream.drawImage(pdImage, tableWidth + margin - WIDTHLASTCOL , yFirstCol - tableHeight, marginWidth, tableHeight + marginWidth);
+    contentStream.drawImage(pdImage, tableWidth + margin, yFirstCol - tableHeight, marginWidth, tableHeight + marginWidth);
+  }
+
+  /**
+   * Dibuja las lineas que separan las filas
+   */
+  public static void drawRow() throws IOException{
+    float nexty = yFirstCol;
     for (int i = 0; i <= rows; i++) {
-      contentStream.addRect(margin, nexty, margin + tableWidth, nexty);
+      contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
       nexty -= rowHeight;
     }
+  }
 
-    // draw the columns
-    float nextx = margin;
-    for (int i = 0; i <= cols; i++) {
-      contentStream.addRect(nextx, y, nextx, y - tableHeight);
-      nextx += colWidth;
-    }
+  public static String parseText(String s){
+    s = GeneralString.removeNewLine(s);
+    s = GeneralString.cutString(s,MAXLENGTHSTRING);
+    return s;
+  }
 
-    // now add the text
-    contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-
+  /**
+   * 
+   * @param content Texto que se añade en la tabla
+   */
+  public static void addText(String[][] content) throws IOException{
     float textx = margin + cellMargin;
-    float texty = y - 15;
+    float texty = yFirstCol - 15;
+    String text = "";
     for (int i = 0; i < content.length; i++) {
       for (int j = 0; j < content[i].length; j++) {
-        String text = content[i][j];
+        text = parseText(content[i][j]);
         contentStream.beginText();
         contentStream.newLineAtOffset(textx, texty);
         contentStream.showText(text);
         contentStream.endText();
-        textx += colWidth;
+        textx += (tableWidth - WIDTHLASTCOL);
       }
       texty -= rowHeight;
       textx = margin + cellMargin;
     }
-  }
-
-  public static void main(String[] args) throws IOException {
-    PDDocument doc = new PDDocument();
-    PDPage page = new PDPage();
-    doc.addPage(page);
-
-    PDPageContentStream contentStream = new PDPageContentStream(doc, page);
-
-    String[][] content = { { "a", "b", "1" }, { "c", "d", "2" }, { "e", "f", "3" }, { "g", "h", "4" }, { "i", "j", "5" } };
-
-    drawTable(page, contentStream, 700, 100, content);
-    contentStream.close();
-    doc.save("test.pdf");
   }
 
 }

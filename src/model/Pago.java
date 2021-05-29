@@ -13,7 +13,7 @@ public class Pago {
   private static Integer total; // Almacena el costo total del envío.
   private static Integer impuesto; // Almacena el impuesto del envío.
   private static Integer seguro; // Almacena el valor del seguro del envío.
-  private static String numeracion;
+  private static String[][] numeracion;
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
@@ -58,13 +58,16 @@ public class Pago {
    * @param envio Contiene los datos relacionados al envio.
    */
   private static void parseNumeracion(model.RegistrarEnvio envio) throws IOException {
-    numeracion = "";
     List<model.RegistrarEnvio.Paquete> ps = envio.getPaquetes();
     model.RegistrarEnvio.Paquete p;
+    numeracion = new String[ps.size() + 1][2];
+    numeracion[0][0] = "Descripción";
+    numeracion[0][1] = "Valor";
 
     for (int i = 0; i < ps.size(); i++) {
       p = ps.get(i);
-      numeracion += (p.descripcion + " - " + ((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3)) + "\n");
+      numeracion[i + 1][0] = p.descripcion;
+      numeracion[i + 1][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
     }
 
     CreatePDF pdf = new CreatePDF(numeracion);

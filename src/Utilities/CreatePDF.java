@@ -7,14 +7,14 @@ import org.apache.pdfbox.pdmodel.*;
 
 public class CreatePDF {
 
-  String infoFact; // INFORMACION QUE DEBE IR ESCRITA EN LA FACTURA.
+  String[][] infoPaq; // INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
 
   /**
-   * INFORMACION QUE DEBE IR ESCRITA EN LA FACTURA.
-   * @param infoFact
+   * INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
+   * @param infoPaq
    */
-  public CreatePDF(String infoFact) {
-    this.infoFact = infoFact;
+  public CreatePDF(String[][] infoPaq) {
+    this.infoPaq = infoPaq;
   }
 
   /**
@@ -26,7 +26,7 @@ public class CreatePDF {
     PDDocument document = new PDDocument();
     PDPage page = new PDPage();
     document.addPage(page);
-    FacturaContenido factura = new FacturaContenido(document, page, infoFact);
+    FacturaContenido factura = new FacturaContenido(document, page, infoPaq);
     factura.crearFactura();
 
     document.save(urlFactura());
@@ -39,9 +39,10 @@ public class CreatePDF {
    * @throws IOException
    */
   public String urlFactura() throws IOException {
+    //TODO ANTES DE CREAR, BORRAR EL ANTERIOR O CAMBIAR POR nombreArchivo.pdf (n)
     String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura.pdf";
     File f = new File(curDir);
-    f.delete();
+    if(f.exists()) f.delete();
 
     return curDir;
   }
