@@ -2,6 +2,7 @@ package utilities;
 
 import java.io.IOException;
 import org.apache.pdfbox.pdmodel.*;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 /**
@@ -47,7 +48,14 @@ public class PDFTableGenerator {
     init(document, margen, y, content, cs);
     drawRow();
     drawColumns();
+    drawColor(document);
     addText(content);
+  }
+
+  public static void drawColor(PDDocument document) throws IOException{
+    PDImageXObject image = PDImageXObject.createFromFile("src/resources/images/orangeLine.PNG", document);
+    float firstCol = yFirstCol-(rows-1)*rowHeight;
+    contentStream.drawImage(image, margin, firstCol, tableWidth+marginWidth, rowHeight);
   }
 
   /**
@@ -86,8 +94,12 @@ public class PDFTableGenerator {
     String text = "";
     for (int i = 0; i < content.length; i++) {
       for (int j = 0; j < content[i].length; j++) {
+
+       
         text = parseText(content[i][j]);
         contentStream.beginText();
+         if(i == 0) contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+         else contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
         contentStream.newLineAtOffset(textx, texty);
         contentStream.showText(text);
         contentStream.endText();
