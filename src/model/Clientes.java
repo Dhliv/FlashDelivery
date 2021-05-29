@@ -15,6 +15,8 @@ public class Clientes {
     public Boolean existInDB;
   }
 
+  
+
   /**
    * Registra a un nuevo cliente en la base de datos.
    * 

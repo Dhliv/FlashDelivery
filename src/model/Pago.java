@@ -11,6 +11,7 @@ import utilities.Globals;
 
 public class Pago {
   private static Integer total; // Almacena el costo total del envío.
+  private static Integer subTotal; // Almacena el subtotal del envío.
   private static Integer impuesto; // Almacena el impuesto del envío.
   private static Integer seguro; // Almacena el valor del seguro del envío.
   private static String[][] numeracion;
@@ -25,7 +26,19 @@ public class Pago {
    */
   public static void initialize(RegistrarEnvio envio) throws IOException {
     calcularTotal(envio);
-    parseNumeracion(envio);
+    parsePaquetes(envio);
+    parseCliente(envio.getRemitente); //remitente
+    parseCliente(envio.getDestinatario); //destinatario
+    parsePago();
+  }
+
+  public static String[] parsePago(){
+    String[] pago = new String[4];
+    pago[0] = Integer.toString(getTotal());
+    pago[1] = Integer.toString(getSeguro());
+    pago[2] = Integer.toString(getImpuesto());
+    pago[3] = Integer.toString(getSubTotal());
+    return pago;
   }
 
   /**
@@ -52,12 +65,23 @@ public class Pago {
     Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta());
   }
 
+  private static String[] parseCliente(Cliente cliente){
+    
+    String[] numeracionCliente = new String[5];
+    numeracionCliente[0] = cliente.nombre;
+    numeracionCliente[1] = cliente.cedula;
+    numeracionCliente[2] = cliente.ciudad;
+    numeracionCliente[3] = cliente.direccion;
+    numeracionCliente[4] = cliente.telefono;
+    return numeracionCliente;
+  }
+
   /**
-   * Obtiene la información que debería tener la factura.
+   * Obtiene la información de los paquetes que se debe mostrar en la factura.
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  private static void parseNumeracion(model.RegistrarEnvio envio) throws IOException {
+  private static String[][] parsePaquetes(model.RegistrarEnvio envio) throws IOException {
     List<model.RegistrarEnvio.Paquete> ps = envio.getPaquetes();
     model.RegistrarEnvio.Paquete p;
     numeracion = new String[ps.size() + 1][2];
@@ -70,8 +94,7 @@ public class Pago {
       numeracion[i + 1][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
     }
 
-    CreatePDF pdf = new CreatePDF(numeracion);
-    pdf.pdfCreate();
+    return numeracion;
   }
 
 
@@ -113,8 +136,6 @@ public class Pago {
     return costo;
   }
 
-
-
   /**
    * Calcula el costo total del envío.
    * 
@@ -122,20 +143,19 @@ public class Pago {
    */
   private static void calcularTotal(model.RegistrarEnvio envio) {
     List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();
-    costo = calcularCosto(p);
 
-    total = (int)(calcularImpuesto(costo) + costo + calcularSeguro(p));
+    subtotal = (int)calcularCosto(p);
+    impuesto = (int)calcularImpuesto(subtotal);
+    seguro = (int)calcularSeguro(p);
+
+    total = subTotal+impuesto+seguro;
   }
 
-  public static Integer getTotal() {
-    return total;
-  }
+  public static Integer getTotal() {return total;}
 
-  public static Integer getImpuesto() {
-    return impuesto;
-  }
+  public static Integer getSubtotal() {return subTotal;}
 
-  public static Integer getSeguro() {
-    return seguro;
-  }
+  public static Integer getImpuesto() {return impuesto;}
+
+  public static Integer getSeguro() {return seguro;}
 }

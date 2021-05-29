@@ -5,7 +5,8 @@ import utilities.Globals;
 import utilities.Ventana;
 import utilities.CreatePDF;
 
-public class Main extends Application {
+public class Main extends Application 
+{
     public static void main(String[] args) {
         System.getProperties().setProperty("org.jooq.no-logo", "true"); // no mostrar logo de jOOQ
         launch(args);
@@ -14,7 +15,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         String[][] contenido = {{"a","b"},{"c","d"}};
-        CreatePDF pdf = new CreatePDF(contenido);
+        String[] extra = {"a"};
+        CreatePDF pdf = new CreatePDF(contenido, extra, extra, extra);
         pdf.pdfCreate();
         
         /*
