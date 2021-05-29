@@ -74,30 +74,57 @@ public class Pago {
     pdf.pdfCreate();
   }
 
+
+  /**
+   * Calcula el impuesto de un envío.
+   * @param costo Subtotal del envio.
+   * @return Impuesto correspondiente a pagar.
+   */
+  private static double calcularImpuesto(double costo){
+    return (costo * IMPUESTO);
+  }
+
+  /**
+   * Calcula el valor del seguro de un envío con base en los paquetes registrados.
+   * @param p Datos relacionados a los paquetes del envio.
+   * @return Valor del seguro a pagar.
+   */
+  private static double calcularSeguro(List<model.RegistrarEnvio.Paquete> p){
+    double seguro = 0; //Valor del seguro a pagar por el paquete
+    for (int i = 0; i < p.size(); i++) {
+      if (p.get(i).seguro) {
+        seguro += (p.get(i).valor_declarado * SEGURO);
+      }
+    }
+    return seguro;
+  }
+
+  /**
+   * Calcula el costo de un envío con base en los paquetes registrados.
+   * @param p Datos relacionados a los paquetes del envio.
+   * @return Subtotal a pagar en el envío.
+   */
+  private static double calcularCosto(List<model.RegistrarEnvio.Paquete> p){
+    double costo = 0;
+    for (int i = 0; i < p.size(); i++) {
+      costo += (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3);
+    }
+
+    return costo;
+  }
+
+
+
   /**
    * Calcula el costo total del envío.
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
   private static void calcularTotal(model.RegistrarEnvio envio) {
-    total = 0;
-    seguro = 0;
-    double c = 0.0;
-    double s = 0.0;
-    Integer costo = 0;
     List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();
+    costo = calcularCosto(p);
 
-    for (int i = 0; i < p.size(); i++) {
-      if (p.get(i).seguro) {
-        s += (p.get(i).valor_declarado * SEGURO);
-      }
-      c += (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3);
-    }
-
-    seguro = (int) s;
-    costo = (int) c;
-    impuesto = (int) (costo * IMPUESTO);
-    total = impuesto + costo + seguro;
+    total = (int)(calcularImpuesto(costo) + costo + calcularSeguro(p));
   }
 
   public static Integer getTotal() {

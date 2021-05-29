@@ -13,14 +13,16 @@ public class Main extends Application {
 
     public void start(Stage stage) throws Exception {
 
-        //CreatePDF pdf = new CreatePDF("");
-        //pdf.pdfCreate();
+        String[][] contenido = {{"a","b"},{"c","d"}};
+        CreatePDF pdf = new CreatePDF(contenido);
+        pdf.pdfCreate();
         
+        /*
         Globals.init(this);
         Globals.pantalla = stage;
         Ventana login = new Ventana("login", new Login());
         login.start(stage);
-        
+        */
     }
 
 }

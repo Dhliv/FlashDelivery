@@ -39,10 +39,17 @@ public class CreatePDF {
    * @throws IOException
    */
   public String urlFactura() throws IOException {
-    //TODO ANTES DE CREAR, BORRAR EL ANTERIOR O CAMBIAR POR nombreArchivo.pdf (n)
+    //TODO AÑADIR IDENTIFICADOR A LA FACTURA
     String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura.pdf";
-    File f = new File(curDir);
-    if(f.exists()) f.delete();
+    int repeat = 0; //Veces que se ha intentado cambiar el nombre
+    
+    //SI EXISTE SE LE AGREGA UN VALOR ENTRE PARENTESIS PARA GUARDAR EL NUEVO ARCHIVO
+    while((new File(curDir)).exists()){
+      if(repeat > 0) curDir = curDir.substring(0,curDir.length()-6) + Integer.toString(repeat) + ").pdf";
+      else curDir = curDir.substring(0,curDir.length()-4) + "(1).pdf";
+      repeat++;
+      
+    }
 
     return curDir;
   }
