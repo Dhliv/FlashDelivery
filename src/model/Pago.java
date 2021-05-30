@@ -28,11 +28,12 @@ public class Pago {
    */
   public static void initialize(RegistrarEnvio envio) throws IOException {
     calcularTotal(envio);
-    
+    date = Date.valueOf(LocalDate.now());
     CreatePDF pdf = new CreatePDF(parsePaquetes(envio),
                         parseCliente(envio.getRemitente()),
                         parseCliente(envio.getDestinatario()),
                         parsePago());
+    
     pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
 
@@ -53,7 +54,6 @@ public class Pago {
   public static int getIdEnvio(RegistrarEnvio envio) {
     Integer SEDE = Globals.empleado.getSede();
     String EMPLEADO = Globals.empleado.getCedula();
-    date = Date.valueOf(LocalDate.now());
 
     Integer idEnvio = Envios.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     
