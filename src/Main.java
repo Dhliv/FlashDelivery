@@ -1,6 +1,10 @@
+import java.sql.Date;
+import java.time.LocalDate;
+
 import controller.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import utilities.CreatePDF;
 import utilities.Globals;
 import utilities.Ventana;
 
@@ -15,15 +19,18 @@ public class Main extends Application
 
 
     public void start(Stage stage) throws Exception {
-        String[][] infoPaq = {{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"}}; // INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
-        String[] infoDest = {"Nombre","Cedula","Direccion","Telefono", "Email"};  //INFORMACION DEL CLIENTE DESTINATARIO
-        String[] infoPago = {Date.valueOf(LocalDate.now()).toString(),"160000","150","27000","135000"};  //INFORMACION DEL PAGO
-        CreatePDF pdf = new CreatePDF(infoPaq,infoDest,infoDest, infoPago);
-        pdf.pdfCreate();
-        // Globals.init(this);
-        // Globals.pantalla = stage;
-        // Ventana login = new Ventana("login", new Login());
-        // login.start(stage);
+        
+        // String[][] infoPaq = {{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"},{"a","b"}}; // INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
+        // String[] infoDest = {"Nombre","Cedula","Direccion","Telefono", "Email"};  //INFORMACION DEL CLIENTE DESTINATARIO
+        // String[] infoPago = {Date.valueOf(LocalDate.now()).toString(),"160000","150","27000","135000"};  //INFORMACION DEL PAGO
+        // CreatePDF pdf = new CreatePDF(infoPaq,infoDest,infoDest, infoPago);
+        // pdf.pdfCreate();
+
+
+        Globals.init(this);
+        Globals.pantalla = stage;
+        Ventana login = new Ventana("login", new Login());
+        login.start(stage);
     }
 
 }
