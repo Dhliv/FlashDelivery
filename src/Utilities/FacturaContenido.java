@@ -1,6 +1,10 @@
 package utilities;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.io.IOException;
+import java.io.InputStream;
+
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.util.Matrix;
 
@@ -37,6 +41,8 @@ public class FacturaContenido {
    */
   public void crearFactura() throws IOException {
     PDPage page = document.getPage(0);
+    PDPage page2 = document.getPage(1);
+    
     //HAbilita la edición de un PDF
     PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true);
     //Pone el contenido en la orientación correcta (UP)
@@ -50,11 +56,15 @@ public class FacturaContenido {
     System.out.println(infoPago[0]);
     System.out.println(idPDF);
 
+
     PDFBillGenerator.drawBillInfo(document, contentStream, infoPago[0], idPDF);
     PDFClientGenerator.drawClient(document,contentStream, infoRem, 480, XREM);
     PDFClientGenerator.drawClient(document,contentStream, infoDest, 480, XDEST);
     PDFTableGenerator.drawTable(document, contentStream, infoPaq, XTABLE, 450);
+    PDFBillGenerator.drawPayInfo(document, contentStream, Arrays.copyOfRange(infoPago,1,infoPago.length), infoPaq.length);
     contentStream.close();
+
+    
   }
 
 }

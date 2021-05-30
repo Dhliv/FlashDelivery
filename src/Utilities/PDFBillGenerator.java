@@ -5,6 +5,11 @@ import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 public class PDFBillGenerator {
 
+  public static void drawPayInfo(PDDocument document, PDPageContentStream contentStream, String[] infoPago, int row){
+    
+  }
+
+
   /**
    * Dibuja los datos propios de la factura en el PDF
    * @param date La fecha en la que se realiza el pago en formato String

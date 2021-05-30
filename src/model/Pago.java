@@ -34,11 +34,12 @@ public class Pago {
     EMPLEADO = Globals.empleado.getCedula();
     date = Date.valueOf(LocalDate.now());
     calcularTotal(envio);
-    
+    date = Date.valueOf(LocalDate.now());
     CreatePDF pdf = new CreatePDF(parsePaquetes(envio),
                         parseCliente(envio.getRemitente()),
                         parseCliente(envio.getDestinatario()),
                         parsePago());
+    
     pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
 
