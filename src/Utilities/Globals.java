@@ -5,23 +5,15 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Empleado;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.UnaryOperator;
-
-import javax.swing.event.ChangeListener;
-
 import java.util.HashMap;
-
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
@@ -34,7 +26,6 @@ public class Globals {
     public static Stage pantalla;
     public static Empleado empleado;
     private static Ventana ventana;
-    private static List<model.Sedes.Sede> sedes;
     private static Connection conn;
     private static Map<String, Parent> views;
     private static model.RegistrarEnvio envio;
@@ -126,9 +117,6 @@ public class Globals {
             e.printStackTrace();
         }
         conn = null;
-        /*
-         * try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-         */
     }
 
     /**

@@ -1,13 +1,8 @@
-import java.sql.Date;
-import java.time.LocalDate;
-
 import controller.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utilities.Globals;
 import utilities.Ventana;
-import utilities.CreatePDF;
-import utilities.PDFCreateExtraFunctions;
 
 public class Main extends Application 
 {
