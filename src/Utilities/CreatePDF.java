@@ -32,13 +32,13 @@ public class CreatePDF {
    * formato esperado para la factura.
    * @throws IOException
    */
-  public void pdfCreate(String namePDF) throws IOException {
+  public void pdfCreate(String idPDF) throws IOException {
     File file = new File("src/resources/templates/template.pdf");
     PDDocument document = Loader.loadPDF(file);   
-    FacturaContenido factura = new FacturaContenido(document, infoPaq, infoRem, infoDest, infoPago);
+    FacturaContenido factura = new FacturaContenido(document, infoPaq, infoRem, infoDest, infoPago, idPDF);
     factura.crearFactura();
 
-    document.save(urlFactura(namePDF));
+    document.save(urlFactura(idPDF));
     document.close();
   }
 

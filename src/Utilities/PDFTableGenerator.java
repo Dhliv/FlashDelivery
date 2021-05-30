@@ -1,6 +1,8 @@
 package utilities;
 
 import java.io.IOException;
+import java.net.ConnectException;
+
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
@@ -50,14 +52,22 @@ public class PDFTableGenerator {
     init(document, margen, y, content, cs);
     
     
-    drawColor("orange", 1);
+    drawCellBackgroundColor("orange", 1);
+    drawDecoration(1, content.length);
     addText(content);
     drawColumns();
-    drawRow();
+    drawRow(0);
+    drawRow(content.length);
     
   }
 
-  public static void drawColor(String color, int row) throws IOException{
+  public static void drawDecoration(int fRow, int lastRows) throws IOException{
+    for (int i = fRow; i < lastRows; i++) {
+      if(i%2 == 0) drawCellBackgroundColor("gray", i+1);
+    }
+  }
+
+  public static void drawCellBackgroundColor(String color, int row) throws IOException{
     PDImageXObject image = PDImageXObject.createFromFile("src/resources/images/"+ color +".png", document);
     float firstCol = yFirstCol-rowHeight*row;
     contentStream.drawImage(image, margin, firstCol, tableWidth+marginWidth, rowHeight);
@@ -72,13 +82,30 @@ public class PDFTableGenerator {
     contentStream.drawImage(pdImage, tableWidth + margin, yFirstCol - tableHeight, marginWidth, tableHeight + marginWidth);
   }
 
+  public static void drawRow(int row) throws IOException{
+    contentStream.drawImage(pdImage, margin, (yFirstCol - row*rowHeight), tableWidth + marginWidth, marginWidth);
+  }
+
   /**
-   * Dibuja las lineas que separan las filas
+   * Dibuja las lineas seleccionadas
+   * @param row Array con las lineas que se dibujan
+   * @throws IOException
+   */
+  public static void drawRow(int[] row) throws IOException{
+    float nexty;
+    for (int i = 0; i < row.length; i++) {
+      nexty = yFirstCol - row[i]*rowHeight;
+      contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
+    }
+  }
+  /**
+   * Dibuja todas lineas que separan las filas.
+   * @throws IOException
    */
   public static void drawRow() throws IOException{
     float nexty = yFirstCol;
     for (int i = 0; i <= rows; i++) {
-      if(i == 0 || i == rows) contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
+      contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
       nexty -= rowHeight;
     }
   }
@@ -97,16 +124,18 @@ public class PDFTableGenerator {
     float textx = margin + cellMargin;
     float texty = yFirstCol - 15;
     String text = "";
+
     for (int i = 0; i < content.length; i++) {
-      if(i != 0 && i%2 == 0) drawColor("gray", i+1);
       for (int j = 0; j < content[i].length; j++) {       
         text = parseText(content[i][j]);
+
         contentStream.beginText();
-         if(i == 0) contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-         else contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-        contentStream.newLineAtOffset(textx, texty);
-        contentStream.showText(text);
+          if(i == 0)  contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+          else        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+          contentStream.newLineAtOffset(textx, texty);
+          contentStream.showText(text);
         contentStream.endText();
+
         textx += (tableWidth - WIDTHLASTCOL);
       }
       texty -= rowHeight;

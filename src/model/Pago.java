@@ -16,6 +16,7 @@ public class Pago {
   private static Integer impuesto; // Almacena el impuesto del envío.
   private static Integer seguro; // Almacena el valor del seguro del envío.
   private static String[][] numeracion;
+  private static Date date;
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
@@ -28,16 +29,20 @@ public class Pago {
   public static void initialize(RegistrarEnvio envio) throws IOException {
     calcularTotal(envio);
     
-    CreatePDF pdf = new CreatePDF(parsePaquetes(envio),parseCliente(envio.getRemitente()),parseCliente(envio.getDestinatario()),parsePago());
+    CreatePDF pdf = new CreatePDF(parsePaquetes(envio),
+                        parseCliente(envio.getRemitente()),
+                        parseCliente(envio.getDestinatario()),
+                        parsePago());
     pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
 
   public static String[] parsePago(){
-    String[] pago = new String[4];
-    pago[0] = Integer.toString(getTotal());
-    pago[1] = Integer.toString(getSeguro());
-    pago[2] = Integer.toString(getImpuesto());
-    pago[3] = Integer.toString(getSubTotal());
+    String[] pago = new String[5];
+    pago[0] = getDate().toString();
+    pago[1] = Integer.toString(getTotal());
+    pago[2] = Integer.toString(getSeguro());
+    pago[3] = Integer.toString(getImpuesto());
+    pago[4] = Integer.toString(getSubTotal());
     return pago;
   }
 
@@ -48,9 +53,9 @@ public class Pago {
   public static int getIdEnvio(RegistrarEnvio envio) {
     Integer SEDE = Globals.empleado.getSede();
     String EMPLEADO = Globals.empleado.getCedula();
-    Date DATE = Date.valueOf(LocalDate.now());
+    date = Date.valueOf(LocalDate.now());
 
-    Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
+    Integer idEnvio = Envios.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     
     return idEnvio;
   } 
@@ -166,4 +171,6 @@ public class Pago {
   public static Integer getImpuesto() {return impuesto;}
 
   public static Integer getSeguro() {return seguro;}
+
+  public static Date getDate() {return date;}
 }

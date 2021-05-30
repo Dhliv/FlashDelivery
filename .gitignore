@@ -3,4 +3,5 @@
 .project
 .classpath
 org.eclipse.*
-
+main.java
+*.pdf
