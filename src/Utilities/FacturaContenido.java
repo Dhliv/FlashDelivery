@@ -6,10 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.pdfbox.pdmodel.*;
+<<<<<<< HEAD
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.form.PDFormXObject;
+=======
+>>>>>>> 6bcd1fa8097e93c7f2f9052c5a5ff2d0fabb3db1
 import org.apache.pdfbox.util.Matrix;
 
 public class FacturaContenido {

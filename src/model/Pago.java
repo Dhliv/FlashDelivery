@@ -17,6 +17,9 @@ public class Pago {
   private static Integer seguro; // Almacena el valor del seguro del envío.
   private static String[][] numeracion;
   private static Date date;
+  private static Integer SEDE;
+  private static String EMPLEADO;
+
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
@@ -27,6 +30,9 @@ public class Pago {
    * @param envio Contiene los datos relacionados al envio.
    */
   public static void initialize(RegistrarEnvio envio) throws IOException {
+    SEDE = Globals.empleado.getSede();
+    EMPLEADO = Globals.empleado.getCedula();
+    date = Date.valueOf(LocalDate.now());
     calcularTotal(envio);
     date = Date.valueOf(LocalDate.now());
     CreatePDF pdf = new CreatePDF(parsePaquetes(envio),
@@ -52,11 +58,7 @@ public class Pago {
    * @param envio Contiene los datos relacionados al envio.
    */
   public static int getIdEnvio(RegistrarEnvio envio) {
-    Integer SEDE = Globals.empleado.getSede();
-    String EMPLEADO = Globals.empleado.getCedula();
-
     Integer idEnvio = Envios.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
-    
     return idEnvio;
   } 
 
