@@ -30,4 +30,26 @@ public class GeneralString {
     return s;
   }
 
+  /**
+   * Añade espacios al inicio del string para que todos tengan el mismo tamaño
+   * @param s Array de strings
+   * @return Array con todos los strings del mismo tamaño
+   */
+  public static String[] textToRight(String[] s){
+    Integer maxi = 0;
+    
+    //Encontrar la longitud maxima
+    for(int i=0; i<s.length; i++){
+      if(s[i].length() > maxi) maxi = s[i].length();
+    }
+
+    for(int i = 0; i < s.length; i++){
+      String aux = "";
+      for(int j = 0; j < maxi - s[i].length(); j++) aux += " ";
+      s[i] = aux + s[i];
+    }
+
+    return s;
+  }
+
 }

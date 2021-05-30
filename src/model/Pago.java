@@ -47,8 +47,8 @@ public class Pago {
     String[] pago = new String[5];
     pago[0] = getDate().toString();
     pago[1] = Integer.toString(getTotal());
-    pago[2] = Integer.toString(getSeguro());
-    pago[3] = Integer.toString(getImpuesto());
+    pago[2] = Integer.toString(getImpuesto());
+    pago[3] = Integer.toString(getSeguro());
     pago[4] = Integer.toString(getSubTotal());
     return pago;
   }

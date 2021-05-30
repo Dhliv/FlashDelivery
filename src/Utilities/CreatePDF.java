@@ -33,7 +33,7 @@ public class CreatePDF {
    * @throws IOException
    */
   public void pdfCreate(String idPDF) throws IOException {
-    File file = new File("src/resources/templates/template.pdf");
+    File file = new File("src/resources/templates/templatePDFFactura.pdf");
     PDDocument document = Loader.loadPDF(file);   
     FacturaContenido factura = new FacturaContenido(document, infoPaq, infoRem, infoDest, infoPago, idPDF);
     factura.crearFactura();

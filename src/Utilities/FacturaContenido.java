@@ -41,7 +41,6 @@ public class FacturaContenido {
    */
   public void crearFactura() throws IOException {
     PDPage page = document.getPage(0);
-    PDPage page2 = document.getPage(1);
     
     //HAbilita la edición de un PDF
     PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true);
@@ -52,16 +51,14 @@ public class FacturaContenido {
     final int XTABLE = 72; //Pocision X respecto a la izquierda de la tabla
     final int XREM = 92; //Pocision X respecto a la izquierda de la información del remitente
     final int XDEST = 302; //Pocision X respecto a la izquierda de la información del remitente
-    
-    System.out.println(infoPago[0]);
-    System.out.println(idPDF);
+    final float tableHeight = 20f*infoPaq.length;
 
 
     PDFBillGenerator.drawBillInfo(document, contentStream, infoPago[0], idPDF);
     PDFClientGenerator.drawClient(document,contentStream, infoRem, 480, XREM);
     PDFClientGenerator.drawClient(document,contentStream, infoDest, 480, XDEST);
     PDFTableGenerator.drawTable(document, contentStream, infoPaq, XTABLE, 450);
-    PDFBillGenerator.drawPayInfo(document, contentStream, Arrays.copyOfRange(infoPago,1,infoPago.length), infoPaq.length);
+    PDFBillGenerator.drawPayInfo(document, contentStream, Arrays.copyOfRange(infoPago,1,infoPago.length), tableHeight);
     contentStream.close();
 
     

@@ -37,7 +37,7 @@ public class PDFTableGenerator {
     cellMargin = 5f;
     marginWidth = 0.1f;
     contentStream = cs;
-    pdImage = PDImageXObject.createFromFile("src/resources/images/black.png", document);
+    pdImage = PDImageXObject.createFromFile("src/resources/images/darkGray.png", document);
   }
   
   /**
