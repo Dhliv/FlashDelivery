@@ -14,14 +14,6 @@ public class Main extends Application
     }
 
     public void start(Stage stage) throws Exception {
-
-        String[][] contenido = {{"a","b"},{"c","d"}, {"e","f"}, {"g","h"},{"a","b"},{"c","d"}, {"e","f"}, {"g","h"}};
-        String[] pago = {"Subtotal","Impuesto","Seguro","Total"};
-        String[] cliente = {"Alejandro Pergueza","1004680841","Transversal 4C #1608","3136639980","practica22correo@gmail.com"};
-        CreatePDF pdf = new CreatePDF(contenido, cliente, cliente, pago);
-        pdf.pdfCreate();
-
-        
         
         Globals.init(this);
         Globals.pantalla = stage;
