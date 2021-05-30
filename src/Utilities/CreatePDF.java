@@ -3,14 +3,15 @@ package utilities;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.*;
 
 public class CreatePDF {
 
-  String[][] infoPaq; // INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
-  String[] infoDest;  //INFORMACION DEL CLIENTE DESTINATARIO
-  String[] infoRem;   //INFORMACION DEL CLIENTE REMITENTE
-  String[] infoPago;  //INFORMACION DEL PAGO
+  private String[][] infoPaq; // INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
+  private String[] infoDest;  //INFORMACION DEL CLIENTE DESTINATARIO
+  private String[] infoRem;   //INFORMACION DEL CLIENTE REMITENTE
+  private String[] infoPago;  //INFORMACION DEL PAGO
 
   /**
    * INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
@@ -32,10 +33,9 @@ public class CreatePDF {
    * @throws IOException
    */
   public void pdfCreate(String namePDF) throws IOException {
-    PDDocument document = new PDDocument();
-    PDPage page = new PDPage();
-    document.addPage(page);
-    FacturaContenido factura = new FacturaContenido(document, page, infoPaq);
+    File file = new File("src/resources/templates/template.pdf");
+    PDDocument document = Loader.loadPDF(file);   
+    FacturaContenido factura = new FacturaContenido(document, infoPaq, infoRem, infoDest, infoPago);
     factura.crearFactura();
 
     document.save(urlFactura(namePDF));

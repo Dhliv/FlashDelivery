@@ -22,8 +22,10 @@ public class PDFTableGenerator {
   private static float margin;                      // Espacio en blanco desde el margen de la izquierda/derecha.
   private static float yFirstCol;                   // Coordenada y de la primera fila de la tabla.
   private static PDPageContentStream contentStream; //contentStream del PDF
+  private static PDDocument document;
 
-  public static void init(PDDocument document, float margen, float y, String[][] content, PDPageContentStream cs) throws IOException{
+  public static void init(PDDocument documento, float margen, float y, String[][] content, PDPageContentStream cs) throws IOException{
+    document = documento;
     margin = margen;
     yFirstCol = y;
     rows = content.length;
@@ -31,9 +33,9 @@ public class PDFTableGenerator {
     tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
     tableHeight = rowHeight * rows;
     cellMargin = 5f;
-    marginWidth = 0.4f;
+    marginWidth = 0.1f;
     contentStream = cs;
-    pdImage = PDImageXObject.createFromFile("src/resources/images/blackLine.png", document);
+    pdImage = PDImageXObject.createFromFile("src/resources/images/black.png", document);
   }
   
   /**
@@ -46,16 +48,18 @@ public class PDFTableGenerator {
    */
   public static void drawTable(PDDocument document, PDPageContentStream cs, String[][] content, float margen, float y) throws IOException {
     init(document, margen, y, content, cs);
-    drawRow();
-    drawColumns();
-    drawColor(document);
+    
+    
+    drawColor("orange", 1);
     addText(content);
+    drawColumns();
+    drawRow();
     
   }
 
-  public static void drawColor(PDDocument document) throws IOException{
-    PDImageXObject image = PDImageXObject.createFromFile("src/resources/images/orangeLine.PNG", document);
-    float firstCol = yFirstCol-rowHeight;
+  public static void drawColor(String color, int row) throws IOException{
+    PDImageXObject image = PDImageXObject.createFromFile("src/resources/images/"+ color +".png", document);
+    float firstCol = yFirstCol-rowHeight*row;
     contentStream.drawImage(image, margin, firstCol, tableWidth+marginWidth, rowHeight);
   }
 
@@ -74,7 +78,7 @@ public class PDFTableGenerator {
   public static void drawRow() throws IOException{
     float nexty = yFirstCol;
     for (int i = 0; i <= rows; i++) {
-      contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
+      if(i == 0 || i == rows) contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
       nexty -= rowHeight;
     }
   }
@@ -94,9 +98,8 @@ public class PDFTableGenerator {
     float texty = yFirstCol - 15;
     String text = "";
     for (int i = 0; i < content.length; i++) {
-      for (int j = 0; j < content[i].length; j++) {
-
-       
+      if(i != 0 && i%2 == 0) drawColor("gray", i+1);
+      for (int j = 0; j < content[i].length; j++) {       
         text = parseText(content[i][j]);
         contentStream.beginText();
          if(i == 0) contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
