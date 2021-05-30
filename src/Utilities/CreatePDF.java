@@ -31,25 +31,27 @@ public class CreatePDF {
    * formato esperado para la factura.
    * @throws IOException
    */
-  public void pdfCreate() throws IOException {
+  public void pdfCreate(String namePDF) throws IOException {
     PDDocument document = new PDDocument();
     PDPage page = new PDPage();
     document.addPage(page);
     FacturaContenido factura = new FacturaContenido(document, page, infoPaq);
     factura.crearFactura();
 
-    document.save(urlFactura());
+    document.save(urlFactura(namePDF));
     document.close();
   }
 
+  public void pdfCreate() throws IOException{pdfCreate("");}
+
   /**
-   * 
-   * @return
+   * Genera una url valida en donde se podrá guardar un archivo pdf.
+   * @param name Nombre del archivo pdf
+   * @return Direccion en donde se guarda el archivo pdf
    * @throws IOException
    */
-  public String urlFactura() throws IOException {
-    //TODO AÑADIR IDENTIFICADOR A LA FACTURA
-    String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura.pdf";
+  public String urlFactura(String name) throws IOException {
+    String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura"+ name +".pdf";
     int repeat = 1; //Veces que se ha intentado cambiar el nombre
     int lastPos = curDir.length()-4; //Ultima posicion antes de modificar el string
     //SI EXISTE SE LE AGREGA UN VALOR ENTRE PARENTESIS PARA GUARDAR EL NUEVO ARCHIVO

@@ -55,7 +55,7 @@ public class PDFTableGenerator {
 
   public static void drawColor(PDDocument document) throws IOException{
     PDImageXObject image = PDImageXObject.createFromFile("src/resources/images/orangeLine.PNG", document);
-    float firstCol = yFirstCol-(rows-1)*rowHeight;
+    float firstCol = yFirstCol-rowHeight;
     contentStream.drawImage(image, margin, firstCol, tableWidth+marginWidth, rowHeight);
   }
 

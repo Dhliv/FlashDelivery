@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import controller.OperadorConsulta;
+import model.Clientes.Cliente;
 import utilities.CreatePDF;
 import utilities.Globals;
 
@@ -26,10 +27,9 @@ public class Pago {
    */
   public static void initialize(RegistrarEnvio envio) throws IOException {
     calcularTotal(envio);
-    parsePaquetes(envio);
-    parseCliente(envio.getRemitente); //remitente
-    parseCliente(envio.getDestinatario); //destinatario
-    parsePago();
+    
+    CreatePDF pdf = new CreatePDF(parsePaquetes(envio),parseCliente(envio.getRemitente()),parseCliente(envio.getDestinatario()),parsePago());
+    pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
 
   public static String[] parsePago(){
@@ -42,18 +42,26 @@ public class Pago {
   }
 
   /**
-   * Ingresa los datos pertinentes a la base de datos, como los clientes, los
-   * paquetes y el envío.
+   * Genera el id del envío.
    * @param envio Contiene los datos relacionados al envio.
    */
-  public static void ejecutarPago(RegistrarEnvio envio) {
+  public static int getIdEnvio(RegistrarEnvio envio) {
     Integer SEDE = Globals.empleado.getSede();
     String EMPLEADO = Globals.empleado.getCedula();
     Date DATE = Date.valueOf(LocalDate.now());
 
     Integer idEnvio = Envios.createEnvio(DATE, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
-    Paquetes.createPaquetes(envio.getPaquetes(), idEnvio);
+    
+    return idEnvio;
+  } 
 
+  /**
+   * Ingresa los datos pertinentes a la base de datos, como los clientes, los
+   * paquetes y el envío.
+   * @param envio Contiene los datos relacionados al envio.
+   */
+  public static void ejecutarPago(RegistrarEnvio envio) {
+    Paquetes.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
     goBack();
   }
 
@@ -144,8 +152,8 @@ public class Pago {
   private static void calcularTotal(model.RegistrarEnvio envio) {
     List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();
 
-    subtotal = (int)calcularCosto(p);
-    impuesto = (int)calcularImpuesto(subtotal);
+    subTotal = (int)calcularCosto(p);
+    impuesto = (int)calcularImpuesto(subTotal);
     seguro = (int)calcularSeguro(p);
 
     total = subTotal+impuesto+seguro;
@@ -153,7 +161,7 @@ public class Pago {
 
   public static Integer getTotal() {return total;}
 
-  public static Integer getSubtotal() {return subTotal;}
+  public static Integer getSubTotal() {return subTotal;}
 
   public static Integer getImpuesto() {return impuesto;}
 

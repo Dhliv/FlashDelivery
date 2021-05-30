@@ -12,6 +12,5 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.*;
 
 public class PDFCreateExtraFunctions {
-  SignatureImageTextParameters textParameters = new SignatureImageTextParameters();
 
 }

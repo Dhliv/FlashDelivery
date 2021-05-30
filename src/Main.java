@@ -15,20 +15,18 @@ public class Main extends Application
 
     public void start(Stage stage) throws Exception {
 
-        // String[][] contenido = {{"a","b"},{"c","d"}};
-        // String[] extra = {"a"};
-        // CreatePDF pdf = new CreatePDF(contenido, extra, extra, extra);
-        // pdf.pdfCreate();
+        String[][] contenido = {{"a","b"},{"c","d"}, {"e","f"}, {"g","h"}};
+        String[] extra = {"a"};
+        CreatePDF pdf = new CreatePDF(contenido, extra, extra, extra);
+        pdf.pdfCreate();
 
-        PDFCreateExtraFunctions test = new PDFCreateExtraFunctions();
-        test.prepareSmallPdf();
         
-        /*
-        Globals.init(this);
-        Globals.pantalla = stage;
-        Ventana login = new Ventana("login", new Login());
-        login.start(stage);
-        */
+        
+        // Globals.init(this);
+        // Globals.pantalla = stage;
+        // Ventana login = new Ventana("login", new Login());
+        // login.start(stage);
+        
     }
 
 }

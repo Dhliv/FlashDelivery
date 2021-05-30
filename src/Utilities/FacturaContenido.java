@@ -33,7 +33,7 @@ public class FacturaContenido {
   public void crearFactura() throws IOException {
     PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0));
     contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-    pdfTableGenerator.drawTable(document, contentStream, contenido, 25, 50);
+    pdfTableGenerator.drawTable(document, contentStream, contenido, 25, 700);
     /*
     contentStream.beginText();
     contentStream.newLineAtOffset(25, 700);
