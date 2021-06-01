@@ -41,7 +41,6 @@ public class Main extends Application {
         Globals.pantalla = stage;
         Ventana login = new Ventana("login", new Login());
         login.start(stage);
-
     }
 
 }
