@@ -1,5 +1,7 @@
 package utilities;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.HashMap;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -73,13 +76,15 @@ public class Globals {
 
     /**
      * Carga vista desde FXML
+     * 
      * @param name    filename
      * @param control control a asignar a la vista
      * @return la vista
      */
     public static Parent loadView(String name, Object control) {
         FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-        if (control != null) loader.setController(control);
+        if (control != null)
+            loader.setController(control);
         Parent root = null;
         try {
             root = loader.load();
@@ -98,14 +103,23 @@ public class Globals {
     // #---------------------------------------------------------------------------
 
     public static DSLContext db() {
-        String url = "jdbc:postgresql://ec2-52-87-107-83.compute-1.amazonaws.com:5432/d622m7j3h054ts";
-        String usr = "ikwnggozhnxhvp";
-        String pwd = "a933d68a3c21b7b24a2e05104117b487091c7b880a72fe25f4ae721fadbbae9a";
+
         try {
+            Properties dbs = new Properties();
+            dbs.load(new FileReader("resources/db.properties"));
+            String url = dbs.getProperty("url");
+            String usr = dbs.getProperty("usr");
+            String pwd = dbs.getProperty("pwd");
             conn = DriverManager.getConnection(url, usr, pwd);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return DSL.using(conn, SQLDialect.POSTGRES);
     }
