@@ -12,11 +12,10 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
  */
 public class PDFTableGenerator {
 
-  private static PDImageXObject pdImage;            //Imagen de una linea negra
-  private static final float WIDTHLASTCOL = 50;     // Ancho de la ultima columna
-  private static final int MAXLENGTHSTRING = 90;  //Maximo numero de caracteres que puede ocupar una cadena en la tabla.
+  private static PDImageXObject pdImage;            //Imagen de una linea que delimita los limites de la tabla.
+  private static final float WIDTHLASTCOL = 85;     // Ancho de la ultima columna
   private static int rows;
-  private static float rowHeight;
+  private static float rowHeight;                   //Ancho de la casilla
   private static float tableWidth;                  // Ancho de la tabla
   private static float tableHeight;                 // Largo de la tabla
   private static float cellMargin;                  //
@@ -26,12 +25,12 @@ public class PDFTableGenerator {
   private static PDPageContentStream contentStream; //contentStream del PDF
   private static PDDocument document;
 
-  public static void init(PDDocument documento, float margen, float y, String[][] content, PDPageContentStream cs) throws IOException{
+  public static void init(PDDocument documento, float margen, float y, float rowH, String[][] content, PDPageContentStream cs) throws IOException{
     document = documento;
     margin = margen;
     yFirstCol = y;
     rows = content.length;
-    rowHeight = 20f;
+    rowHeight = rowH;
     tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
     tableHeight = rowHeight * rows;
     cellMargin = 5f;
@@ -46,10 +45,11 @@ public class PDFTableGenerator {
    * @param cs ContentStream del PDF.
    * @param content Contenido de la tabla.
    * @param margen Separación entre la tabla y el borde izquierdo de la página.
-   * @param y Coordenada y de la primer fila.
+   * @param yFirst Coordenada y de la primer fila.
+   * @param rowHeight Altura de las casillas
    */
-  public static void drawTable(PDDocument document, PDPageContentStream cs, String[][] content, float margen, float y) throws IOException {
-    init(document, margen, y, content, cs);
+  public static void drawTable(PDDocument document, PDPageContentStream cs, String[][] content, float margen, float yFirst, float rowHeight) throws IOException {
+    init(document, margen, yFirst, rowHeight, content, cs);
     
     
     drawCellBackgroundColor("orange", 1);
@@ -111,6 +111,7 @@ public class PDFTableGenerator {
   }
 
   public static String parseText(String s){
+    final int MAXLENGTHSTRING = 50;  //Maximo numero de caracteres que puede ocupar una cadena en la tabla.
     s = GeneralString.removeNewLine(s);
     s = GeneralString.cutString(s,MAXLENGTHSTRING);
     return s;
@@ -131,7 +132,7 @@ public class PDFTableGenerator {
 
         contentStream.beginText();
           if(i == 0)  contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-          else        contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+          else        contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
           contentStream.newLineAtOffset(textx, texty);
           contentStream.showText(text);
         contentStream.endText();
