@@ -11,11 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Empleado;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.HashMap;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -98,44 +95,6 @@ public class Globals {
         return new Scene(loadView(name, null));
     }
 
-<<<<<<< HEAD
-=======
-    // #---------------------------------------------------------------------------
-    // # Base de Datos
-    // #---------------------------------------------------------------------------
-
-    public static DSLContext db() {
-
-        try {
-            Properties dbs = new Properties();
-            dbs.load(new FileReader("src\\resources\\db.properties"));
-            String url = dbs.getProperty("url");
-            String usr = dbs.getProperty("usr");
-            String pwd = dbs.getProperty("pwd");
-            conn = DriverManager.getConnection(url, usr, pwd);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return DSL.using(conn, SQLDialect.POSTGRES);
-    }
-
-    public static void closeConnection() {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        conn = null;
-    }
-
->>>>>>> 83f7d547300328e986d1f1537011ef0f9d0e1e69
     /**
      * Desconecta al usuario actual del sistema.
      */
