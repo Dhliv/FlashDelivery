@@ -1,9 +1,6 @@
 package utilities;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,12 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Empleado;
 import java.sql.Connection;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
 
 import controller.Login;
 
@@ -26,7 +19,6 @@ public class Globals {
     public static Stage pantalla;
     public static Empleado empleado;
     private static Ventana ventana;
-    private static Connection conn;
     private static Map<String, Parent> views;
     private static model.RegistrarEnvio envio;
 
