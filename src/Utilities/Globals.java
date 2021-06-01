@@ -106,7 +106,7 @@ public class Globals {
 
         try {
             Properties dbs = new Properties();
-            dbs.load(new FileReader("resources/db.properties"));
+            dbs.load(new FileReader("src\\resources\\db.properties"));
             String url = dbs.getProperty("url");
             String usr = dbs.getProperty("usr");
             String pwd = dbs.getProperty("pwd");
