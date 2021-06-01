@@ -1,9 +1,7 @@
 package model;
 
-import org.jooq.Result;
 import org.jooq.impl.*;
-import org.jooq.Record;
-import utilities.Globals;
+import utilities.Conexion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +15,8 @@ public class Sedes {
     }
 
     public static void createSede(String nombre, String direccion) {
-        Globals.db().insertInto(DSL.table("sede"), DSL.field("\"Nombre\""), DSL.field("\"Direccion\"")).values(nombre, direccion).execute();
-        Globals.closeConnection();
+        Conexion.db().insertInto(DSL.table("sede"), DSL.field("\"Nombre\""), DSL.field("\"Direccion\"")).values(nombre, direccion).execute();
+        Conexion.closeConnection();
     }
 
     /**
@@ -27,8 +25,8 @@ public class Sedes {
      * @return listado de sedes.
      */
     public static List<Sede> getSedes() {
-        List<Sede> sedes = Globals.db().select().from("sede").fetch().into(Sede.class); // Ejecuto la query 'sql'.
-        Globals.closeConnection();
+        List<Sede> sedes = Conexion.db().select().from("sede").fetch().into(Sede.class); // Ejecuto la query 'sql'.
+        Conexion.closeConnection();
 
         return sedes;
     }
