@@ -51,7 +51,7 @@ public class CreatePDF {
    * @throws IOException
    */
   public String urlFactura(String name) throws IOException {
-    String curDir = System.getProperty("user.dir") + "\\src\\resources\\facturas\\factura"+ name +".pdf";
+    String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura"+ name +".pdf";
     int repeat = 1; //Veces que se ha intentado cambiar el nombre
     int lastPos = curDir.length()-4; //Ultima posicion antes de modificar el string
     //SI EXISTE SE LE AGREGA UN VALOR ENTRE PARENTESIS PARA GUARDAR EL NUEVO ARCHIVO
