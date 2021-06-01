@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
-import utilities.Globals;
+import utilities.Conexion;
 
 public class Empleado implements Entity {
     private String cedula;
@@ -110,8 +110,8 @@ public class Empleado implements Entity {
      * @return lista de empleados existentes en la BD.
      */
     public static List<Empleado> getSedes() {
-        List<Empleado> sedes = Globals.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query 'sql'.
-        Globals.closeConnection();
+        List<Empleado> sedes = Conexion.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query 'sql'.
+        Conexion.closeConnection();
 
         return sedes;
     }
@@ -126,7 +126,7 @@ public class Empleado implements Entity {
         String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol() + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
                 + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
 
-        Globals.db().execute(sql);
+        Conexion.db().execute(sql);
     }
 
 }

@@ -1,10 +1,8 @@
 package model;
 
-import org.jooq.Result;
 import org.jooq.impl.*;
 import java.sql.Date;
-import org.jooq.Record;
-import utilities.Globals;
+import utilities.Conexion;
 
 public class Facturas {
   public class Factura {
@@ -22,7 +20,9 @@ public class Facturas {
    * @param id_envio   de la factura.
    */
   public static void createFactura(Date expdate, String numeracion, Integer id_envio) {
-    Globals.db().insertInto(DSL.table("facturacion"), DSL.field("expdate"), DSL.field("numeracion"), DSL.field("id_envio")).values(expdate, numeracion, id_envio).execute();
-    Globals.closeConnection();
+    Conexion.db()
+        .insertInto(DSL.table("facturacion"), DSL.field("expdate"), DSL.field("numeracion"), DSL.field("id_envio"))
+        .values(expdate, numeracion, id_envio).execute();
+    Conexion.closeConnection();
   }
 }

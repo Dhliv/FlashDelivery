@@ -3,7 +3,7 @@ package model;
 import org.jooq.Result;
 import org.jooq.impl.*;
 import org.jooq.Record;
-import utilities.Globals;
+import utilities.Conexion;
 
 public class Clientes {
   public static class Cliente {
@@ -26,8 +26,8 @@ public class Clientes {
    * @param telefono  del cliente.
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono) {
-    Globals.db().insertInto(DSL.table("cliente"), DSL.field("\"Cedula\""), DSL.field("\"Direccion\""), DSL.field("\"Telefono\""), DSL.field("\"Nombre\"")).values(cedula, direccion, telefono, nombre).execute();
-    Globals.closeConnection();
+    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("\"Cedula\""), DSL.field("\"Direccion\""), DSL.field("\"Telefono\""), DSL.field("\"Nombre\"")).values(cedula, direccion, telefono, nombre).execute();
+    Conexion.closeConnection();
   }
 
   /**
@@ -38,8 +38,8 @@ public class Clientes {
    */
   public static boolean clientExists(String cedula) {
     String sql = "select * from cliente where \"Cedula\"='" + cedula + "'";
-    Result<Record> rs = Globals.db().fetch(sql);
-    Globals.closeConnection();
+    Result<Record> rs = Conexion.db().fetch(sql);
+    Conexion.closeConnection();
 
     if (rs.size() == 1) // Si la query retorna un resultado, el cliente existe.
       return true;
