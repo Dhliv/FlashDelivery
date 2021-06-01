@@ -98,41 +98,6 @@ public class Globals {
         return new Scene(loadView(name, null));
     }
 
-    // #---------------------------------------------------------------------------
-    // # Base de Datos
-    // #---------------------------------------------------------------------------
-
-    public static DSLContext db() {
-
-        try {
-            Properties dbs = new Properties();
-            dbs.load(new FileReader("resources/db.properties"));
-            String url = dbs.getProperty("url");
-            String usr = dbs.getProperty("usr");
-            String pwd = dbs.getProperty("pwd");
-            conn = DriverManager.getConnection(url, usr, pwd);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return DSL.using(conn, SQLDialect.POSTGRES);
-    }
-
-    public static void closeConnection() {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        conn = null;
-    }
-
     /**
      * Desconecta al usuario actual del sistema.
      */

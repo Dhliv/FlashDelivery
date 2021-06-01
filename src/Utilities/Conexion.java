@@ -4,11 +4,11 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class Conexion {
-    private static Connection con = null;
+    private static Connection conn = null;
 
     public static Connection startConnection() {
         try {
-            if (con == null) {
+            if (conn == null) {
                 // Determina cuando se termina el programa
                 // Runtime.getRuntime().addShutdownHook(new MiShDwnHook());
                 // Recupera los parámetros de conexión del archivo
@@ -23,17 +23,13 @@ public class Conexion {
                 String pwd = "a933d68a3c21b7b24a2e05104117b487091c7b880a72fe25f4ae721fadbbae9a";
 
                 Class.forName(driver);
-                con = DriverManager.getConnection(url, usr, pwd);
+                conn = DriverManager.getConnection(url, usr, pwd);
             }
 
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : " + ex.toString());
         }
-        return con;
-    }
-
-    public static void closeConnection() {
-        con = null;
+        return conn;
     }
 
     static class MiShDwnHook extends Thread {
@@ -48,5 +44,38 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error : " + ex.getMessage());
             }
         }
+    }
+
+    /**
+     * Establece la conexión con la base de datos con jOOQ.
+     */
+    public static DSLContext db() {
+        try {
+            Properties dbs = new Properties();
+            dbs.load(new FileReader("resources/db.properties"));
+            String url = dbs.getProperty("url");
+            String usr = dbs.getProperty("usr");
+            String pwd = dbs.getProperty("pwd");
+            conn = DriverManager.getConnection(url, usr, pwd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return DSL.using(conn, SQLDialect.POSTGRES);
+    }
+
+    public static void closeConnection() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        conn = null;
     }
 }

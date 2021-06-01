@@ -15,6 +15,7 @@ public class CreatePDF {
 
   /**
    * INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
+   * 
    * @param infoPaq   Datos que se imprimen en la tabla
    * @param infoRem   Datos del remitente
    * @param infoDest  Datos del destinatario
@@ -30,6 +31,7 @@ public class CreatePDF {
   /**
    * Crea el PDF en donde se encuentra toda la información de infoFact con el
    * formato esperado para la factura.
+   * 
    * @throws IOException
    */
   public void pdfCreate(String idPDF) throws IOException {
@@ -46,6 +48,7 @@ public class CreatePDF {
 
   /**
    * Genera una url valida en donde se podrá guardar un archivo pdf.
+   * 
    * @param name Nombre del archivo pdf
    * @return Direccion en donde se guarda el archivo pdf
    * @throws IOException
@@ -54,12 +57,12 @@ public class CreatePDF {
     String curDir = System.getProperty("user.dir") + "/src/resources/facturas/factura"+ name +".pdf";
     int repeat = 1; //Veces que se ha intentado cambiar el nombre
     int lastPos = curDir.length()-4; //Ultima posicion antes de modificar el string
+
     //SI EXISTE SE LE AGREGA UN VALOR ENTRE PARENTESIS PARA GUARDAR EL NUEVO ARCHIVO
     while((new File(curDir)).exists()){
       if(repeat > 1) curDir = curDir.substring(0,lastPos) + "(" + Integer.toString(repeat) + ").pdf";
       else curDir = curDir.substring(0,lastPos) + "(1).pdf";
       repeat++;
-      
     }
 
     return curDir;

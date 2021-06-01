@@ -35,12 +35,11 @@ public class Main extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        // generatePDF();
+        //generatePDF();
 
         Globals.init(this);
         Globals.pantalla = stage;
         Ventana login = new Ventana("login", new Login());
         login.start(stage);
     }
-
 }
