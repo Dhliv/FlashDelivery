@@ -8,6 +8,7 @@ import org.jooq.impl.DSL;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Properties;
+import java.io.IOException;
 
 public class Conexion {
     private static Connection conn = null;
