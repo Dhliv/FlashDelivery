@@ -30,6 +30,7 @@ public class Conexion {
                 Connection con = Conexion.startConnection();
                 con.close();
             } catch (Exception ex) {
+                System.out.println("xdxd");
                 JOptionPane.showMessageDialog(null, "Error : " + ex.getMessage());
             }
         }
