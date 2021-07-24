@@ -1,9 +1,9 @@
-package model;
+package model.Entities;
 
 import java.util.List;
 import org.jooq.impl.DSL;
 
-import model.RegistrarEnvio.Paquete;
+import model.RegistrarEnvio;
 import utilities.Conexion;
 
 public class Paquetes {
@@ -24,4 +24,5 @@ public class Paquetes {
       createPaquete(p.get(i).descripcion, p.get(i).peso, id_envio);
     }
   }
+
 }

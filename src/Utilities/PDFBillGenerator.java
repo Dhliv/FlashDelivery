@@ -2,7 +2,6 @@ package utilities;
 
 import java.io.IOException;
 
-import org.apache.pdfbox.contentstream.PDContentStream;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;

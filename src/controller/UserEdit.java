@@ -13,7 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.Empleado;
+import model.Entities.Empleado;
 import utilities.*;
 
 public class UserEdit implements Initializable {
@@ -73,7 +73,7 @@ public class UserEdit implements Initializable {
     s.removeAll(s);
     l.removeAll(l);
     l.addAll(roles.rol);
-    s.addAll(model.Sedes.getSedesParsed());
+    s.addAll(model.Entities.Sede.getSedesParsed());
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
 
@@ -83,7 +83,7 @@ public class UserEdit implements Initializable {
     direccionT.setText(aEditar.getDireccion());
     fechaT.setValue(aEditar.getBirthdate());
     rolT.setValue(aEditar.getRol());
-    idsedeT.setValue(model.Sedes.parseSede(aEditar.getSede()));
+    idsedeT.setValue(model.Entities.Sede.parseSede(aEditar.getSede()));
 
     lblEmpleadoEditar.setText(lblEmpleadoEditar.getText() + " " + aEditar.getNombres());
     identificacionT.setEditable(false);
@@ -108,7 +108,7 @@ public class UserEdit implements Initializable {
    */
   private void parseData() {
     fecha = LocalDate.parse(fc.toString());
-    idSede = model.Sedes.getIdSede(idS.toString());
+    idSede = model.Entities.Sede.getIdSede(idS.toString());
     rol = rl.toString();
   }
 

@@ -9,11 +9,11 @@ import javafx.scene.control.TableView;
 
 public class OperadorConsulta implements Initializable {
 
-  @FXML private TableView<model.Paquetes.Paquete> tPaquetes;
-  @FXML private TableColumn<model.Paquetes.Paquete, String> tcDestinatario;
-  @FXML private TableColumn<model.Paquetes.Paquete, Integer> tcIdPaquete;
-  @FXML private TableColumn<model.Paquetes.Paquete, Integer> tcPesoPaquete;
-  @FXML private TableColumn<model.Paquetes.Paquete, Boolean> tcEstado;
+  @FXML private TableView<model.Entities.Paquetes.Paquete> tPaquetes;
+  @FXML private TableColumn<model.Entities.Paquetes.Paquete, String> tcDestinatario;
+  @FXML private TableColumn<model.Entities.Paquetes.Paquete, Integer> tcIdPaquete;
+  @FXML private TableColumn<model.Entities.Paquetes.Paquete, Integer> tcPesoPaquete;
+  @FXML private TableColumn<model.Entities.Paquetes.Paquete, Boolean> tcEstado;
 
   @Override public void initialize(URL location, ResourceBundle resources) {
 

@@ -1,9 +1,7 @@
 package utilities;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.util.Matrix;

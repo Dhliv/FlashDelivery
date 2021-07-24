@@ -1,4 +1,4 @@
-package model;
+package model.Entities;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +14,8 @@ public class Empleado implements Entity {
     public Empleado() {
     }
 
-    public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono, LocalDate birthdate, int sede) {
+    public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
+            LocalDate birthdate, int sede) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -89,7 +90,8 @@ public class Empleado implements Entity {
         this.sede = sede;
     }
 
-    @Override public void Charge(Object[] info) {
+    @Override
+    public void Charge(Object[] info) {
         this.cedula = (String) info[0];
         this.nombres = (String) info[1];
         this.apellidos = (String) info[2];
@@ -100,8 +102,11 @@ public class Empleado implements Entity {
         this.sede = (int) info[7];
     }
 
-    @Override public String toString() {
-        return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede + '}';
+    @Override
+    public String toString() {
+        return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
+                + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede
+                + '}';
     }
 
     /**
@@ -110,7 +115,8 @@ public class Empleado implements Entity {
      * @return lista de empleados existentes en la BD.
      */
     public static List<Empleado> getSedes() {
-        List<Empleado> sedes = Conexion.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query 'sql'.
+        List<Empleado> sedes = Conexion.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query
+                                                                                                     // 'sql'.
         Conexion.closeConnection();
 
         return sedes;
@@ -123,10 +129,28 @@ public class Empleado implements Entity {
      * @param empleado informacion completa a actualizar (incluso sin cambios).
      */
     public static void updateEmpleado(Empleado empleado) {
-        String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol() + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
-                + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
+        String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol()
+                + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono()
+                + "', birthdate='" + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='"
+                + empleado.getCedula() + "'";
 
         Conexion.db().execute(sql);
+    }
+
+    public static int crearEmpleado(Empleado e) {
+        String sql = "insert into empleado VALUES ('" + e.cedula + "', '" + e.getNombres() + "', '" + e.getApellidos()
+                + "', '" + e.getRol() + "', '" + e.getDireccion() + "', '" + e.getTelefono() + "', '"
+                + e.getBirthdate().toString() + "', " + e.getSede() + ")";
+
+        return Conexion.db().execute(sql);
+    }
+
+    public static Empleado cargarEmpleado(String cedula) {
+
+        List<Empleado> empleado = Conexion.db().select().from("empleado").where("cedula ='" + cedula + "'").fetch()
+                .into(Empleado.class);
+        Conexion.closeConnection();
+        return (!empleado.isEmpty() ? empleado.get(0) : null);
     }
 
 }

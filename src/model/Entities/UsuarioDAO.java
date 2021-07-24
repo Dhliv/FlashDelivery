@@ -1,4 +1,4 @@
-package model;
+package model.Entities;
 
 import java.sql.*;
 
@@ -15,7 +15,7 @@ public class UsuarioDAO {
             conexion = Conexion.startConnection();
             sqlStatement = "INSERT INTO usuario VALUES (?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
-            instruccion.setInt(1, u.getID());
+            instruccion.setInt(1, u.getId());
             instruccion.setString(2, u.getUsername());
             instruccion.setString(3, u.getPassword());
             instruccion.setBoolean(4, u.isEnabled());
@@ -53,7 +53,7 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 u = new Usuario();
-                u.setID(rs.getInt(1));
+                u.setId(rs.getInt(1));
                 u.setUsername(rs.getString(2));
                 u.setPassword(rs.getString(3));
                 u.setEnabled(rs.getBoolean(4));
@@ -84,6 +84,8 @@ public class UsuarioDAO {
             String sqlStatement;
 
             try {
+
+                
                 conexion = Conexion.startConnection();
                 sqlStatement = "SELECT * FROM usuario WHERE username = ? AND password = ?";
                 instruccion = conexion.prepareStatement(sqlStatement);
@@ -93,12 +95,12 @@ public class UsuarioDAO {
 
                 if (rs.next()) {
                     u = new Usuario();
-                    u.setID(rs.getInt(1));
+                    u.setId(rs.getInt(1));
                     u.setUsername(rs.getString(2));
                     u.setPassword(rs.getString(3));
                     u.setEnabled(rs.getBoolean(4));
                     if (u.isEnabled()) {
-                        code = u.getID();
+                        code = u.getId();
                     } else {
                         code = -2;
                     }
@@ -142,7 +144,7 @@ public class UsuarioDAO {
                 instrucciones.setString(1, u.getUsername());
                 instrucciones.setString(2, u.getPassword());
                 instrucciones.setBoolean(3, u.isEnabled());
-                instrucciones.setInt(4, u.getID());
+                instrucciones.setInt(4, u.getId());
 
                 resultado = instrucciones.executeUpdate();
             } catch (SQLException e) {

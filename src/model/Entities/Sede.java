@@ -1,4 +1,4 @@
-package model;
+package model.Entities;
 
 import org.jooq.impl.*;
 import utilities.Conexion;
@@ -6,17 +6,16 @@ import utilities.Conexion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sedes {
+public class Sede {
+    public int id;
+    public String nombre;
+    public String direccion;
 
-    public static class Sede {
-        public int id;
-        public String nombre;
-        public String direccion;
-    }
 
-    public static void createSede(String nombre, String direccion) {
-        Conexion.db().insertInto(DSL.table("sede"), DSL.field("\"Nombre\""), DSL.field("\"Direccion\"")).values(nombre, direccion).execute();
+    public static int createSede(String nombre, String direccion) {
+        int query = Conexion.db().insertInto(DSL.table("sede"), DSL.field("\"Nombre\""), DSL.field("\"Direccion\"")).values(nombre, direccion).execute();
         Conexion.closeConnection();
+        return query;
     }
 
     /**
@@ -70,7 +69,7 @@ public class Sedes {
      * @return string con el id y nombre de la sede.
      */
     public static String parseSede(int idSede) {
-        List<Sede> sedes = model.Sedes.getSedes();
+        List<Sede> sedes = model.Entities.Sede.getSedes();
 
         for (int i = 0; i < sedes.size(); i++) {
             if (idSede == sedes.get(i).id) return (idSede + " - " + sedes.get(i).nombre);
