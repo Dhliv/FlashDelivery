@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Properties;

@@ -13,10 +13,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.Empleado;
-import model.EmpleadoDAO;
-import model.Usuario;
-import model.UsuarioDAO;
+import model.Entities.Empleado;
+import model.Entities.Usuario;
+import model.Entities.UsuarioDAO;
 import utilities.*;
 
 public class UserRegister implements Initializable {
@@ -79,7 +78,7 @@ public class UserRegister implements Initializable {
     s.removeAll(s);
     l.removeAll(l);
     l.addAll(roles.rol);
-    s.addAll(model.Sedes.getSedesParsed());
+    s.addAll(model.Entities.Sede.getSedesParsed());
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
   }
@@ -106,7 +105,7 @@ public class UserRegister implements Initializable {
   private void parseData() {
     id = Integer.valueOf(ident);
     fc = LocalDate.parse(fecha.toString());
-    idSede = model.Sedes.getIdSede(idS.toString());
+    idSede = model.Entities.Sede.getIdSede(idS.toString());
     rol = rl.toString();
   }
 
@@ -148,8 +147,7 @@ public class UserRegister implements Initializable {
         parseData();
 
         Empleado emp = new Empleado(id + "", name, "", rol, dir, telefono, fc, idSede);
-        EmpleadoDAO empD = new EmpleadoDAO();
-        userNoExist = empD.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el empleado
+        userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el empleado
                                                // ya existía.
 
         if (userNoExist == NOEXISTE) {

@@ -26,6 +26,6 @@ public class Sedes {
     }
 
     public void guardar(ActionEvent event) {
-        model.Sedes.createSede(nombre.getText(), direccion.getText());
+        model.Entities.Sede.createSede(nombre.getText(), direccion.getText());
     }
 }

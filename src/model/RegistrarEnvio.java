@@ -2,11 +2,13 @@ package model;
 
 import java.sql.Date;
 import org.jooq.Record;
+
+import model.Entities.Clientes.Cliente;
+
 import java.util.List;
 import java.util.ArrayList;
 
 import utilities.Conexion;
-import model.Clientes.Cliente;
 
 /**
  * Clase encargada de almacenar todos los datos para registrar un envio y

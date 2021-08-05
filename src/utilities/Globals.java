@@ -6,7 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Empleado;
+import model.Entities.Empleado;
+
 import java.util.Map;
 import java.util.HashMap;
 
