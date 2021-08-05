@@ -40,21 +40,13 @@ public class Conexion {
      */
     public static DSLContext db() {
         try {
-            Properties dbs = new Properties();
-            dbs.load(new FileReader("src/resources/db.properties"));
-            String url = dbs.getProperty("url");
-            String usr = dbs.getProperty("usr");
-            String pwd = dbs.getProperty("pwd");
+            String url = "jdbc:postgresql://ec2-52-87-107-83.compute-1.amazonaws.com:5432/d622m7j3h054ts";
+            String usr = "ikwnggozhnxhvp";
+            String pwd = "a933d68a3c21b7b24a2e05104117b487091c7b880a72fe25f4ae721fadbbae9a";
             conn = DriverManager.getConnection(url, usr, pwd);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         return DSL.using(conn, SQLDialect.POSTGRES);
     }
