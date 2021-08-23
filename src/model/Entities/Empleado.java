@@ -114,7 +114,7 @@ public class Empleado implements Entity {
      * 
      * @return lista de empleados existentes en la BD.
      */
-    public static List<Empleado> getSedes() {
+    public static List<Empleado> getEmpleados() {
         List<Empleado> sedes = Conexion.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query
                                                                                                      // 'sql'.
         Conexion.closeConnection();

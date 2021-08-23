@@ -65,7 +65,7 @@ public class UserRegister implements Initializable {
   }
 
   /**
-   * Inicializador de algunos componentes gráficos.
+   * Ingresa los datos a los menus desplegables de Roles y Sedes.
    * 
    * @param url not used.
    * @param rb  not used.

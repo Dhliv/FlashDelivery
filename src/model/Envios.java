@@ -38,4 +38,10 @@ public class Envios {
 
     return query.get(0).id;
   }
+  
+  public static List<Envio> getEnviosBySede(Integer id_sede){
+    List<Envio> envios = Conexion.db().select().from("envio").where("id_sede = " + id_sede).fetch().into(Envio.class); // Ejecuto la query 'sql'.
+    Conexion.closeConnection();
+    return envios;
+  }
 }

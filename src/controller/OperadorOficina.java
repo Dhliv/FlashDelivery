@@ -16,7 +16,7 @@ public class OperadorOficina {
 
   public void initialize() {
     Globals.viewPane = rightContent;
-    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta());
+    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta() );
   }
 
   /**
