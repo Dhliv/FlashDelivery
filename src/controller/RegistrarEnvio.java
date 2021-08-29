@@ -8,59 +8,91 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Clientes.Cliente;
+import model.Entities.Clientes.Cliente;
 import model.RegistrarEnvio.Dim;
 import model.RegistrarEnvio.Paquete;
 import model.RegistrarEnvio.TipoCliente;
 import utilities.GeneralAlerts;
 import utilities.Globals;
 import utilities.TextFieldRestrictions;
+import java.io.*;
 
 /**
  * Controlador para las vistar operador.cliente y operador.paquetes
+ * 
  * @author Julián Orejuela
  * @version 1.0, 29/4/2021
  */
 public class RegistrarEnvio {
 
-    @FXML private TextField RCedula;
-    @FXML private TextField RNombre;
-    @FXML private TextField RCiudad;
-    @FXML private TextField RDireccion;
-    @FXML private TextField RTelefono;
-    @FXML private TextField DCedula;
-    @FXML private TextField DNombre;
-    @FXML private TextField DCiudad;
-    @FXML private TextField DDireccion;
-    @FXML private TextField DTelefono;
-    @FXML private Button atrasCliente;
+    @FXML
+    private TextField RCedula;
+    @FXML
+    private TextField RNombre;
+    @FXML
+    private TextField RCiudad;
+    @FXML
+    private TextField RDireccion;
+    @FXML
+    private TextField RTelefono;
+    @FXML
+    private TextField DCedula;
+    @FXML
+    private TextField DNombre;
+    @FXML
+    private TextField DCiudad;
+    @FXML
+    private TextField DDireccion;
+    @FXML
+    private TextField DTelefono;
+    @FXML
+    private Button atrasCliente;
     // #------------------------------------
 
     private int selectedP; // Índice de la fila seleccionada en la tabla de paquetes
     private boolean modify; // Boolean que indica si se está modificando un paquete o no
 
     // Componentes gráficos de la ventana de registro paquetes
-    @FXML private Button btRegistrarEnvios; //
-    @FXML private Button atrasPaquete; // Botón para devolverse a la vista de clientes
-    @FXML private TextField Peso; // TextField para leer el peso del paquete
-    @FXML private TextField Valor; // TextField para leer el valor del paquete
-    @FXML private TextArea Descripcion; // TextField para leer la descripción adjunta al paquete
-    @FXML private CheckBox Seguro; // CheckBox para marcar si se le aplica o no el seguro al paquete
-    @FXML private Button btEliminar; // Botón para eliminar un paquete de la lista
-    @FXML private Button btEditar; // Botón para editar un paquete de la lista
-    @FXML private Button btRegistrar; // Botón para registrar un paquete de la lista
-    @FXML private TextField Alto; // TextField para ingresar el alto del paquete
-    @FXML private TextField Largo; // TextField para ingresar el largo del paquete
-    @FXML private TextField Ancho; // TextField para ingresar el ancho del paquete
+    @FXML
+    private Button btRegistrarEnvios; //
+    @FXML
+    private Button atrasPaquete; // Botón para devolverse a la vista de clientes
+    @FXML
+    private TextField Peso; // TextField para leer el peso del paquete
+    @FXML
+    private TextField Valor; // TextField para leer el valor del paquete
+    @FXML
+    private TextArea Descripcion; // TextField para leer la descripción adjunta al paquete
+    @FXML
+    private CheckBox Seguro; // CheckBox para marcar si se le aplica o no el seguro al paquete
+    @FXML
+    private Button btEliminar; // Botón para eliminar un paquete de la lista
+    @FXML
+    private Button btEditar; // Botón para editar un paquete de la lista
+    @FXML
+    private Button btRegistrar; // Botón para registrar un paquete de la lista
+    @FXML
+    private TextField Alto; // TextField para ingresar el alto del paquete
+    @FXML
+    private TextField Largo; // TextField para ingresar el largo del paquete
+    @FXML
+    private TextField Ancho; // TextField para ingresar el ancho del paquete
 
-    @FXML private TableView<PaqueteT> tbPaquetes; // Tabla para mostrar la lista de paquetes
+    @FXML
+    private TableView<PaqueteT> tbPaquetes; // Tabla para mostrar la lista de paquetes
     // Columnas de la tabla
-    @FXML private TableColumn<PaqueteT, Integer> tcPeso;
-    @FXML private TableColumn<PaqueteT, Integer> tcValor;
-    @FXML private TableColumn<PaqueteT, String> tcDescripcion;
-    @FXML private TableColumn<PaqueteT, Integer> tcVolumen;
-    @FXML private TableColumn<PaqueteT, Integer> tcValorEnvio;
-    @FXML private TableColumn<PaqueteT, Integer> tcTotal;
+    @FXML
+    private TableColumn<PaqueteT, Integer> tcPeso;
+    @FXML
+    private TableColumn<PaqueteT, Integer> tcValor;
+    @FXML
+    private TableColumn<PaqueteT, String> tcDescripcion;
+    @FXML
+    private TableColumn<PaqueteT, Integer> tcVolumen;
+    @FXML
+    private TableColumn<PaqueteT, Integer> tcValorEnvio;
+    @FXML
+    private TableColumn<PaqueteT, Integer> tcTotal;
     // Lista de elementos de la tabla
     private ObservableList<PaqueteT> list;
     // #------------------------------------
@@ -70,11 +102,15 @@ public class RegistrarEnvio {
 
     public void initialize() {
         selectedP = -1;
-        if (envio == null) envio = new model.RegistrarEnvio();
-        if (operadorResumen == null) operadorResumen = new OperadorResumen();
+        if (envio == null)
+            envio = new model.RegistrarEnvio();
+        if (operadorResumen == null)
+            operadorResumen = new OperadorResumen();
 
-        if (RCedula != null) RCedula.focusedProperty().addListener(onRemitenteFocusOut);
-        if (DCedula != null) DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
+        if (RCedula != null)
+            RCedula.focusedProperty().addListener(onRemitenteFocusOut);
+        if (DCedula != null)
+            DCedula.focusedProperty().addListener(onDestinatarioFocusOut);
         if (tbPaquetes != null) {
             // Cargar cosas en la tabla
             TextFieldRestrictions.textFieldNumeric(Peso);
@@ -96,34 +132,68 @@ public class RegistrarEnvio {
         }
     }
 
-    @FXML void atras(ActionEvent event) {
-        if (event.getSource() == atrasPaquete) Globals.cambiarVista("operador.cliente", this);
+    @FXML
+    void atras(ActionEvent event) {
+        if (event.getSource() == atrasPaquete)
+            Globals.cambiarVista("operador.cliente", this);
     }
 
-    @FXML void registrarPaquetes(ActionEvent event) {
-        envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
-        envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
+    @FXML
+    void registrarPaquetes(ActionEvent event) {
+        envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(),
+                RTelefono.getText(), TipoCliente.Remitente);
+        envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(),
+                DTelefono.getText(), TipoCliente.Destinatario);
         Globals.cambiarVista("operador.paquetes", this);
     }
 
-    @FXML void onActionRemitente() {
-        onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);
+    @FXML
+    void onActionRemitente() {
+
+        // Se crea un hilo sobreescribiendo el método run que ejecute la búsqueda en la
+        // base de datos
+        // Para no sobrecargar la interfaz gráfica
+        Thread r = new Thread() {
+            @Override
+            public void run() {
+                onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);
+            }
+        };
+        r.start();
+
     }
 
-    ChangeListener<Boolean> onRemitenteFocusOut = (ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) -> {
-        if (!arg2) onActionRemitente();
-    };
+    ChangeListener<Boolean> onRemitenteFocusOut = (ObservableValue<? extends Boolean> arg0, Boolean arg1,
+            Boolean arg2) -> {
+                if (!arg2)
+                    onActionRemitente();
+            };
 
-    @FXML void onActionDestinatario() {
-        onChangeCedula(DCedula, DNombre, DCiudad, DDireccion, DTelefono, TipoCliente.Destinatario);
+    @FXML
+    void onActionDestinatario() {
+        // Se crea un hilo sobreescribiendo el método run que ejecute la búsqueda en la
+        // base de datos
+        // Para no sobrecargar la interfaz gráfica
+        Thread r = new Thread() {
+            @Override
+            public void run() {
+                onChangeCedula(DCedula, DNombre, DCiudad, DDireccion, DTelefono, TipoCliente.Destinatario);
+            }
+        };
+        r.start();
+
     }
 
-    ChangeListener<Boolean> onDestinatarioFocusOut = (ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) -> {
-        if (!arg2) onActionDestinatario();
+    ChangeListener<Boolean> onDestinatarioFocusOut = (ObservableValue<? extends Boolean> arg0, Boolean arg1,
+            Boolean arg2) -> {
+        if (!arg2)
+            onActionDestinatario();
     };
 
-    private void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion, TextField Telefono, TipoCliente tipo) {
-        if (Cedula.getText() == "") return;
+    private void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion,
+            TextField Telefono, TipoCliente tipo) {
+        if (Cedula.getText() == "")
+            return;
         Cliente cliente = envio.buscarCliente(Cedula.getText(), tipo);
         if (cliente != null) {
             Nombre.setText(cliente.nombre);
@@ -137,7 +207,8 @@ public class RegistrarEnvio {
     // # VISTA REGISTRAR PAQUETES
     // #---------------------------------------------------------------------------
 
-    @FXML void registrarPaquete(ActionEvent event) {
+    @FXML
+    void registrarPaquete(ActionEvent event) {
         try { // Faltan validaciones
             Integer peso = Integer.parseInt(Peso.getText());
             Integer valor = Integer.parseInt(Valor.getText());
@@ -149,16 +220,18 @@ public class RegistrarEnvio {
 
             Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, -1);
             list.add(new PaqueteT(p));
-            clearCampsPaquetes();
+            clearFieldsPaquetes();
         } catch (NumberFormatException e) {
             GeneralAlerts.showEmptyFieldAlert();
         }
 
     }
 
-    @FXML void editarPaquete(ActionEvent event) {
+    @FXML
+    void editarPaquete(ActionEvent event) {
         int index = tbPaquetes.getSelectionModel().getFocusedIndex();
-        if (index == -1) return;
+        if (index == -1)
+            return;
         if (!modify) {
             btRegistrar.setDisable(true);
             selectedP = index;
@@ -190,7 +263,7 @@ public class RegistrarEnvio {
                 tbPaquetes.setDisable(false);
                 selectedP = -1;
                 btEditar.setText("Editar");
-                clearCampsPaquetes();
+                clearFieldsPaquetes();
             } catch (NumberFormatException e) {
                 GeneralAlerts.showEmptyFieldAlert();
             }
@@ -200,9 +273,11 @@ public class RegistrarEnvio {
 
     }
 
-    @FXML void eliminarPaquete(ActionEvent event) {
+    @FXML
+    void eliminarPaquete(ActionEvent event) {
         int index = tbPaquetes.getSelectionModel().getFocusedIndex();
-        if (index == -1) return;
+        if (index == -1)
+            return;
         envio.eliminarPaquete(index);
         list.remove(index);
 
@@ -213,7 +288,7 @@ public class RegistrarEnvio {
 
     }
 
-    private void clearCampsPaquetes() {
+    private void clearFieldsPaquetes() {
         Peso.setText("");
         Valor.setText("");
         Descripcion.setText("");
@@ -263,7 +338,8 @@ public class RegistrarEnvio {
         }
     }
 
-    @FXML void resumenEnvio(ActionEvent event) {
+    @FXML
+    void resumenEnvio(ActionEvent event) {
         operadorResumen.update(envio, this);
         Globals.cambiarVista(Globals.loadView("operador.resumen", operadorResumen));
     }

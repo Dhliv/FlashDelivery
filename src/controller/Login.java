@@ -1,6 +1,8 @@
 package controller;
 
-import model.*;
+
+import model.Entities.Empleado;
+import model.Entities.Usuario;
 import utilities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +24,6 @@ public class Login {
         this.rol = roles.rol;
     }
 
-    private UsuarioDAO ud;
-    private EmpleadoDAO ed;
     @FXML private Button btIngresar;
 
     @FXML private PasswordField txtPass;
@@ -43,11 +43,9 @@ public class Login {
     }
 
     void login() throws Exception {
-        ed = new EmpleadoDAO();
-        ud = new UsuarioDAO();
         user = txtUsuario.getText();
         String pass = txtPass.getText();
-        int acc = ud.entradaUsuario(user, pass);
+        int acc = Usuario.entradaUsuario(user, pass);
         if (acc == -2) {
             // JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el
             // sistema");
@@ -60,7 +58,7 @@ public class Login {
         } else {
             // JOptionPane.showMessageDialog(null, "Entraste!");
             System.out.println("entre");
-            Empleado userActual = ed.cargarEmpleado(acc);
+            Empleado userActual = Empleado.cargarEmpleado(acc+"");
             var rolAcc = userActual.getRol();
 
             Globals.pantalla.close();

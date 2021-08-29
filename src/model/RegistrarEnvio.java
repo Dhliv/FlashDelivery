@@ -2,12 +2,13 @@ package model;
 
 import java.sql.Date;
 import org.jooq.Record;
+
+import model.Entities.Clientes.Cliente;
+
 import java.util.List;
 import java.util.ArrayList;
 
-import static utilities.Globals.db;
-import utilities.Globals;
-import model.Clientes.Cliente;
+import utilities.Conexion;
 
 /**
  * Clase encargada de almacenar todos los datos para registrar un envio y
@@ -41,11 +42,11 @@ public class RegistrarEnvio {
    * @return El cliente o {@code null} si no existe.
    */
   public Cliente buscarCliente(String cedula, TipoCliente tipo) {
-    Record rs = db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
+    Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
     Cliente cliente = rs != null ? rs.into(Cliente.class) : null;
     if (tipo == TipoCliente.Remitente) remitente = cliente;
     if (tipo == TipoCliente.Destinatario) destinatario = cliente;
-    Globals.closeConnection();
+    Conexion.closeConnection();
     return cliente;
   }
 

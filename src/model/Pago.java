@@ -6,7 +6,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import controller.OperadorConsulta;
-import model.Clientes.Cliente;
+import model.Entities.Paquetes;
+import model.Entities.Clientes.Cliente;
 import utilities.CreatePDF;
 import utilities.Globals;
 

@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Empleado;
+import model.Entities.Empleado;
 import utilities.*;
 
 public class UserConsulta implements Initializable {
@@ -34,6 +34,7 @@ public class UserConsulta implements Initializable {
    * @param resources not used.
    */
   @Override public void initialize(URL location, ResourceBundle resources) {
+
     cedula.setCellValueFactory(new PropertyValueFactory<Empleado, Integer>("cedula"));
     nombre.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombres"));
     apellido.setCellValueFactory(new PropertyValueFactory<Empleado, String>("apellidos"));
@@ -43,7 +44,7 @@ public class UserConsulta implements Initializable {
     telefono.setCellValueFactory(new PropertyValueFactory<Empleado, String>("telefono"));
     birthdate.setCellValueFactory(new PropertyValueFactory<Empleado, LocalDate>("birthdate"));
     ObservableList<Empleado> s = FXCollections.observableArrayList();
-    s.addAll(Empleado.getSedes());
+    s.addAll(Empleado.getEmpleados());
 
     tableUsers.setItems(s);
   }
