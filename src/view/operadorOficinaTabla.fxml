@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane fx:id="rightContent" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tPaquetes" focusTraversable="false" layoutY="10.0" prefHeight="760.0" prefWidth="1010.0">
+         <columns>
+            <TableColumn fx:id="tcDestinatario" prefWidth="315.9999809265137" text="Destinatario" />
+            <TableColumn fx:id="tcIdPaquete" prefWidth="110.4000244140625" text="ID del paquete" />
+            <TableColumn fx:id="tcPesoPaquete" prefWidth="309.5999755859375" text="Peso del paquete" />
+            <TableColumn fx:id="tcEstado" prefWidth="280.800048828125" text="Estado" />
+         </columns>
+      </TableView>
+   </children>
    <padding>
       <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
    </padding>
-   <children>
-      <TreeTableView fx:id="tbPaquetes" prefHeight="642.0" prefWidth="931.0">
-        <columns>
-          <TreeTableColumn fx:id="id_envio" prefWidth="105.0" text="ID Envio" />
-            <TreeTableColumn fx:id="estado" prefWidth="64.0" text="Estado" />
-            <TreeTableColumn fx:id="descripcion" prefWidth="540.0" text="Descripcion" />
-            <TreeTableColumn fx:id="id_paquete" prefWidth="109.0" text="ID Paquete" />
-            <TreeTableColumn fx:id="peso" prefWidth="112.0" text="Peso(kg)" />
-        </columns>
-      </TreeTableView>
-   </children>
 </Pane>

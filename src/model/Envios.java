@@ -18,6 +18,17 @@ public class Envios {
     public Boolean delivered;
     public String cliente_envio;
     public String cliente_recogida;
+
+    public Integer getIdenvio(){
+      return id;
+    }
+    public Integer getIdsede() {
+      return id_sede;
+    }
+
+    public Boolean isDelivered() {
+      return delivered;
+    }
   }
 
   public static Integer createEnvio(Date fecha_registro, String metodo_pago, Integer costo, Integer seguro,
@@ -38,9 +49,12 @@ public class Envios {
 
     return query.get(0).id;
   }
-  
-  public static List<Envio> getEnviosBySede(Integer id_sede){
-    List<Envio> envios = Conexion.db().select().from("envio").where("id_sede = " + id_sede).fetch().into(Envio.class); // Ejecuto la query 'sql'.
+
+  public static List<Envio> getEnviosBySede(Integer id_sede) {
+    List<Envio> envios = Conexion.db().select().from("envio").where("id_sede = " + id_sede).fetch().into(Envio.class); // Ejecuto
+                                                                                                                       // la
+                                                                                                                       // query
+                                                                                                                       // 'sql'.
     Conexion.closeConnection();
     return envios;
   }
