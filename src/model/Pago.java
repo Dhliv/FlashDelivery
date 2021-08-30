@@ -99,16 +99,22 @@ public class Pago {
    */
   private static String[][] parsePaquetes(model.RegistrarEnvio envio) throws IOException {
     List<model.RegistrarEnvio.Paquete> ps = envio.getPaquetes();
+    
+
     model.RegistrarEnvio.Paquete p;
-    numeracion = new String[ps.size() + 1][2];
+    numeracion = new String[ps.size() + 2][2];
     numeracion[0][0] = "Descripción";
     numeracion[0][1] = "Valor";
+    numeracion[ps.size()+1][0] = "end";
+    numeracion[ps.size()+1][1] = "end"; 
 
     for (int i = 0; i < ps.size(); i++) {
       p = ps.get(i);
       numeracion[i + 1][0] = p.descripcion;
       numeracion[i + 1][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
     }
+
+    // System.out.println(numeracion);
 
     return numeracion;
   }

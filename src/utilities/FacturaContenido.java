@@ -67,7 +67,7 @@ public class FacturaContenido {
       
     }
     
-    PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(infoPaq, nextRow, infoPaq.length-1), XTABLE, yTable, rowHeight);
+    PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(infoPaq, nextRow, infoPaq.length-nextRow-1), XTABLE, yTable, rowHeight);
     contentStream.close();
     
     

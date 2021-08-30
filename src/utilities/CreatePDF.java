@@ -41,6 +41,7 @@ public class CreatePDF {
     factura.crearFactura();
 
     document.save(urlFactura(idPDF));
+    System.out.println("pdf: " + idPDF + "creado");
     document.close();
   }
 

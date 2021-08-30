@@ -61,6 +61,13 @@ public class PDFTableGenerator {
     
   }
 
+  /**
+   * 
+   * @param fRow
+   * @param lastRows
+   * @throws IOException
+   */
+
   public static void drawDecoration(int fRow, int lastRows) throws IOException{
     for (int i = fRow; i < lastRows; i++) {
       if(i%2 == 0) drawCellBackgroundColor("gray", i+1);
