@@ -13,6 +13,14 @@ public class PDFBillGenerator {
   private static final float XPOS = 439; //POSICION EN X DE LA INFORMACION DE PAGO
   private static final  float LINELENGTH = 80;
 
+  /**
+   * Dibuja la información de pago.
+   * @param document Documento PDF
+   * @param contentStream Lugar en donde se va a escribir la información
+   * @param infoPago 
+   * @param yInit Posición y en donde se inicia a escribir|
+   * @throws IOException
+   */
   public static void drawPayInfo(PDDocument document, PDPageContentStream contentStream, String[] infoPago, float yInit) throws IOException {
     yInit-=10; //Añade separacion de la tabla
     float y = yInit;
@@ -35,7 +43,7 @@ public class PDFBillGenerator {
     contentStream.setFont(PDType1Font.HELVETICA_BOLD, 8);
     float y = yInit+5;
     String[] info = {"SUBTOTAL", "    SEGURO", " IMPUESTO", "        TOTAL"};
-    //info = GeneralString.textToRight(info);
+    // info = GeneralString.textToRight(info);
     
     for(int i = 0; i < infoPagoSize; i++){
       contentStream.beginText();

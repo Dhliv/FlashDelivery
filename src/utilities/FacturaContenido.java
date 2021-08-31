@@ -31,33 +31,46 @@ public class FacturaContenido {
   }
 
 
-  public void printRandom(PDPageContentStream contentStream) throws IOException{
-    float y=0f;
-    for(int i=0; i<100; i++){
-      contentStream.beginText();
-        contentStream.newLineAtOffset(0, y);
-        contentStream.showText("MaxTamaño: " + Float.toString(y));
-      contentStream.endText();
-      y+=10f;
-    }
-  }
+  // public void printRandom(PDPageContentStream contentStream) throws IOException{
+  //   float y=0f;
+  //   for(int i=0; i<100; i++){
+  //     contentStream.beginText();
+  //       contentStream.newLineAtOffset(0, y);
+  //       contentStream.showText("MaxTamaño: " + Float.toString(y));
+  //     contentStream.endText();
+  //     y+=10f;
+  //   }
+  // }
 
+
+  /**
+   * Función que permite imprimir la información
+   * de los paquetes sin salirse del limite inferior de las paginas del PDF
+   * 
+   * @param contentStream ContentStream en donde se dibuja (documento, pagina)
+   * @param rowHeight Tamaño de las celdas de la tabla
+   * @throws IOException
+   */
   public void drawTableMultiPage(PDPageContentStream contentStream, float rowHeight) throws IOException{
     final int XTABLE = 72; //Pocision X respecto a la izquierda de la tabla
-    final int YTABLE_PAGE1 = 450;
-    final int YTABLE_NEXT_PAGE = 770;
-    final int YMIN = 70;
+    final int YTABLE_PAGE1 = 450-15; //Posición Y inicial de la tabla en la primer pagina.
+    final int YTABLE_NEXT_PAGE = 770-30; //Posición Y inicial de las paginas siguientes.
+    final int YMIN = 70; //Posición minima en Y en donde se es permitido dibujar.
     
     int yTable = YTABLE_PAGE1;
-    int rowsPerPage = (int)((yTable-YMIN)/rowHeight);
+    int rowsPerPage = (int)((yTable-YMIN)/rowHeight);//Filas de la columna por pagina
     int nextRow = 0;
-    //Primer pagina
+
+    //Dibujar las primeras N paginas sin desbordamiento
     while(infoPaq.length-nextRow > rowsPerPage){ //Split
+
       PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(infoPaq, nextRow, nextRow+rowsPerPage), XTABLE, yTable, rowHeight);
+      PDFTableGenerator.drawHeader();
+
       contentStream.close();
       contentStream.close();
 
-      nextRow += rowsPerPage+1;
+      nextRow += rowsPerPage;
       yTable = YTABLE_NEXT_PAGE;
       rowsPerPage = (int)((yTable-YMIN)/rowHeight);
       
@@ -67,7 +80,9 @@ public class FacturaContenido {
       
     }
     
-    PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(infoPaq, nextRow, infoPaq.length-nextRow-1), XTABLE, yTable, rowHeight);
+    // Dibujar la ultima pagina
+    PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(infoPaq, nextRow, infoPaq.length), XTABLE, yTable, rowHeight);
+    PDFTableGenerator.drawHeader();
     contentStream.close();
     
     
@@ -77,13 +92,13 @@ public class FacturaContenido {
 
   /**
    * Crea la factura.
-   * @throws IOException Sino no me deja compilar :c
+   * @throws IOException Sino no me deja compilar :c>
    */
   public void crearFactura() throws IOException {
     final int XREM = 92; //Pocision X respecto a la izquierda de la información del remitente
     final int XDEST = 302; //Pocision X respecto a la izquierda de la información del remitente
-    final float ROWHEIGTH = 20f;
-    final float tableHeight = ROWHEIGTH*infoPaq.length;
+    final float ROWHEIGTH = 20f; //Ancho de las filas.
+    final float tableHeight = ROWHEIGTH*infoPaq.length; //Ancho de la tabla
 
     PDPage page = document.getPage(0);
     
@@ -97,6 +112,8 @@ public class FacturaContenido {
     PDFBillGenerator.drawBillInfo(document, contentStream, infoPago[0], idPDF);
     PDFClientGenerator.drawClient(document,contentStream, infoRem, 480, XREM);
     PDFClientGenerator.drawClient(document,contentStream, infoDest, 480, XDEST);
+
+    //Dibuja la tabla
     drawTableMultiPage(contentStream, ROWHEIGTH);
     PDFBillGenerator.drawPayInfo(document, contentStream, Arrays.copyOfRange(infoPago,1,infoPago.length), tableHeight);
     contentStream.close();

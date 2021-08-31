@@ -33,7 +33,7 @@ public class Pago {
   public static void initialize(RegistrarEnvio envio) throws IOException {
     SEDE = Globals.empleado.getSede();
     EMPLEADO = Globals.empleado.getCedula();
-    date = Date.valueOf(LocalDate.now());
+    date = Date.valueOf(LocalDate.now()); //Fecha actual.
     calcularTotal(envio);
     date = Date.valueOf(LocalDate.now());
     CreatePDF pdf = new CreatePDF(parsePaquetes(envio),
@@ -44,6 +44,10 @@ public class Pago {
     pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
 
+  /**
+   * Retorna la información de pago.
+   * @return String Array con: Fecha, Total, Impuesto, Seguro, Subtotal del envio.
+   */
   public static String[] parsePago(){
     String[] pago = new String[5];
     pago[0] = getDate().toString();
@@ -56,7 +60,7 @@ public class Pago {
 
   /**
    * Genera el id del envío.
-   * @param envio Contiene los datos relacionados al envio.
+   * @param envio Objeto que contiene los datos relacionados al envio.
    */
   public static int getIdEnvio(RegistrarEnvio envio) {
     Integer idEnvio = Envios.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
@@ -64,7 +68,7 @@ public class Pago {
   } 
 
   /**
-   * Ingresa los datos pertinentes a la base de datos, como los clientes, los
+   * Ingresa los datos pertinentes a la base de datos: clientes,
    * paquetes y el envío.
    * @param envio Contiene los datos relacionados al envio.
    */
@@ -81,6 +85,11 @@ public class Pago {
     Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta());
   }
 
+  /**
+   * Retorna la información de un objeto Cliente en un Array de Strings.
+   * @param cliente 
+   * @return Array de Strings con la información del cliente: nombre, cedula, ciudad, dirección, telefono.
+   */
   private static String[] parseCliente(Cliente cliente){
     
     String[] numeracionCliente = new String[5];
@@ -96,25 +105,20 @@ public class Pago {
    * Obtiene la información de los paquetes que se debe mostrar en la factura.
    * 
    * @param envio Contiene los datos relacionados al envio.
+   * @return Array de Strings con la descripción y el precio de cada uno de los paquetes de un envio. 
    */
   private static String[][] parsePaquetes(model.RegistrarEnvio envio) throws IOException {
     List<model.RegistrarEnvio.Paquete> ps = envio.getPaquetes();
     
 
     model.RegistrarEnvio.Paquete p;
-    numeracion = new String[ps.size() + 2][2];
-    numeracion[0][0] = "Descripción";
-    numeracion[0][1] = "Valor";
-    numeracion[ps.size()+1][0] = "end";
-    numeracion[ps.size()+1][1] = "end"; 
+    numeracion = new String[ps.size()][2]; 
 
     for (int i = 0; i < ps.size(); i++) {
       p = ps.get(i);
-      numeracion[i + 1][0] = p.descripcion;
-      numeracion[i + 1][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
+      numeracion[i][0] = p.descripcion;
+      numeracion[i][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
     }
-
-    // System.out.println(numeracion);
 
     return numeracion;
   }
