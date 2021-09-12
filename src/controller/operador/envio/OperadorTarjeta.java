@@ -22,28 +22,31 @@ import utilities.SobreTarjeta;
 import utilities.TextFieldRestrictions;
 
 public class OperadorTarjeta implements Initializable {
-  private Integer tipoTarjeta;
-  private model.RegistrarEnvio envio;
-  private static final Integer DEBITO = 0;
-  private static final Integer CREDITO = 1;
-  private Boolean camposVacios;
-  private Boolean forbidChar;
-  private String[] campos;
-  private Object[] objetos;
+  private Integer tipoTarjeta; // Almacena el tipo de la tarjeta que se haya seleccionado para el método de
+                               // pago.
+  private model.RegistrarEnvio envio; // Almacena la info relacionada al envio (destinatario, remitente, paquetes,
+                                      // etc).
+  private static final Integer DEBITO = 0; // Identifica un tipo de tarjeta.
+  private static final Integer CREDITO = 1; // Identifica un tipo de tarjeta.
+  private Boolean camposVacios; // Almacena si existen campos vacios.
+  private Boolean forbidChar; // Almacena si existen caracteres prohibidos.
+  private String[] campos; // Almacena los strings a los que se ejecutarán validaciones.
+  private Object[] objetos; // Almacena los objetos a los que se ejecutarán validaciones.
 
-  private String numeroTarjeta;
-  private String cvv;
-  private String mes;
+  private String numeroTarjeta; // Almacena el número de la tarjeta.
+  private String cvv; // Almacena el núremo CVV de la tarjeta.
+  private String mes; // Almacena el mes de vencimiento de la tarjeta.
   private String año;
-  private String nombre;
+  private String nombre; // Almacena el nombre del titular de la tarjeta.
   private String numCuotas;
-  private Object nCuotas;
-  private Integer counter;
-  private Boolean agregar;
-  private Boolean borrar;
+  private Object nCuotas; // Almacena la informacion del CheckBox de número de cuotas.
+  private Integer counter; // Auxiliar que almacena el número de digitos en el campo de texto del numero de
+                           // tarjeta.
+  private Boolean agregar; // Auxiliar que almacena si de debe agregar o no un caracter a la parte gráfica.
+  private Boolean borrar; // Auxiliar que almacena si de debe borrar o no un caracter a la parte gráfica.
   private String addToText;
-  private Object mesAux;
-  private Pago pago;
+  private Object mesAux; // Almacena la información relacionada a la fecha de vencimiento de la tarjeta.
+  private Pago pago; // Almacena toda la info relacionada con el objeto pago.
 
   @FXML
   private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
@@ -80,8 +83,10 @@ public class OperadorTarjeta implements Initializable {
   /**
    * Constructor de la clase OperadorTarjeta.
    * 
-   * @param tipoTarjeta identifica el tipo de tarjeta con la que se pagará.
-   * @param ctr         es el controlador de la vista anterior a esta.
+   * @param tipoTarjeta identifica el número de tarjeta a usar.
+   * @param envio       Almacena la información relacionada al envío
+   *                    (destinatario, remitente, paquetes, etc).
+   * @param pago        OBjeto de pago con toda la información relacionada a éste.
    */
   public OperadorTarjeta(Integer tipoTarjeta, model.RegistrarEnvio envio, Pago pago) {
     this.tipoTarjeta = tipoTarjeta;
@@ -90,6 +95,13 @@ public class OperadorTarjeta implements Initializable {
     counter = 0;
   }
 
+  /**
+   * Inicializa los componentes gráficos. Ademmás establece restricciones a los
+   * campos de texto necesarios.
+   * 
+   * @param location  not used.
+   * @param resources not used.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ObservableList<String> l = FXCollections.observableArrayList();
@@ -180,6 +192,12 @@ public class OperadorTarjeta implements Initializable {
     }
   }
 
+  /**
+   * Borra un caracter del componente gráfico que muestra el nombre del titular de
+   * la tarjeta, si es el caso.
+   * 
+   * @param event not used.
+   */
   @FXML
   void eraseTitular(KeyEvent event) {
     Object[] validados = SobreTarjeta.checkErase(event, false);
@@ -191,6 +209,12 @@ public class OperadorTarjeta implements Initializable {
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
   }
 
+  /**
+   * Agrega un caracter al componente gráfico que muestra el nombre del titular de
+   * la tarjeta, si es el caso.
+   * 
+   * @param event not used.
+   */
   @FXML
   void addTitular(KeyEvent event) {
     Object[] validados = SobreTarjeta.checkErase(event, false);
@@ -203,6 +227,9 @@ public class OperadorTarjeta implements Initializable {
     lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
 
+  /**
+   * Se obtienen los datos de los campos de texto.
+   */
   private void getData() {
     nombre = txtTitular.getText();
     numeroTarjeta = txtNumerotarjeta.getText();
@@ -221,6 +248,9 @@ public class OperadorTarjeta implements Initializable {
     }
   }
 
+  /**
+   * Obtiene el texto de los campos que no son explicitamente de texto.
+   */
   private void parseData() {
     mes = mesAux.toString();
     if (tipoTarjeta == CREDITO)
