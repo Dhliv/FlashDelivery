@@ -68,12 +68,7 @@ public class PDFTableGenerator {
   }
 
   /**
-<<<<<<< HEAD
    * Dibuja el header de la tabla de la factura
-=======
-   * Dibuja el header de la factura
-   * 
->>>>>>> e8f1b4322dd04edd7ca6eb4f0250470dbf284515
    * @throws IOException
    */
   public static void drawHeader() throws IOException {
