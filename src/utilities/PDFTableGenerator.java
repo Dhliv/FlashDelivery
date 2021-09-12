@@ -62,7 +62,7 @@ public class PDFTableGenerator {
   }
 
   /**
-   * Dibuja el header de la factura
+   * Dibuja el header de la tabla de la factura
    * @throws IOException
    */
   public static void drawHeader() throws IOException{
@@ -89,7 +89,7 @@ public class PDFTableGenerator {
    */
   public static void drawDecoration(int fRow, int lastRows) throws IOException{
     for (int i = fRow; i < lastRows; i++) {
-      if(i%2 == 0) drawCellBackgroundColor("gray", i+1);
+      drawCellBackgroundColor("gray", i+1);
     }
   }
 
