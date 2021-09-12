@@ -40,7 +40,7 @@ public class PDFTableGenerator {
   }
   
   /**
-   * 
+   * Dibuja la tabla en el PDF
    * @param document PDF en donde se insertará la tabla.
    * @param cs ContentStream del PDF.
    * @param content Contenido de la tabla.
@@ -52,8 +52,7 @@ public class PDFTableGenerator {
     init(document, margen, yFirst, rowHeight, content, cs);
     
     
-    drawCellBackgroundColor("orange", 1);
-    drawDecoration(1, content.length);
+    drawDecoration(0, content.length);
     addText(content);
     drawColumns();
     drawRow(0);
@@ -61,12 +60,44 @@ public class PDFTableGenerator {
     
   }
 
+  /**
+   * Dibuja el header de la factura
+   * @throws IOException
+   */
+  public static void drawHeader() throws IOException{
+
+    float headerPosY = yFirstCol + 4; //Posición del header
+    drawCellBackgroundColor("orange", 0);
+    contentStream.beginText();
+      contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+      contentStream.newLineAtOffset(margin+cellMargin, headerPosY);
+      contentStream.showText("Descripción");
+    contentStream.endText();
+    contentStream.beginText();
+      contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+      contentStream.newLineAtOffset(margin+cellMargin+tableWidth - WIDTHLASTCOL, headerPosY);
+      contentStream.showText("Precio(COP)");
+    contentStream.endText();
+  }
+
+  /**
+   * Crea un fondo de color en las filas que intercala entre gris y blanco.
+   * @param fRow Primera fila a ser decorada.
+   * @param lastRows Ultima fila a ser decorada.
+   * @throws IOException
+   */
   public static void drawDecoration(int fRow, int lastRows) throws IOException{
     for (int i = fRow; i < lastRows; i++) {
       if(i%2 == 0) drawCellBackgroundColor("gray", i+1);
     }
   }
 
+  /**
+   * Pinta de color "color" alguna la fila con indice "row"
+   * @param color String de un color almacenado en la carpeta images.
+   * @param row Fila que se desea colorear.
+   * @throws IOException
+   */
   public static void drawCellBackgroundColor(String color, int row) throws IOException{
     PDImageXObject image = PDImageXObject.createFromFile("src/resources/images/"+ color +".png", document);
     float firstCol = yFirstCol-rowHeight*row;
@@ -82,6 +113,11 @@ public class PDFTableGenerator {
     contentStream.drawImage(pdImage, tableWidth + margin, yFirstCol - tableHeight, marginWidth, tableHeight + marginWidth);
   }
 
+  /**
+   * Dibuja una linea que separan dos filas
+   * @param row
+   * @throws IOException
+   */
   public static void drawRow(int row) throws IOException{
     contentStream.drawImage(pdImage, margin, (yFirstCol - row*rowHeight), tableWidth + marginWidth, marginWidth);
   }
@@ -110,6 +146,12 @@ public class PDFTableGenerator {
     }
   }
 
+  /**
+   * Formatea un String para que pueda ser dibujado en pantalla.
+   * Generalmente se usa en la descripción del producto.
+   * @param s String que se va a formatear
+   * @return String formateado
+   */
   public static String parseText(String s){
     final int MAXLENGTHSTRING = 50;  //Maximo numero de caracteres que puede ocupar una cadena en la tabla.
     s = GeneralString.removeNewLine(s);
@@ -118,7 +160,7 @@ public class PDFTableGenerator {
   }
 
   /**
-   * 
+   * Añadir texto a la tabla del PDF
    * @param content Texto que se añade en la tabla
    */
   public static void addText(String[][] content) throws IOException{
@@ -131,8 +173,7 @@ public class PDFTableGenerator {
         text = parseText(content[i][j]);
 
         contentStream.beginText();
-          if(i == 0)  contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-          else        contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
+          contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
           contentStream.newLineAtOffset(textx, texty);
           contentStream.showText(text);
         contentStream.endText();
