@@ -106,7 +106,7 @@ public class UserConsulta implements Initializable {
    */
   @FXML
   void goToUsuariosRegistro(ActionEvent event) {
-    Globals.cambiarVista(Globals.loadView("user.register", new UserRegister(this)));
+    Globals.cambiarVista("user.register", new UserRegister());
   }
 
   /**
@@ -118,7 +118,7 @@ public class UserConsulta implements Initializable {
   void userEditButton(ActionEvent event) {
     Empleado e = tableUsers.getSelectionModel().getSelectedItem();
     if (e != null)
-      Globals.cambiarVista(Globals.loadView("user.edit", new UserEdit(e, this)));
+      Globals.cambiarVista("user.edit", new UserEdit(e));
     else
       GeneralAlerts.showUserNullAlert();
   }

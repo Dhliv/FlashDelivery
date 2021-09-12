@@ -22,7 +22,6 @@ public class UserRegister implements Initializable {
   private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
   private Roles roles; // Cargos de la empresa
   private int userNoExist;
-  private UserConsulta controladorAnterior;
 
   // Auxiliares para los datos del usuario.
   private Object fecha; // Dato parcial de fecha de nacimiento
@@ -65,12 +64,9 @@ public class UserRegister implements Initializable {
   /**
    * Constructor de la clase UserRegister
    * 
-   * @param contenido   Contenedor de todos los componentes visuales de la actual
-   *                    pestaña.
-   * @param controlador Controller de la pestaña anterior.
    */
-  public UserRegister(UserConsulta controlador) {
-    controladorAnterior = controlador;
+  public UserRegister() {
+
   }
 
   /**
@@ -130,7 +126,7 @@ public class UserRegister implements Initializable {
    * Retorna a la pantalla de consulta de usuarios.
    */
   private void volver() {
-    Globals.cambiarVista(Globals.loadView("user.consulta", controladorAnterior));
+    Globals.cambiarVista("user.consulta", new UserConsulta());
   }
 
   /**
