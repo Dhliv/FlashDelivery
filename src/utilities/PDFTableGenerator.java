@@ -35,10 +35,10 @@ public class PDFTableGenerator {
     document = documento;
     margin = margen;
     yFirstCol = y;
-    rows = content.length;
+    // rows = content.length;
     rowHeight = rowH;
     tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
-    tableHeight = rowHeight * rows;
+    // tableHeight = rowHeight * rows;
     cellMargin = 5f;
     marginWidth = 0.1f;
     contentStream = cs;
@@ -59,11 +59,18 @@ public class PDFTableGenerator {
       float yFirst, float rowHeight) throws IOException {
     init(document, margen, yFirst, rowHeight, content, cs);
 
-    drawDecoration(0, content.length);
-    addText(content);
+    
+    Object[] contenido = new Object[2];
+    ArrayList<String> texto = parseText(content[0][0]);
+    contenido[0] = parseText(content[0][0]);
+    contenido[1] = content[0][1];
+    rows = texto.size();
+    tableHeight = rowHeight * rows;
+    drawDecoration(0, rows);
+    addText(contenido);
     drawColumns();
     drawRow(0);
-    drawRow(content.length);
+    drawRow(rows);
 
   }
 
@@ -153,13 +160,13 @@ public class PDFTableGenerator {
    * 
    * @throws IOException
    */
-  public static void drawRow() throws IOException {
-    float nexty = yFirstCol;
-    for (int i = 0; i <= rows; i++) {
-      contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
-      nexty -= rowHeight;
-    }
-  }
+  // public static void drawRow() throws IOException {
+  //   float nexty = yFirstCol;
+  //   for (int i = 0; i <= rows; i++) {
+  //     contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
+  //     nexty -= rowHeight;
+  //   }
+  // }
 
   /**
    * Formatea un String para que pueda ser dibujado en pantalla. Generalmente se
@@ -189,7 +196,7 @@ public class PDFTableGenerator {
     Pair<String, Boolean> par;
 
     int sum = 1;
-    aux = "-";
+    aux = "";
     while (!words.isEmpty()) {
       par = words.poll();
       sum += par.getKey().length();
@@ -201,7 +208,7 @@ public class PDFTableGenerator {
         sum = 1;
         aux += " " + par.getKey();
         sFormat.add(aux);
-        aux = "-";
+        aux = "";
       } else {
         if (aux.length() > 0) {
           aux += " ";
@@ -237,15 +244,12 @@ public class PDFTableGenerator {
    * 
    * @param content Texto que se añade en la tabla
    */
-  public static void addText(String[][] content) throws IOException {
+  public static void addText(Object[] content) throws IOException {
     float textx = margin + cellMargin;
     float texty = yFirstCol - 15;
-    ArrayList<String> text = new ArrayList<String>();
+    ArrayList<String> text = (ArrayList<String>) content[0];
 
-    for (int i = 0; i < content.length; i++) {
-      for (int j = 0; j < content[i].length; j++) {
-        text = parseText(content[i][j]);
-
+        //Primer columna
         for (int k = 0; k < text.size(); k++) {
           drawText(textx, texty, text.get(k));
           texty -= rowHeight;
@@ -253,10 +257,10 @@ public class PDFTableGenerator {
 
         texty = (yFirstCol + texty) / 2; // Centrar verticalmente la segunda columna
         textx += (tableWidth - WIDTHLASTCOL); // Segunda columna horizontalmente
-      }
-      texty -= rowHeight;
-      textx = margin + cellMargin;
-    }
+        drawText(textx,texty,(String) content[1]);
+      // texty -= rowHeight;
+      // textx = margin + cellMargin;
+    
   }
 
 }
