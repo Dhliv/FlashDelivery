@@ -2,6 +2,7 @@ package utilities;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.util.ArrayList;
 
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
@@ -152,13 +153,51 @@ public class PDFTableGenerator {
    * @param s String que se va a formatear
    * @return String formateado
    */
-  public static String parseText(String s){
-    final int MAXLENGTHSTRING = 50;  //Maximo numero de caracteres que puede ocupar una cadena en la tabla.
-    s = GeneralString.removeNewLine(s);
-    s = GeneralString.cutString(s,MAXLENGTHSTRING);
-    return s;
+  public static ArrayList<String> parseText(String s){
+    final int MAXLENGTHSTRING = 85;  //Maximo numero de caracteres que puede ocupar una cadena en la tabla.
+    ArrayList<String> sFormatAux = new ArrayList<String>();
+    ArrayList<String> sFormat = new ArrayList<String>();
+    String aux;
+
+    //Separar strings cuando se encuentre el caracter '\n'
+    int pos=0;
+    for(int j=0; j<s.length(); j++){
+      if(s.charAt(j) == '\n'){
+        sFormatAux.add(s.substring(pos, j));
+        pos=j+1;
+      }
+    }
+    sFormatAux.add(s.substring(pos, s.length()));
+
+    //Separa las cadenas cuando llega a un numero maximo de caracteres.
+    for(int i=0; i<sFormatAux.size(); i++){
+      aux = sFormatAux.get(i);
+      pos=0;
+      for(int j=MAXLENGTHSTRING; j<aux.length(); j+=MAXLENGTHSTRING){
+          sFormat.add(aux.substring(pos, j));
+          pos=j;
+      }
+      sFormat.add(aux.substring(pos, aux.length()));
+    }
+
+    System.out.println(s);
+    return sFormat;
   }
 
+  /**
+   * Dibuja el texto text en las posiciones X=posX y Y=posY
+   * @param posX posición X en formato float
+   * @param posY posición Y en formato float
+   * @param text texto en string
+   * @throws IOException
+   */
+  public static void drawText(float posX,float posY,String text) throws IOException{
+    contentStream.beginText();
+      contentStream.setFont(PDType1Font.TIMES_ROMAN, 10); //Fuente de la letra
+      contentStream.newLineAtOffset(posX, posY);
+      contentStream.showText(text);
+    contentStream.endText();
+  }
   /**
    * Añadir texto a la tabla del PDF
    * @param content Texto que se añade en la tabla
@@ -166,19 +205,19 @@ public class PDFTableGenerator {
   public static void addText(String[][] content) throws IOException{
     float textx = margin + cellMargin;
     float texty = yFirstCol - 15;
-    String text = "";
+    ArrayList<String> text = new ArrayList<String>();
 
     for (int i = 0; i < content.length; i++) {
       for (int j = 0; j < content[i].length; j++) {       
         text = parseText(content[i][j]);
+        
+        for(int k=0; k<text.size(); k++){
+          drawText(textx,texty,text.get(k));
+          texty -= rowHeight;
+        }
 
-        contentStream.beginText();
-          contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
-          contentStream.newLineAtOffset(textx, texty);
-          contentStream.showText(text);
-        contentStream.endText();
-
-        textx += (tableWidth - WIDTHLASTCOL);
+        texty = (yFirstCol+texty)/2; //Centrar verticalmente la segunda columna
+        textx += (tableWidth - WIDTHLASTCOL); //Segunda columna horizontalmente
       }
       texty -= rowHeight;
       textx = margin + cellMargin;
