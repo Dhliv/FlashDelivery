@@ -24,16 +24,28 @@ public class OperadorResumen {
   private int total;
   private int impuesto;
   private Empleado operador;
-  @FXML private Label lblCedulaR; // label Cedula del Remitente
-  @FXML private Label lblNameR; // label nombre de remitente
-  @FXML private Label lblCedulaD; // label cedula del destinatario
-  @FXML private Label lblNameD; // label Nombre del Destinatario
-  @FXML private Label lblDirD; // direccion del destinatario
-  @FXML private Label lblnumP; // numero de paquetes en el pedido
-  @FXML private Label labelCostoEnvio; // costo del envio
-  @FXML private Label lblImpuesto; // valor del impuesto
-  @FXML private Label lblSeguro; // Costo de los seguros de los paquetes.
-  @FXML private Label lblTotal; // Costo total del envío.
+  private Pago pago;
+
+  @FXML
+  private Label lblCedulaR; // label Cedula del Remitente
+  @FXML
+  private Label lblNameR; // label nombre de remitente
+  @FXML
+  private Label lblCedulaD; // label cedula del destinatario
+  @FXML
+  private Label lblNameD; // label Nombre del Destinatario
+  @FXML
+  private Label lblDirD; // direccion del destinatario
+  @FXML
+  private Label lblnumP; // numero de paquetes en el pedido
+  @FXML
+  private Label labelCostoEnvio; // costo del envio
+  @FXML
+  private Label lblImpuesto; // valor del impuesto
+  @FXML
+  private Label lblSeguro; // Costo de los seguros de los paquetes.
+  @FXML
+  private Label lblTotal; // Costo total del envío.
 
   /**
    * Constructor de la clase OperadorResumen.
@@ -41,8 +53,9 @@ public class OperadorResumen {
    * @param envio Clase que almacena métodos e informacion de los clientes y
    *              paquetes del envío.
    */
-  public void update(model.RegistrarEnvio envio) {
+  public OperadorResumen(model.RegistrarEnvio envio, Empleado operador) {
     this.envio = envio;
+    this.operador = operador;
   }
 
   /**
@@ -66,14 +79,14 @@ public class OperadorResumen {
     lblnumP.setText(lblnumP.getText() + ": " + Integer.toString(envio.getPaquetes().size()));
 
     // Calcula el total del envio y su respectivo impuesto.
-    Pago.initialize(envio, operador);
-    total = Pago.getTotal();
-    impuesto = Pago.getImpuesto();
+    pago = new Pago(envio, operador);
+    total = pago.getTotal();
+    impuesto = pago.getImpuesto();
 
     // Actualiza los datos en pantalla.
     labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Integer.toString(total - impuesto));
     lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
-    lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(Pago.getSeguro()));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(pago.getSeguro()));
     lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
   }
 
@@ -82,42 +95,50 @@ public class OperadorResumen {
    * 
    * @param event not used.
    */
-  @FXML void atras(ActionEvent event) {
+  @FXML
+  void atras(ActionEvent event) {
     Globals.cambiarVista("operador.paquetes");
   }
 
   /**
    * Accede a la pantalla de pago con tarjeta. Se deshabilitan componentes
    * gráficos según el tipo de la tarjeta.
+   * 
    * @param tipo de la tarjeta.
    */
   void pagar(Integer tipo) {
-    Globals.cambiarVista(Globals.loadView("operador.validar.tarjeta", new OperadorTarjeta(tipo, this, envio)));
+    Globals.cambiarVista("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago));
   }
 
   /**
    * Se ejecuta pagar con el tipo de tarjeta de credito.
+   * 
    * @param event not used.
    */
-  @FXML void pagoCredito(ActionEvent event) {
+  @FXML
+  void pagoCredito(ActionEvent event) {
     pagar(CREDITO);
   }
 
   /**
    * Se ejecuta pagar con el tipo de tarjeta de debito.
+   * 
    * @param event not used.
    */
-  @FXML void pagoDebito(ActionEvent event) {
+  @FXML
+  void pagoDebito(ActionEvent event) {
     pagar(DEBITO);
   }
 
   /**
    * El pago se hace efectivo (o eso asumimos) y se vuelve a la pantalla principal
    * del Operador de Oficina.
+   * 
    * @param event not used.
    */
-  @FXML void pagoEfectivo(ActionEvent event) {
-    Pago.ejecutarPago(envio);
+  @FXML
+  void pagoEfectivo(ActionEvent event) {
+    pago.ejecutarPago(envio);
     GeneralAlerts.showPagoExitoso();
   }
 }

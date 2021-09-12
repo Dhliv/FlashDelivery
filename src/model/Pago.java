@@ -12,17 +12,17 @@ import model.Entities.Empleado;
 import utilities.CreatePDF;
 import utilities.Globals;
 
-// TODO eliminar static de todas las funciones y establecer por constructor.
 public class Pago {
-  private static Integer total; // Almacena el costo total del envío.
-  private static Integer subTotal; // Almacena el subtotal del envío.
-  private static Integer impuesto; // Almacena el impuesto del envío.
-  private static Integer seguro; // Almacena el valor del seguro del envío.
-  private static String[][] numeracion;
-  private static Date date;
-  private static Integer SEDE;
-  private static String EMPLEADO;
-  private static Empleado operador;
+  private Integer total; // Almacena el costo total del envío.
+  private Integer subTotal; // Almacena el subtotal del envío.
+  private Integer impuesto; // Almacena el impuesto del envío.
+  private Integer seguro; // Almacena el valor del seguro del envío.
+  private String[][] numeracion; // Almacena la información organizada sobre los paquetes (valor y descripción).
+  private Date date; // Almacena la fecha actual en la que se ejecuta el pago.
+  private Integer SEDE; // Almacena la sede a la que pertenece el empleado que registra el pago (envío).
+  private String EMPLEADO; // Almacena el número de cedula del empleado que registra el pago (envío).
+  private Empleado operador; // Almacena el objeto Empleado del operador de oficina que registra el pago
+                             // (envío).
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
@@ -33,20 +33,26 @@ public class Pago {
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  public static void initialize(RegistrarEnvio envio, Empleado op) throws IOException {
+  public Pago(RegistrarEnvio envio, Empleado op) throws IOException {
     operador = op;
     SEDE = op.getSede();
     EMPLEADO = op.getCedula();
     date = Date.valueOf(LocalDate.now());
+
     calcularTotal(envio);
-    date = Date.valueOf(LocalDate.now());
     CreatePDF pdf = new CreatePDF(parsePaquetes(envio), parseCliente(envio.getRemitente()),
         parseCliente(envio.getDestinatario()), parsePago());
 
     pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
 
-  public static String[] parsePago() {
+  /**
+   * Inserta toda la información relacionada al pago en un arrau de string para
+   * ordenar esta info en la factura.
+   * 
+   * @return Array con la info organizada.
+   */
+  public String[] parsePago() {
     String[] pago = new String[5];
     pago[0] = getDate().toString();
     pago[1] = Integer.toString(getTotal());
@@ -61,7 +67,7 @@ public class Pago {
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  public static int getIdEnvio(RegistrarEnvio envio) {
+  public int getIdEnvio(RegistrarEnvio envio) {
     Integer idEnvio = Envio.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion,
         SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     return idEnvio;
@@ -73,7 +79,7 @@ public class Pago {
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  public static void ejecutarPago(RegistrarEnvio envio) {
+  public void ejecutarPago(RegistrarEnvio envio) {
     Paquete.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
     goBack();
   }
@@ -81,12 +87,19 @@ public class Pago {
   /**
    * Vuelve a la pantalla principal del Operador de Oficina.
    */
-  private static void goBack() {
+  private void goBack() {
     Globals.clearViews();
     Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
   }
 
-  private static String[] parseCliente(Cliente cliente) {
+  /**
+   * Almacena toda la información relacionada al cliente en un array de string
+   * para organizarla posteriormente en la factura.
+   * 
+   * @param cliente Objeto cliente con la información pertinente a él.
+   * @return Array con la info del cliente organizada.
+   */
+  private String[] parseCliente(Cliente cliente) {
 
     String[] numeracionCliente = new String[5];
     numeracionCliente[0] = cliente.nombre;
@@ -98,11 +111,21 @@ public class Pago {
   }
 
   /**
+   * Calcula el valor de un paquete mediante su masa y su volumen.
+   * 
+   * @param p Paquete al que se le calcula su costo según su masa y volumen.
+   * @return Costo de enviar el paquete considerando solo su masa y volumen.
+   */
+  private int calcularCostoPaquete(Paquete p) {
+    return (int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3);
+  }
+
+  /**
    * Obtiene la información de los paquetes que se debe mostrar en la factura.
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  private static String[][] parsePaquetes(model.RegistrarEnvio envio) throws IOException {
+  private String[][] parsePaquetes(model.RegistrarEnvio envio) throws IOException {
     List<Paquete> ps = envio.getPaquetes();
     Paquete p;
     numeracion = new String[ps.size() + 1][2];
@@ -112,7 +135,7 @@ public class Pago {
     for (int i = 0; i < ps.size(); i++) {
       p = ps.get(i);
       numeracion[i + 1][0] = p.descripcion;
-      numeracion[i + 1][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
+      numeracion[i + 1][1] = String.valueOf(calcularCostoPaquete(p));
     }
 
     return numeracion;
@@ -124,7 +147,7 @@ public class Pago {
    * @param costo Subtotal del envio.
    * @return Impuesto correspondiente a pagar.
    */
-  private static double calcularImpuesto(double costo) {
+  private double calcularImpuesto(double costo) {
     return (costo * IMPUESTO);
   }
 
@@ -134,7 +157,7 @@ public class Pago {
    * @param p Datos relacionados a los paquetes del envio.
    * @return Valor del seguro a pagar.
    */
-  private static double calcularSeguro(List<Paquete> p) {
+  private double calcularSeguro(List<Paquete> p) {
     double seguro = 0; // Valor del seguro a pagar por el paquete
     for (int i = 0; i < p.size(); i++) {
       if (p.get(i).seguro) {
@@ -150,7 +173,7 @@ public class Pago {
    * @param p Datos relacionados a los paquetes del envio.
    * @return Subtotal a pagar en el envío.
    */
-  private static double calcularCosto(List<Paquete> p) {
+  private double calcularCosto(List<Paquete> p) {
     double costo = 0;
     for (int i = 0; i < p.size(); i++) {
       costo += (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3);
@@ -164,7 +187,7 @@ public class Pago {
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  private static void calcularTotal(model.RegistrarEnvio envio) {
+  private void calcularTotal(model.RegistrarEnvio envio) {
     List<Paquete> p = envio.getPaquetes();
 
     subTotal = (int) calcularCosto(p);
@@ -174,23 +197,23 @@ public class Pago {
     total = subTotal + impuesto + seguro;
   }
 
-  public static Integer getTotal() {
+  public Integer getTotal() {
     return total;
   }
 
-  public static Integer getSubTotal() {
+  public Integer getSubTotal() {
     return subTotal;
   }
 
-  public static Integer getImpuesto() {
+  public Integer getImpuesto() {
     return impuesto;
   }
 
-  public static Integer getSeguro() {
+  public Integer getSeguro() {
     return seguro;
   }
 
-  public static Date getDate() {
+  public Date getDate() {
     return date;
   }
 }
