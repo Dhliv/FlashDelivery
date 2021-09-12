@@ -42,15 +42,24 @@ public class UserRegister implements Initializable {
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
-  @FXML private TextField nombreT;
-  @FXML private TextField identificacionT;
-  @FXML private TextField telefonoT;
-  @FXML private TextField direccionT;
-  @FXML private DatePicker fechaT;
-  @FXML private ChoiceBox<String> rolT;
-  @FXML private TextField usernameT;
-  @FXML private ChoiceBox<String> idsedeT;
-  @FXML private PasswordField passwordT;
+  @FXML
+  private TextField nombreT;
+  @FXML
+  private TextField identificacionT;
+  @FXML
+  private TextField telefonoT;
+  @FXML
+  private TextField direccionT;
+  @FXML
+  private DatePicker fechaT;
+  @FXML
+  private ChoiceBox<String> rolT;
+  @FXML
+  private TextField usernameT;
+  @FXML
+  private ChoiceBox<String> idsedeT;
+  @FXML
+  private PasswordField passwordT;
   // FIN de los campos.
 
   /**
@@ -70,7 +79,8 @@ public class UserRegister implements Initializable {
    * @param url not used.
    * @param rb  not used.
    */
-  @Override public void initialize(URL url, ResourceBundle rb) {
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 
@@ -121,7 +131,8 @@ public class UserRegister implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML void goToUsuariosConsulta(ActionEvent event) {
+  @FXML
+  void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
@@ -130,7 +141,8 @@ public class UserRegister implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML void registrarUser(ActionEvent event) {
+  @FXML
+  void registrarUser(ActionEvent event) {
     try {
 
       boolean forbidchar = false;
@@ -147,8 +159,8 @@ public class UserRegister implements Initializable {
         parseData();
 
         Empleado emp = new Empleado(id + "", name, "", rol, dir, telefono, fc, idSede);
-        userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el empleado
-                                               // ya existía.
+        userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
+                                                   // empleado ya existía.
 
         if (userNoExist == NOEXISTE) {
           Usuario user = new Usuario(id, username, password, true);
@@ -162,7 +174,8 @@ public class UserRegister implements Initializable {
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           GeneralAlerts.showEmptyFieldAlert();
-        else if (forbidchar) GeneralAlerts.showCharForbidenAlert();
+        else if (forbidchar)
+          GeneralAlerts.showCharForbidenAlert();
       }
     } catch (NumberFormatException error) {
       GeneralAlerts.showErrorUnexpt();
