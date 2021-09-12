@@ -1,4 +1,4 @@
-package controller;
+package controller.gerente.usuarios;
 
 import java.net.URL;
 import java.time.LocalDate;

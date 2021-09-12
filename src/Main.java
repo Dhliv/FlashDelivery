@@ -1,12 +1,7 @@
-import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Random;
 
 import controller.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import utilities.CreatePDF;
 import utilities.Globals;
 import utilities.Ventana;
 
@@ -17,6 +12,7 @@ public class Main extends Application {
     }
 
     // ! Borrar
+    /*
     public void generatePDF() throws IOException {
         String[][] infoPaq = new String[10][2];
         infoPaq[0][0] = "Descripción";
@@ -33,6 +29,7 @@ public class Main extends Application {
         CreatePDF pdf = new CreatePDF(infoPaq, infoDest, infoDest, infoPago);
         pdf.pdfCreate();
     }
+    */
 
     public void start(Stage stage) throws Exception {
         //generatePDF();
