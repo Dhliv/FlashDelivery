@@ -74,7 +74,8 @@ public class UserRegister implements Initializable {
   }
 
   /**
-   * Ingresa los datos a los menus desplegables de Roles y Sedes.
+   * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
+   * restricciones a los campos necesarios.
    * 
    * @param url not used.
    * @param rb  not used.
@@ -91,6 +92,12 @@ public class UserRegister implements Initializable {
     s.addAll(model.Entities.Sede.getSedesParsed());
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
+
+    TextFieldRestrictions.textFieldNumeric(identificacionT);
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
+
+    TextFieldRestrictions.textFieldNumeric(telefonoT);
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
   }
 
   /**
