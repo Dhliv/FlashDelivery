@@ -5,9 +5,10 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-import controller.OperadorConsulta;
-import model.Entities.Paquetes;
-import model.Entities.Clientes.Cliente;
+import controller.operador.OperadorConsulta;
+import model.Entities.Paquete;
+import model.Entities.Cliente;
+import model.Entities.Empleado;
 import utilities.CreatePDF;
 import utilities.Globals;
 
@@ -21,7 +22,7 @@ public class Pago {
   private static Date date;
   private static Integer SEDE;
   private static String EMPLEADO;
-
+  private static Empleado operador;
   public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
   public static final double SEGURO = 0.06; // porcentaje de seguro.
   public static final int ValorKG = 1000;
@@ -32,10 +33,11 @@ public class Pago {
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  public static void initialize(RegistrarEnvio envio) throws IOException {
-    SEDE = Globals.empleado.getSede();
-    EMPLEADO = Globals.empleado.getCedula();
-    date = Date.valueOf(LocalDate.now()); // Fecha actual.
+  public static void initialize(RegistrarEnvio envio, Empleado op) throws IOException {
+    operador = op;
+    SEDE = op.getSede();
+    EMPLEADO = op.getCedula();
+    date = Date.valueOf(LocalDate.now());
     calcularTotal(envio);
     date = Date.valueOf(LocalDate.now());
     CreatePDF pdf = new CreatePDF(parsePaquetes(envio), parseCliente(envio.getRemitente()),
@@ -44,11 +46,6 @@ public class Pago {
     pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
 
-  /**
-   * Retorna la información de pago.
-   * 
-   * @return String Array con: Fecha, Total, Impuesto, Seguro, Subtotal del envio.
-   */
   public static String[] parsePago() {
     String[] pago = new String[5];
     pago[0] = getDate().toString();
@@ -62,22 +59,22 @@ public class Pago {
   /**
    * Genera el id del envío.
    * 
-   * @param envio Objeto que contiene los datos relacionados al envio.
+   * @param envio Contiene los datos relacionados al envio.
    */
   public static int getIdEnvio(RegistrarEnvio envio) {
-    Integer idEnvio = Envios.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion,
+    Integer idEnvio = Envio.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion,
         SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     return idEnvio;
   }
 
   /**
-   * Ingresa los datos pertinentes a la base de datos: clientes, paquetes y el
-   * envío.
+   * Ingresa los datos pertinentes a la base de datos, como los clientes, los
+   * paquetes y el envío.
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
   public static void ejecutarPago(RegistrarEnvio envio) {
-    Paquetes.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
+    Paquete.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
     goBack();
   }
 
@@ -86,16 +83,9 @@ public class Pago {
    */
   private static void goBack() {
     Globals.clearViews();
-    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta());
+    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
   }
 
-  /**
-   * Retorna la información de un objeto Cliente en un Array de Strings.
-   * 
-   * @param cliente
-   * @return Array de Strings con la información del cliente: nombre, cedula,
-   *         ciudad, dirección, telefono.
-   */
   private static String[] parseCliente(Cliente cliente) {
 
     String[] numeracionCliente = new String[5];
@@ -111,19 +101,18 @@ public class Pago {
    * Obtiene la información de los paquetes que se debe mostrar en la factura.
    * 
    * @param envio Contiene los datos relacionados al envio.
-   * @return Array de Strings con la descripción y el precio de cada uno de los
-   *         paquetes de un envio.
    */
   private static String[][] parsePaquetes(model.RegistrarEnvio envio) throws IOException {
-    List<model.RegistrarEnvio.Paquete> ps = envio.getPaquetes();
-
-    model.RegistrarEnvio.Paquete p;
-    numeracion = new String[ps.size()][2];
+    List<Paquete> ps = envio.getPaquetes();
+    Paquete p;
+    numeracion = new String[ps.size() + 1][2];
+    numeracion[0][0] = "Descripción";
+    numeracion[0][1] = "Valor";
 
     for (int i = 0; i < ps.size(); i++) {
       p = ps.get(i);
-      numeracion[i][0] = p.descripcion;
-      numeracion[i][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
+      numeracion[i + 1][0] = p.descripcion;
+      numeracion[i + 1][1] = String.valueOf((int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3));
     }
 
     return numeracion;
@@ -145,11 +134,11 @@ public class Pago {
    * @param p Datos relacionados a los paquetes del envio.
    * @return Valor del seguro a pagar.
    */
-  private static double calcularSeguro(List<model.RegistrarEnvio.Paquete> p) {
+  private static double calcularSeguro(List<Paquete> p) {
     double seguro = 0; // Valor del seguro a pagar por el paquete
     for (int i = 0; i < p.size(); i++) {
       if (p.get(i).seguro) {
-        seguro += (p.get(i).valor_declarado * SEGURO);
+        seguro += (p.get(i).valor * SEGURO);
       }
     }
     return seguro;
@@ -161,7 +150,7 @@ public class Pago {
    * @param p Datos relacionados a los paquetes del envio.
    * @return Subtotal a pagar en el envío.
    */
-  private static double calcularCosto(List<model.RegistrarEnvio.Paquete> p) {
+  private static double calcularCosto(List<Paquete> p) {
     double costo = 0;
     for (int i = 0; i < p.size(); i++) {
       costo += (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3);
@@ -176,7 +165,7 @@ public class Pago {
    * @param envio Contiene los datos relacionados al envio.
    */
   private static void calcularTotal(model.RegistrarEnvio envio) {
-    List<model.RegistrarEnvio.Paquete> p = envio.getPaquetes();
+    List<Paquete> p = envio.getPaquetes();
 
     subTotal = (int) calcularCosto(p);
     impuesto = (int) calcularImpuesto(subTotal);

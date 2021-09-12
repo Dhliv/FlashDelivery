@@ -1,6 +1,5 @@
 package controller;
 
-
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
@@ -14,6 +13,11 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import controller.gerente.Admin;
+import controller.operador.OperadorOficina;
+
 public class Login {
     private Roles roles;
     private ArrayList<String> rol;
@@ -24,13 +28,15 @@ public class Login {
         this.rol = roles.rol;
     }
 
-    @FXML private Button btIngresar;
+    @FXML
+    private Button btIngresar;
+    @FXML
+    private PasswordField txtPass;
+    @FXML
+    private TextField txtUsuario;
 
-    @FXML private PasswordField txtPass;
-
-    @FXML private TextField txtUsuario;
-
-    @FXML void loginKeyboard(KeyEvent event) throws Exception {
+    @FXML
+    void loginKeyboard(KeyEvent event) throws Exception {
         System.out.println(event);
         KeyCode key = event.getCode();
         if (key.equals(KeyCode.ENTER)) {
@@ -38,7 +44,8 @@ public class Login {
         }
     }
 
-    @FXML void clicksoide(ActionEvent event) throws Exception {
+    @FXML
+    void clicksoide(ActionEvent event) throws Exception {
         login();
     }
 
@@ -46,23 +53,19 @@ public class Login {
         user = txtUsuario.getText();
         String pass = txtPass.getText();
         int acc = Usuario.entradaUsuario(user, pass);
-        if (acc == -2) {
-            // JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el
-            // sistema");
-            System.out.println("sorry bro");
-        } else if (acc == -1) {
-            // JOptionPane.showMessageDialog(null, "No se ha encontrado su usuario");
-            System.out.println("fake");
-        } else if (acc == 0) {
+        if (acc == -2)
+            JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
+        else if (acc == -1)
+            JOptionPane.showMessageDialog(null, "No se ha encontrado su usuario");
+        else if (acc == 0) {
             System.out.println("sql error");
         } else {
             // JOptionPane.showMessageDialog(null, "Entraste!");
             System.out.println("entre");
-            Empleado userActual = Empleado.cargarEmpleado(acc+"");
+            Empleado userActual = Empleado.cargarEmpleado(acc + "");
             var rolAcc = userActual.getRol();
 
             Globals.pantalla.close();
-            Globals.empleado = userActual;
             Ventana vent;
 
             if (rolAcc.equals(rol.get(roles.ADMIN))) {
@@ -71,10 +74,11 @@ public class Login {
             } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
                 vent = new Ventana("admin", new Admin(user));
             } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
-                vent = new Ventana("operadorOficina", new OperadorOficina());
-                vent.start(Globals.pantalla);
+                // vent = new Ventana("operadorOficina", new OperadorOficina());
+                // vent.start(Globals.pantalla);
+                JOptionPane.showMessageDialog(null, "NO HA SIDO IMPLEMENTADO");
             } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
-                vent = new Ventana("operadorOficina", null);
+                vent = new Ventana("operadorOficina", new OperadorOficina(userActual) );
                 vent.start(Globals.pantalla);
             } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {
                 vent = new Ventana("contador", new Admin(user));

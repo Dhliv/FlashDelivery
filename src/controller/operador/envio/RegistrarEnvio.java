@@ -1,4 +1,4 @@
-package controller;
+package controller.operador.envio;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -8,16 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Entities.Clientes.Cliente;
-import model.RegistrarEnvio.Dim;
-import model.RegistrarEnvio.Paquete;
+import model.Entities.Cliente;
+import model.Entities.Paquete;
 import model.RegistrarEnvio.TipoCliente;
 import utilities.GeneralAlerts;
 import utilities.Globals;
 import utilities.TextFieldRestrictions;
-import java.io.*;
 
 /**
+ * ! REYNELL ENCARGADO DE SEPARAR 2 CONTROLADORES
  * Controlador para las vistar operador.cliente y operador.paquetes
  * 
  * @author Julián Orejuela
@@ -79,22 +78,22 @@ public class RegistrarEnvio {
     private TextField Ancho; // TextField para ingresar el ancho del paquete
 
     @FXML
-    private TableView<PaqueteT> tbPaquetes; // Tabla para mostrar la lista de paquetes
+    private TableView<Paquete> tbPaquetes; // Tabla para mostrar la lista de paquetes
     // Columnas de la tabla
     @FXML
-    private TableColumn<PaqueteT, Integer> tcPeso;
+    private TableColumn<Paquete, Integer> tcPeso;
     @FXML
-    private TableColumn<PaqueteT, Integer> tcValor;
+    private TableColumn<Paquete, Integer> tcValor;
     @FXML
-    private TableColumn<PaqueteT, String> tcDescripcion;
+    private TableColumn<Paquete, String> tcDescripcion;
     @FXML
-    private TableColumn<PaqueteT, Integer> tcVolumen;
+    private TableColumn<Paquete, Integer> tcVolumen;
     @FXML
-    private TableColumn<PaqueteT, Integer> tcValorEnvio;
+    private TableColumn<Paquete, Integer> tcValorEnvio;
     @FXML
-    private TableColumn<PaqueteT, Integer> tcTotal;
+    private TableColumn<Paquete, Integer> tcTotal;
     // Lista de elementos de la tabla
-    private ObservableList<PaqueteT> list;
+    private ObservableList<Paquete> list;
     // #------------------------------------
 
     private model.RegistrarEnvio envio;
@@ -120,12 +119,12 @@ public class RegistrarEnvio {
             TextFieldRestrictions.textFieldNumeric(Alto);
 
             modify = false;
-            tcPeso.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("peso"));
-            tcValor.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("valor"));
-            tcDescripcion.setCellValueFactory(new PropertyValueFactory<PaqueteT, String>("descripcion"));
-            tcVolumen.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("volumen"));
-            tcValorEnvio.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("valorenvio"));
-            tcTotal.setCellValueFactory(new PropertyValueFactory<PaqueteT, Integer>("total"));
+            tcPeso.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("peso"));
+            tcValor.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("valor"));
+            tcDescripcion.setCellValueFactory(new PropertyValueFactory<Paquete, String>("descripcion"));
+            tcVolumen.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("volumen"));
+            tcValorEnvio.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("valorenvio"));
+            tcTotal.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("total"));
 
             list = FXCollections.observableArrayList();
             tbPaquetes.setItems(list);
@@ -153,13 +152,8 @@ public class RegistrarEnvio {
         // Se crea un hilo sobreescribiendo el método run que ejecute la búsqueda en la
         // base de datos
         // Para no sobrecargar la interfaz gráfica
-        Thread r = new Thread() {
-            @Override
-            public void run() {
-                onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);
-            }
-        };
-        r.start();
+        Runnable r = () -> { onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);};
+        new Thread(r).start();
 
     }
 
@@ -174,14 +168,9 @@ public class RegistrarEnvio {
         // Se crea un hilo sobreescribiendo el método run que ejecute la búsqueda en la
         // base de datos
         // Para no sobrecargar la interfaz gráfica
-        Thread r = new Thread() {
-            @Override
-            public void run() {
-                onChangeCedula(DCedula, DNombre, DCiudad, DDireccion, DTelefono, TipoCliente.Destinatario);
-            }
-        };
-        r.start();
 
+        Runnable r = () -> { onChangeCedula(DCedula, DNombre, DCiudad, DDireccion, DTelefono, TipoCliente.Destinatario);};
+        new Thread(r).start();
     }
 
     ChangeListener<Boolean> onDestinatarioFocusOut = (ObservableValue<? extends Boolean> arg0, Boolean arg1,
@@ -190,7 +179,7 @@ public class RegistrarEnvio {
             onActionDestinatario();
     };
 
-    private void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion,
+    private synchronized void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion,
             TextField Telefono, TipoCliente tipo) {
         if (Cedula.getText() == "")
             return;
@@ -219,7 +208,7 @@ public class RegistrarEnvio {
             Boolean seguro = Seguro.isSelected();
 
             Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, -1);
-            list.add(new PaqueteT(p));
+            list.add(p);
             clearFieldsPaquetes();
         } catch (NumberFormatException e) {
             GeneralAlerts.showEmptyFieldAlert();
@@ -235,13 +224,13 @@ public class RegistrarEnvio {
         if (!modify) {
             btRegistrar.setDisable(true);
             selectedP = index;
-            PaqueteT pt = list.get(index);
+            Paquete pt = list.get(index);
             Peso.setText(pt.peso + "");
             Valor.setText(pt.valor + "");
             Descripcion.setText(pt.descripcion);
-            Ancho.setText(pt.d.ancho + "");
-            Largo.setText(pt.d.largo + "");
-            Alto.setText(pt.d.alto + "");
+            Ancho.setText(pt.volumen + "");
+            Largo.setText(pt.volumen.largo + "");
+            Alto.setText(pt.volumen.alto + "");
             tbPaquetes.setDisable(true);
             btEliminar.setDisable(true);
             btEditar.setText("Confirmar");
@@ -257,7 +246,7 @@ public class RegistrarEnvio {
                 envio.eliminarPaquete(index);
                 Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, selectedP);
                 list.remove(index);
-                list.add(index, new PaqueteT(p));
+                list.add(index, p);
                 btRegistrar.setDisable(false);
                 btEliminar.setDisable(false);
                 tbPaquetes.setDisable(false);
@@ -297,50 +286,10 @@ public class RegistrarEnvio {
         Ancho.setText("");
     }
 
-    public class PaqueteT {
-        private int peso, valor;
-        private String descripcion;
-        private int volumen, valorenvio, total;
-        private Dim d;
-
-        public PaqueteT(Paquete p) {
-            peso = p.peso;
-            valor = p.valor_declarado;
-            descripcion = p.descripcion;
-            volumen = p.volumen.volumen();
-            valorenvio = envio.getCost(peso, volumen);
-            total = envio.getTotal(valorenvio, valor, p.seguro);
-            d = p.volumen;
-        }
-
-        public int getPeso() {
-            return peso;
-        }
-
-        public int getValor() {
-            return valor;
-        }
-
-        public String getDescripcion() {
-            return descripcion;
-        }
-
-        public int getVolumen() {
-            return volumen;
-        }
-
-        public int getValorenvio() {
-            return valorenvio;
-        }
-
-        public int getTotal() {
-            return total;
-        }
-    }
 
     @FXML
     void resumenEnvio(ActionEvent event) {
-        operadorResumen.update(envio, this);
+        //operadorResumen.update(envio, this);
         Globals.cambiarVista(Globals.loadView("operador.resumen", operadorResumen));
     }
 }

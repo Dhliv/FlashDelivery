@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Entities.Empleado;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -17,7 +16,6 @@ public class Globals {
     private static Object referenceObject;
     public static Pane viewPane;
     public static Stage pantalla;
-    public static Empleado empleado;
     private static Ventana ventana;
     private static Map<String, Parent> views;
     private static model.RegistrarEnvio envio;

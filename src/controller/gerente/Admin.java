@@ -1,6 +1,8 @@
-package controller;
+package controller.gerente;
 
 import javax.swing.JOptionPane;
+
+import controller.gerente.usuarios.UserConsulta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;

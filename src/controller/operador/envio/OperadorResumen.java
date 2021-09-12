@@ -1,4 +1,4 @@
-package controller;
+package controller.operador.envio;
 
 import java.io.IOException;
 
@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.Pago;
+import model.Entities.Empleado;
 import utilities.GeneralAlerts;
 import utilities.Globals;
 
@@ -17,12 +18,12 @@ import utilities.Globals;
  */
 public class OperadorResumen {
   private model.RegistrarEnvio envio;
-  private RegistrarEnvio befCtr;
 
   private static final Integer DEBITO = 0;
   private static final Integer CREDITO = 1;
   private int total;
   private int impuesto;
+  private Empleado operador;
   @FXML private Label lblCedulaR; // label Cedula del Remitente
   @FXML private Label lblNameR; // label nombre de remitente
   @FXML private Label lblCedulaD; // label cedula del destinatario
@@ -40,9 +41,8 @@ public class OperadorResumen {
    * @param envio Clase que almacena métodos e informacion de los clientes y
    *              paquetes del envío.
    */
-  public void update(model.RegistrarEnvio envio, RegistrarEnvio ah) {
+  public void update(model.RegistrarEnvio envio) {
     this.envio = envio;
-    befCtr = ah;
   }
 
   /**
@@ -66,7 +66,7 @@ public class OperadorResumen {
     lblnumP.setText(lblnumP.getText() + ": " + Integer.toString(envio.getPaquetes().size()));
 
     // Calcula el total del envio y su respectivo impuesto.
-    Pago.initialize(envio);
+    Pago.initialize(envio, operador);
     total = Pago.getTotal();
     impuesto = Pago.getImpuesto();
 
@@ -83,7 +83,7 @@ public class OperadorResumen {
    * @param event not used.
    */
   @FXML void atras(ActionEvent event) {
-    Globals.cambiarVista("operador.paquetes", befCtr);
+    Globals.cambiarVista("operador.paquetes");
   }
 
   /**
