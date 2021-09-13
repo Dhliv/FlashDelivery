@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import model.Entities.Cliente;
 import model.Entities.Paquete;
-import model.Entities.Paquete.Dim;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -85,11 +84,10 @@ public class RegistrarEnvio {
     p.descripcion = descripcion;
     p.peso = peso;
     p.valor = valor;
-    Dim d = new Dim();
-    d.alto = alto;
-    d.largo = largo;
-    d.ancho = ancho;
-    p.volumen = d;
+
+    p.alto = alto;
+    p.largo = largo;
+    p.ancho = ancho;
     p.seguro = seguro;
         
     if (index == -1)
@@ -102,7 +100,9 @@ public class RegistrarEnvio {
   public void editarPaquete(int index, Paquete p) {
     paquetes.get(index).descripcion = p.descripcion;
     paquetes.get(index).peso = p.peso;
-    paquetes.get(index).volumen = p.volumen;
+    paquetes.get(index).alto = p.alto;
+    paquetes.get(index).ancho= p.ancho;
+    paquetes.get(index).largo= p.largo;
     paquetes.get(index).valor = p.valor;
   }
 

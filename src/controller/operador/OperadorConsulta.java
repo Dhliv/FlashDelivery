@@ -19,13 +19,15 @@ public class OperadorConsulta implements Initializable {
   @FXML private TableColumn<Paquete, Integer> tcIdPaquete;
   @FXML private TableColumn<Paquete, Integer> tcPesoPaquete;
   @FXML private TableColumn<Paquete, Boolean> tcEstado;
+  private ObservableList<Paquete> list;
   private Empleado e ;
   public OperadorConsulta(Empleado e ){
     this.e = e;
+    
   }
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    System.out.println(tPaquetes);
+    /*
     ArrayList<Paquete> pq = (ArrayList<Paquete>) Paquete.queryPaquetesSede(e.getSede());
     
     tcDestinatario.setCellValueFactory(new PropertyValueFactory<Paquete, String>("destinatario"));
@@ -36,6 +38,7 @@ public class OperadorConsulta implements Initializable {
     ObservableList<Paquete> list = FXCollections.observableArrayList(pq);
     
     tPaquetes.setItems(list);
+    */
   }
 
 }
