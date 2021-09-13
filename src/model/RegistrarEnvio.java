@@ -6,13 +6,15 @@ import org.jooq.Record;
 import model.Entities.Clientes.Cliente;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.ArrayList;
 
 import utilities.Conexion;
 
 /**
- * Clase encargada de almacenar todos los datos para registrar un envio y
- * posteriormente guardarlos en la base de datos.
+ * Clase encargada de almacenar todos los datos en memoria para registrar un
+ * envio y posteriormente guardarlos en la base de datos.
+ * 
  * @author Julián Orejuela
  * @version 1.0, 29/4/2021
  */
@@ -37,11 +39,22 @@ public class RegistrarEnvio {
 
   /**
    * Busca si un cliente ya se encuentra registrado en la base de datos.
+   * 
    * @param cedula
    * @param tipo
    * @return El cliente o {@code null} si no existe.
    */
   public Cliente buscarCliente(String cedula, TipoCliente tipo) {
+    CompletableFuture.supplyAsync(() -> Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne()).thenAccept(record -> {
+      Cliente cliente = record != null ? record.into(Cliente.class) : null;
+      try {
+        Thread.sleep(5000);
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }).join();
+
     Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
     Cliente cliente = rs != null ? rs.into(Cliente.class) : null;
     if (tipo == TipoCliente.Remitente) remitente = cliente;

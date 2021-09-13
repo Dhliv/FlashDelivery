@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import controller.Login;
+import controller.OperadorOficina;
 import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utilities.CreatePDF;
 import utilities.Globals;
@@ -35,12 +38,23 @@ public class Main extends Application {
     }
 
     public void start(Stage stage) throws Exception {
-        //generatePDF();
+        // generatePDF();
 
         Globals.init(this);
         Globals.pantalla = stage;
-        
-        Ventana login = new Ventana("login", new Login());
-        login.start(stage);
+
+        Ventana vent = new Ventana("operadorOficina", null);
+        vent.start(Globals.pantalla);
+
+        /*
+         * Ventana login = new Ventana("login", new Login()); login.start(stage);
+         */
+
+        /*
+         * Parent root = Globals.loadView("operadorOficina"); Scene scene = new
+         * Scene(root);
+         * 
+         * stage.setScene(scene); stage.show();
+         */
     }
 }

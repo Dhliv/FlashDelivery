@@ -15,8 +15,6 @@ public class Clientes {
     public Boolean existInDB;
   }
 
-  
-
   /**
    * Registra a un nuevo cliente en la base de datos.
    * 
@@ -26,7 +24,8 @@ public class Clientes {
    * @param telefono  del cliente.
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono) {
-    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("\"Cedula\""), DSL.field("\"Direccion\""), DSL.field("\"Telefono\""), DSL.field("\"Nombre\"")).values(cedula, direccion, telefono, nombre).execute();
+    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("\"Cedula\""), DSL.field("\"Direccion\""),
+        DSL.field("\"Telefono\""), DSL.field("\"Nombre\"")).values(cedula, direccion, telefono, nombre).execute();
     Conexion.closeConnection();
   }
 
