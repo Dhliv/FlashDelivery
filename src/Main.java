@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -20,12 +21,13 @@ public class Main extends Application {
     }
 
     // ! Borrar
+
     public void generatePDF() throws IOException {
-        String[][] infoPaq = new String[10][2];
-        infoPaq[0][0] = "Descripción";
-        infoPaq[0][1] = "Precio (COP)";
-        for (int i = 1; i < infoPaq.length; i++) {
-            infoPaq[i][0] = "Paquete" + Integer.toString(i);
+        String[][] infoPaq = new String[1][2];
+        String prueba = "El estándar ambiental Green Dragon está estructurado en 5 niveles:\n Compromiso con la Gestión Ambiental\n Comprensión de las responsabilidades ambientales\n Manejo de los impactos ambientales\n  Programa de gestión ambiental\n y Mejora ambiental continua\n Con el fin de proporcionar a las organizaciones los elementos de un sistema de gestión ambiental eficaz que sea apropiado para el contexto, la naturaleza y la escala de sus actividades y operaciones; un sistema para reducir los impactos ambientales de las organizaciones y proteger el medio ambiente, incluida la minimización de la degradación de los ecosistemas, el cambio climático, la pérdida de biodiversidad, la contaminación, el uso de recursos finitos, la gestión de desechos; además de aportar herramientas de implementación para lograr ISO14001: 2015, el sistema comunitario de ecogestión y auditoría medioambientales";
+
+        for (int i = 0; i < infoPaq.length; i++) {
+            infoPaq[i][0] = prueba;
             infoPaq[i][1] = Integer.toString((new Random(10)).nextInt());
         }
         String[] infoDest = { "Nombre", "Cedula", "Direccion", "Telefono", "Email" }; // INFORMACION DEL CLIENTE
@@ -43,18 +45,7 @@ public class Main extends Application {
         Globals.init(this);
         Globals.pantalla = stage;
 
-        Ventana vent = new Ventana("operadorOficina", null);
-        vent.start(Globals.pantalla);
-
-        /*
-         * Ventana login = new Ventana("login", new Login()); login.start(stage);
-         */
-
-        /*
-         * Parent root = Globals.loadView("operadorOficina"); Scene scene = new
-         * Scene(root);
-         * 
-         * stage.setScene(scene); stage.show();
-         */
+        Ventana login = new Ventana("login", new Login());
+        login.start(stage);
     }
 }

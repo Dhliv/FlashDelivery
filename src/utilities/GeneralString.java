@@ -19,7 +19,8 @@ public class GeneralString {
 
 
   /**
-   * Corta el String a una longitud fija en caso de superar cierta cantidad de caracteres. 
+   * Corta el String a una longitud fija. 
+   * En caso de superar cierta cantidad de caracteres se eliminarán y serán reemplazados por la cadena "...". 
    *
    * @param s Cadena de caracteres
    * @param maxLength Maxima longitud esperada en dicha cadena

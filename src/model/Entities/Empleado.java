@@ -5,7 +5,7 @@ import java.util.List;
 
 import utilities.Conexion;
 
-public class Empleado implements Entity {
+public class Empleado {
     private String cedula;
     private String nombres, apellidos, rol, direccion, telefono;
     private LocalDate birthdate;
@@ -91,18 +91,6 @@ public class Empleado implements Entity {
     }
 
     @Override
-    public void Charge(Object[] info) {
-        this.cedula = (String) info[0];
-        this.nombres = (String) info[1];
-        this.apellidos = (String) info[2];
-        this.rol = (String) info[3];
-        this.direccion = (String) info[4];
-        this.telefono = (String) info[5];
-        this.birthdate = (info[6] == null) ? LocalDate.now() : ((java.sql.Date) info[6]).toLocalDate();
-        this.sede = (int) info[7];
-    }
-
-    @Override
     public String toString() {
         return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
                 + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede
@@ -121,6 +109,8 @@ public class Empleado implements Entity {
 
         return sedes;
     }
+
+    
 
     /**
      * Actualiza en la BD los datos del empleadoa los editados (la cedula no cambia
@@ -151,6 +141,34 @@ public class Empleado implements Entity {
                 .into(Empleado.class);
         Conexion.closeConnection();
         return (!empleado.isEmpty() ? empleado.get(0) : null);
+    }
+
+    /**
+     * Obtiene todos los empleados en la base de datos que están habilitados (el
+     * atributo enabled correspondiente en la tabla usuario es true).
+     * 
+     * @return lista de Empleado.
+     */
+    public static List<Empleado> getEmpleadosHabilitados() {
+        List<Empleado> sedes = Conexion.db().select().from("empleado").join("usuario")
+                .on("empleado.cedula = usuario.id").where("enabled = true").fetch().into(Empleado.class);
+        Conexion.closeConnection();
+
+        return sedes;
+    }
+    /**
+     * Obtiene todos los empleados en la base de datos que están habilitados (el
+     * atributo enabled correspondiente en la tabla usuario es false).
+     * 
+     * @return lista de Empleado.
+     */
+    public static List<Empleado> getEmpleadosDeshabilitados() {
+
+        List<Empleado> sedes = Conexion.db().select().from("empleado").join("usuario")
+                .on("empleado.cedula = usuario.id").where("enabled = false").fetch().into(Empleado.class);
+        Conexion.closeConnection();
+
+        return sedes;
     }
 
 }

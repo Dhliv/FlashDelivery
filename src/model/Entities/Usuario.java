@@ -4,9 +4,9 @@ import java.util.List;
 
 import utilities.Conexion;
 
-public class Usuario implements Entity{
+public class Usuario {
 
-    //Atributos de la entidad
+    // Atributos de la entidad
     private int id;
     private String username;
     private String password;
@@ -54,27 +54,18 @@ public class Usuario implements Entity{
         this.enabled = enabled;
     }
 
-    @Override
-    public void Charge(Object[] info) {
-        this.id = (int) info[0];
-        this.username = (String) info[1];
-        this.password = (String) info[2];
-        this.enabled = (boolean) info[3];
-    }
-
     public static int entradaUsuario(String user, String pass) {
         int code = -1;
         if (verificarUsuario(user) && verificarPassword(pass)) {
             List<Usuario> usuario = Conexion.db().select().from("usuario")
-            .where("username ='" + user + "' and password ='" + pass+ "'").fetch()
-                .into(Usuario.class);
+                    .where("username ='" + user + "' and password ='" + pass + "'").fetch().into(Usuario.class);
             Conexion.closeConnection();
-            if(!usuario.isEmpty() ){
+            if (!usuario.isEmpty()) {
                 Usuario u = usuario.get(0);
-                if(u.enabled)
+                if (u.enabled)
                     code = u.id;
                 else
-                    code = -2;         
+                    code = -2;
             }
         }
         return code;
@@ -93,7 +84,8 @@ public class Usuario implements Entity{
         char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
         for (int i = 0; i < user.length(); ++i)
             for (int j = 0; j < F.length; ++j)
-                if (user.charAt(i) == F[j]) return false;
+                if (user.charAt(i) == F[j])
+                    return false;
         return true;
     }
 
@@ -108,13 +100,51 @@ public class Usuario implements Entity{
      */
     private static boolean verificarPassword(String pass) {
         boolean valid = false;
-        if (!pass.trim().equals(pass)) return valid;
+        if (!pass.trim().equals(pass))
+            return valid;
         char F[] = { '.', ',', '\'', '\"', '+', '-', '_', '!' };
         for (int i = 0; i < pass.length(); ++i)
             for (int j = 0; j < F.length; ++j)
-                if (pass.charAt(i) == F[j]) return valid;
+                if (pass.charAt(i) == F[j])
+                    return valid;
         valid = true;
         return valid;
     }
-    
+
+    /**
+     * Cambia el estado del atributo enabled de la tabla usuario a true, de un
+     * usuario con un id especificado (lo mismo que cambiarEstado(id, true))
+     * 
+     * @param id El ID del usuario
+     * @return
+     */
+    public static void habilitarUsuario(String id) {
+        cambiarEstado(id, true);
+    }
+
+    /**
+     * Cambia el estado del atributo enabled de la tabla usuario a false, de un
+     * usuario con un id especificado (lo mismo que cambiarEstado(id, false))
+     * 
+     * @param id El ID del usuario
+     * @return
+     */
+    public static void deshabilitarUsuario(String id) {
+        cambiarEstado(id, false);
+    }
+
+    /**
+     * !TODO USAR LAS OPCIONES QUE PROPORCIONA jOOQ
+     * Cambia el estado del atributo enabled
+     * de la tabla usuario a true, de un usuario con un id especificado
+     * 
+     * @param id      El ID del usuario a modificar
+     * @param enabled el estado a modificar
+     * @return
+     */
+    private static void cambiarEstado(String id, boolean enabled) {
+        String sql = "update usuario set enabled =" + enabled + " where id = '" + id + "'";
+        Conexion.db().execute(sql);
+    }
+
 }

@@ -1,4 +1,4 @@
-package controller;
+package controller.gerente.usuarios;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -18,7 +18,6 @@ import utilities.*;
 
 public class UserEdit implements Initializable {
   private Roles roles; // Cargos de la empresa
-  private UserConsulta controladorAnterior;
   private Empleado aEditar;
 
   // Auxiliares para los datos del usuario.
@@ -38,14 +37,22 @@ public class UserEdit implements Initializable {
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
-  @FXML private TextField nombreT;
-  @FXML private TextField identificacionT;
-  @FXML private TextField telefonoT;
-  @FXML private TextField direccionT;
-  @FXML private DatePicker fechaT;
-  @FXML private ChoiceBox<String> rolT;
-  @FXML private ChoiceBox<String> idsedeT;
-  @FXML private Label lblEmpleadoEditar;
+  @FXML
+  private TextField nombreT;
+  @FXML
+  private TextField identificacionT;
+  @FXML
+  private TextField telefonoT;
+  @FXML
+  private TextField direccionT;
+  @FXML
+  private DatePicker fechaT;
+  @FXML
+  private ChoiceBox<String> rolT;
+  @FXML
+  private ChoiceBox<String> idsedeT;
+  @FXML
+  private Label lblEmpleadoEditar;
   // FIN de los campos.
 
   /**
@@ -54,18 +61,19 @@ public class UserEdit implements Initializable {
    * @param e   empleado que se va a editar.
    * @param ctr controlador de la vista anterior.
    */
-  public UserEdit(Empleado e, UserConsulta ctr) {
+  public UserEdit(Empleado e) {
     aEditar = e;
-    controladorAnterior = ctr;
   }
 
   /**
-   * Inicializador de algunos componentes gráficos.
+   * Inicializador de algunos componentes gráficos. Además, se agregan
+   * restricciones a algunos campos de texto.
    * 
    * @param url not used.
    * @param rb  not used.
    */
-  @Override public void initialize(URL url, ResourceBundle rb) {
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 
@@ -87,6 +95,9 @@ public class UserEdit implements Initializable {
 
     lblEmpleadoEditar.setText(lblEmpleadoEditar.getText() + " " + aEditar.getNombres());
     identificacionT.setEditable(false);
+
+    TextFieldRestrictions.textFieldNumeric(telefonoT);
+    TextFieldRestrictions.textFieldMaxLength(telefonoT, 16);
   }
 
   /**
@@ -116,7 +127,7 @@ public class UserEdit implements Initializable {
    * Retorna a la pantalla de consulta de empleados.
    */
   private void volver() {
-    Globals.cambiarVista(Globals.loadView("user.consulta", controladorAnterior));
+    Globals.cambiarVista("user.consulta");
   }
 
   /**
@@ -124,7 +135,8 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML void goToUsuariosConsulta(ActionEvent event) {
+  @FXML
+  void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
@@ -133,8 +145,9 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML void goToUsuariosRegistro(ActionEvent event) {
-    Globals.cambiarVista(Globals.loadView("user.register", new UserRegister(controladorAnterior)));
+  @FXML
+  void goToUsuariosRegistro(ActionEvent event) {
+    Globals.cambiarVista("user.register", new UserRegister());
   }
 
   /**
@@ -142,7 +155,8 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML void updateEmpleado(ActionEvent event) {
+  @FXML
+  void updateEmpleado(ActionEvent event) {
     getData();
 
     String campos[] = { name, telefono, dir, ident };

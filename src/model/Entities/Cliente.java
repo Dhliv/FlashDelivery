@@ -1,19 +1,22 @@
 package model.Entities;
 
-import org.jooq.Result;
 import org.jooq.impl.*;
 import org.jooq.Record;
 import utilities.Conexion;
 
-public class Clientes {
-  public static class Cliente {
-    public String cedula;
-    public String nombre;
-    public String ciudad;
-    public String direccion;
-    public String telefono;
-    public Boolean existInDB;
-  }
+/**
+ * POJO y funcionalidades sobre la entidad cliente
+ * 
+ * @author Julián Orejuela
+ * @version 1.1, 1/9/2021
+ */
+public class Cliente {
+  public String cedula;
+  public String nombre;
+  public String ciudad;
+  public String direccion;
+  public String telefono;
+  public Boolean existInDB;
 
   /**
    * Registra a un nuevo cliente en la base de datos.
@@ -36,12 +39,20 @@ public class Clientes {
    * @return true si el cliente existía, false de lo contrario.
    */
   public static boolean clientExists(String cedula) {
-    String sql = "select * from cliente where \"Cedula\"='" + cedula + "'";
-    Result<Record> rs = Conexion.db().fetch(sql);
-    Conexion.closeConnection();
+    return buscarCliente(cedula) != null;
+  }
 
-    if (rs.size() == 1) // Si la query retorna un resultado, el cliente existe.
-      return true;
-    return false;
+  /**
+   * Busca un cliente en la base de datos con la cedula suministrada.
+   * 
+   * @param cedula
+   * @return El {@code cliente} o {@code null} si no existe.
+   */
+  public static Cliente buscarCliente(String cedula) {
+    Cliente cliente;
+    Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
+    cliente = rs != null ? rs.into(Cliente.class) : null;
+    Conexion.closeConnection();
+    return cliente;
   }
 }

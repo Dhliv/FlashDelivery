@@ -14,9 +14,9 @@ public class CreatePDF {
   private String[] infoPago;  //INFORMACION DEL PAGO
 
   /**
-   * INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
+   * Solicita la iNFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
    * 
-   * @param infoPaq   Datos que se imprimen en la tabla
+   * @param infoPaq   Descripción y precio de los paquetes
    * @param infoRem   Datos del remitente
    * @param infoDest  Datos del destinatario
    * @param infoPago  Datos monetarios del pago
@@ -41,6 +41,7 @@ public class CreatePDF {
     factura.crearFactura();
 
     document.save(urlFactura(idPDF));
+    System.out.println("pdf: " + idPDF + "creado");
     document.close();
   }
 

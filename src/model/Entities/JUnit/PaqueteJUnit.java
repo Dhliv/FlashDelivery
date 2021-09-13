@@ -3,12 +3,12 @@ package model.Entities.JUnit;
 import org.junit.Assert;
 import org.junit.Test;
 
-import model.Entities.Paquetes;
+import model.Entities.Paquete;
 
 public class PaqueteJUnit {
     @Test
     public void prueba1() {
-        System.out.println(Paquetes.queryPaquetesSede(1));
+        System.out.println(Paquete.queryPaquetesSede(1));
         Assert.assertTrue(true);
     }
 

@@ -4,9 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import utilities.Conexion;
 
-public class Envios {
-  public static class Envio {
-    public Integer id;
+public class Envio {
+  public Integer id;
     public Date fecha_registro;
     public String metodo_pago;
     public Integer costo;
@@ -29,7 +28,6 @@ public class Envios {
     public Boolean isDelivered() {
       return delivered;
     }
-  }
 
   public static Integer createEnvio(Date fecha_registro, String metodo_pago, Integer costo, Integer seguro,
       Integer impuesto_envio, String direccion_entrega, Integer id_sede, String emp_entrega, String cliente_envio,
@@ -44,7 +42,7 @@ public class Envios {
         + "' and costo=" + costo + " and impuesto_envio=" + impuesto_envio + " and direccion_entrega='"
         + direccion_entrega + "' and id_sede=" + id_sede + " and emp_entrega='" + emp_entrega + "' and cliente_envio='"
         + cliente_envio + "' and cliente_recogida='" + cliente_recogida + "'";
-    List<Envios.Envio> query = Conexion.db().fetch(sql).into(Envio.class);
+    List<Envio> query = Conexion.db().fetch(sql).into(Envio.class);
     Conexion.closeConnection();
 
     return query.get(0).id;

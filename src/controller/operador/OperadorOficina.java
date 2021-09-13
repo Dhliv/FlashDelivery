@@ -1,10 +1,12 @@
-package controller;
+package controller.operador;
 
+import controller.operador.envio.RegistrarClientes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import model.Entities.Empleado;
 import utilities.Globals;
 
 public class OperadorOficina {
@@ -18,10 +20,15 @@ public class OperadorOficina {
   private Label labelUsuario;
   @FXML
   private Pane rightContent;
+  private Empleado operador;
+
+  public OperadorOficina(Empleado operador) {
+    this.operador = operador;
+  }
 
   public void initialize() {
     Globals.viewPane = rightContent;
-    /* Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta() ); */
+    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
   }
 
   /**
@@ -29,7 +36,8 @@ public class OperadorOficina {
    */
   @FXML
   void registrarEnvio(ActionEvent event) {
-    Globals.cambiarVista("operador.cliente");
+    Globals.cambiarVista("operador.cliente", new RegistrarClientes(operador));
+    // Globals.cambiarVista("operador.cliente");
   }
 
   @FXML

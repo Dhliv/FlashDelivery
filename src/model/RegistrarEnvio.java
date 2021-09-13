@@ -1,15 +1,14 @@
 package model;
 
 import java.sql.Date;
-import org.jooq.Record;
 
-import model.Entities.Clientes.Cliente;
+import model.Entities.Cliente;
+import model.Entities.Paquete;
+import model.Entities.Paquete.Dim;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.ArrayList;
-
-import utilities.Conexion;
 
 /**
  * Clase encargada de almacenar todos los datos en memoria para registrar un
@@ -24,8 +23,8 @@ public class RegistrarEnvio {
   private List<Paquete> paquetes;
 
   public RegistrarEnvio() {
-    remitente = new Cliente();
-    destinatario = new Cliente();
+    remitente = null;
+    destinatario = null;
     paquetes = new ArrayList<>();
   }
 
@@ -45,21 +44,9 @@ public class RegistrarEnvio {
    * @return El cliente o {@code null} si no existe.
    */
   public Cliente buscarCliente(String cedula, TipoCliente tipo) {
-    CompletableFuture.supplyAsync(() -> Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne()).thenAccept(record -> {
-      Cliente cliente = record != null ? record.into(Cliente.class) : null;
-      try {
-        Thread.sleep(5000);
-      } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    }).join();
-
-    Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
-    Cliente cliente = rs != null ? rs.into(Cliente.class) : null;
+    Cliente cliente = Cliente.buscarCliente(cedula);
     if (tipo == TipoCliente.Remitente) remitente = cliente;
     if (tipo == TipoCliente.Destinatario) destinatario = cliente;
-    Conexion.closeConnection();
     return cliente;
   }
 
@@ -68,11 +55,16 @@ public class RegistrarEnvio {
    */
   public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
     Cliente cliente = new Cliente();
-    cliente.cedula = cedula;
-    cliente.nombre = nombre;
-    cliente.ciudad = ciudad;
-    cliente.direccion = direccion;
-    cliente.telefono = telefono;
+    if (cedula.trim().equals("") || nombre.trim().equals("") || ciudad.equals("") || direccion.equals("") || telefono.equals(""))
+      cliente = null;
+    else {
+      cliente.cedula = cedula;
+      cliente.nombre = nombre;
+      cliente.ciudad = ciudad;
+      cliente.direccion = direccion;
+      cliente.telefono = telefono;
+    }
+
     if (tipo == TipoCliente.Destinatario) {
       destinatario = cliente;
     } else {
@@ -88,7 +80,7 @@ public class RegistrarEnvio {
     Paquete p = new Paquete();
     p.descripcion = descripcion;
     p.peso = peso;
-    p.valor_declarado = valor;
+    p.valor = valor;
     Dim d = new Dim();
     d.alto = alto;
     d.largo = largo;
@@ -107,7 +99,7 @@ public class RegistrarEnvio {
     paquetes.get(index).descripcion = p.descripcion;
     paquetes.get(index).peso = p.peso;
     paquetes.get(index).volumen = p.volumen;
-    paquetes.get(index).valor_declarado = p.valor_declarado;
+    paquetes.get(index).valor = p.valor;
   }
 
   public void eliminarPaquete(int index) {
@@ -129,14 +121,6 @@ public class RegistrarEnvio {
   // #---------------------------------------------------------------------------
   // # FUNCIONES AUXILIARES
   // #---------------------------------------------------------------------------
-
-  public static class Dim {
-    public Integer alto, ancho, largo;
-
-    public Integer volumen() {
-      return alto * ancho * largo;
-    }
-  }
 
   // #---------------------------------------------------------------------------
   // # ENUMS
@@ -163,15 +147,6 @@ public class RegistrarEnvio {
     public Boolean Delivered;
     public String Cliente_Envio;
     public String Cliente_Recogida;
-  }
-
-  public static class Paquete {
-    public String descripcion;
-    public Integer peso;
-    public Dim volumen;
-    public Integer valor_declarado;
-    public Integer id_envio;
-    public Boolean seguro;
   }
 
 }

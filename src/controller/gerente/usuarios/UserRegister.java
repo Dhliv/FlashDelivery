@@ -1,4 +1,4 @@
-package controller;
+package controller.gerente.usuarios;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -22,7 +22,6 @@ public class UserRegister implements Initializable {
   private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
   private Roles roles; // Cargos de la empresa
   private int userNoExist;
-  private UserConsulta controladorAnterior;
 
   // Auxiliares para los datos del usuario.
   private Object fecha; // Dato parcial de fecha de nacimiento
@@ -42,35 +41,43 @@ public class UserRegister implements Initializable {
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
-  @FXML private TextField nombreT;
-  @FXML private TextField identificacionT;
-  @FXML private TextField telefonoT;
-  @FXML private TextField direccionT;
-  @FXML private DatePicker fechaT;
-  @FXML private ChoiceBox<String> rolT;
-  @FXML private TextField usernameT;
-  @FXML private ChoiceBox<String> idsedeT;
-  @FXML private PasswordField passwordT;
+  @FXML
+  private TextField nombreT;
+  @FXML
+  private TextField identificacionT;
+  @FXML
+  private TextField telefonoT;
+  @FXML
+  private TextField direccionT;
+  @FXML
+  private DatePicker fechaT;
+  @FXML
+  private ChoiceBox<String> rolT;
+  @FXML
+  private TextField usernameT;
+  @FXML
+  private ChoiceBox<String> idsedeT;
+  @FXML
+  private PasswordField passwordT;
   // FIN de los campos.
 
   /**
    * Constructor de la clase UserRegister
    * 
-   * @param contenido   Contenedor de todos los componentes visuales de la actual
-   *                    pestaña.
-   * @param controlador Controller de la pestaña anterior.
    */
-  public UserRegister(UserConsulta controlador) {
-    controladorAnterior = controlador;
+  public UserRegister() {
+
   }
 
   /**
-   * Ingresa los datos a los menus desplegables de Roles y Sedes.
+   * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
+   * restricciones a los campos necesarios.
    * 
    * @param url not used.
    * @param rb  not used.
    */
-  @Override public void initialize(URL url, ResourceBundle rb) {
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 
@@ -81,6 +88,12 @@ public class UserRegister implements Initializable {
     s.addAll(model.Entities.Sede.getSedesParsed());
     rolT.getItems().addAll(l);
     idsedeT.getItems().addAll(s);
+
+    TextFieldRestrictions.textFieldNumeric(identificacionT);
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
+
+    TextFieldRestrictions.textFieldNumeric(telefonoT);
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
   }
 
   /**
@@ -113,7 +126,7 @@ public class UserRegister implements Initializable {
    * Retorna a la pantalla de consulta de usuarios.
    */
   private void volver() {
-    Globals.cambiarVista(Globals.loadView("user.consulta", controladorAnterior));
+    Globals.cambiarVista("user.consulta", new UserConsulta());
   }
 
   /**
@@ -121,7 +134,8 @@ public class UserRegister implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML void goToUsuariosConsulta(ActionEvent event) {
+  @FXML
+  void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
@@ -130,7 +144,8 @@ public class UserRegister implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML void registrarUser(ActionEvent event) {
+  @FXML
+  void registrarUser(ActionEvent event) {
     try {
 
       boolean forbidchar = false;
@@ -147,8 +162,8 @@ public class UserRegister implements Initializable {
         parseData();
 
         Empleado emp = new Empleado(id + "", name, "", rol, dir, telefono, fc, idSede);
-        userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el empleado
-                                               // ya existía.
+        userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
+                                                   // empleado ya existía.
 
         if (userNoExist == NOEXISTE) {
           Usuario user = new Usuario(id, username, password, true);
@@ -162,7 +177,8 @@ public class UserRegister implements Initializable {
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           GeneralAlerts.showEmptyFieldAlert();
-        else if (forbidchar) GeneralAlerts.showCharForbidenAlert();
+        else if (forbidchar)
+          GeneralAlerts.showCharForbidenAlert();
       }
     } catch (NumberFormatException error) {
       GeneralAlerts.showErrorUnexpt();
