@@ -110,9 +110,9 @@ public class RegistrarPaquete {
       Peso.setText(pt.peso + "");
       Valor.setText(pt.valor + "");
       Descripcion.setText(pt.descripcion);
-      Ancho.setText(pt.volumen.ancho + "");
-      Largo.setText(pt.volumen.largo + "");
-      Alto.setText(pt.volumen.alto + "");
+      Ancho.setText(pt.ancho + "");
+      Largo.setText(pt.largo + "");
+      Alto.setText(pt.alto + "");
       tbPaquetes.setDisable(true);
       btEliminar.setDisable(true);
       btEditar.setText("Confirmar");

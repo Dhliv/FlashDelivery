@@ -18,16 +18,16 @@ import model.Entities.Usuario;
 import model.Entities.UsuarioDAO;
 import utilities.*;
 
-public class UserRegister implements Initializable {
+public class UserRegister {
   private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
+  private static final int EXISTE = 0; // Usuario se encuentra en la BD
   private Roles roles; // Cargos de la empresa
   private int userNoExist;
-  private UserConsulta controladorAnterior;
 
   // Auxiliares para los datos del usuario.
-  private Object fecha; // Dato parcial de fecha de nacimiento
-  private Object idS; // Dato parcial de id sede
-  private Object rl; // Dato parcial de rol
+  private String fecha; // Dato parcial de fecha de nacimiento
+  private String idS; // Dato parcial de id sede
+  private String rl; // Dato parcial de rol
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
@@ -65,23 +65,17 @@ public class UserRegister implements Initializable {
   /**
    * Constructor de la clase UserRegister
    * 
-   * @param contenido   Contenedor de todos los componentes visuales de la actual
-   *                    pestaña.
-   * @param controlador Controller de la pestaña anterior.
    */
-  public UserRegister(UserConsulta controlador) {
-    controladorAnterior = controlador;
+  public UserRegister() {
+
   }
 
   /**
    * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
    * restricciones a los campos necesarios.
    * 
-   * @param url not used.
-   * @param rb  not used.
    */
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
+  public void initialize() {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 
@@ -110,10 +104,38 @@ public class UserRegister implements Initializable {
     rl = rolT.getValue();
     dir = direccionT.getText();
     ident = identificacionT.getText();
-    fecha = fechaT.getValue();
+    fecha = fechaT.getValue() != null ? fechaT.getValue().toString() : "";
     idS = idsedeT.getValue();
     username = usernameT.getText();
     password = passwordT.getText();
+  }
+
+  /**
+   * Limpia todos los campos rellenables.
+   */
+  private void clearCamps() {
+    nombreT.setText("");
+    telefonoT.setText("");
+    direccionT.setText("");
+    identificacionT.setText("");
+    usernameT.setText("");
+    passwordT.setText("");
+
+    fechaT.setValue(null);
+    idsedeT.setValue(null);
+    rolT.setValue(null);
+  }
+
+  /**
+   * Convierte el rol visual a un rol interno.
+   * 
+   * @param rol String con rol visual.
+   * @return String con rol interno.
+   */
+  private String parseRol(String rol) {
+    if (rol == roles.rol.get(roles.SECRETARIO))
+      return "Secretaria";
+    return rol;
   }
 
   /**
@@ -121,16 +143,16 @@ public class UserRegister implements Initializable {
    */
   private void parseData() {
     id = Integer.valueOf(ident);
-    fc = LocalDate.parse(fecha.toString());
-    idSede = model.Entities.Sede.getIdSede(idS.toString());
-    rol = rl.toString();
+    fc = LocalDate.parse(fecha);
+    idSede = model.Entities.Sede.getIdSede(idS);
+    rol = parseRol(rl.toString());
   }
 
   /**
    * Retorna a la pantalla de consulta de usuarios.
    */
   private void volver() {
-    Globals.cambiarVista(Globals.loadView("user.consulta", controladorAnterior));
+    Globals.cambiarVista("user.consulta", new UserConsulta());
   }
 
   /**
@@ -154,29 +176,34 @@ public class UserRegister implements Initializable {
 
       boolean forbidchar = false;
       boolean emptyCamps = false;
+      boolean usernameExist = false;
 
       getData();
-      String campo[] = { name, telefono, dir, ident, username, password };
-      Object multOpcion[] = { rl, fecha, idS };
-
-      emptyCamps = GeneralChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
+      String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS};
+      emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]); // verifica que no existan campos vacíos.
       forbidchar = GeneralChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
 
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         parseData();
-
-        Empleado emp = new Empleado(id + "", name, "", rol, dir, telefono, fc, idSede);
+        // TODO Crear campo para ingresar los apellidos.
+        Empleado emp = new Empleado(id + "", name, "", parseRol(rol), dir, telefono, fc, idSede);
         userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
                                                    // empleado ya existía.
+        usernameExist = Usuario.checkExistence(username);
 
-        if (userNoExist == NOEXISTE) {
+        if (userNoExist == NOEXISTE && !usernameExist) {
           Usuario user = new Usuario(id, username, password, true);
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
           GeneralAlerts.showRegSuccess();
+          clearCamps();
           volver();
+          clearCamps();
         } else {
-          GeneralAlerts.showUserExistAlert();
+          if (userNoExist == EXISTE)
+            GeneralAlerts.showUserExistAlert();
+          if (usernameExist)
+            GeneralAlerts.showUsernameExist();
         }
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
@@ -187,7 +214,6 @@ public class UserRegister implements Initializable {
     } catch (NumberFormatException error) {
       GeneralAlerts.showErrorUnexpt();
     }
-
   }
 
 }

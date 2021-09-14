@@ -19,7 +19,8 @@ import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
 
-public class UserConsulta implements Initializable {
+// TODO Documentar.
+public class UserConsulta{
   @FXML
   private Button btBorrar;
   @FXML
@@ -47,11 +48,9 @@ public class UserConsulta implements Initializable {
   /**
    * Inicializa los datos de la tabla de empleados.
    * 
-   * @param location  not used.
-   * @param resources not used.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+
+  public void initialize() {
 
     borrar = true;
     btChange.setText("Mostrar deshabilitados");
@@ -106,7 +105,7 @@ public class UserConsulta implements Initializable {
    */
   @FXML
   void goToUsuariosRegistro(ActionEvent event) {
-    Globals.cambiarVista(Globals.loadView("user.register", new UserRegister(this)));
+    Globals.cambiarVista("user.register", new UserRegister());
   }
 
   /**
@@ -118,7 +117,7 @@ public class UserConsulta implements Initializable {
   void userEditButton(ActionEvent event) {
     Empleado e = tableUsers.getSelectionModel().getSelectedItem();
     if (e != null)
-      Globals.cambiarVista(Globals.loadView("user.edit", new UserEdit(e, this)));
+      Globals.cambiarVista("user.edit", new UserEdit(e));
     else
       GeneralAlerts.showUserNullAlert();
   }
