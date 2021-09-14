@@ -20,6 +20,7 @@ import utilities.*;
 
 public class UserRegister implements Initializable {
   private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
+  private static final int EXISTE = 0; // Usuario se encuentra en la BD
   private Roles roles; // Cargos de la empresa
   private int userNoExist;
 
@@ -178,6 +179,7 @@ public class UserRegister implements Initializable {
 
       boolean forbidchar = false;
       boolean emptyCamps = false;
+      boolean usernameExist = false;
 
       getData();
       String campo[] = { name, telefono, dir, ident, username, password };
@@ -192,15 +194,20 @@ public class UserRegister implements Initializable {
         Empleado emp = new Empleado(id + "", name, "", parseRol(rol), dir, telefono, fc, idSede);
         userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
                                                    // empleado ya existía.
+        usernameExist = Usuario.checkExistence(username);
 
-        if (userNoExist == NOEXISTE) {
+        if (userNoExist == NOEXISTE && !usernameExist) {
           Usuario user = new Usuario(id, username, password, true);
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
           GeneralAlerts.showRegSuccess();
           volver();
+          clearCamps();
         } else {
-          GeneralAlerts.showUserExistAlert();
+          if (userNoExist == EXISTE)
+            GeneralAlerts.showUserExistAlert();
+          if (usernameExist)
+            GeneralAlerts.showUsernameExist();
         }
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
@@ -211,8 +218,6 @@ public class UserRegister implements Initializable {
     } catch (NumberFormatException error) {
       GeneralAlerts.showErrorUnexpt();
     }
-
-    clearCamps();
   }
 
 }
