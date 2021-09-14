@@ -18,15 +18,15 @@ import model.Entities.Usuario;
 import model.Entities.UsuarioDAO;
 import utilities.*;
 
-public class UserRegister{
+public class UserRegister {
   private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
   private Roles roles; // Cargos de la empresa
   private int userNoExist;
 
   // Auxiliares para los datos del usuario.
-  private Object fecha; // Dato parcial de fecha de nacimiento
-  private Object idS; // Dato parcial de id sede
-  private Object rl; // Dato parcial de rol
+  private String fecha; // Dato parcial de fecha de nacimiento
+  private String idS; // Dato parcial de id sede
+  private String rl; // Dato parcial de rol
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
@@ -103,7 +103,7 @@ public class UserRegister{
     rl = rolT.getValue();
     dir = direccionT.getText();
     ident = identificacionT.getText();
-    fecha = fechaT.getValue();
+    fecha = fechaT.getValue() != null ? fechaT.getValue().toString() : "";
     idS = idsedeT.getValue();
     username = usernameT.getText();
     password = passwordT.getText();
@@ -142,8 +142,8 @@ public class UserRegister{
    */
   private void parseData() {
     id = Integer.valueOf(ident);
-    fc = LocalDate.parse(fecha.toString());
-    idSede = model.Entities.Sede.getIdSede(idS.toString());
+    fc = LocalDate.parse(fecha);
+    idSede = model.Entities.Sede.getIdSede(idS);
     rol = parseRol(rl.toString());
   }
 
@@ -177,15 +177,13 @@ public class UserRegister{
       boolean emptyCamps = false;
 
       getData();
-      String campo[] = { name, telefono, dir, ident, username, password };
-      Object multOpcion[] = { rl, fecha, idS };
-
-      emptyCamps = GeneralChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
+      String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS};
+      emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]); // verifica que no existan campos vacíos.
       forbidchar = GeneralChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
 
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         parseData();
-
+        // TODO Crear campo para ingresar los apellidos.
         Empleado emp = new Empleado(id + "", name, "", parseRol(rol), dir, telefono, fc, idSede);
         userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
                                                    // empleado ya existía.
@@ -195,6 +193,7 @@ public class UserRegister{
           UsuarioDAO userD = new UsuarioDAO();
           userD.crearUsuario(user);
           GeneralAlerts.showRegSuccess();
+          clearCamps();
           volver();
         } else {
           GeneralAlerts.showUserExistAlert();
@@ -208,8 +207,6 @@ public class UserRegister{
     } catch (NumberFormatException error) {
       GeneralAlerts.showErrorUnexpt();
     }
-
-    clearCamps();
   }
 
 }
