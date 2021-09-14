@@ -38,7 +38,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="250.0" layoutY="60.0" text="Nombre">
+            <Label layoutX="250.0" layoutY="60.0" text="Apellido">
                <font>
                   <Font size="18.0" />
                </font>
@@ -78,7 +78,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="nombreT" layoutX="250.0" layoutY="85.0" prefHeight="25.0" prefWidth="519.0" />
+            <TextField fx:id="apellidoT" layoutX="250.0" layoutY="85.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="nombreT" layoutX="585.0" layoutY="86.0" prefHeight="25.0" prefWidth="184.0" />
             <TextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
             <TextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
             <TextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
@@ -97,6 +98,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Label layoutX="585.0" layoutY="61.0" text="Nombre">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Separator layoutY="90.0" prefWidth="1020.0" />
