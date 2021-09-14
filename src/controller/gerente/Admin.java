@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 import controller.gerente.usuarios.UserConsulta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import utilities.Globals;
@@ -16,10 +15,6 @@ public class Admin {
   public Admin(String userName) {
     this.userName = userName;
   }
-
-  // #---------------------------------------------------------------------------
-  // # FXML: ARCHIVOS DE JAVA FXML
-  // #---------------------------------------------------------------------------
 
   @FXML
   private Label labelNameUser;

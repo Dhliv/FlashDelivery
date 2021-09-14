@@ -6,11 +6,12 @@ import model.Entities.Cliente;
 import model.Entities.Paquete;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.ArrayList;
 
 /**
- * Clase encargada de almacenar todos los datos para registrar un envio y
- * posteriormente guardarlos en la base de datos.
+ * Clase encargada de almacenar todos los datos en memoria para registrar un
+ * envio y posteriormente guardarlos en la base de datos.
  * 
  * @author Julián Orejuela
  * @version 1.0, 29/4/2021
@@ -43,21 +44,17 @@ public class RegistrarEnvio {
    */
   public Cliente buscarCliente(String cedula, TipoCliente tipo) {
     Cliente cliente = Cliente.buscarCliente(cedula);
-    if (tipo == TipoCliente.Remitente)
-      remitente = cliente;
-    if (tipo == TipoCliente.Destinatario)
-      destinatario = cliente;
+    if (tipo == TipoCliente.Remitente) remitente = cliente;
+    if (tipo == TipoCliente.Destinatario) destinatario = cliente;
     return cliente;
   }
 
   /**
    * Modifica el estado del cliente.
    */
-  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono,
-      TipoCliente tipo) {
+  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
     Cliente cliente = new Cliente();
-    if (cedula.trim().equals("") || nombre.trim().equals("") || ciudad.equals("") || direccion.equals("")
-        || telefono.equals(""))
+    if (cedula.trim().equals("") || nombre.trim().equals("") || ciudad.equals("") || direccion.equals("") || telefono.equals(""))
       cliente = null;
     else {
       cliente.cedula = cedula;
@@ -78,8 +75,7 @@ public class RegistrarEnvio {
     paquetes.add(p);
   }
 
-  public Paquete agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo,
-      Integer alto, Boolean seguro, int index) {
+  public Paquete agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro, int index) {
     Paquete p = new Paquete();
     p.descripcion = descripcion;
     p.peso = peso;
@@ -89,7 +85,7 @@ public class RegistrarEnvio {
     p.largo = largo;
     p.ancho = ancho;
     p.seguro = seguro;
-        
+
     if (index == -1)
       paquetes.add(p);
     else

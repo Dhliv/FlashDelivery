@@ -19,6 +19,7 @@ import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
 
+// TODO Documentar.
 public class UserConsulta implements Initializable {
   @FXML
   private Button btBorrar;
