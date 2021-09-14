@@ -19,71 +19,71 @@ import controller.gerente.Admin;
 import controller.operador.OperadorOficina;
 
 public class Login {
-    private Roles roles;
-    private ArrayList<String> rol;
-    private String user;
+  private Roles roles;
+  private ArrayList<String> rol;
+  private String user;
 
-    public Login() {
-        roles = new Roles();
-        this.rol = roles.rol;
+  public Login() {
+    roles = new Roles();
+    this.rol = roles.rol;
+  }
+
+  @FXML
+  private Button btIngresar;
+  @FXML
+  private PasswordField txtPass;
+  @FXML
+  private TextField txtUsuario;
+
+  @FXML
+  void loginKeyboard(KeyEvent event) throws Exception {
+    System.out.println(event);
+    KeyCode key = event.getCode();
+    if (key.equals(KeyCode.ENTER)) {
+      login();
     }
+  }
 
-    @FXML
-    private Button btIngresar;
-    @FXML
-    private PasswordField txtPass;
-    @FXML
-    private TextField txtUsuario;
+  @FXML
+  void clicksoide(ActionEvent event) throws Exception {
+    login();
+  }
 
-    @FXML
-    void loginKeyboard(KeyEvent event) throws Exception {
-        System.out.println(event);
-        KeyCode key = event.getCode();
-        if (key.equals(KeyCode.ENTER)) {
-            login();
-        }
+  void login() throws Exception {
+    user = txtUsuario.getText();
+    String pass = txtPass.getText();
+    int acc = Usuario.entradaUsuario(user, pass);
+    if (acc == -2)
+      JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
+    else if (acc == -1)
+      GeneralAlerts.showBadLogin();
+    else if (acc == 0) {
+      System.out.println("sql error");
+    } else {
+      // JOptionPane.showMessageDialog(null, "Entraste!");
+      System.out.println("entre");
+      Empleado userActual = Empleado.cargarEmpleado(acc + "");
+      var rolAcc = userActual.getRol();
+
+      Globals.pantalla.close();
+      Ventana vent;
+
+      if (rolAcc.equals(rol.get(roles.ADMIN))) {
+        vent = new Ventana("admin", new Admin(user));
+        vent.start(Globals.pantalla);
+      } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
+        vent = new Ventana("admin", new Admin(user));
+      } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
+        // vent = new Ventana("operadorOficina", new OperadorOficina());
+        // vent.start(Globals.pantalla);
+        JOptionPane.showMessageDialog(null, "NO HA SIDO IMPLEMENTADO");
+      } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
+        vent = new Ventana("operadorOficina", new OperadorOficina(userActual));
+        vent.start(Globals.pantalla);
+      } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {
+        vent = new Ventana("contador", new Admin(user));
+      }
     }
-
-    @FXML
-    void clicksoide(ActionEvent event) throws Exception {
-        login();
-    }
-
-    void login() throws Exception {
-        user = txtUsuario.getText();
-        String pass = txtPass.getText();
-        int acc = Usuario.entradaUsuario(user, pass);
-        if (acc == -2)
-            JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
-        else if (acc == -1)
-            JOptionPane.showMessageDialog(null, "No se ha encontrado su usuario");
-        else if (acc == 0) {
-            System.out.println("sql error");
-        } else {
-            // JOptionPane.showMessageDialog(null, "Entraste!");
-            System.out.println("entre");
-            Empleado userActual = Empleado.cargarEmpleado(acc + "");
-            var rolAcc = userActual.getRol();
-
-            Globals.pantalla.close();
-            Ventana vent;
-
-            if (rolAcc.equals(rol.get(roles.ADMIN))) {
-                vent = new Ventana("admin", new Admin(user));
-                vent.start(Globals.pantalla);
-            } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
-                vent = new Ventana("admin", new Admin(user));
-            } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
-                // vent = new Ventana("operadorOficina", new OperadorOficina());
-                // vent.start(Globals.pantalla);
-                JOptionPane.showMessageDialog(null, "NO HA SIDO IMPLEMENTADO");
-            } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
-                vent = new Ventana("operadorOficina", new OperadorOficina(userActual) );
-                vent.start(Globals.pantalla);
-            } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {
-                vent = new Ventana("contador", new Admin(user));
-            }
-        }
-    }
+  }
 
 }
