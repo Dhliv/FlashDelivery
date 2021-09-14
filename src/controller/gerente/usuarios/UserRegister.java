@@ -18,7 +18,7 @@ import model.Entities.Usuario;
 import model.Entities.UsuarioDAO;
 import utilities.*;
 
-public class UserRegister implements Initializable {
+public class UserRegister{
   private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
   private Roles roles; // Cargos de la empresa
   private int userNoExist;
@@ -73,11 +73,8 @@ public class UserRegister implements Initializable {
    * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
    * restricciones a los campos necesarios.
    * 
-   * @param url not used.
-   * @param rb  not used.
    */
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
+  public void initialize() {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 

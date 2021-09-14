@@ -128,11 +128,18 @@ public class Empleado {
     }
 
     public static int crearEmpleado(Empleado e) {
-        String sql = "insert into empleado VALUES ('" + e.cedula + "', '" + e.getNombres() + "', '" + e.getApellidos()
+        int res = 0;
+        try{
+            String sql = "insert into empleado VALUES ('" + e.cedula + "', '" + e.getNombres() + "', '" + e.getApellidos()
                 + "', '" + e.getRol() + "', '" + e.getDireccion() + "', '" + e.getTelefono() + "', '"
                 + e.getBirthdate().toString() + "', " + e.getSede() + ")";
+            res = Conexion.db().execute(sql);
+        }catch(Exception ex){
+            res = 0;
+        }
+        
 
-        return Conexion.db().execute(sql);
+        return res;
     }
 
     public static Empleado cargarEmpleado(String cedula) {

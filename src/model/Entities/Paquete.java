@@ -4,7 +4,6 @@ import java.util.List;
 import org.jooq.impl.DSL;
 
 import model.Envio;
-import model.RegistrarEnvio;
 import utilities.Conexion;
 
 public class Paquete extends Envio {
