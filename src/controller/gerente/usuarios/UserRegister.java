@@ -113,13 +113,41 @@ public class UserRegister implements Initializable {
   }
 
   /**
+   * Limpia todos los campos rellenables.
+   */
+  private void clearCamps() {
+    nombreT.setText("");
+    telefonoT.setText("");
+    direccionT.setText("");
+    identificacionT.setText("");
+    usernameT.setText("");
+    passwordT.setText("");
+
+    fechaT.setValue(null);
+    idsedeT.setValue(null);
+    rolT.setValue(null);
+  }
+
+  /**
+   * Convierte el rol visual a un rol interno.
+   * 
+   * @param rol String con rol visual.
+   * @return String con rol interno.
+   */
+  private String parseRol(String rol) {
+    if (rol == roles.rol.get(roles.SECRETARIO))
+      return "Secretaria";
+    return rol;
+  }
+
+  /**
    * Se transforman los tipos de datos que tienen tipo distinto a string.
    */
   private void parseData() {
     id = Integer.valueOf(ident);
     fc = LocalDate.parse(fecha.toString());
     idSede = model.Entities.Sede.getIdSede(idS.toString());
-    rol = rl.toString();
+    rol = parseRol(rl.toString());
   }
 
   /**
@@ -161,7 +189,7 @@ public class UserRegister implements Initializable {
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         parseData();
 
-        Empleado emp = new Empleado(id + "", name, "", rol, dir, telefono, fc, idSede);
+        Empleado emp = new Empleado(id + "", name, "", parseRol(rol), dir, telefono, fc, idSede);
         userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
                                                    // empleado ya existía.
 
@@ -184,6 +212,7 @@ public class UserRegister implements Initializable {
       GeneralAlerts.showErrorUnexpt();
     }
 
+    clearCamps();
   }
 
 }
