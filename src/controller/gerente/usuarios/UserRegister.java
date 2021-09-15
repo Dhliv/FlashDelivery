@@ -172,49 +172,47 @@ public class UserRegister {
    */
   @FXML
   void registrarUser(ActionEvent event) {
-    try {
+    boolean forbidchar = false;
+    boolean emptyCamps = false;
+    boolean usernameExist = false;
+    boolean empleadoExist = false;
+    boolean registroFallido = false;
 
-      boolean forbidchar = false;
-      boolean emptyCamps = false;
-      boolean usernameExist = false;
-      boolean empleadoExist = false;
-      boolean registroFallido = false;
+    getData();
+    String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
+    emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
+    forbidchar = GeneralChecker.checkChar(campo);
 
-      getData();
-      String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
-      emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]); // verifica que no existan campos vacíos.
-      forbidchar = GeneralChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
+    if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
+      parseData();
+      usernameExist = Usuario.checkExistence(username);
+      empleadoExist = Empleado.checkExistence(id + "");
 
-      if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
-        parseData();
-        usernameExist = Usuario.checkExistence(username);
-        empleadoExist = Empleado.checkExistence(id + "");
+      if (!(usernameExist || empleadoExist)) { // Si el empleado y el usuario no están registrados, se procede a hacer
+                                               // el registro.
+        Usuario user = new Usuario(id, username, password, true);
+        Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
+        registroFallido = (Empleado.crearEmpleado(emp) != 0);
+        registroFallido |= Usuario.registrarUsuario(user);
 
-        if (!(usernameExist || empleadoExist)) { // Si el empleado y el usuario no están registrados, se procede a hacer el registro.
-          Usuario user = new Usuario(id, username, password, true);
-          Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
-          registroFallido = (Empleado.crearEmpleado(emp) != 0);
-          registroFallido |= Usuario.registrarUsuario(user);
-
-          if(registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
-            SpecificAlerts.showErrorUnexpt();
-          else{
-            SpecificAlerts.showRegSuccess();
-            volver();
-            clearCamps();
-          }
-        } else {
-          if(usernameExist) SpecificAlerts.showUsernameExist();
-          if(empleadoExist) SpecificAlerts.showEmpleadoExists();
+        if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
+          SpecificAlerts.showErrorUnexpt();
+        else {
+          SpecificAlerts.showRegSuccess();
+          volver();
+          clearCamps();
         }
-      } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
-        if (emptyCamps)
-          SpecificAlerts.showEmptyFieldAlert();
-        else if (forbidchar)
-          SpecificAlerts.showCharForbidenAlert();
+      } else {
+        if (usernameExist)
+          SpecificAlerts.showUserExist();
+        if (empleadoExist)
+          SpecificAlerts.showEmpleadoExists();
       }
-    } catch (NumberFormatException error) {
-      SpecificAlerts.showErrorUnexpt();
+    } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
+      if (emptyCamps)
+        SpecificAlerts.showEmptyFieldAlert();
+      if (forbidchar)
+        SpecificAlerts.showCharForbidenAlert();
     }
   }
 
