@@ -38,7 +38,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="250.0" layoutY="60.0" text="Apellido">
+            <Label layoutX="250.0" layoutY="60.0" text="Apellidos">
                <font>
                   <Font size="18.0" />
                </font>
@@ -98,7 +98,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="585.0" layoutY="61.0" text="Nombre">
+            <Label layoutX="585.0" layoutY="61.0" text="Nombres">
                <font>
                   <Font size="18.0" />
                </font>

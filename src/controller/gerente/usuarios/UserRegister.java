@@ -31,6 +31,7 @@ public class UserRegister {
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
+  private String apellidos; // Apellidos.
   private String telefono;
   private String dir; // Dirección
   private String ident; // Identificación
@@ -44,6 +45,8 @@ public class UserRegister {
   // Campos de texto que se pueden rellenar en user.register view
   @FXML
   private TextField nombreT;
+  @FXML
+  private TextField apellidoT;
   @FXML
   private TextField identificacionT;
   @FXML
@@ -100,6 +103,7 @@ public class UserRegister {
    */
   private void getData() {
     name = nombreT.getText();
+    apellidos = apellidoT.getText();
     telefono = telefonoT.getText();
     rl = rolT.getValue();
     dir = direccionT.getText();
@@ -115,6 +119,7 @@ public class UserRegister {
    */
   private void clearCamps() {
     nombreT.setText("");
+    apellidoT.setText("");
     telefonoT.setText("");
     direccionT.setText("");
     identificacionT.setText("");
@@ -179,14 +184,13 @@ public class UserRegister {
       boolean usernameExist = false;
 
       getData();
-      String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS};
+      String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
       emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]); // verifica que no existan campos vacíos.
       forbidchar = GeneralChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
 
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         parseData();
-        // TODO Crear campo para ingresar los apellidos.
-        Empleado emp = new Empleado(id + "", name, "", parseRol(rol), dir, telefono, fc, idSede);
+        Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
         userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
                                                    // empleado ya existía.
         usernameExist = Usuario.checkExistence(username);
