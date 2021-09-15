@@ -119,6 +119,6 @@ public class UserConsulta{
     if (e != null)
       Globals.cambiarVista("user.edit", new UserEdit(e));
     else
-      GeneralAlerts.showUserNullAlert();
+      SpecificAlerts.showUserNullAlert();
   }
 }

@@ -58,7 +58,7 @@ public class TextFieldRestrictions {
     return true;
   }
   /**
-   * INCOMPLETO
+   * !TODO INCOMPLETO
    * Método para evaluar un filtro de cambios obligatorios (usos del ratón y flechitas (teclas direccionales).
    * @param change
    * @return true si change corresponde a alguno de los ya citados, false en caso contrario.

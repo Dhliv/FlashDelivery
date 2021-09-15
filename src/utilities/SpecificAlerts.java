@@ -1,13 +1,15 @@
 package utilities;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
 
 /**
  * Esta clase está diseñada para construir y mostrar los mensajes de alerta
  * pertinentes a diversas pantallas.
  */
-public class GeneralAlerts {
+public class SpecificAlerts {
   private static Alert cEmpty; // Alerta para campos vacios
   private static Alert cForbi; // Alerta para caracteres prohibidos
   private static Alert userExist; // Alerta para usuarios ya existentes
@@ -16,16 +18,18 @@ public class GeneralAlerts {
   private static Alert userNull; // Alerta para usuarios nulos(no seleccionados).
   private static Alert pagoExitoso; // Alerta para pago exitoso.
   private static Alert updSucces; // Alerta para actualización exitosa.
-  private static Alert usernameExists; // Alerta para indicar que el username ya existía.
+  private static Alert userExists; // Alerta para indicar que el username ya existía.
+  private static Alert empleadoExists; // Alerta para indicar que el username ya existía.
   private static Alert badLogin; // Alerta para indicar que el usuario/contraseña es erroneo.
   private static Boolean inicializado = false; // Indica si se han inicializado las alertas.
 
   private static void init() {
+    
     cEmpty = new Alert(AlertType.WARNING);
     cEmpty.setContentText("Por favor rellene los campos restantes.");
     cEmpty.setTitle("Campos Vacíos");
     cEmpty.setHeaderText("Existen campos vacíos");
-
+    
     cForbi = new Alert(AlertType.WARNING);
     cForbi.setContentText("No es posible utilizar los siguientes caracteres: . , \' \" * = + - _ !");
     cForbi.setTitle("Caracteres Prohibidos");
@@ -55,21 +59,26 @@ public class GeneralAlerts {
     pagoExitoso.setContentText("El pago se ha efectuado con exito.");
     pagoExitoso.setTitle("Pago Exitoso");
     pagoExitoso.setHeaderText("Pago Exitoso");
-
+    
     updSucces = new Alert(AlertType.INFORMATION);
     updSucces.setContentText("Los datos se han actualizado con exito.");
     updSucces.setTitle("Actualización Exitosa");
     updSucces.setHeaderText("Actualización Exitosa");
 
-    usernameExists = new Alert(AlertType.ERROR);
-    usernameExists.setContentText("El username que está registrando ya se encuentra registrado, elija otro.");
-    usernameExists.setTitle("Username Duplicado");
-    usernameExists.setHeaderText("Username Duplicado");
+    userExists = new Alert(AlertType.ERROR);
+    userExists.setContentText("El usuario que está registrando ya se encuentra registrado, elija otro.");
+    userExists.setTitle("Usuario Duplicado");
+    userExists.setHeaderText("Usuario Duplicado");
 
     badLogin = new Alert(AlertType.ERROR);
-    badLogin.setContentText("El username o contraseña digitado es incorrecto.");
+    badLogin.setContentText("El usuario o contraseña digitado es incorrecto.");
     badLogin.setTitle("Usuario o Contraseña incorrectos");
     badLogin.setHeaderText("Usuario o Contraseña incorrectos");
+    
+    empleadoExists = new Alert(AlertType.ERROR);
+    empleadoExists.setContentText("El empleado que intenta registrar ya se encuentra registrado en la base de datos.");
+    empleadoExists.setTitle("Empleado ya registrado");
+    empleadoExists.setHeaderText("Empleado ya registrado");
 
     inicializado = true;
   }
@@ -129,12 +138,17 @@ public class GeneralAlerts {
   public static void showUsernameExist() {
     if (!inicializado)
       init();
-    usernameExists.show();
+    userExists.show();
   }
 
   public static void showBadLogin() {
     if (!inicializado)
       init();
     badLogin.show();
+  }
+
+  public static void showEmpleadoExists(){
+    if(!inicializado) init();
+    empleadoExists.show();
   }
 }

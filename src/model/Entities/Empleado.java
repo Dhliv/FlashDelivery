@@ -110,8 +110,6 @@ public class Empleado {
         return sedes;
     }
 
-    
-
     /**
      * Actualiza en la BD los datos del empleadoa los editados (la cedula no cambia
      * nunca).
@@ -127,17 +125,17 @@ public class Empleado {
         Conexion.db().execute(sql);
     }
 
+    // TODO documentar.
     public static int crearEmpleado(Empleado e) {
         int res = 0;
-        try{
-            String sql = "insert into empleado VALUES ('" + e.cedula + "', '" + e.getNombres() + "', '" + e.getApellidos()
-                + "', '" + e.getRol() + "', '" + e.getDireccion() + "', '" + e.getTelefono() + "', '"
-                + e.getBirthdate().toString() + "', " + e.getSede() + ")";
+        try {
+            String sql = "insert into empleado VALUES ('" + e.cedula + "', '" + e.getNombres() + "', '"
+                    + e.getApellidos() + "', '" + e.getRol() + "', '" + e.getDireccion() + "', '" + e.getTelefono()
+                    + "', '" + e.getBirthdate().toString() + "', " + e.getSede() + ")";
             res = Conexion.db().execute(sql);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             res = 0;
         }
-        
 
         return res;
     }
@@ -163,6 +161,7 @@ public class Empleado {
 
         return sedes;
     }
+
     /**
      * Obtiene todos los empleados en la base de datos que están habilitados (el
      * atributo enabled correspondiente en la tabla usuario es false).
@@ -178,4 +177,16 @@ public class Empleado {
         return sedes;
     }
 
+    /**
+     * El método revisa si un empleado existe en la base de datos mediante su
+     * cédula.
+     *
+     * @param id Cédula del epleado.
+     * @return True si el epleado ya existía en la base de datos, False de lo
+     *         contrario.
+     */
+    public static Boolean checkExistence(String id) {
+        var res = Conexion.db().select().from("empleado").where("cedula = '" + id + "'").fetch().into(Empleado.class);
+        return res.size() != 0;
+    }
 }

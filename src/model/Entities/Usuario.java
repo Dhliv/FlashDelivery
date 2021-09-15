@@ -1,16 +1,18 @@
 package model.Entities;
 
 import java.util.List;
-
+import org.jooq.impl.DSL;
 import utilities.Conexion;
 
+// TODO documentar.
 public class Usuario {
 
-  // Atributos de la entidad
+  // <editor-fold defaultstate="collapsed" desc="Atributos de la entidad">
   private int id;
   private String username;
   private String password;
   private boolean enabled;
+  // </editor-fold>
 
   public Usuario() {
   }
@@ -160,4 +162,21 @@ public class Usuario {
     return Boolean.FALSE;
   }
 
+  /**
+   * Ingresa un usuario en la BD.
+   *
+   * @param u Usuario a ingresar.
+   * @return True si el registro fue exitoso, False de lo contrario.
+   */
+  public static Boolean registrarUsuario(Usuario u) {
+    int res;
+    try {
+      res = Conexion.db().insertInto(DSL.table("usuario"), DSL.field("id"), DSL.field("username"),
+          DSL.field("password"), DSL.field("enabled")).values(u.getId(), u.getUsername(), u.getPassword(), Boolean.TRUE)
+          .execute();
+    } catch (Exception e) {
+      res = 0;
+    }
+    return res != 0;
+  }
 }

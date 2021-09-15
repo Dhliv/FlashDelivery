@@ -1,5 +1,7 @@
 package controller.operador.envio;
 
+import javax.swing.JOptionPane;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,60 +13,45 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import model.Entities.Empleado;
 import model.Entities.Paquete;
-import utilities.GeneralAlerts;
+import utilities.SpecificAlerts;
 import utilities.Globals;
 import utilities.TextFieldRestrictions;
 
 public class RegistrarPaquete {
 
   @FXML
-  private Button atrasPaquete;// Botón para devolverse a la vista de clientes
+  private Button atrasPaquete;
   @FXML
   private Button btRegistrarEnvios;
   @FXML
-  private TextField Peso;
+  private Button btInsertar;
   @FXML
-  private TextField Valor;
+  private Button btBorrar;
   @FXML
-  private TextArea Descripcion;
+  private TextArea txtDescripcion;
   @FXML
-  private CheckBox Seguro;
+  private TextField txtAncho;
   @FXML
-  private Button btEliminar;
+  private TextField txtAlto;
   @FXML
-  private Button btEditar;
+  private TextField txtLargo;
   @FXML
-  private Button btRegistrar;
+  private Button btModificar;
   @FXML
-  private TextField Alto;
+  private CheckBox checkSeguro;
   @FXML
-  private TextField Largo;
+  private TextField txtPeso;
   @FXML
-  private TextField Ancho;
+  private TextField txtValor;
   @FXML
-  private TableView<Paquete> tbPaquetes;
-  @FXML
-  private TableColumn<Paquete, Integer> tcPeso;
-  @FXML
-  private TableColumn<Paquete, Integer> tcValor;
-  @FXML
-  private TableColumn<Paquete, String> tcDescripcion;
-  @FXML
-  private TableColumn<Paquete, Integer> tcVolumen;
-  @FXML
-  private TableColumn<Paquete, Integer> tcValorEnvio;
-  @FXML
-  private TableColumn<Paquete, Integer> tcTotal;
-  // Lista de elementos de la tabla
-  private ObservableList<Paquete> list;
+  private TextArea txtReporte;
 
-  private int selectedP; // Índice de la fila seleccionada en la tabla de paquetes
   private boolean modify; // Boolean que indica si se está modificando un paquete o no
 
   private model.RegistrarEnvio envio;
-  private OperadorResumen operadorResumen;
   private Empleado operador;
 
   public RegistrarPaquete(model.RegistrarEnvio envio, Empleado operador) {
@@ -73,23 +60,13 @@ public class RegistrarPaquete {
   }
 
   public void initialize() {
-    selectedP = -1;
-    TextFieldRestrictions.textFieldNumeric(Peso);
-    TextFieldRestrictions.textFieldNumeric(Valor);
-    TextFieldRestrictions.textFieldNumeric(Ancho);
-    TextFieldRestrictions.textFieldNumeric(Largo);
-    TextFieldRestrictions.textFieldNumeric(Alto);
-
+    TextFieldRestrictions.textFieldNumeric(txtPeso);
+    TextFieldRestrictions.textFieldNumeric(txtValor);
+    TextFieldRestrictions.textFieldNumeric(txtAncho);
+    TextFieldRestrictions.textFieldNumeric(txtLargo);
+    TextFieldRestrictions.textFieldNumeric(txtAlto);
+    //txtReporte.setText("xdxdxd");
     modify = false;
-    tcPeso.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("peso"));
-    tcValor.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("valor"));
-    tcDescripcion.setCellValueFactory(new PropertyValueFactory<Paquete, String>("descripcion"));
-    tcVolumen.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("volumen"));
-    tcValorEnvio.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("valorenvio"));
-    tcTotal.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("total"));
-
-    list = FXCollections.observableArrayList();
-    tbPaquetes.setItems(list);
   }
 
   @FXML
@@ -98,90 +75,81 @@ public class RegistrarPaquete {
       Globals.cambiarVista("operador.cliente", this);
   }
 
-  @FXML
-  void editarPaquete(ActionEvent event) {
-    int index = tbPaquetes.getSelectionModel().getFocusedIndex();
-    if (index == -1)
-      return;
-    if (!modify) {
-      btRegistrar.setDisable(true);
-      selectedP = index;
-      Paquete pt = list.get(index);
-      Peso.setText(pt.peso + "");
-      Valor.setText(pt.valor + "");
-      Descripcion.setText(pt.descripcion);
-      Ancho.setText(pt.ancho + "");
-      Largo.setText(pt.largo + "");
-      Alto.setText(pt.alto + "");
-      tbPaquetes.setDisable(true);
-      btEliminar.setDisable(true);
-      btEditar.setText("Confirmar");
-    } else {
-      try {
-        Integer peso = Integer.parseInt(Peso.getText());
-        Integer valor = Integer.parseInt(Valor.getText());
-        String descripcion = Descripcion.getText();
-        Integer ancho = Integer.parseInt(Ancho.getText());
-        Integer largo = Integer.parseInt(Largo.getText());
-        Integer alto = Integer.parseInt(Alto.getText());
-        Boolean seguro = Seguro.isPressed();
-        envio.eliminarPaquete(index);
-        Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, selectedP);
-        list.remove(index);
-        list.add(index, p);
-        btRegistrar.setDisable(false);
-        btEliminar.setDisable(false);
-        tbPaquetes.setDisable(false);
-        selectedP = -1;
-        btEditar.setText("Editar");
-        clearFieldsPaquetes();
-      } catch (NumberFormatException e) {
-        GeneralAlerts.showErrorUnexpt();
-      }
-    }
-    modify = !modify;
-    // Obtener el index seleccionado?
-  }
-
-  @FXML
-  void eliminarPaquete(ActionEvent event) {
-    int index = tbPaquetes.getSelectionModel().getFocusedIndex();
-    if (index == -1)
-      return;
-    envio.eliminarPaquete(index);
-    list.remove(index);
-  }
-
-  @FXML
-  void registrarPaquete(ActionEvent event) {
-    try { // Faltan validaciones
-      Integer peso = Integer.parseInt(Peso.getText());
-      Integer valor = Integer.parseInt(Valor.getText());
-      String descripcion = Descripcion.getText();
-      Integer ancho = Integer.parseInt(Ancho.getText());
-      Integer largo = Integer.parseInt(Largo.getText());
-      Integer alto = Integer.parseInt(Alto.getText());
-      Boolean seguro = Seguro.isSelected();
-
-      Paquete p = envio.agregarPaquete(peso, valor, descripcion, ancho, largo, alto, seguro, -1);
-      list.add(p);
-      clearFieldsPaquetes();
-    } catch (NumberFormatException e) {
-      GeneralAlerts.showErrorUnexpt();
-    }
-  }
-
   private void clearFieldsPaquetes() {
-    Peso.setText("");
-    Valor.setText("");
-    Descripcion.setText("");
-    Alto.setText("");
-    Largo.setText("");
-    Ancho.setText("");
+    txtPeso.setText("");
+    txtValor.setText("");
+    txtDescripcion.setText("");
+    txtAlto.setText("");
+    txtLargo.setText("");
+    txtAncho.setText("");
+  }
+
+  @FXML
+  void borrarPaquete(ActionEvent event) {
+    envio.eliminarPaquete();
+    clearFieldsPaquetes();
+  }
+
+  @FXML
+  void insertarPaquete(ActionEvent event) {
+    if (agregarPaquete()) {
+      JOptionPane.showMessageDialog(null, "El paquete ha sido ingresado");
+    } else {
+      SpecificAlerts.showErrorUnexpt();
+    }
+  }
+
+  @FXML
+  void modificarPaquete(ActionEvent event) {
+    if (modify) {
+      if (agregarPaquete()) {
+        JOptionPane.showMessageDialog(null, "El paquete ha sido modificado");
+      } else {
+        modify = false;
+        btBorrar.setText("Modificar paquete");
+      }
+    } else {
+      Paquete p = envio.getPaquete();
+      txtPeso.setText(p.peso + "");
+      txtValor.setText(p.valor + "");
+      txtDescripcion.setText(p.descripcion);
+      txtAncho.setText(p.ancho + "");
+      txtLargo.setText(p.largo + "");
+      txtAlto.setText(p.alto + "");
+      checkSeguro.setSelected(p.seguro);
+      btBorrar.setText("Confirmar modificación");
+      modify = true;
+    }
+
+  }
+
+  boolean agregarPaquete() {
+    try { // Faltan validaciones
+      Integer peso = Integer.parseInt(txtPeso.getText());
+      Integer valor = Integer.parseInt(txtValor.getText());
+      String descripcion = txtDescripcion.getText();
+      Integer ancho = Integer.parseInt(txtAncho.getText());
+      Integer largo = Integer.parseInt(txtLargo.getText());
+      Integer alto = Integer.parseInt(txtAlto.getText());
+      Boolean seguro = checkSeguro.isSelected();
+      envio.agregarPaqueteP(peso, valor, descripcion, ancho, largo, alto, seguro);
+      clearFieldsPaquetes();
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
   }
 
   @FXML
   void resumenEnvio(ActionEvent event) {
-    Globals.cambiarVista("operador.resumen", new OperadorResumen(envio, operador));
+    if (envio.getPaquete() == null || modify)
+      JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
+    else
+      Globals.cambiarVista("operador.resumen", new OperadorResumen(envio, operador));
+
   }
+  @FXML
+    void superPrueba(KeyEvent event) {
+      System.out.println("Será que esto sí funciona así?");
+    }
 }

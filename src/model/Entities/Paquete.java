@@ -6,7 +6,7 @@ import org.jooq.impl.DSL;
 import model.Envio;
 import utilities.Conexion;
 
-public class Paquete extends Envio {
+public class Paquete{
   // SQL Fields
   public Integer id;
   public String descripcion;
@@ -23,17 +23,11 @@ public class Paquete extends Envio {
     return id;
   }
 
-  public String getDestinatario() {
-    return cliente_recogida;
-  }
 
   public Integer getPeso() {
     return peso;
   }
 
-  public Boolean getEstado() {
-    return delivered;
-  }
   public Boolean getSeguro(){
     return seguro;
   }

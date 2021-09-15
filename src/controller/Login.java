@@ -56,7 +56,7 @@ public class Login {
     if (acc == -2)
       JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
     else if (acc == -1)
-      GeneralAlerts.showBadLogin();
+      SpecificAlerts.showBadLogin();
     else if (acc == 0) {
       System.out.println("sql error");
     } else {

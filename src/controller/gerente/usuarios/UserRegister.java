@@ -12,14 +12,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
-import model.Entities.UsuarioDAO;
 import utilities.*;
 
 public class UserRegister {
   private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
   private static final int EXISTE = 0; // Usuario se encuentra en la BD
   private Roles roles; // Cargos de la empresa
-  private int userNoExist;
 
   // Auxiliares para los datos del usuario.
   private String fecha; // Dato parcial de fecha de nacimiento
@@ -179,6 +177,8 @@ public class UserRegister {
       boolean forbidchar = false;
       boolean emptyCamps = false;
       boolean usernameExist = false;
+      boolean empleadoExist = false;
+      boolean registroFallido = false;
 
       getData();
       String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
@@ -187,33 +187,34 @@ public class UserRegister {
 
       if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
         parseData();
-        Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
-        userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
-                                                   // empleado ya existía.
         usernameExist = Usuario.checkExistence(username);
+        empleadoExist = Empleado.checkExistence(id + "");
 
-        if (userNoExist == NOEXISTE && !usernameExist) {
+        if (!(usernameExist || empleadoExist)) { // Si el empleado y el usuario no están registrados, se procede a hacer el registro.
           Usuario user = new Usuario(id, username, password, true);
-          UsuarioDAO userD = new UsuarioDAO();
-          userD.crearUsuario(user);
-          GeneralAlerts.showRegSuccess();
-          clearCamps();
-          volver();
-          clearCamps();
+          Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
+          registroFallido = (Empleado.crearEmpleado(emp) != 0);
+          registroFallido |= Usuario.registrarUsuario(user);
+
+          if(registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
+            SpecificAlerts.showErrorUnexpt();
+          else{
+            SpecificAlerts.showRegSuccess();
+            volver();
+            clearCamps();
+          }
         } else {
-          if (userNoExist == EXISTE)
-            GeneralAlerts.showUserExistAlert();
-          if (usernameExist)
-            GeneralAlerts.showUsernameExist();
+          if(usernameExist) SpecificAlerts.showUsernameExist();
+          if(empleadoExist) SpecificAlerts.showEmpleadoExists();
         }
       } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
-          GeneralAlerts.showEmptyFieldAlert();
+          SpecificAlerts.showEmptyFieldAlert();
         else if (forbidchar)
-          GeneralAlerts.showCharForbidenAlert();
+          SpecificAlerts.showCharForbidenAlert();
       }
     } catch (NumberFormatException error) {
-      GeneralAlerts.showErrorUnexpt();
+      SpecificAlerts.showErrorUnexpt();
     }
   }
 

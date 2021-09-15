@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import model.Pago;
 import utilities.GeneralChecker;
-import utilities.GeneralAlerts;
+import utilities.SpecificAlerts;
 import utilities.Globals;
 import utilities.SobreTarjeta;
 import utilities.TextFieldRestrictions;
@@ -150,12 +150,12 @@ public class OperadorTarjeta implements Initializable {
     if (!(camposVacios || forbidChar)) {
       parseData();
       pago.ejecutarPago(envio);
-      GeneralAlerts.showPagoExitoso();
+      SpecificAlerts.showPagoExitoso();
     } else {
       if (camposVacios)
-        GeneralAlerts.showEmptyFieldAlert();
+        SpecificAlerts.showEmptyFieldAlert();
       else
-        GeneralAlerts.showCharForbidenAlert();
+        SpecificAlerts.showCharForbidenAlert();
     }
   }
 
