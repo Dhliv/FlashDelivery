@@ -14,9 +14,11 @@ import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
 
+/**
+ * La clase UserRegister se encarga de brindar al cliente la interfaz gráfica
+ * para el resgistro de un empleado en la base de datos.
+ */
 public class UserRegister {
-  private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
-  private static final int EXISTE = 0; // Usuario se encuentra en la BD
   private Roles roles; // Cargos de la empresa
 
   // Auxiliares para los datos del usuario.
