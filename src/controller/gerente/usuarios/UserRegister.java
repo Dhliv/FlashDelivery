@@ -166,7 +166,11 @@ public class UserRegister {
   }
 
   /**
-   * Registra a un usuario.
+   * Registra a un usuario en la base de datos, haciendo las respectivas
+   * validaciones (revisar que no existan campos vacíos, que no se usen caracteres
+   * prohibidos, que el empleado a registrar no se encuentre registrado, que el
+   * usuario asignado al empleado no se encuentre en uso, que la inserción de
+   * datos en la BD sea exitosa).
    * 
    * @param event not used.
    */
