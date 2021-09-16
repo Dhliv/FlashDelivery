@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import controller.Login;
-import controller.OperadorOficina;
+import controller.operador.OperadorOficina;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -45,7 +45,10 @@ public class Main extends Application {
         Globals.init(this);
         Globals.pantalla = stage;
 
-        Ventana login = new Ventana("login", new Login());
-        login.start(stage);
+        /*entana login = new Ventana("login", new Login());
+        login.start(stage);*/
+
+        Ventana vent = new Ventana("operadorOficina", new OperadorOficina(model.Entities.Empleado.cargarEmpleado("12345")));
+        vent.start(Globals.pantalla);
     }
 }

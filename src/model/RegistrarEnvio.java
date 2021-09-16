@@ -28,14 +28,6 @@ public class RegistrarEnvio {
     paquetes = new ArrayList<>();
   }
 
-  public Cliente getRemitente() {
-    return remitente;
-  }
-
-  public Cliente getDestinatario() {
-    return destinatario;
-  }
-
   /**
    * Busca si un cliente ya se encuentra registrado en la base de datos.
    * 
@@ -121,6 +113,18 @@ public class RegistrarEnvio {
   // #---------------------------------------------------------------------------
   // # FUNCIONES AUXILIARES
   // #---------------------------------------------------------------------------
+
+  public Cliente getRemitente() {
+    return remitente;
+  }
+
+  public Cliente getDestinatario() {
+    return destinatario;
+  }
+
+  public boolean checkClientes() {
+    return !(remitente == null || destinatario == null);
+  }
 
   // #---------------------------------------------------------------------------
   // # ENUMS
