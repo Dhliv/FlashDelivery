@@ -198,7 +198,7 @@ public class UserRegister {
                                                // el registro.
         Usuario user = new Usuario(id, username, password, true);
         Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
-        registroFallido = (Empleado.crearEmpleado(emp) != 0);
+        registroFallido = (Empleado.crearEmpleado(emp) == 0);
         registroFallido |= Usuario.registrarUsuario(user);
 
         if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
