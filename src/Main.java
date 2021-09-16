@@ -5,10 +5,6 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import controller.Login;
-<<<<<<< HEAD
-import controller.operador.OperadorOficina;
-=======
->>>>>>> 849d612974d836b5e6d6fe8e3b9fe1c6acc0ee46
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utilities.CreatePDF;
