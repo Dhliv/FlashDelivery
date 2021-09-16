@@ -27,18 +27,6 @@ public class RegistrarEnvio {
     paquete = null;
   }
 
-  public Cliente getRemitente() {
-    return remitente;
-  }
-
-  public Cliente getDestinatario() {
-    return destinatario;
-  }
-
-  public Paquete getPaquete() {
-    return paquete;
-  }
-
   /**
    * Busca si un cliente ya se encuentra registrado en la base de datos.
    * 
@@ -48,21 +36,17 @@ public class RegistrarEnvio {
    */
   public Cliente buscarCliente(String cedula, TipoCliente tipo) {
     Cliente cliente = Cliente.buscarCliente(cedula);
-    if (tipo == TipoCliente.Remitente)
-      remitente = cliente;
-    if (tipo == TipoCliente.Destinatario)
-      destinatario = cliente;
+    if (tipo == TipoCliente.Remitente) remitente = cliente;
+    if (tipo == TipoCliente.Destinatario) destinatario = cliente;
     return cliente;
   }
 
   /**
    * Modifica el estado del cliente.
    */
-  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono,
-      TipoCliente tipo) {
+  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
     Cliente cliente = new Cliente();
-    if (cedula.trim().equals("") || nombre.trim().equals("") || ciudad.equals("") || direccion.equals("")
-        || telefono.equals(""))
+    if (cedula.trim().equals("") || nombre.trim().equals("") || ciudad.equals("") || direccion.equals("") || telefono.equals(""))
       cliente = null;
     else {
       cliente.cedula = cedula;
@@ -79,10 +63,8 @@ public class RegistrarEnvio {
     }
   }
 
-  public void agregarPaqueteP(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo,
-      Integer alto, Boolean seguro) {
-    if (paquete == null)
-      this.paquete = new Paquete();
+  public void agregarPaqueteP(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
+    if (paquete == null) this.paquete = new Paquete();
     paquete.peso = peso;
     paquete.valor = valor;
     paquete.descripcion = descripcion;
@@ -108,6 +90,22 @@ public class RegistrarEnvio {
   // #---------------------------------------------------------------------------
   // # FUNCIONES AUXILIARES
   // #---------------------------------------------------------------------------
+
+  public Cliente getRemitente() {
+    return remitente;
+  }
+
+  public Cliente getDestinatario() {
+    return destinatario;
+  }
+
+  public Paquete getPaquete() {
+    return paquete;
+  }
+
+  public boolean checkClientes() {
+    return !(remitente == null || destinatario == null);
+  }
 
   // #---------------------------------------------------------------------------
   // # ENUMS

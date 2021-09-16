@@ -28,7 +28,7 @@
             <TextField fx:id="txtAlto" layoutX="378.0" layoutY="183.0" prefHeight="25.0" prefWidth="100.0" />
             <TextField fx:id="txtLargo" layoutX="511.0" layoutY="183.0" prefHeight="25.0" prefWidth="100.0" />
             <Button fx:id="btModificar" layoutX="376.0" layoutY="288.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="172.0" text="Modificar paquete" />
-            <CheckBox layoutX="686.0" layoutY="187.0" mnemonicParsing="false" text="Asegurado" />
+            <CheckBox fx:id="checkSeguro" layoutX="686.0" layoutY="187.0" mnemonicParsing="false" text="Asegurado" />
             <Label layoutX="99.0" layoutY="236.0" text="Peso" />
             <Label layoutX="350.0" layoutY="236.0" text="Valor del paquete (para seguro)" />
             <TextField fx:id="txtPeso" layoutX="160.0" layoutY="232.0" />
