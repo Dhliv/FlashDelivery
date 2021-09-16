@@ -80,7 +80,7 @@ public class Pago {
    * @param envio Contiene los datos relacionados al envio.
    */
   public void ejecutarPago(RegistrarEnvio envio) {
-    Paquete.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
+    //Paquete.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
     goBack();
   }
 
@@ -117,7 +117,7 @@ public class Pago {
    * @return Costo de enviar el paquete considerando solo su masa y volumen.
    */
   private int calcularCostoPaquete(Paquete p) {
-    return (int) (p.peso * ValorKG + p.volumen.volumen() * ValorCM3);
+    return (int) (p.peso * ValorKG + p.getVolumen() * ValorCM3);
   }
 
   /**
@@ -176,7 +176,7 @@ public class Pago {
   private double calcularCosto(List<Paquete> p) {
     double costo = 0;
     for (int i = 0; i < p.size(); i++) {
-      costo += (p.get(i).peso * ValorKG + p.get(i).volumen.volumen() * ValorCM3);
+      costo += (p.get(i).peso * ValorKG + p.get(i).getVolumen() * ValorCM3);
     }
 
     return costo;

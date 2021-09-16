@@ -169,13 +169,13 @@ public class UserEdit implements Initializable {
       parseData();
       Empleado updated = new Empleado(ident, name, "", rol, dir, telefono, fecha, idSede);
       Empleado.updateEmpleado(updated);
-      GeneralAlerts.showUpdSucces();
+      SpecificAlerts.showUpdSucces();
       volver();
     } else {
       if (camposVacios)
-        GeneralAlerts.showEmptyFieldAlert();
+        SpecificAlerts.showEmptyFieldAlert();
       else
-        GeneralAlerts.showCharForbidenAlert();
+        SpecificAlerts.showCharForbidenAlert();
     }
   }
 

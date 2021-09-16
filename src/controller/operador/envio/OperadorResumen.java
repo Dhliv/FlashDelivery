@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.Pago;
 import model.Entities.Empleado;
-import utilities.GeneralAlerts;
+import utilities.SpecificAlerts;
 import utilities.Globals;
 
 /**
@@ -69,7 +69,8 @@ public class OperadorResumen {
   /**
    * Carga la información relacionada al envío en la interfaz grafica.
    */
-  public void chargeInformation() throws IOException {
+  public void chargeInformation() throws IOException { 
+    /*
     // Actualiza los datos en pantalla.
     lblCedulaR.setText(lblCedulaR.getText() + ": " + envio.getRemitente().cedula);
     lblNameR.setText(lblNameR.getText() + ": " + envio.getRemitente().nombre);
@@ -88,6 +89,7 @@ public class OperadorResumen {
     lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
     lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(pago.getSeguro()));
     lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
+    */
   }
 
   /**
@@ -139,6 +141,6 @@ public class OperadorResumen {
   @FXML
   void pagoEfectivo(ActionEvent event) {
     pago.ejecutarPago(envio);
-    GeneralAlerts.showPagoExitoso();
+    SpecificAlerts.showPagoExitoso();
   }
 }

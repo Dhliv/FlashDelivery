@@ -8,9 +8,6 @@ public class Envio {
   public Integer id;
     public Date fecha_registro;
     public String metodo_pago;
-    public Integer costo;
-    public Boolean seguro;
-    public Integer impuesto_envio;
     public String direccion_entrega;
     public Integer id_sede;
     public String emp_entrega;
@@ -32,7 +29,7 @@ public class Envio {
   public static Integer createEnvio(Date fecha_registro, String metodo_pago, Integer costo, Integer seguro,
       Integer impuesto_envio, String direccion_entrega, Integer id_sede, String emp_entrega, String cliente_envio,
       String cliente_recogida) {
-    String sql = "insert into envio(fecha_registro, metodo_pago, costo, seguro, impuesto_envio, direccion_entrega, id_sede, emp_entrega, delivered, cliente_envio, cliente_recogida) values('"
+    String sql = "insert into envio(fecha_registro, metodo_pago,  direccion_entrega, id_sede, emp_entrega, delivered, cliente_envio, cliente_recogida) values('"
         + fecha_registro + "', '" + metodo_pago + "', " + costo + ", " + seguro + ", " + impuesto_envio + ", '"
         + direccion_entrega + "', " + id_sede + ", '" + emp_entrega + "', FALSE, '" + cliente_envio + "', '"
         + cliente_recogida + "')";

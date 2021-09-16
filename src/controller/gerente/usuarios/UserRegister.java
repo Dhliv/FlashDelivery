@@ -1,35 +1,34 @@
 package controller.gerente.usuarios;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
-import model.Entities.UsuarioDAO;
 import utilities.*;
 
-public class UserRegister implements Initializable {
-  private static final int NOEXISTE = 1; // Usuario no se encuentra en la BD
+/**
+ * La clase UserRegister se encarga de brindar al cliente la interfaz gráfica
+ * para el resgistro de un empleado en la base de datos.
+ */
+public class UserRegister {
   private Roles roles; // Cargos de la empresa
-  private int userNoExist;
 
   // Auxiliares para los datos del usuario.
-  private Object fecha; // Dato parcial de fecha de nacimiento
-  private Object idS; // Dato parcial de id sede
-  private Object rl; // Dato parcial de rol
+  private String fecha; // Dato parcial de fecha de nacimiento
+  private String idS; // Dato parcial de id sede
+  private String rl; // Dato parcial de rol
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
+  private String apellidos; // Apellidos.
   private String telefono;
   private String dir; // Dirección
   private String ident; // Identificación
@@ -43,6 +42,8 @@ public class UserRegister implements Initializable {
   // Campos de texto que se pueden rellenar en user.register view
   @FXML
   private TextField nombreT;
+  @FXML
+  private TextField apellidoT;
   @FXML
   private TextField identificacionT;
   @FXML
@@ -73,11 +74,8 @@ public class UserRegister implements Initializable {
    * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
    * restricciones a los campos necesarios.
    * 
-   * @param url not used.
-   * @param rb  not used.
    */
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
+  public void initialize() {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 
@@ -102,14 +100,44 @@ public class UserRegister implements Initializable {
    */
   private void getData() {
     name = nombreT.getText();
+    apellidos = apellidoT.getText();
     telefono = telefonoT.getText();
     rl = rolT.getValue();
     dir = direccionT.getText();
     ident = identificacionT.getText();
-    fecha = fechaT.getValue();
+    fecha = fechaT.getValue() != null ? fechaT.getValue().toString() : "";
     idS = idsedeT.getValue();
     username = usernameT.getText();
     password = passwordT.getText();
+  }
+
+  /**
+   * Limpia todos los campos rellenables.
+   */
+  private void clearCamps() {
+    nombreT.setText("");
+    apellidoT.setText("");
+    telefonoT.setText("");
+    direccionT.setText("");
+    identificacionT.setText("");
+    usernameT.setText("");
+    passwordT.setText("");
+
+    fechaT.setValue(null);
+    idsedeT.setValue(null);
+    rolT.setValue(null);
+  }
+
+  /**
+   * Convierte el rol visual a un rol interno.
+   * 
+   * @param rol String con rol visual.
+   * @return String con rol interno.
+   */
+  private String parseRol(String rol) {
+    if (rol == roles.rol.get(roles.SECRETARIO))
+      return "Secretaria";
+    return rol;
   }
 
   /**
@@ -117,9 +145,9 @@ public class UserRegister implements Initializable {
    */
   private void parseData() {
     id = Integer.valueOf(ident);
-    fc = LocalDate.parse(fecha.toString());
-    idSede = model.Entities.Sede.getIdSede(idS.toString());
-    rol = rl.toString();
+    fc = LocalDate.parse(fecha);
+    idSede = model.Entities.Sede.getIdSede(idS);
+    rol = parseRol(rl.toString());
   }
 
   /**
@@ -140,50 +168,58 @@ public class UserRegister implements Initializable {
   }
 
   /**
-   * Registra a un usuario.
+   * Registra a un usuario en la base de datos, haciendo las respectivas
+   * validaciones (revisar que no existan campos vacíos, que no se usen caracteres
+   * prohibidos, que el empleado a registrar no se encuentre registrado, que el
+   * usuario asignado al empleado no se encuentre en uso, que la inserción de
+   * datos en la BD sea exitosa).
    * 
    * @param event not used.
    */
   @FXML
   void registrarUser(ActionEvent event) {
-    try {
+    boolean forbidchar = false;
+    boolean emptyCamps = false;
+    boolean usernameExist = false;
+    boolean empleadoExist = false;
+    boolean registroFallido = false;
 
-      boolean forbidchar = false;
-      boolean emptyCamps = false;
+    getData();
+    String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
+    emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
+    forbidchar = GeneralChecker.checkChar(campo);
 
-      getData();
-      String campo[] = { name, telefono, dir, ident, username, password };
-      Object multOpcion[] = { rl, fecha, idS };
+    if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
+      parseData();
+      usernameExist = Usuario.checkExistence(username);
+      empleadoExist = Empleado.checkExistence(id + "");
 
-      emptyCamps = GeneralChecker.checkEmpty(campo, multOpcion); // verifica que no existan campos vacíos.
-      forbidchar = GeneralChecker.checkChar(campo); // verifica que no se hayan utilizado caracteres prohibidos.
+      if (!(usernameExist || empleadoExist)) { // Si el empleado y el usuario no están registrados, se procede a hacer
+                                               // el registro.
+        Usuario user = new Usuario(id, username, password, true);
+        Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
+        registroFallido = (Empleado.crearEmpleado(emp) != 0);
+        registroFallido |= Usuario.registrarUsuario(user);
 
-      if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
-        parseData();
-
-        Empleado emp = new Empleado(id + "", name, "", rol, dir, telefono, fc, idSede);
-        userNoExist = Empleado.crearEmpleado(emp); // Almacena 1 si el empleado fue registrado con exito. 0 si el
-                                                   // empleado ya existía.
-
-        if (userNoExist == NOEXISTE) {
-          Usuario user = new Usuario(id, username, password, true);
-          UsuarioDAO userD = new UsuarioDAO();
-          userD.crearUsuario(user);
-          GeneralAlerts.showRegSuccess();
+        if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
+          SpecificAlerts.showErrorUnexpt();
+        else {
+          SpecificAlerts.showRegSuccess();
           volver();
-        } else {
-          GeneralAlerts.showUserExistAlert();
+          clearCamps();
         }
-      } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
-        if (emptyCamps)
-          GeneralAlerts.showEmptyFieldAlert();
-        else if (forbidchar)
-          GeneralAlerts.showCharForbidenAlert();
+      } else {
+        if (usernameExist)
+          SpecificAlerts.showUserExist();
+        if (empleadoExist)
+          SpecificAlerts.showEmpleadoExists();
       }
-    } catch (NumberFormatException error) {
-      GeneralAlerts.showErrorUnexpt();
+    } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
+      if (emptyCamps)
+        SpecificAlerts.showEmptyFieldAlert();
+      if (forbidchar)
+        SpecificAlerts.showCharForbidenAlert();
     }
-
   }
 
 }

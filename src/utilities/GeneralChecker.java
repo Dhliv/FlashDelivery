@@ -38,7 +38,7 @@ public class GeneralChecker {
     boolean ch = false;
 
     for (int i = 0; i < campo.length; i++) {
-      if (campo[i] == "") {
+      if (campo[i].trim() == "") {
         ch = true;
         break;
       }

@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import model.Entities.Cliente;
 import model.Entities.Paquete;
-import model.Entities.Paquete.Dim;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -20,12 +19,12 @@ import java.util.ArrayList;
 public class RegistrarEnvio {
   private Cliente remitente;
   private Cliente destinatario;
-  private List<Paquete> paquetes;
+  private Paquete paquete;
 
   public RegistrarEnvio() {
     remitente = null;
     destinatario = null;
-    paquetes = new ArrayList<>();
+    paquete = null;
   }
 
   /**
@@ -64,42 +63,20 @@ public class RegistrarEnvio {
     }
   }
 
-  public void agregarPaqueteP(Paquete p) {
-    paquetes.add(p);
+  public void agregarPaqueteP(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
+    if (paquete == null) this.paquete = new Paquete();
+    paquete.peso = peso;
+    paquete.valor = valor;
+    paquete.descripcion = descripcion;
+    paquete.ancho = ancho;
+    paquete.largo = largo;
+    paquete.alto = alto;
+    paquete.seguro = seguro;
+
   }
 
-  public Paquete agregarPaquete(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro, int index) {
-    Paquete p = new Paquete();
-    p.descripcion = descripcion;
-    p.peso = peso;
-    p.valor = valor;
-    Dim d = new Dim();
-    d.alto = alto;
-    d.largo = largo;
-    d.ancho = ancho;
-    p.volumen = d;
-    p.seguro = seguro;
-
-    if (index == -1)
-      paquetes.add(p);
-    else
-      paquetes.add(index, p);
-    return p;
-  }
-
-  public void editarPaquete(int index, Paquete p) {
-    paquetes.get(index).descripcion = p.descripcion;
-    paquetes.get(index).peso = p.peso;
-    paquetes.get(index).volumen = p.volumen;
-    paquetes.get(index).valor = p.valor;
-  }
-
-  public void eliminarPaquete(int index) {
-    paquetes.remove(index);
-  }
-
-  public List<Paquete> getPaquetes() {
-    return paquetes;
+  public void eliminarPaquete() {
+    paquete = null;
   }
 
   public Integer getCost(Integer peso, Integer volumen) { // añadir parametros int ciudadOrigen, int ciudadDestino
@@ -122,6 +99,10 @@ public class RegistrarEnvio {
     return destinatario;
   }
 
+  public Paquete getPaquete() {
+    return paquete;
+  }
+
   public boolean checkClientes() {
     return !(remitente == null || destinatario == null);
   }
@@ -132,25 +113,6 @@ public class RegistrarEnvio {
 
   public enum TipoCliente {
     Remitente, Destinatario
-  }
-
-  // #---------------------------------------------------------------------------
-  // # POJOs
-  // #---------------------------------------------------------------------------
-
-  public static class Envio {
-    public Integer ID_Envio;
-    public Date Fecha_registro;
-    public String Metodo_pago;
-    public Double Costo;
-    public Boolean Seguro;
-    public Double Impuesto_envio;
-    public String Direccion_entrega;
-    public Integer ID_Sede;
-    public Integer Emp_Entrega;
-    public Boolean Delivered;
-    public String Cliente_Envio;
-    public String Cliente_Recogida;
   }
 
 }
