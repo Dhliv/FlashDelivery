@@ -9,7 +9,7 @@ public class Empleado {
   private String cedula;
   private String nombres, apellidos, rol, direccion, telefono;
   private LocalDate birthdate;
-  public int sede;
+  public int id_sede;
 
   public Empleado() {
   }
@@ -23,7 +23,7 @@ public class Empleado {
     this.direccion = direccion;
     this.telefono = telefono;
     this.birthdate = birthdate;
-    this.sede = sede;
+    this.id_sede = sede;
   }
 
   public String getCedula() {
@@ -55,7 +55,7 @@ public class Empleado {
   }
 
   public int getSede() {
-    return sede;
+    return id_sede;
   }
 
   public void setCedula(String cedula) {
@@ -87,13 +87,14 @@ public class Empleado {
   }
 
   public void setSede(int sede) {
-    this.sede = sede;
+    this.id_sede = sede;
   }
 
   @Override
   public String toString() {
     return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
-        + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + sede + '}';
+        + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + id_sede
+        + '}';
   }
 
   /**
