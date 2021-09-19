@@ -14,22 +14,33 @@ import utilities.TextFieldRestrictions;
 
 /**
  * Controlador para la vista operador.cliente
+ * 
  * @author Julián Orejuela
  * @version 1.2, 13/9/2021
  */
 public class RegistrarClientes {
   // Remitente
-  @FXML private TextField RCedula;
-  @FXML private TextField RNombre;
-  @FXML private TextField RDireccion;
-  @FXML private TextField RTelefono;
-  @FXML private TextField RCiudad;
+  @FXML
+  private TextField RCedula;
+  @FXML
+  private TextField RNombre;
+  @FXML
+  private TextField RDireccion;
+  @FXML
+  private TextField RTelefono;
+  @FXML
+  private TextField RCiudad;
   // Destinatario
-  @FXML private TextField DCedula;
-  @FXML private TextField DNombre;
-  @FXML private TextField DDireccion;
-  @FXML private TextField DTelefono;
-  @FXML private TextField DCiudad;
+  @FXML
+  private TextField DCedula;
+  @FXML
+  private TextField DNombre;
+  @FXML
+  private TextField DDireccion;
+  @FXML
+  private TextField DTelefono;
+  @FXML
+  private TextField DCiudad;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -49,18 +60,21 @@ public class RegistrarClientes {
   /**
    * Manejador del evento onKeyPressed del TextField #DCedula
    */
-  @FXML void onKeyPressedDestinatario(KeyEvent event) {
+  @FXML
+  void onKeyPressedDestinatario(KeyEvent event) {
     onChangeCedula(DCedula, DNombre, DCiudad, DDireccion, DTelefono, TipoCliente.Destinatario);
   }
 
   /**
    * Manejador del evento onKeyPressed del TextField #RCedula
    */
-  @FXML void onKeyPressedRemitente(KeyEvent event) {
+  @FXML
+  void onKeyPressedRemitente(KeyEvent event) {
     onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);
   }
 
-  private synchronized void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion, TextField Telefono, TipoCliente tipo) {
+  private synchronized void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion,
+      TextField Telefono, TipoCliente tipo) {
     if (Cedula.getText() == "") // Cedula.getText().trim().equals("")
       return;
     Runnable r = () -> {
@@ -75,9 +89,12 @@ public class RegistrarClientes {
     new Thread(r).start();
   }
 
-  @FXML void registrarPaquetes(ActionEvent event) {
-    envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
-    envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
+  @FXML
+  void registrarPaquetes(ActionEvent event) {
+    envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(), RTelefono.getText(),
+        TipoCliente.Remitente);
+    envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(), DTelefono.getText(),
+        TipoCliente.Destinatario);
 
     if (!envio.checkClientes())
       // no se puede proceder con los datos que se han ingresado hasta el momento
