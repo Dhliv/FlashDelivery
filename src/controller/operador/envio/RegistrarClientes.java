@@ -11,6 +11,7 @@ import model.Entities.Empleado;
 import model.RegistrarEnvio.TipoCliente;
 import utilities.Globals;
 import utilities.TextFieldRestrictions;
+import utilities.View;
 
 /**
  * Controlador para la vista operador.cliente
@@ -83,6 +84,6 @@ public class RegistrarClientes {
       // no se puede proceder con los datos que se han ingresado hasta el momento
       JOptionPane.showMessageDialog(null, "Debe ingresar los datos de los clientes antes de continuar.");
     else
-      Globals.cambiarVista("operador.paquetes", new RegistrarPaquete(envio, operador));
+      View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
   }
 }

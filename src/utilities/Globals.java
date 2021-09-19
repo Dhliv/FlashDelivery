@@ -14,17 +14,9 @@ import java.util.HashMap;
 import controller.Login;
 
 public class Globals {
-  private static Object referenceObject;
-  public static Pane viewPane;
   public static Stage pantalla;
   private static Ventana ventana;
-  private static Map<String, Parent> views;
   private static model.RegistrarEnvio envio;
-
-  public static void init(Object obj) {
-    referenceObject = obj;
-    views = new HashMap<String, Parent>();
-  }
 
   public static void setEnvio(model.RegistrarEnvio r) {
     envio = r;
@@ -32,6 +24,18 @@ public class Globals {
 
   public static model.RegistrarEnvio getEnvio() {
     return envio;
+  }
+
+  // ! --------------------------------------------
+  // ! POR BORRAR
+
+  private static Object referenceObject;
+  public static Pane viewPane;
+  private static Map<String, Parent> views;
+
+  public static void init(Object obj) {
+    referenceObject = obj;
+    views = new HashMap<String, Parent>();
   }
 
   public static void cambiarVista(String name) {
@@ -71,8 +75,7 @@ public class Globals {
    */
   public static Parent loadView(String name, Object control) {
     FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-    if (control != null)
-      loader.setController(control);
+    if (control != null) loader.setController(control);
     Parent root = null;
     try {
       root = loader.load();
@@ -85,6 +88,8 @@ public class Globals {
   public static Scene loadScene(String name) {
     return new Scene(loadView(name, null));
   }
+
+  // ! --------------------------------------------
 
   /**
    * Desconecta al usuario actual del sistema.

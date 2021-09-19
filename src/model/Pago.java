@@ -40,8 +40,7 @@ public class Pago {
     date = Date.valueOf(LocalDate.now());
 
     calcularTotal(envio);
-    CreatePDF pdf = new CreatePDF(parsePaquetes(envio), parseCliente(envio.getRemitente()),
-        parseCliente(envio.getDestinatario()), parsePago());
+    CreatePDF pdf = new CreatePDF(parsePaquetes(envio), parseCliente(envio.getRemitente()), parseCliente(envio.getDestinatario()), parsePago());
 
     pdf.pdfCreate(Integer.toString(getIdEnvio(envio)));
   }
@@ -68,8 +67,7 @@ public class Pago {
    * @param envio Contiene los datos relacionados al envio.
    */
   public int getIdEnvio(RegistrarEnvio envio) {
-    Integer idEnvio = Envio.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion,
-        SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
+    Integer idEnvio = Envio.createEnvio(date, "Efectivo", total, seguro, impuesto, envio.getDestinatario().direccion, SEDE, EMPLEADO, envio.getRemitente().cedula, envio.getDestinatario().cedula);
     return idEnvio;
   }
 
@@ -80,7 +78,7 @@ public class Pago {
    * @param envio Contiene los datos relacionados al envio.
    */
   public void ejecutarPago(RegistrarEnvio envio) {
-    //Paquete.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
+    // Paquete.createPaquetes(envio.getPaquetes(), getIdEnvio(envio));
     goBack();
   }
 
