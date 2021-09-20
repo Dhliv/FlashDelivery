@@ -58,10 +58,6 @@ public class Globals {
     viewPane.getChildren().add(view);
   }
 
-  public static void clearViews() {
-    views.clear();
-  }
-
   public static Parent loadView(String name) {
     return loadView(name, null);
   }
@@ -75,7 +71,8 @@ public class Globals {
    */
   public static Parent loadView(String name, Object control) {
     FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-    if (control != null) loader.setController(control);
+    if (control != null)
+      loader.setController(control);
     Parent root = null;
     try {
       root = loader.load();
@@ -96,7 +93,7 @@ public class Globals {
    */
   public static void logOut() {
     pantalla.close();
-    clearViews();
+    View.clearViews();
     ventana = new Ventana("login", new Login());
     try {
       ventana.start(pantalla);

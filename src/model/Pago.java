@@ -88,7 +88,6 @@ public class Pago {
    * Vuelve a la pantalla principal del Operador de Oficina.
    */
   private void goBack() {
-    Globals.clearViews();
     Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
   }
 
