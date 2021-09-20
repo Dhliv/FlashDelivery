@@ -2,6 +2,7 @@ package controller.operador.envio;
 
 import java.io.IOException;
 
+import controller.operador.OperadorOficina;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,7 +16,7 @@ import utilities.Globals;
  * Clase encargada de controlar la vista OperadorResumen Despliega el metodo de
  * pago que se quiere elegir y reenvia a el seleccionado Efectivo = Devolverse a
  * la pantalla principal de operador Credito = Muestra la vista de credito
- * Debito = Muestra la vista de debito
+ * Debito = Muestra la vista de debito.
  */
 public class OperadorResumen {
   private model.RegistrarEnvio envio;
@@ -107,7 +108,7 @@ public class OperadorResumen {
    * @param tipo de la tarjeta.
    */
   void pagar(Integer tipo) {
-    View.cambiar("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago));
+    View.cambiar("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago, operador));
   }
 
   /**
@@ -140,5 +141,14 @@ public class OperadorResumen {
   void pagoEfectivo(ActionEvent event) {
     pago.ejecutarPago(envio, "Efectivo");
     SpecificAlerts.showPagoExitoso();
+    goBack();
+  }
+
+  /**
+   * Vuelve a la pantalla principal de operador de oficina.
+   */
+  private void goBack() {
+    View.clearViews();
+    View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 }

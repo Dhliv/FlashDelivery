@@ -80,15 +80,6 @@ public class Pago {
       // TODO PERGUEZA ESTO TE CORRESPONDE
       e.printStackTrace();
     }
-
-    goBack();
-  }
-
-  /**
-   * Vuelve a la pantalla principal del Operador de Oficina.
-   */
-  private void goBack() {
-    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
   }
 
   /**

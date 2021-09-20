@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import utilities.CreatePDF;
 import utilities.Globals;
+import utilities.SpecificAlerts;
 import utilities.Ventana;
 import utilities.View;
 
@@ -44,6 +45,7 @@ public class Main extends Application {
 
     View.init(this);
     Globals.init(this);
+    SpecificAlerts.init();
     Globals.pantalla = stage;
 
     Ventana login = new Ventana("login", new Login());

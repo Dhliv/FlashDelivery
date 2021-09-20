@@ -20,9 +20,8 @@ public class SpecificAlerts {
   private static Alert userExists; // Alerta para indicar que el usuario ya existía.
   private static Alert empleadoExists; // Alerta para indicar que el empleado ya existía.
   private static Alert badLogin; // Alerta para indicar que el usuario/contraseña es erroneo.
-  private static Boolean inicializado = false; // Indica si se han inicializado las alertas.
 
-  private static void init() {
+  public static void init() {
 
     cEmpty = new Alert(AlertType.WARNING);
     cEmpty.setContentText("Por favor rellene los campos restantes.");
@@ -73,44 +72,34 @@ public class SpecificAlerts {
     empleadoExists.setContentText("El empleado que intenta registrar ya se encuentra registrado en la base de datos.");
     empleadoExists.setTitle("Empleado ya registrado");
     empleadoExists.setHeaderText("Empleado ya registrado");
-
-    inicializado = true;
   }
 
   /**
    * Alerta que indica la existencia de campos vacíos.
    */
   public static void showEmptyFieldAlert() {
-    if (!inicializado)
-      init();
-    cEmpty.show();
+    cEmpty.showAndWait();
   }
 
   /**
    * Alerta que indica que se usaron caracteres prohibidos.
    */
   public static void showCharForbidenAlert() {
-    if (!inicializado)
-      init();
-    cForbi.show();
+    cForbi.showAndWait();
   }
 
   /**
    * Alerta que indica que ocurrió un error no identificado.
    */
   public static void showErrorUnexpt() {
-    if (!inicializado)
-      init();
-    errorUnexpt.show();
+    errorUnexpt.showAndWait();
   }
 
   /**
    * Alerta que indica que el registro (de cualquier entidad) fue exitoso.
    */
   public static void showRegSuccess() {
-    if (!inicializado)
-      init();
-    regSuccess.show();
+    regSuccess.showAndWait();
   }
 
   /**
@@ -118,53 +107,41 @@ public class SpecificAlerts {
    * eliminarlo.
    */
   public static void showUserNullAlert() {
-    if (!inicializado)
-      init();
-    userNull.show();
+    userNull.showAndWait();
   }
 
   /**
    * Alerta que indica que el pago del envío fue exitoso.
    */
   public static void showPagoExitoso() {
-    if (!inicializado)
-      init();
-    pagoExitoso.show();
+    pagoExitoso.showAndWait();
   }
 
   /**
    * Alerta que indica la exitosa actualización (de cualquier entidad):
    */
   public static void showUpdSucces() {
-    if (!inicializado)
-      init();
-    updSucces.show();
+    updSucces.showAndWait();
   }
 
   /**
    * Alerta que indica que el Usuario por registrar ya existe.
    */
   public static void showUserExist() {
-    if (!inicializado)
-      init();
-    userExists.show();
+    userExists.showAndWait();
   }
 
   /**
    * Alerta que indica que el usurio o contraseña digitados están errados.
    */
   public static void showBadLogin() {
-    if (!inicializado)
-      init();
-    badLogin.show();
+    badLogin.showAndWait();
   }
 
   /**
    * Alerta que indica que un empleado ya estaba registrado.
    */
   public static void showEmpleadoExists() {
-    if (!inicializado)
-      init();
-    empleadoExists.show();
+    empleadoExists.showAndWait();
   }
 }
