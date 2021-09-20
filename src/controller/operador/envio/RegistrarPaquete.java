@@ -16,12 +16,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import model.Entities.Empleado;
 import model.Entities.Paquete;
+
 import utilities.SpecificAlerts;
 import utilities.Globals;
 import utilities.TextFieldRestrictions;
+import utilities.View;
 
 public class RegistrarPaquete {
-
   @FXML
   private Button atrasPaquete;
   @FXML
@@ -72,7 +73,7 @@ public class RegistrarPaquete {
   @FXML
   void atras(ActionEvent event) {
     if (event.getSource() == atrasPaquete)
-      Globals.cambiarVista("operador.cliente", this);
+      View.cambiar("operador.cliente");
   }
 
   private void clearFieldsPaquetes() {
@@ -145,7 +146,7 @@ public class RegistrarPaquete {
     if (envio.getPaquete() == null || modify)
       JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
     else
-      Globals.cambiarVista("operador.resumen", new OperadorResumen(envio, operador));
+      View.cambiar("operador.resumen", new OperadorResumen(envio, operador));
 
   }
 

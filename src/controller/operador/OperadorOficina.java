@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import model.Entities.Empleado;
 import utilities.Globals;
+import utilities.View;
 
 public class OperadorOficina {
   @FXML private Label labelPOS;
@@ -22,17 +23,16 @@ public class OperadorOficina {
   }
 
   public void initialize() {
-    Globals.viewPane = rightContent;
-    // Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
-    Globals.cambiarVista("operador.cliente", new RegistrarClientes(operador));
+    View.setViewPane(rightContent, true);
+    // View.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
+    View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
   /**
    * Accede a la pantalla de registro de paquetes.
    */
   @FXML void registrarEnvio(ActionEvent event) {
-    Globals.cambiarVista("operador.cliente", new RegistrarClientes(operador));
-    // Globals.cambiarVista("operador.cliente");
+    View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
   @FXML void registrarRecogida(ActionEvent event) {

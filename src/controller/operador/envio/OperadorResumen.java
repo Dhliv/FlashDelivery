@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import model.Pago;
 import model.Entities.Empleado;
 import utilities.SpecificAlerts;
+import utilities.View;
 import utilities.Globals;
 
 /**
@@ -96,7 +97,7 @@ public class OperadorResumen {
    */
   @FXML
   void atras(ActionEvent event) {
-    Globals.cambiarVista("operador.paquetes");
+    View.cambiar("operador.paquetes");
   }
 
   /**
@@ -106,7 +107,7 @@ public class OperadorResumen {
    * @param tipo de la tarjeta.
    */
   void pagar(Integer tipo) {
-    Globals.cambiarVista("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago));
+    View.cambiar("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago));
   }
 
   /**

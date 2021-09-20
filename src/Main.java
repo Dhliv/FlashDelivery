@@ -2,6 +2,8 @@
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 
 import controller.Login;
@@ -10,6 +12,7 @@ import javafx.stage.Stage;
 import utilities.CreatePDF;
 import utilities.Globals;
 import utilities.Ventana;
+import utilities.View;
 
 public class Main extends Application {
   public static void main(String[] args) {
@@ -39,6 +42,7 @@ public class Main extends Application {
   public void start(Stage stage) throws Exception {
     // generatePDF();
 
+    View.init(this);
     Globals.init(this);
     Globals.pantalla = stage;
 
