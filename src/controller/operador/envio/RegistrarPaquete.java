@@ -65,7 +65,7 @@ public class RegistrarPaquete {
     TextFieldRestrictions.textFieldNumeric(txtAncho);
     TextFieldRestrictions.textFieldNumeric(txtLargo);
     TextFieldRestrictions.textFieldNumeric(txtAlto);
-    //txtReporte.setText("xdxdxd");
+    // txtReporte.setText("xdxdxd");
     modify = false;
   }
 
@@ -148,8 +148,9 @@ public class RegistrarPaquete {
       Globals.cambiarVista("operador.resumen", new OperadorResumen(envio, operador));
 
   }
+
   @FXML
-    void superPrueba(KeyEvent event) {
-      System.out.println("Será que esto sí funciona así?");
-    }
+  void superPrueba(KeyEvent event) {
+    System.out.println("Será que esto sí funciona así?");
+  }
 }

@@ -149,7 +149,7 @@ public class OperadorTarjeta implements Initializable {
 
     if (!(camposVacios || forbidChar)) {
       parseData();
-      pago.ejecutarPago(envio);
+      pago.ejecutarPago(envio, tipoTarjeta == CREDITO ? "Credito" : "Debito");
       SpecificAlerts.showPagoExitoso();
     } else {
       if (camposVacios)

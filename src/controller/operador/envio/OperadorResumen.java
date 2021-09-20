@@ -59,8 +59,8 @@ public class OperadorResumen {
   }
 
   /**
-   * Iniciliaza los caomponentes gráficos con los datos del cliente y los costos
-   * de su envío.
+   * Iniciliaza los componentes gráficos con los datos del cliente y los costos de
+   * su envío.
    */
   public void initialize() throws IOException {
     chargeInformation();
@@ -69,15 +69,13 @@ public class OperadorResumen {
   /**
    * Carga la información relacionada al envío en la interfaz grafica.
    */
-  public void chargeInformation() throws IOException { 
-    /*
-    // Actualiza los datos en pantalla.
+  public void chargeInformation() throws IOException {
     lblCedulaR.setText(lblCedulaR.getText() + ": " + envio.getRemitente().cedula);
     lblNameR.setText(lblNameR.getText() + ": " + envio.getRemitente().nombre);
     lblCedulaD.setText(lblCedulaD.getText() + ": " + envio.getDestinatario().cedula);
     lblNameD.setText(lblNameD.getText() + ": " + envio.getDestinatario().nombre);
     lblDirD.setText(lblDirD.getText() + ": " + envio.getDestinatario().direccion);
-    lblnumP.setText(lblnumP.getText() + ": " + Integer.toString(envio.getPaquetes().size()));
+    lblnumP.setText(lblnumP.getText() + ": 1");
 
     // Calcula el total del envio y su respectivo impuesto.
     pago = new Pago(envio, operador);
@@ -89,7 +87,6 @@ public class OperadorResumen {
     lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
     lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(pago.getSeguro()));
     lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
-    */
   }
 
   /**
@@ -140,7 +137,7 @@ public class OperadorResumen {
    */
   @FXML
   void pagoEfectivo(ActionEvent event) {
-    pago.ejecutarPago(envio);
+    pago.ejecutarPago(envio, "Efectivo");
     SpecificAlerts.showPagoExitoso();
   }
 }
