@@ -22,7 +22,6 @@ import utilities.TextFieldRestrictions;
 import utilities.View;
 import model.Entities.Empleado;
 
-
 public class OperadorTarjeta implements Initializable {
 
   private Integer CVVLENGTH = 4;
@@ -120,7 +119,7 @@ public class OperadorTarjeta implements Initializable {
     l.addAll(aux);
     chboxNumeroCuotas.getItems().addAll(l);
 
-    //Muestra en pantalla si es una tarjeta de credito o de debito respectivamente.
+    // Muestra en pantalla si es una tarjeta de credito o de debito respectivamente.
     lblTipoTarjeta.setText("Tarjeta de " + ((tipoTarjeta == CREDITO) ? "Crédito" : "Debito"));
 
     lblNumero1.setText("");
@@ -132,7 +131,7 @@ public class OperadorTarjeta implements Initializable {
     lblMes.setText("");
     lblAño.setText("");
 
-    //Oculta el campo numero de cuotas.
+    // Oculta el campo numero de cuotas.
     if (tipoTarjeta == DEBITO) {
       chboxNumeroCuotas.setVisible(false);
       lblNumeroCuotas.setVisible(false);
@@ -158,20 +157,21 @@ public class OperadorTarjeta implements Initializable {
     getData();
     camposVacios = GeneralChecker.checkEmpty(campos, objetos);
     forbidChar = GeneralChecker.checkChar(campos);
-    Boolean pagar = true; //Booleano para ver si se puede efectuar el pago adecuadamente o existe algún problema.
+    Boolean pagar = true; // Booleano para ver si se puede efectuar el pago adecuadamente o existe algún
+                          // problema.
 
-    //Revisa que tenga como minimo CVVLENGTH de tamaño el string escrito por el usuario en el campo CVV
-    if(cvv.length() < CVVLENGTH){
+    // Revisa que tenga como minimo CVVLENGTH de tamaño el string escrito por el
+    // usuario en el campo CVV
+    if (cvv.length() < CVVLENGTH) {
       SpecificAlerts.showCardUnexist();
       pagar = false;
     }
 
-    //Revisa lo mismo que en el anterior pero en el campo numeroTarjeta
-    if(numeroTarjeta.length() < CARDLENGTH){
+    // Revisa lo mismo que en el anterior pero en el campo numeroTarjeta
+    if (numeroTarjeta.length() < CARDLENGTH) {
       SpecificAlerts.showCardUnexist();
       pagar = false;
     }
-
 
     if (!(camposVacios || forbidChar) && pagar) {
       parseData();
@@ -231,7 +231,6 @@ public class OperadorTarjeta implements Initializable {
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
-    
 
     if (borrar && txtTitular.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
@@ -245,46 +244,47 @@ public class OperadorTarjeta implements Initializable {
    */
   @FXML
   void addTitular(KeyEvent event) {
-    
+
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
 
-
     System.out.println(event.getCharacter().codePointAt(0));
     if ((borrar || event.getCharacter().codePointAt(0) == 8) && txtTitular.getText().length() < 21) {
       return;
     }
-    
-    //Revisa que se cumpla la misma condición del txtField en el componente grafico que imprime la cadena
-    if(agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
+
+    // Revisa que se cumpla la misma condición del txtField en el componente grafico
+    // que imprime la cadena
+    if (agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
 
   @FXML
-  void addCvv(KeyEvent event){
+  void addCvv(KeyEvent event) {
     // lblCVV
     Object[] validados = SobreTarjeta.checkErase(event, true);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
-    
-    if(borrar){
+
+    if (borrar) {
       lblCVV.setText(SobreTarjeta.eraseFrom(lblCVV.getText(), 1));
     }
 
-    if(agregar && lblCVV.getText().length() < CVVLENGTH)
-    lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
-}
+    if (agregar && lblCVV.getText().length() < CVVLENGTH)
+      lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
+  }
 
   @FXML
-  void addFecha(ActionEvent event){
-    
+  void addFecha(ActionEvent event) {
+
     int month = dateFechaVencimiento.getValue().getMonthValue();
-    if(month < 10)
+    if (month < 10)
       lblMes.setText("0" + Integer.toString(month));
-    else lblMes.setText(Integer.toString(month));
+    else
+      lblMes.setText(Integer.toString(month));
     lblAño.setText(Integer.toString(dateFechaVencimiento.getValue().getYear()));
   }
 
