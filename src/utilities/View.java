@@ -117,6 +117,17 @@ public class View {
   }
 
   /**
+   * Carga una vista completamente nueva para el rightContent.
+   * 
+   * @param name       Nombre de la ventana a cargar.
+   * @param controller Controlador de la ventana a cargar.
+   */
+  public static void newView(String name, Object controller) {
+    Parent root = loadView(name, controller);
+    cambiar(root);
+  }
+
+  /**
    * limpiar la memoria de las vistas
    */
   public static void clearViews() {
