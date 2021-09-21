@@ -75,9 +75,10 @@ public class Pago {
     CreatePDF pdf = new CreatePDF(parsePaquete(envio), parseCliente(envio.getRemitente()),
         parseCliente(envio.getDestinatario()), parsePago());
     try {
+      // TODO Cambiar implementación de pdfCreate.
       pdf.pdfCreate(Integer.toString(id_envio));
     } catch (IOException e) {
-      // TODO PERGUEZA ESTO TE CORRESPONDE
+      
       e.printStackTrace();
     }
   }

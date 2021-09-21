@@ -15,7 +15,8 @@ public class TextFieldRestrictions {
   public static void textFieldMaxLength(TextField txt, Integer size) {
     TextFormatter prevFormatter = txt.getTextFormatter();
     Pattern pattern = Pattern.compile(".{0," + Integer.toString(size) + "}");
-    TextFormatter formatter = new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+    TextFormatter formatter = 
+    new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
       if(!checkPreviousFilter(prevFormatter, change)) return null;
 
       return pattern.matcher(change.getControlNewText()).matches() ? change : null;
@@ -58,7 +59,7 @@ public class TextFieldRestrictions {
     return true;
   }
   /**
-   * !TODO INCOMPLETO
+   * TODO INCOMPLETO
    * Método para evaluar un filtro de cambios obligatorios (usos del ratón y flechitas (teclas direccionales).
    * @param change
    * @return true si change corresponde a alguno de los ya citados, false en caso contrario.
