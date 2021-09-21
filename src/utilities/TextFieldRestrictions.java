@@ -43,6 +43,25 @@ public class TextFieldRestrictions {
 
     txt.setTextFormatter(formatterNOnly);
   }
+
+  /**
+   * Setea un text field con la restricción de uso exclusivo de caracteres alfabeticos.
+   * @param txt Text Field al que se aplicará el filtro
+   */
+  public static void textFieldAlphabeticChars(TextField txt) {
+    TextFormatter prevFormatter = txt.getTextFormatter();
+    TextFormatter formatterNOnly = new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+      String aux = change.getText();
+      if(!checkPreviousFilter(prevFormatter, change)) return null;
+      if (change.isDeleted()) return change;
+      if (aux.length() > 0 && Character.isDefined(aux.charAt(0))) return change;
+      else return null;
+    }
+    );
+
+    txt.setTextFormatter(formatterNOnly);
+  }
+
   /**
    * 
    * @param txt
