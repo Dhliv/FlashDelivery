@@ -261,7 +261,11 @@ public class OperadorTarjeta implements Initializable {
     if(agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
-
+  /**
+   * Agrega o elimina un caracter al componente gráfico que muestra el cvv
+   * si es el caso.
+   * @param event not used
+   */
   @FXML
   void addCvv(KeyEvent event){
     // lblCVV
@@ -278,6 +282,11 @@ public class OperadorTarjeta implements Initializable {
     lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
 }
 
+/**
+ * Agrega o elimina un caracter al componente gráfico que muestra la fecha
+ * si es el caso.
+ * @param event not used.
+ */
   @FXML
   void addFecha(ActionEvent event){
     
