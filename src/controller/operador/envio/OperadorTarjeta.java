@@ -82,8 +82,6 @@ public class OperadorTarjeta implements Initializable {
   private Label lblCVV; // cvv para desplegar en pantalla.
   @FXML
   private Label lblNombreEnTarjeta; // nombre del titular para desplegar en pantalla
-  // @FXML
-  // private Label lblNombreEnTarjeta; // nombre del titular para desplegar en pantalla
   @FXML
   private Label lblMes; // mes de vencimiento de la tarjeta para desplegar en pantalla.
   @FXML
@@ -264,6 +262,32 @@ public class OperadorTarjeta implements Initializable {
     //Revisa que se cumpla la misma condición del txtField en el componente grafico que imprime la cadena
     if(agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
+  }
+
+  @FXML
+  void addCvv(KeyEvent event){
+    // lblCVV
+    Object[] validados = SobreTarjeta.checkErase(event, true);
+    borrar = (Boolean) validados[0];
+    agregar = (Boolean) validados[1];
+    addToText = (String) validados[2];
+    
+    if(borrar){
+      lblCVV.setText(SobreTarjeta.eraseFrom(lblCVV.getText(), 1));
+    }
+
+    if(agregar && lblCVV.getText().length() < CVVLENGTH)
+    lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
+}
+
+  @FXML
+  void addFecha(ActionEvent event){
+    
+    int month = dateFechaVencimiento.getValue().getMonthValue();
+    if(month < 10)
+      lblMes.setText("0" + Integer.toString(month));
+    else lblMes.setText(Integer.toString(month));
+    lblAño.setText(Integer.toString(dateFechaVencimiento.getValue().getYear()));
   }
 
   /**
