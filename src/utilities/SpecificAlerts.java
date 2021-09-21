@@ -20,6 +20,7 @@ public class SpecificAlerts {
   private static Alert userExists; // Alerta para indicar que el usuario ya existía.
   private static Alert empleadoExists; // Alerta para indicar que el empleado ya existía.
   private static Alert badLogin; // Alerta para indicar que el usuario/contraseña es erroneo.
+  private static Alert cardUnexist; //Alerta que indica que una tarjeta es inexistente o está mal escrita.
 
   public static void init() {
 
@@ -72,6 +73,11 @@ public class SpecificAlerts {
     empleadoExists.setContentText("El empleado que intenta registrar ya se encuentra registrado en la base de datos.");
     empleadoExists.setTitle("Empleado ya registrado");
     empleadoExists.setHeaderText("Empleado ya registrado");
+
+    cardUnexist = new Alert(AlertType.ERROR);
+    cardUnexist.setContentText("Tarjeta de crédito inexistente");
+    cardUnexist.setTitle("Comprobar número de tarjeta de crédito");
+    cardUnexist.setHeaderText("Tarjeta erronea");
   }
 
   /**
@@ -143,5 +149,9 @@ public class SpecificAlerts {
    */
   public static void showEmpleadoExists() {
     empleadoExists.showAndWait();
+  }
+
+  public static void showCardUnexist(){
+    cardUnexist.showAndWait();
   }
 }
