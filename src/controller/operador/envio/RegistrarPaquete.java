@@ -60,6 +60,19 @@ public class RegistrarPaquete {
     this.operador = operador;
   }
 
+  /**
+   * Llena con datos el paquete para no tener que escibirlos cada maldita vez que
+   * queramos ensayar cosas en estas ventanas. Buenas noches.
+   */
+  private void fillDeafult() {
+    txtPeso.setText("1");
+    txtValor.setText("1");
+    txtDescripcion.setText("1");
+    txtAlto.setText("1");
+    txtLargo.setText("1");
+    txtAncho.setText("1");
+  }
+
   public void initialize() {
     TextFieldRestrictions.textFieldNumeric(txtPeso);
     TextFieldRestrictions.textFieldNumeric(txtValor);
@@ -67,6 +80,7 @@ public class RegistrarPaquete {
     TextFieldRestrictions.textFieldNumeric(txtLargo);
     TextFieldRestrictions.textFieldNumeric(txtAlto);
     // txtReporte.setText("xdxdxd");
+    fillDeafult();
     modify = false;
   }
 
@@ -146,7 +160,7 @@ public class RegistrarPaquete {
     if (envio.getPaquete() == null || modify)
       JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
     else
-      View.cambiar("operador.resumen", new OperadorResumen(envio, operador));
+      View.newView("operador.resumen", new OperadorResumen(envio, operador));
 
   }
 

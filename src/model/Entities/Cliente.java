@@ -17,7 +17,6 @@ public class Cliente {
   public String ciudad;
   public String direccion;
   public String telefono;
-  public Boolean existInDB;
 
   /**
    * Registra a un nuevo cliente en la base de datos.
@@ -29,7 +28,8 @@ public class Cliente {
    * @param ciudad    del Cliente
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono, String ciudad) {
-    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"), DSL.field("direccion"), DSL.field("telefono")).values(cedula, direccion, ciudad, nombre, telefono).execute();
+    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"), DSL.field("direccion"), DSL.field("telefono")).values(cedula, direccion, ciudad, nombre, telefono).onDuplicateKeyUpdate()
+        .set(DSL.field("cedula"), cedula);
     Conexion.closeConnection();
   }
 
@@ -40,7 +40,6 @@ public class Cliente {
    * @param c Cliente a registrar en la BD.
    */
   public static void createCliente(Cliente c) {
-    // if (!c.existInDB)
     createCliente(c.cedula, c.nombre, c.direccion, c.telefono, c.ciudad);
   }
 

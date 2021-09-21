@@ -76,19 +76,8 @@ public class Pago {
     try {
       pdf.pdfCreate(Integer.toString(id_envio));
     } catch (IOException e) {
-      // TODO PERGUEZA ESTO TE CORRESPONDE
-      e.printStackTrace();
+      // e.printStackTrace();
     }
-
-    goBack();
-  }
-
-  /**
-   * Vuelve a la pantalla principal del Operador de Oficina.
-   */
-  private void goBack() {
-    Globals.clearViews();
-    Globals.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
   }
 
   /**
