@@ -22,8 +22,6 @@ import utilities.TextFieldRestrictions;
 import utilities.View;
 import model.Entities.Empleado;
 
-// TODO escribir el CVV en la parte visual de la tarjeta.
-// TODO escribir la fecha de vencimiento en la parte visual de la tarjeta.
 
 public class OperadorTarjeta implements Initializable {
 
