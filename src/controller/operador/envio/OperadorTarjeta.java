@@ -145,6 +145,8 @@ public class OperadorTarjeta implements Initializable {
 
     TextFieldRestrictions.textFieldMaxLength(txtCVV, CVVLENGTH);
     TextFieldRestrictions.textFieldNumeric(txtCVV);
+
+    TextFieldRestrictions.textFieldAlphabeticChars(txtTitular);
   }
 
   /**
@@ -231,10 +233,8 @@ public class OperadorTarjeta implements Initializable {
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
-
     
     // TODO si se edita un caracter que no esté en la última posición, el cambio se ve reflejado solo en la última posición.
-    // TODO quitar los 3 puntos suspensivos que aparecen al escibir muchos caracteres, preferiblemente colocar un endl.
 
     if (borrar)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
@@ -248,15 +248,22 @@ public class OperadorTarjeta implements Initializable {
    */
   @FXML
   void addTitular(KeyEvent event) {
+    
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
 
-    // TODO a veces no borra los caracteres en la parte visual del nombre.
-    if (borrar)
+
+    System.out.println(event.getCharacter().codePointAt(0));
+    if (borrar || event.getCharacter().codePointAt(0) == 8){
+      // lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
       return;
-    lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
+    }
+    
+    //Revisa que se cumpla la misma condición del txtField en el componente grafico que imprime la cadena
+    if(Character.isDefined(event.getCharacter().charAt(0)))
+      lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
 
   /**
