@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import controller.operador.OperadorOficina;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,11 +17,17 @@ import javafx.scene.input.KeyEvent;
 import model.Pago;
 import utilities.GeneralChecker;
 import utilities.SpecificAlerts;
-import utilities.Globals;
 import utilities.SobreTarjeta;
 import utilities.TextFieldRestrictions;
 import utilities.View;
 import model.Entities.Empleado;
+
+// TODO escribir el CVV en la parte visual de la tarjeta.
+// TODO escribir la fecha de vencimiento en la parte visual de la tarjeta.
+// TODO poner invisible la selección de número de cuotas para la tarjeta de debito.
+// TODO cambiar el label que dice tarjeta de credito en la tarjeta de debito.
+// TODO verificar que el número de la tarjeta esté completo (16 digitos).
+// TODO verificar que el CVV esté completo (digitos >= 3).
 
 public class OperadorTarjeta implements Initializable {
   private Integer tipoTarjeta; // Almacena el tipo de la tarjeta que se haya seleccionado para el método de
@@ -172,7 +177,7 @@ public class OperadorTarjeta implements Initializable {
    */
   @FXML
   void atras(ActionEvent event) {
-    View.cambiar("operador.resumen");
+    View.newView("operador.resumen", new OperadorResumen(envio, operador));
   }
 
   /**
@@ -210,6 +215,12 @@ public class OperadorTarjeta implements Initializable {
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
+
+    // TODO a veces no borra los caracteres en la parte visual.
+    // TODO si se edita un caracter que no esté en la última posición, el cambio se
+    // ve reflejado solo en la última posición.
+    // TODO quitar los 3 puntos suspensivos que aparecen al escibir muchos
+    // caracteres, preferiblemente colocar un endl.
 
     if (borrar)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
