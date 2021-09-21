@@ -29,10 +29,7 @@ public class Cliente {
    * @param ciudad    del Cliente
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono, String ciudad) {
-    Conexion.db()
-        .insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"),
-            DSL.field("direccion"), DSL.field("telefono"))
-        .values(cedula, direccion, ciudad, nombre, telefono).execute();
+    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"), DSL.field("direccion"), DSL.field("telefono")).values(cedula, direccion, ciudad, nombre, telefono).execute();
     Conexion.closeConnection();
   }
 
@@ -67,7 +64,7 @@ public class Cliente {
     Cliente cliente;
     Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
     cliente = rs != null ? rs.into(Cliente.class) : null;
-    Conexion.closeConnection();
+    // Conexion.closeConnection();
     return cliente;
   }
 }

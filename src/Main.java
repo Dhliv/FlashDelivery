@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Random;
 
 import controller.Login;
+import controller.gerente.Admin;
+import controller.operador.OperadorOficina;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utilities.CreatePDF;
@@ -46,7 +48,13 @@ public class Main extends Application {
     Globals.init(this);
     Globals.pantalla = stage;
 
-    Ventana login = new Ventana("login", new Login());
-    login.start(stage);
+    /*Ventana login = new Ventana("login", new Login());
+    login.start(stage);*/
+
+    Ventana vent2 = new Ventana("admin", new Admin("APA"));
+    vent2.start(Globals.pantalla);
+
+    /*Ventana vent = new Ventana("operadorOficina", new OperadorOficina(model.Entities.Empleado.cargarEmpleado("12345")));
+    vent.start(Globals.pantalla);*/
   }
 }
