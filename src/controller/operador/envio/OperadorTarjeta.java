@@ -82,6 +82,8 @@ public class OperadorTarjeta implements Initializable {
   private Label lblCVV; // cvv para desplegar en pantalla.
   @FXML
   private Label lblNombreEnTarjeta; // nombre del titular para desplegar en pantalla
+  // @FXML
+  // private Label lblNombreEnTarjeta; // nombre del titular para desplegar en pantalla
   @FXML
   private Label lblMes; // mes de vencimiento de la tarjeta para desplegar en pantalla.
   @FXML
@@ -234,9 +236,8 @@ public class OperadorTarjeta implements Initializable {
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
     
-    // TODO si se edita un caracter que no esté en la última posición, el cambio se ve reflejado solo en la última posición.
 
-    if (borrar)
+    if (borrar && txtTitular.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
   }
 
@@ -256,13 +257,12 @@ public class OperadorTarjeta implements Initializable {
 
 
     System.out.println(event.getCharacter().codePointAt(0));
-    if (borrar || event.getCharacter().codePointAt(0) == 8){
-      // lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
+    if ((borrar || event.getCharacter().codePointAt(0) == 8) && txtTitular.getText().length() < 21) {
       return;
     }
     
     //Revisa que se cumpla la misma condición del txtField en el componente grafico que imprime la cadena
-    if(Character.isDefined(event.getCharacter().charAt(0)))
+    if(agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
 
