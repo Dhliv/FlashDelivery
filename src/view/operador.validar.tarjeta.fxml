@@ -71,13 +71,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCVV" layoutX="106.0" layoutY="347.0" prefHeight="25.0" prefWidth="55.0" />
+            <TextField fx:id="txtCVV" onKeyPressed="#addCvv" layoutX="106.0" layoutY="347.0" prefHeight="25.0" prefWidth="55.0" />
             <Label layoutX="564.0" layoutY="324.0" text="Fecha de vencimiento">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="dateFechaVencimiento" layoutX="564.0" layoutY="347.0" />
+            <DatePicker fx:id="dateFechaVencimiento" onAction="#addFecha" layoutX="564.0" layoutY="347.0" />
             <Label fx:id="lblNumeroCuotas" layoutX="317.0" layoutY="324.0" text="Número de cuotas">
                <font>
                   <Font size="18.0" />
