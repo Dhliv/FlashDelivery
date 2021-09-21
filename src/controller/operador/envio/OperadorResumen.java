@@ -2,19 +2,21 @@ package controller.operador.envio;
 
 import java.io.IOException;
 
+import controller.operador.OperadorOficina;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.Pago;
 import model.Entities.Empleado;
 import utilities.SpecificAlerts;
+import utilities.View;
 import utilities.Globals;
 
 /**
  * Clase encargada de controlar la vista OperadorResumen Despliega el metodo de
  * pago que se quiere elegir y reenvia a el seleccionado Efectivo = Devolverse a
  * la pantalla principal de operador Credito = Muestra la vista de credito
- * Debito = Muestra la vista de debito
+ * Debito = Muestra la vista de debito.
  */
 public class OperadorResumen {
   private model.RegistrarEnvio envio;
@@ -59,8 +61,8 @@ public class OperadorResumen {
   }
 
   /**
-   * Iniciliaza los caomponentes gráficos con los datos del cliente y los costos
-   * de su envío.
+   * Iniciliaza los componentes gráficos con los datos del cliente y los costos de
+   * su envío.
    */
   public void initialize() throws IOException {
     chargeInformation();
@@ -69,15 +71,13 @@ public class OperadorResumen {
   /**
    * Carga la información relacionada al envío en la interfaz grafica.
    */
-  public void chargeInformation() throws IOException { 
-    /*
-    // Actualiza los datos en pantalla.
+  public void chargeInformation() throws IOException {
     lblCedulaR.setText(lblCedulaR.getText() + ": " + envio.getRemitente().cedula);
     lblNameR.setText(lblNameR.getText() + ": " + envio.getRemitente().nombre);
     lblCedulaD.setText(lblCedulaD.getText() + ": " + envio.getDestinatario().cedula);
     lblNameD.setText(lblNameD.getText() + ": " + envio.getDestinatario().nombre);
     lblDirD.setText(lblDirD.getText() + ": " + envio.getDestinatario().direccion);
-    lblnumP.setText(lblnumP.getText() + ": " + Integer.toString(envio.getPaquetes().size()));
+    lblnumP.setText(lblnumP.getText() + ": 1");
 
     // Calcula el total del envio y su respectivo impuesto.
     pago = new Pago(envio, operador);
@@ -89,7 +89,6 @@ public class OperadorResumen {
     lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
     lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(pago.getSeguro()));
     lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
-    */
   }
 
   /**
@@ -99,7 +98,7 @@ public class OperadorResumen {
    */
   @FXML
   void atras(ActionEvent event) {
-    Globals.cambiarVista("operador.paquetes");
+    View.cambiar("operador.paquetes");
   }
 
   /**
@@ -109,7 +108,7 @@ public class OperadorResumen {
    * @param tipo de la tarjeta.
    */
   void pagar(Integer tipo) {
-    Globals.cambiarVista("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago));
+    View.newView("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago, operador));
   }
 
   /**
@@ -140,7 +139,16 @@ public class OperadorResumen {
    */
   @FXML
   void pagoEfectivo(ActionEvent event) {
-    pago.ejecutarPago(envio);
+    pago.ejecutarPago(envio, "Efectivo");
     SpecificAlerts.showPagoExitoso();
+    goBack();
+  }
+
+  /**
+   * Vuelve a la pantalla principal de operador de oficina.
+   */
+  private void goBack() {
+    View.clearViews();
+    View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 }

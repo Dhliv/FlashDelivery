@@ -53,6 +53,7 @@ public class Login {
     user = txtUsuario.getText();
     String pass = txtPass.getText();
     int acc = Usuario.entradaUsuario(user, pass);
+
     if (acc == -2)
       JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
     else if (acc == -1)

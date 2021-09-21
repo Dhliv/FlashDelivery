@@ -17,9 +17,17 @@ import javafx.scene.input.KeyEvent;
 import model.Pago;
 import utilities.GeneralChecker;
 import utilities.SpecificAlerts;
-import utilities.Globals;
 import utilities.SobreTarjeta;
 import utilities.TextFieldRestrictions;
+import utilities.View;
+import model.Entities.Empleado;
+
+// TODO escribir el CVV en la parte visual de la tarjeta.
+// TODO escribir la fecha de vencimiento en la parte visual de la tarjeta.
+// TODO poner invisible la selección de número de cuotas para la tarjeta de debito.
+// TODO cambiar el label que dice tarjeta de credito en la tarjeta de debito.
+// TODO verificar que el número de la tarjeta esté completo (16 digitos).
+// TODO verificar que el CVV esté completo (digitos >= 3).
 
 public class OperadorTarjeta implements Initializable {
   private Integer tipoTarjeta; // Almacena el tipo de la tarjeta que se haya seleccionado para el método de
@@ -47,6 +55,7 @@ public class OperadorTarjeta implements Initializable {
   private String addToText;
   private Object mesAux; // Almacena la información relacionada a la fecha de vencimiento de la tarjeta.
   private Pago pago; // Almacena toda la info relacionada con el objeto pago.
+  private Empleado operador; // Almacena al operador de oficina.
 
   @FXML
   private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
@@ -88,10 +97,11 @@ public class OperadorTarjeta implements Initializable {
    *                    (destinatario, remitente, paquetes, etc).
    * @param pago        OBjeto de pago con toda la información relacionada a éste.
    */
-  public OperadorTarjeta(Integer tipoTarjeta, model.RegistrarEnvio envio, Pago pago) {
+  public OperadorTarjeta(Integer tipoTarjeta, model.RegistrarEnvio envio, Pago pago, Empleado operador) {
     this.tipoTarjeta = tipoTarjeta;
     this.pago = pago;
     this.envio = envio;
+    this.operador = operador;
     counter = 0;
   }
 
@@ -149,8 +159,9 @@ public class OperadorTarjeta implements Initializable {
 
     if (!(camposVacios || forbidChar)) {
       parseData();
-      pago.ejecutarPago(envio);
+      pago.ejecutarPago(envio, tipoTarjeta == CREDITO ? "Credito" : "Debito");
       SpecificAlerts.showPagoExitoso();
+      goBack();
     } else {
       if (camposVacios)
         SpecificAlerts.showEmptyFieldAlert();
@@ -166,7 +177,7 @@ public class OperadorTarjeta implements Initializable {
    */
   @FXML
   void atras(ActionEvent event) {
-    Globals.cambiarVista(Globals.loadView("operador.resumen"));
+    View.newView("operador.resumen", new OperadorResumen(envio, operador));
   }
 
   /**
@@ -204,6 +215,12 @@ public class OperadorTarjeta implements Initializable {
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
+
+    // TODO a veces no borra los caracteres en la parte visual.
+    // TODO si se edita un caracter que no esté en la última posición, el cambio se
+    // ve reflejado solo en la última posición.
+    // TODO quitar los 3 puntos suspensivos que aparecen al escibir muchos
+    // caracteres, preferiblemente colocar un endl.
 
     if (borrar)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
@@ -259,4 +276,11 @@ public class OperadorTarjeta implements Initializable {
     mes = mes.substring(5, 7);
   }
 
+  /**
+   * Vuelve a la pantalla principal de operador de oficina.
+   */
+  private void goBack() {
+    View.clearViews();
+    View.cambiar("operador.cliente", new RegistrarClientes(operador));
+  }
 }

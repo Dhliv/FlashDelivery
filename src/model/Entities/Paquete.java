@@ -6,16 +6,16 @@ import org.jooq.impl.DSL;
 import model.Envio;
 import utilities.Conexion;
 
-public class Paquete{
+public class Paquete {
   // SQL Fields
   public Integer id;
   public String descripcion;
   public Integer peso;
   public Boolean seguro;
-  public Integer alto, ancho, largo;  
+  public Integer alto, ancho, largo;
   public Integer valor;
   // Others
-  
+
   public int valorenvio;
   public int total;
 
@@ -23,12 +23,11 @@ public class Paquete{
     return id;
   }
 
-
   public Integer getPeso() {
     return peso;
   }
 
-  public Boolean getSeguro(){
+  public Boolean getSeguro() {
     return seguro;
   }
 
@@ -41,7 +40,7 @@ public class Paquete{
   }
 
   public int getVolumen() {
-    return largo*alto*ancho;
+    return largo * alto * ancho;
   }
 
   public int getValorenvio() {
@@ -52,30 +51,29 @@ public class Paquete{
     return total;
   }
 
-  public int getAlto(){
+  public int getAlto() {
     return alto;
   }
-  public int getAncho(){
+
+  public int getAncho() {
     return ancho;
   }
-  public int getLargo(){
+
+  public int getLargo() {
     return largo;
   }
+
   public static void createPaquete(Paquete p) {
-    Conexion.db().insertInto(DSL.table("paquete"), DSL.field("descripcion"), DSL.field("peso"), DSL.field("seguro"),
-     DSL.field("alto"), DSL.field("ancho"), DSL.field("largo"), DSL.field("valor"))
-        .values(p.getDescripcion(), p.getPeso(), p.getSeguro(), p.getAlto(), p.getAncho(), p.getLargo(), p.getValor()).execute();
+    Conexion.db()
+        .insertInto(DSL.table("paquete"), DSL.field("descripcion"), DSL.field("peso"), DSL.field("seguro"),
+            DSL.field("alto"), DSL.field("ancho"), DSL.field("largo"), DSL.field("valor"))
+        .values(p.getDescripcion(), p.getPeso(), p.getSeguro(), p.getAlto(), p.getAncho(), p.getLargo(), p.getValor())
+        .execute();
     Conexion.closeConnection();
   }
 
-  /*public static void createPaquetes(List<Paquete> p, Integer id_envio) {
-    for (int i = 0; i < p.size(); i++) {
-      createPaquete(p.get(i).descripcion, p.get(i).peso, id_envio);
-    }
-  }*/
   /**
-   * @deprecated
-   * !TODO NO ESTÁ IMPLEMENTADO DE ACUERDO A LOS CAMBIOS
+   * @deprecated !TODO NO ESTÁ IMPLEMENTADO DE ACUERDO A LOS CAMBIOS
    * @param id_sede
    * @return
    */

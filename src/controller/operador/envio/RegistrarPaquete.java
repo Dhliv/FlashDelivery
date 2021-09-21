@@ -1,27 +1,19 @@
 package controller.operador.envio;
 
 import javax.swing.JOptionPane;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import model.Entities.Empleado;
-import model.Entities.Paquete;
-import utilities.SpecificAlerts;
-import utilities.Globals;
+
 import utilities.TextFieldRestrictions;
+import utilities.View;
 
 public class RegistrarPaquete {
-
   @FXML
   private Button atrasPaquete;
 
@@ -60,18 +52,33 @@ public class RegistrarPaquete {
     this.operador = operador;
   }
 
+  /**
+   * Llena con datos el paquete para no tener que escibirlos cada maldita vez que
+   * queramos ensayar cosas en estas ventanas. Buenas noches.
+   */
+  private void fillDeafult() {
+    txtPeso.setText("1");
+    txtValor.setText("1");
+    txtDescripcion.setText("1");
+    txtAlto.setText("1");
+    txtLargo.setText("1");
+    txtAncho.setText("1");
+  }
+
   public void initialize() {
     TextFieldRestrictions.textFieldNumeric(txtPeso);
     TextFieldRestrictions.textFieldNumeric(txtValor);
     TextFieldRestrictions.textFieldNumeric(txtAncho);
     TextFieldRestrictions.textFieldNumeric(txtLargo);
     TextFieldRestrictions.textFieldNumeric(txtAlto);
+    // txtReporte.setText("xdxdxd");
+    fillDeafult();
   }
 
   @FXML
   void atras(ActionEvent event) {
     if (event.getSource() == atrasPaquete)
-      Globals.cambiarVista("operador.cliente", this);
+      View.cambiar("operador.cliente");
   }
 
   private void clearFieldsPaquetes() {
@@ -109,9 +116,10 @@ public class RegistrarPaquete {
     if (!agregarPaquete())
       JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
     else
-      Globals.cambiarVista("operador.resumen", new OperadorResumen(envio, operador));
+      View.newView("operador.resumen", new OperadorResumen(envio, operador));
 
   }
+
   @FXML
   void limpiarCampos(ActionEvent event) {
     clearFieldsPaquetes();

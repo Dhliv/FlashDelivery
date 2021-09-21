@@ -14,17 +14,9 @@ import java.util.HashMap;
 import controller.Login;
 
 public class Globals {
-  private static Object referenceObject;
-  public static Pane viewPane;
   public static Stage pantalla;
   private static Ventana ventana;
-  private static Map<String, Parent> views;
   private static model.RegistrarEnvio envio;
-
-  public static void init(Object obj) {
-    referenceObject = obj;
-    views = new HashMap<String, Parent>();
-  }
 
   public static void setEnvio(model.RegistrarEnvio r) {
     envio = r;
@@ -32,6 +24,18 @@ public class Globals {
 
   public static model.RegistrarEnvio getEnvio() {
     return envio;
+  }
+
+  // ! --------------------------------------------
+  // ! POR BORRAR
+
+  private static Object referenceObject;
+  public static Pane viewPane;
+  private static Map<String, Parent> views;
+
+  public static void init(Object obj) {
+    referenceObject = obj;
+    views = new HashMap<String, Parent>();
   }
 
   public static void cambiarVista(String name) {
@@ -52,10 +56,6 @@ public class Globals {
   public static void cambiarVista(Parent view) {
     viewPane.getChildren().clear();
     viewPane.getChildren().add(view);
-  }
-
-  public static void clearViews() {
-    views.clear();
   }
 
   public static Parent loadView(String name) {
@@ -86,12 +86,14 @@ public class Globals {
     return new Scene(loadView(name, null));
   }
 
+  // ! --------------------------------------------
+
   /**
    * Desconecta al usuario actual del sistema.
    */
   public static void logOut() {
     pantalla.close();
-    clearViews();
+    View.clearViews();
     ventana = new Ventana("login", new Login());
     try {
       ventana.start(pantalla);
