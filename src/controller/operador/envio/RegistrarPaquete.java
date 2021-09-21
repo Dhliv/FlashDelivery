@@ -160,7 +160,7 @@ public class RegistrarPaquete {
     if (envio.getPaquete() == null || modify)
       JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
     else
-      View.cambiar("operador.resumen", new OperadorResumen(envio, operador));
+      View.newView("operador.resumen", new OperadorResumen(envio, operador));
 
   }
 

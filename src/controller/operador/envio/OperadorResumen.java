@@ -108,7 +108,7 @@ public class OperadorResumen {
    * @param tipo de la tarjeta.
    */
   void pagar(Integer tipo) {
-    View.cambiar("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago, operador));
+    View.newView("operador.validar.tarjeta", new OperadorTarjeta(tipo, envio, pago, operador));
   }
 
   /**
