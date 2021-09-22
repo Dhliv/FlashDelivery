@@ -69,7 +69,7 @@ public class Usuario {
    */
   public static int entradaUsuario(String user, String pass) {
     int code = -1;
-    if (GeneralChecker.checkChar(new String[]{user, pass})) {
+    if (!GeneralChecker.checkChar(new String[]{user, pass})) {
       List<Usuario> usuario = Conexion.db().select().from("usuario")
           .where("username ='" + user + "' and password ='" + pass + "'").fetch().into(Usuario.class);
       Conexion.closeConnection();
