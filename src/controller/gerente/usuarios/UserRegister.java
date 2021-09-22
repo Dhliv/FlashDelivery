@@ -155,54 +155,50 @@ public class UserRegister {
         volver();
     }
 
-    /**
-     * Registra a un usuario en la base de datos, haciendo las respectivas
-     * validaciones (revisar que no existan campos vacíos, que no se usen caracteres
-     * prohibidos, que el empleado a registrar no se encuentre registrado, que el
-     * usuario asignado al empleado no se encuentre en uso, que la inserción de
-     * datos en la BD sea exitosa).
-     * 
-     * @param event not used.
-     */
-    @FXML void registrarUser(ActionEvent event) {
-        boolean forbidchar = false;
-        boolean emptyCamps = false;
-        boolean usernameExist = false;
-        boolean empleadoExist = false;
-        boolean registroFallido = false;
+  /**
+   * Registra a un usuario en la base de datos, haciendo las respectivas
+   * validaciones (revisar que no existan campos vacíos, que no se usen caracteres
+   * prohibidos, que el empleado a registrar no se encuentre registrado, que el
+   * usuario asignado al empleado no se encuentre en uso, que la inserción de
+   * datos en la BD sea exitosa).
+   * 
+   * @param event not used.
+   */
+  @FXML
+  void registrarUser(ActionEvent event) {
 
-        getData();
-        String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
-        emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
-        forbidchar = GeneralChecker.checkChar(campo);
+    getData();
+    //TODO Que mondá es esto y por qué hay dos idS?
+    String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
 
-        if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
-            parseData();
-            usernameExist = Usuario.checkExistence(username);
-            empleadoExist = Empleado.checkExistence(id + "");
+    boolean emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
+    boolean forbidchar = GeneralChecker.checkChar(campo);
+    boolean usernameExist = Usuario.checkExistence(username);
+    boolean empleadoExist = Empleado.checkExistence(ident);
 
-            if (!(usernameExist || empleadoExist)) { // Si el empleado y el usuario no están registrados, se procede a hacer
-                                                     // el registro.
-                Usuario user = new Usuario(id, username, password, true);
-                Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
-                registroFallido = (Empleado.crearEmpleado(emp) == 0);
-                registroFallido |= Usuario.registrarUsuario(user);
-
-                if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
-                    SpecificAlerts.showErrorUnexpt();
-                else {
-                    SpecificAlerts.showRegSuccess();
-                    volver();
-                    clearCamps();
-                }
-            } else {
-                if (usernameExist) SpecificAlerts.showUserExist();
-                if (empleadoExist) SpecificAlerts.showEmpleadoExists();
-            }
-        } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
-            if (emptyCamps) SpecificAlerts.showEmptyFieldAlert();
-            if (forbidchar) SpecificAlerts.showCharForbidenAlert();
+    if (forbidchar || emptyCamps || usernameExist || empleadoExist) {
+      { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
+        if (emptyCamps) SpecificAlerts.showEmptyFieldAlert();
+        if (forbidchar) SpecificAlerts.showCharForbidenAlert();
+        if (usernameExist) SpecificAlerts.showUserExist();
+        if (empleadoExist) SpecificAlerts.showEmpleadoExists();
+      }
+    }
+    else{ // Si no hay problemas con las validaciones hechas:
+      parseData();
+      
+        Usuario user = new Usuario(id, username, password, true);
+        Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
+        
+        boolean registroFallido = (Empleado.crearEmpleado(emp) == 0) | Usuario.registrarUsuario(user);
+        if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
+          SpecificAlerts.showErrorUnexpt();
+        else {
+          SpecificAlerts.showRegSuccess();
+          volver();
+          clearCamps();
         }
+      
     }
 
 }

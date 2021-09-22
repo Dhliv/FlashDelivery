@@ -155,6 +155,8 @@ public class Usuario {
    * @return True si el usuario existía, False de lo contrario.
    */
   public static Boolean checkExistence(String username) {
+    if(username == null) return false;
+    
     var user = Conexion.db().select().from("usuario").where("username = '" + username + "'").fetch()
         .into(Usuario.class);
     if (user.size() != 0)
