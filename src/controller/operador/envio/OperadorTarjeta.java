@@ -110,6 +110,8 @@ public class OperadorTarjeta implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    //TODO @winja o @Reynell que es l?
     ObservableList<String> l = FXCollections.observableArrayList();
     ArrayList<String> aux = new ArrayList<>();
     for (int i = 1; i <= 36; i++) {

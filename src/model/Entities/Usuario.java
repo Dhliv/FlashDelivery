@@ -9,7 +9,7 @@ import utilities.GeneralChecker;
 public class Usuario {
 
   // <editor-fold defaultstate="collapsed" desc="Atributos de la entidad">
-  private int id;
+  private String id;
   private String username;
   private String password;
   private boolean enabled;
@@ -25,7 +25,7 @@ public class Usuario {
     this.enabled = enabled;
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
@@ -41,7 +41,7 @@ public class Usuario {
     return enabled;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -76,7 +76,7 @@ public class Usuario {
       if (!usuario.isEmpty()) {
         Usuario u = usuario.get(0);
         if (u.enabled)
-          code = u.id;
+          code = Integer.parseInt(u.id);
         else
           code = -2;
       }
@@ -127,8 +127,9 @@ public class Usuario {
    * @return True si el usuario existía, False de lo contrario.
    */
   public static Boolean checkExistence(String username) {
-    if(username == null) return false;
-    
+    if (username == null)
+      return false;
+
     var user = Conexion.db().select().from("usuario").where("username = '" + username + "'").fetch()
         .into(Usuario.class);
     if (user.size() != 0)
