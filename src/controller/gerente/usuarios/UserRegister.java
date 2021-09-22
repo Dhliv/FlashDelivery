@@ -180,6 +180,7 @@ public class UserRegister {
   void registrarUser(ActionEvent event) {
 
     getData();
+    //TODO Que mondá es esto y por qué hay dos idS?
     String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
 
     boolean emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
