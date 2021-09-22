@@ -10,12 +10,15 @@ import utilities.View;
 
 /**
  * Controlador para la vista operador.cliente
+ * 
  * @author Julián Orejuela
  * @version 1.3, 21/09/2021
  */
 public class RegistrarClientes {
-  @FXML private Cliente remitente;
-  @FXML private Cliente destinatario;
+  @FXML
+  private Cliente remitente;
+  @FXML
+  private Cliente destinatario;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -31,11 +34,15 @@ public class RegistrarClientes {
   }
 
   /**
-   * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
+   * Verificar los campos, actualizar los valores en envio, y continuar a la vista
+   * operador.paquetes
    */
-  @FXML void registrarPaquetes(ActionEvent event) {
-    if (!remitente.checkAndUpdateEnvio()) return;
-    if (!destinatario.checkAndUpdateEnvio()) return;
+  @FXML
+  void registrarPaquetes(ActionEvent event) {
+    if (!remitente.checkAndUpdateEnvio())
+      return;
+    if (!destinatario.checkAndUpdateEnvio())
+      return;
     View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
   }
 }
