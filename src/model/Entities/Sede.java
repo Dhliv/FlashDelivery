@@ -6,27 +6,31 @@ import utilities.Conexion;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Modelo para la entidad Sede
+ * @author Julián Orejuela
+ * @version 2.0, 21/09/2021
+ */
 public class Sede {
     public int id;
     public String nombre;
     public String direccion;
 
-
-    public static int createSede(String nombre, String direccion) {
-        int query = Conexion.db().insertInto(DSL.table("sede"), DSL.field("\"Nombre\""), DSL.field("\"Direccion\"")).values(nombre, direccion).execute();
+    /**
+     * Registrar una nueva sede.
+     */
+    public static int registrar(String nombre, String direccion) {
+        int idSede = Conexion.db().insertInto(DSL.table("sede"), DSL.field("nombre"), DSL.field("direccion")).values(nombre, direccion).execute();
         Conexion.closeConnection();
-        return query;
+        return idSede;
     }
 
     /**
-     * Obtiene todas las sedes que existen en la base de datos.
-     * 
-     * @return listado de sedes.
+     * Obtiene una lista con todas las sedes.
      */
     public static List<Sede> getSedes() {
         List<Sede> sedes = Conexion.db().select().from("sede").fetch().into(Sede.class); // Ejecuto la query 'sql'.
         Conexion.closeConnection();
-
         return sedes;
     }
 

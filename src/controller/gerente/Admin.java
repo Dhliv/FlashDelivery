@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import utilities.Globals;
+import utilities.View;
 
 public class Admin {
   private String userName;
@@ -21,6 +22,7 @@ public class Admin {
   @FXML private AnchorPane content;
 
   @FXML private void initialize() {
+    View.setViewPane(content, false);
     Globals.viewPane = content;
     labelNameUser.setText("Bienvenido " + userName);
   }
