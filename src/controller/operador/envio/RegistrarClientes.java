@@ -36,6 +36,7 @@ public class RegistrarClientes {
   @FXML void registrarPaquetes(ActionEvent event) {
     if (!remitente.checkAndUpdateEnvio()) return;
     if (!destinatario.checkAndUpdateEnvio()) return;
+    System.out.println("Registrar cliente: " + envio.getDestinatario().cedula);
     View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
   }
 }
