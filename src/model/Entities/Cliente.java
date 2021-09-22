@@ -36,14 +36,17 @@ public class Cliente {
    * @param ciudad    del Cliente
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono, String ciudad) {
-    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"), DSL.field("direccion"), DSL.field("telefono")).values(cedula, direccion, ciudad, nombre, telefono).onDuplicateKeyUpdate()
-        .set(DSL.field("cedula"), cedula);
+    Conexion.db()
+        .insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"),
+            DSL.field("direccion"), DSL.field("telefono"))
+        .values(cedula, direccion, ciudad, nombre, telefono).onDuplicateKeyUpdate().set(DSL.field("cedula"), cedula)
+        .execute();
     Conexion.closeConnection();
   }
 
   /**
-   * Interfaz para registrar a un cliente mediante el objeto de Cliente, solo en caso de que ya no
-   * existiera.
+   * Interfaz para registrar a un cliente mediante el objeto de Cliente, solo en
+   * caso de que ya no existiera.
    * 
    * @param c Cliente a registrar en la BD.
    */
