@@ -26,6 +26,7 @@ public class RegistrarClientes {
   public RegistrarClientes(Empleado operador) {
     envio = new model.RegistrarEnvio();
     this.operador = operador;
+    //sadsadas
   }
 
   public void initialize() {

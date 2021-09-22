@@ -58,18 +58,18 @@ public class Usuario {
   }
 
   /**
-   * Busca en la base de datos un Usuario que cuente con el usuario y la 
+   * Busca en la base de datos un Usuario que cuente con el usuario y la
    * contraseña suministrados
    * 
    * @param user El usuario ingresado.
    * @param pass La contraseña a ingresar
-   * @return el id  (>0) del usuario si existe con los datos suministrados ben la base de datos,
-   * -1 si no existe un usuario con esos datos suministrados, -2 si el usuario existe pero está
-   * deshabilitado.
+   * @return el id (>0) del usuario si existe con los datos suministrados ben la
+   *         base de datos, -1 si no existe un usuario con esos datos
+   *         suministrados, -2 si el usuario existe pero está deshabilitado.
    */
   public static int entradaUsuario(String user, String pass) {
     int code = -1;
-    if (GeneralChecker.checkChar(new String[]{user, pass})) {
+    if (!GeneralChecker.checkChar(new String[] { user, pass })) {
       List<Usuario> usuario = Conexion.db().select().from("usuario")
           .where("username ='" + user + "' and password ='" + pass + "'").fetch().into(Usuario.class);
       Conexion.closeConnection();
@@ -83,7 +83,6 @@ public class Usuario {
     }
     return code;
   }
-
 
   /**
    * Cambia el estado del atributo enabled de la tabla usuario a true, de un
