@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import model.Entities.Cliente;
 import model.Entities.Empleado;
 import model.RegistrarEnvio.TipoCliente;
-import utilities.Globals;
+import utilities.GeneralChecker;
 import utilities.TextFieldRestrictions;
 import utilities.View;
 
@@ -61,9 +61,12 @@ public class RegistrarClientes {
     onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);
   }
 
+  /**
+   * Método encargado de buscar un cliente en la DB y mostrarlo en pantalla si existe
+   */
   private synchronized void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion, TextField Telefono, TipoCliente tipo) {
-    if (Cedula.getText() == "") // Cedula.getText().trim().equals("")
-      return;
+    if (Cedula.getText().trim().equals("")) return;
+
     Runnable r = () -> {
       Cliente cliente = envio.buscarCliente(Cedula.getText(), tipo);
       if (cliente != null) {
@@ -73,11 +76,15 @@ public class RegistrarClientes {
         Telefono.setText(cliente.telefono);
       }
     };
-
     new Thread(r).start();
   }
 
+  /**
+   * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
+   */
   @FXML void registrarPaquetes(ActionEvent event) {
+    if (!GeneralChecker.checkTextFieldEmptyAndFC(new TextField[] { RCedula, RNombre, RDireccion, })) return;
+    // actualizar los datos en el en
     envio.setCliente(RCedula.getText(), RNombre.getText(), RCiudad.getText(), RDireccion.getText(), RTelefono.getText(), TipoCliente.Remitente);
     envio.setCliente(DCedula.getText(), DNombre.getText(), DCiudad.getText(), DDireccion.getText(), DTelefono.getText(), TipoCliente.Destinatario);
 

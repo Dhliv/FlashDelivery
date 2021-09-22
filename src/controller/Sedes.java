@@ -7,6 +7,11 @@ import utilities.Globals;
 import utilities.SpecificAlerts;
 import utilities.View;
 
+/**
+ * Controlador para las vistas sede.consulta, sede.register.edit
+ * @author Julián Orejuela
+ * @version 2.0, 21/09/2021
+ */
 public class Sedes {
     public TextField direccion;
     public TextField nombre;
