@@ -18,6 +18,14 @@ public class Cliente {
   public String direccion;
   public String telefono;
 
+  public Cliente(String cedula, String nombre, String ciudad, String direccion, String telefono) {
+    this.cedula = cedula;
+    this.nombre = nombre;
+    this.ciudad = ciudad;
+    this.direccion = direccion;
+    this.telefono = telefono;
+  }
+
   /**
    * Registra a un nuevo cliente en la base de datos.
    * 
@@ -34,8 +42,8 @@ public class Cliente {
   }
 
   /**
-   * Interfaz para registrar a un cliente mediante el objeto de Cliente, solo en
-   * caso de que ya no existiera.
+   * Interfaz para registrar a un cliente mediante el objeto de Cliente, solo en caso de que ya no
+   * existiera.
    * 
    * @param c Cliente a registrar en la BD.
    */

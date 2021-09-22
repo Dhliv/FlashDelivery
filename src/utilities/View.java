@@ -54,22 +54,19 @@ public class View {
    */
   public static void cambiar(String name, Object control) {
     Parent view = views.get(name) == null ? loadView(name, control) : views.get(name);
-    if (views.get(name) == null)
-      views.put(name, memory == true ? view : null);
+    if (views.get(name) == null) views.put(name, memory == true ? view : null);
     cambiar(view);
   }
 
   /**
    * cargar vista desde FXML
-   * 
    * @param name    nombre del archivo fxml
    * @param control control a asignar
    * @return theView
    */
   public static Parent loadView(String name, Object control) {
     FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-    if (control != null)
-      loader.setController(control);
+    if (control != null) loader.setController(control);
     Parent root = null;
     try {
       root = loader.load();
@@ -77,6 +74,24 @@ public class View {
       e.printStackTrace();
     }
     return root;
+  }
+
+  /**
+   * cargar vista para un control personalizado desde FXML
+   * @param name    nombre del archivo fxml
+   * @param control control a asignar
+   */
+  public static void loadControlView(String name, Object control) {
+    FXMLLoader fxmlLoader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
+
+    fxmlLoader.setRoot(control);
+    fxmlLoader.setController(control);
+
+    try {
+      fxmlLoader.load();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   // #---------------------------------------------------------------------------

@@ -10,8 +10,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.ArrayList;
 
 /**
- * Clase encargada de almacenar todos los datos en memoria para registrar un
- * envio y posteriormente guardarlos en la base de datos.
+ * Clase encargada de almacenar todos los datos en memoria para registrar un envio y posteriormente
+ * guardarlos en la base de datos.
  * 
  * @author Julián Orejuela
  * @version 1.0, 29/4/2021
@@ -45,22 +45,11 @@ public class RegistrarEnvio {
    * Modifica el estado del cliente.
    */
   public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
-    Cliente cliente = new Cliente();
-    if (cedula.trim().equals("") || nombre.trim().equals("") || ciudad.equals("") || direccion.equals("") || telefono.equals(""))
-      cliente = null;
-    else {
-      cliente.cedula = cedula;
-      cliente.nombre = nombre;
-      cliente.ciudad = ciudad;
-      cliente.direccion = direccion;
-      cliente.telefono = telefono;
-    }
-
-    if (tipo == TipoCliente.Destinatario) {
+    Cliente cliente = new Cliente(cedula, nombre, ciudad, direccion, telefono);
+    if (tipo == TipoCliente.Destinatario)
       destinatario = cliente;
-    } else {
+    else
       remitente = cliente;
-    }
   }
 
   public void agregarPaqueteP(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
@@ -101,10 +90,6 @@ public class RegistrarEnvio {
 
   public Paquete getPaquete() {
     return paquete;
-  }
-
-  public boolean checkClientes() {
-    return !(remitente == null || destinatario == null);
   }
 
   // #---------------------------------------------------------------------------

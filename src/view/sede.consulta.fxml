@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:controller="controller.Sedes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sedes">
    <children>
       <Pane layoutX="494.0" layoutY="26.0">
          <children>
@@ -31,11 +31,12 @@
             </Button>
          </children>
       </Pane>
-      <TreeTableView layoutY="90.0" prefHeight="670.0" prefWidth="1020.0">
-         <columns>
-            <TreeTableColumn prefWidth="323.0" text="ID Sede" />
-            <TreeTableColumn prefWidth="696.0" text="Direccion" />
-         </columns>
-      </TreeTableView>
+      <TableView fx:id="sedesTable" layoutY="91.0" prefHeight="670.0" prefWidth="1020.0">
+        <columns>
+          <TableColumn fx:id="id_column" prefWidth="163.0" text="ID Sede" />
+          <TableColumn fx:id="nombre_column" prefWidth="348.0" text="Nombre" />
+            <TableColumn fx:id="direccion_column" prefWidth="507.0" text="Dirección" />
+        </columns>
+      </TableView>
    </children>
 </Pane>

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import controller.controls.Cliente?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -18,75 +19,13 @@
       <Pane layoutX="26.0" layoutY="92.0" prefHeight="663.0" prefWidth="973.0" style="-fx-border-color: #9B9B9B; -fx-border-width: 2px;">
          <children>
             <Button layoutX="805.0" layoutY="596.0" mnemonicParsing="false" onAction="#registrarPaquetes" prefHeight="42.0" prefWidth="142.0" text="Registrar Paquetes" />
-            <Pane layoutX="96.0" layoutY="36.0" prefHeight="418.0" prefWidth="312.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Ingrese la cedula del remitente:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="RCedula" layoutX="14.0" layoutY="42.0" onKeyPressed="#onKeyPressedRemitente" prefHeight="25.0" prefWidth="193.0" />
-                  <Label layoutX="14.0" layoutY="91.0" text="Nombre:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="RNombre" layoutX="12.0" layoutY="117.0" prefHeight="25.0" prefWidth="281.0" />
-                  <TextField fx:id="RDireccion" layoutX="13.0" layoutY="276.0" prefHeight="25.0" prefWidth="281.0" />
-                  <Label layoutX="14.0" layoutY="248.0" text="Dirección:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="13.0" layoutY="329.0" text="Teléfono:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="RTelefono" layoutX="15.0" layoutY="358.0" prefHeight="25.0" prefWidth="281.0" />
-                  <Label layoutX="12.0" layoutY="168.0" text="Ciudad:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="RCiudad" layoutX="11.0" layoutY="196.0" prefHeight="25.0" prefWidth="193.0" />
-               </children>
-            </Pane>
+           
+            <Cliente fx:id="remitente" layoutX="96.0" layoutY="36.0"></Cliente>
+
             <Line endX="360.0" endY="450.0" layoutX="127.0" layoutY="-3.0" startX="360.0" startY="40.0" stroke="#9b9b9b" strokeWidth="2.0" />
-            <Pane layoutX="564.0" layoutY="36.0" prefHeight="418.0" prefWidth="312.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Ingrese la cedula del destinatario:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="DCedula" layoutX="14.0" layoutY="42.0" onKeyPressed="#onKeyPressedDestinatario" prefHeight="25.0" prefWidth="193.0" />
-                  <Label layoutX="14.0" layoutY="91.0" text="Nombre:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="DNombre" layoutX="12.0" layoutY="117.0" prefHeight="25.0" prefWidth="281.0" />
-                  <TextField fx:id="DDireccion" layoutX="13.0" layoutY="276.0" prefHeight="25.0" prefWidth="281.0" />
-                  <Label layoutX="14.0" layoutY="248.0" text="Dirección:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="13.0" layoutY="329.0" text="Teléfono:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="DTelefono" layoutX="15.0" layoutY="358.0" prefHeight="25.0" prefWidth="281.0" />
-                  <Label layoutX="12.0" layoutY="168.0" text="Ciudad:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="DCiudad" layoutX="11.0" layoutY="196.0" prefHeight="25.0" prefWidth="193.0" />
-               </children>
-            </Pane>
+
+            <Cliente fx:id="destinatario" layoutX="564.0" layoutY="36.0"></Cliente>
+
          </children>
       </Pane>
    </children>

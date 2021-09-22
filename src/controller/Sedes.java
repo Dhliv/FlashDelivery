@@ -1,7 +1,13 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Entities.Sede;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import utilities.GeneralChecker;
 import utilities.Globals;
 import utilities.SpecificAlerts;
@@ -13,8 +19,21 @@ import utilities.View;
  * @version 2.0, 21/09/2021
  */
 public class Sedes {
+    @FXML private TableView<Sede> sedesTable;
+    @FXML private TableColumn<Sede, Integer> id_column;
+    @FXML private TableColumn<Sede, String> nombre_column;
+    @FXML private TableColumn<Sede, String> direccion_column;
     public TextField direccion;
     public TextField nombre;
+
+    public void initialize() {
+        if (sedesTable != null) {
+            id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
+            nombre_column.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            direccion_column.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+            sedesTable.setItems(Sede.getSedesList());
+        }
+    }
 
     /**
      * go to registrar una nueva sede
@@ -24,7 +43,8 @@ public class Sedes {
     }
 
     public void editar(ActionEvent event) {
-
+        Sede sede = sedesTable.getSelectionModel().getSelectedItem();
+        /*if(sede)*/
     }
 
     public void borrar(ActionEvent event) {

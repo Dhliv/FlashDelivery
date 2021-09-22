@@ -1,6 +1,9 @@
 package model.Entities;
 
 import org.jooq.impl.*;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utilities.Conexion;
 
 import java.util.ArrayList;
@@ -12,9 +15,21 @@ import java.util.List;
  * @version 2.0, 21/09/2021
  */
 public class Sede {
-    public int id;
+    public Integer id;
     public String nombre;
     public String direccion;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
 
     /**
      * Registrar una nueva sede.
@@ -23,6 +38,10 @@ public class Sede {
         int idSede = Conexion.db().insertInto(DSL.table("sede"), DSL.field("nombre"), DSL.field("direccion")).values(nombre, direccion).execute();
         Conexion.closeConnection();
         return idSede;
+    }
+
+    public static ObservableList<Sede> getSedesList() {
+        return FXCollections.observableArrayList(getSedes());
     }
 
     /**
@@ -37,8 +56,7 @@ public class Sede {
     /**
      * Obtiene las sedes existentes en la BD y las retorna.
      * 
-     * @return Formatea el id y el nombre de la sede y retorna su respectivo
-     *         listado.
+     * @return Formatea el id y el nombre de la sede y retorna su respectivo listado.
      */
     public static ArrayList<String> getSedesParsed() {
         List<Sede> sedes = getSedes();
@@ -66,8 +84,8 @@ public class Sede {
     }
 
     /**
-     * Transforma el entero que representa el id de una sede a la id de la sede mas
-     * su nombre para mostrarlo en la interfaz.
+     * Transforma el entero que representa el id de una sede a la id de la sede mas su nombre para
+     * mostrarlo en la interfaz.
      * 
      * @param idSede id de la sede.
      * @return string con el id y nombre de la sede.

@@ -24,8 +24,8 @@ public class OperadorOficina {
 
   public void initialize() {
     View.setViewPane(rightContent, true);
-    // View.cambiarVista("operadorOficinaTabla", new OperadorConsulta(operador));
-    View.cambiar("operador.cliente", new RegistrarClientes(operador));
+    View.cambiar("operadorOficinaTabla", new OperadorConsulta(operador));
+    // View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
   /**
