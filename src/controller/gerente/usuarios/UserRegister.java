@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
@@ -80,6 +81,8 @@ public class UserRegister {
 
     TextFieldRestrictions.textFieldNumeric(identificacionT);
     TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
+
+    
   }
 
   /**
@@ -148,6 +151,9 @@ public class UserRegister {
    * 
    * @param event not used.
    */
+
+
+
   @FXML
   void registrarUser(ActionEvent event) {
 

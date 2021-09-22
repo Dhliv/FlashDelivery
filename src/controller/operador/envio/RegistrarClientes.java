@@ -10,6 +10,7 @@ import utilities.View;
 
 /**
  * Controlador para la vista operador.cliente
+ * 
  * @author Julián Orejuela
  * @version 1.3, 21/09/2021
  */
@@ -23,6 +24,7 @@ public class RegistrarClientes {
   public RegistrarClientes(Empleado operador) {
     envio = new model.RegistrarEnvio();
     this.operador = operador;
+    // sadsadas
   }
 
   public void initialize() {

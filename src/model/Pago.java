@@ -69,10 +69,11 @@ public class Pago {
   public void ejecutarPago(RegistrarEnvio envio, String metodo_pago) {
     Cliente.createCliente(envio.getDestinatario());
     Cliente.createCliente(envio.getRemitente());
-    id_envio = 5;
-    Paquete.createPaquete(envio.getPaquete());
+    id_envio = Envio.createEnvio(envio, metodo_pago, operador);
+    Paquete.createPaquete(envio.getPaquete(), id_envio);
 
-    CreatePDF pdf = new CreatePDF(parsePaquete(envio), parseCliente(envio.getRemitente()), parseCliente(envio.getDestinatario()), parsePago());
+    CreatePDF pdf = new CreatePDF(parsePaquete(envio), parseCliente(envio.getRemitente()),
+        parseCliente(envio.getDestinatario()), parsePago());
     try {
       pdf.pdfCreate(Integer.toString(id_envio));
     } catch (IOException e) {
@@ -130,7 +131,8 @@ public class Pago {
    */
   private int calcularSeguro(Paquete p) {
     int seguro = 0; // Valor del seguro a pagar por el paquete
-    if (p.seguro) seguro = (int) (p.valor * SEGURO);
+    if (p.seguro)
+      seguro = (int) (p.valor * SEGURO);
     return seguro;
   }
 

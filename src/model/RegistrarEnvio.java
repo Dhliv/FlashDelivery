@@ -34,7 +34,7 @@ public class RegistrarEnvio {
    * @param tipo
    * @return El cliente o {@code null} si no existe.
    */
-  public Cliente buscarCliente(String cedula, TipoCliente tipo) {
+  public synchronized Cliente buscarCliente(String cedula, TipoCliente tipo) {
     Cliente cliente = Cliente.buscarCliente(cedula);
     if (tipo == TipoCliente.Remitente) remitente = cliente;
     if (tipo == TipoCliente.Destinatario) destinatario = cliente;
