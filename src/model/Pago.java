@@ -70,7 +70,7 @@ public class Pago {
     Cliente.createCliente(envio.getDestinatario());
     Cliente.createCliente(envio.getRemitente());
     id_envio = Envio.createEnvio(envio, metodo_pago, operador);
-    Paquete.createPaquete(envio.getPaquete());
+    Paquete.createPaquete(envio.getPaquete(), id_envio);
 
     CreatePDF pdf = new CreatePDF(parsePaquete(envio), parseCliente(envio.getRemitente()),
         parseCliente(envio.getDestinatario()), parsePago());
