@@ -55,6 +55,8 @@ public class RegistrarPaquete {
   /**
    * Llena con datos el paquete para no tener que escibirlos cada maldita vez que
    * queramos ensayar cosas en estas ventanas. Buenas noches.
+   * 
+   * PD: XD
    */
   private void fillDeafult() {
     txtPeso.setText("1");
