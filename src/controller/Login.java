@@ -19,14 +19,7 @@ import controller.gerente.Admin;
 import controller.operador.OperadorOficina;
 
 public class Login {
-  private Roles roles;
-  private ArrayList<String> rol;
   private String user;
-
-  public Login() {
-    roles = new Roles();
-    this.rol = roles.rol;
-  }
 
   @FXML
   private Button btIngresar;
@@ -34,12 +27,14 @@ public class Login {
   private PasswordField txtPass;
   @FXML
   private TextField txtUsuario;
-/**
- * Metodo para ejecutar el login de forma alternativa; en lugar de usar el botón, se usa
- * la tecla Enter
- * @param event
- * @throws Exception
- */
+
+  /**
+   * Metodo para ejecutar el login de forma alternativa; en lugar de usar el
+   * botón, se usa la tecla Enter
+   * 
+   * @param event
+   * @throws Exception
+   */
   @FXML
   void loginKeyboard(KeyEvent event) throws Exception {
     System.out.println(event);
@@ -48,17 +43,22 @@ public class Login {
       login();
     }
   }
-/**
- * Método del botón login
- * @param event evento causado por el botón login
- * @throws Exception
- */
+
+  /**
+   * Método del botón login
+   * 
+   * @param event evento causado por el botón login
+   * @throws Exception
+   */
   @FXML
   void clicksoide(ActionEvent event) throws Exception {
     login();
   }
+
   /**
-   * Método para iniciar sesión en los distintos roles dado un usuario y una contraseña.
+   * Método para iniciar sesión en los distintos roles dado un usuario y una
+   * contraseña.
+   * 
    * @throws Exception
    */
   void login() throws Exception {
@@ -82,19 +82,19 @@ public class Login {
       Globals.pantalla.close();
       Ventana vent;
 
-      if (rolAcc.equals(rol.get(roles.ADMIN))) {
+      if (rolAcc.equals(Roles.rol[Roles.ADMIN])) {
         vent = new Ventana("admin", new Admin(user));
         vent.start(Globals.pantalla);
-      } else if (rolAcc.equals(rol.get(roles.AUXILIAR))) {
+      } else if (rolAcc.equals(Roles.rol[Roles.AUXILIAR])) {
         vent = new Ventana("admin", new Admin(user));
-      } else if (rolAcc.equals(rol.get(roles.CONTADOR))) {
+      } else if (rolAcc.equals(Roles.rol[Roles.CONTADOR])) {
         // vent = new Ventana("operadorOficina", new OperadorOficina());
         // vent.start(Globals.pantalla);
         JOptionPane.showMessageDialog(null, "NO HA SIDO IMPLEMENTADO");
-      } else if (rolAcc.equals(rol.get(roles.OPERADOR))) {
+      } else if (rolAcc.equals(Roles.rol[Roles.OPERADOR])) {
         vent = new Ventana("operadorOficina", new OperadorOficina(userActual));
         vent.start(Globals.pantalla);
-      } else if (rolAcc.equals(rol.get(roles.SECRETARIO))) {
+      } else if (rolAcc.equals(Roles.rol[Roles.SECRETARIO])) {
         vent = new Ventana("contador", new Admin(user));
       }
     }

@@ -11,5 +11,4 @@ public class Roles {
   static public int OPERADOR = 2;
   static public int AUXILIAR = 3;
   static public int CONTADOR = 4;
-
 }
