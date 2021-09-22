@@ -134,4 +134,7 @@ public class View {
     views.clear();
   }
 
+  public static Pane getViewPane() {
+    return viewPane;
+  }
 }

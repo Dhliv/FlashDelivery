@@ -19,7 +19,7 @@ import utilities.*;
  * para el resgistro de un empleado en la base de datos.
  */
 public class UserRegister {
-  private Roles roles; // Cargos de la empresa
+  // private Roles roles; // Cargos de la empresa
 
   // Auxiliares para los datos del usuario.
   private String fecha; // Dato parcial de fecha de nacimiento
@@ -71,38 +71,14 @@ public class UserRegister {
     ObservableList<String> rolesParaVista = FXCollections.observableArrayList();
     ObservableList<String> sedesParaVista = FXCollections.observableArrayList();
 
-    roles = new Roles();
     sedesParaVista.removeAll(sedesParaVista);
     rolesParaVista.removeAll(rolesParaVista);
-    rolesParaVista.addAll(roles.rol);
+    rolesParaVista.addAll(Roles.roles);
     sedesParaVista.addAll(model.Entities.Sede.getSedesParsed());
     rolT.getItems().addAll(rolesParaVista);
     idsedeT.getItems().addAll(sedesParaVista);
 
     TextFieldRestrictions.textFieldNumeric(identificacionT);
-    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
-
-  /**
-   * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
-   * restricciones a los campos necesarios.
-   * 
-   */
-  public void initialize() {
-    ObservableList<String> l = FXCollections.observableArrayList();
-    ObservableList<String> s = FXCollections.observableArrayList();
-
-    roles = new Roles();
-    s.removeAll(s);
-    l.removeAll(l);
-    l.addAll(roles.rol);
-    s.addAll(model.Entities.Sede.getSedesParsed());
-    rolT.getItems().addAll(l);
-    idsedeT.getItems().addAll(s);
-
-    TextFieldRestrictions.textFieldNumeric(identificacionT);
-    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
-
-    TextFieldRestrictions.textFieldNumeric(telefonoT);
     TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
   }
 
@@ -130,7 +106,7 @@ public class UserRegister {
    * @return String con rol interno.
    */
   private String parseRol(String rol) {
-    if (rol == roles.rol.get(roles.SECRETARIO))
+    if (rol == Roles.rol[Roles.SECRETARIO])
       return "Secretaria";
     return rol;
   }
@@ -149,7 +125,7 @@ public class UserRegister {
    * Retorna a la pantalla de consulta de usuarios.
    */
   private void volver() {
-    View.newView("user.consulta", new UserConsulta());
+    View.cambiar("user.consulta", new UserConsulta());
   }
 
   /**
@@ -175,7 +151,7 @@ public class UserRegister {
   void registrarUser(ActionEvent event) {
 
     getData();
-    // TODO Que mondá es esto?
+    // TODO QCambiar a manejo por objeto (Empleado y Usuario)
     String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, apellidos };
 
     boolean emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
@@ -197,8 +173,8 @@ public class UserRegister {
     } else { // Si no hay problemas con las validaciones hechas:
       parseData();
 
-      Usuario user = new Usuario(id, username, password, true);
-      Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
+      Usuario user = new Usuario(ident, username, password, true);
+      Empleado emp = new Empleado(ident, name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
 
       boolean registroFallido = (Empleado.crearEmpleado(emp) == 0) | Usuario.registrarUsuario(user);
       if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
@@ -208,5 +184,5 @@ public class UserRegister {
         volver();
       }
     }
-
+  }
 }
