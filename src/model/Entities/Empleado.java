@@ -143,7 +143,12 @@ public class Empleado {
 
     return res;
   }
-
+/**
+ * Carga un objeto de tipo Empleado si existe un empleado en la base de datos con la cedula
+ * introducida 
+ * @param cedula la cedula del empleado a buscar
+ * @return un objeto de la clase Empleado si existe en la base de datos, null si no existe
+ */
   public static Empleado cargarEmpleado(String cedula) {
 
     List<Empleado> empleado = Conexion.db().select().from("empleado").where("cedula ='" + cedula + "'").fetch()

@@ -3,6 +3,7 @@ package model.Entities;
 import java.util.List;
 import org.jooq.impl.DSL;
 import utilities.Conexion;
+import utilities.GeneralChecker;
 
 // TODO documentar.
 public class Usuario {
@@ -56,9 +57,19 @@ public class Usuario {
     this.enabled = enabled;
   }
 
+  /**
+   * Busca en la base de datos un Usuario que cuente con el usuario y la 
+   * contraseña suministrados
+   * 
+   * @param user El usuario ingresado.
+   * @param pass La contraseña a ingresar
+   * @return el id  (>0) del usuario si existe con los datos suministrados ben la base de datos,
+   * -1 si no existe un usuario con esos datos suministrados, -2 si el usuario existe pero está
+   * deshabilitado.
+   */
   public static int entradaUsuario(String user, String pass) {
     int code = -1;
-    if (verificarUsuario(user) && verificarPassword(pass)) {
+    if (GeneralChecker.checkChar(new String[]{user, pass})) {
       List<Usuario> usuario = Conexion.db().select().from("usuario")
           .where("username ='" + user + "' and password ='" + pass + "'").fetch().into(Usuario.class);
       Conexion.closeConnection();
@@ -73,45 +84,6 @@ public class Usuario {
     return code;
   }
 
-  /**
-   * Verifica que el user tenga el formato correcto, comprobando caracteres
-   * erroneos como #'.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' , y también
-   * verificando si está vacía o no
-   * 
-   * @param user La contraseña ingresada.
-   * @return true si es correcta la contraseña, false si tiene algún error de los
-   *         antes descritos.
-   */
-  private static boolean verificarUsuario(String user) {
-    char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
-    for (int i = 0; i < user.length(); ++i)
-      for (int j = 0; j < F.length; ++j)
-        if (user.charAt(i) == F[j])
-          return false;
-    return true;
-  }
-
-  /**
-   * Verifica que el password tenga el formato correcto, comprobando caracteres
-   * erroneos como #'.', ',', '\'', '\"', '+', '-', '_', '!' , y también
-   * verificando si está vacía o no
-   * 
-   * @param pass La contraseña ingresada.
-   * @return true si es correcta la contraseña, false si tiene algún error de los
-   *         antes descritos.
-   */
-  private static boolean verificarPassword(String pass) {
-    boolean valid = false;
-    if (!pass.trim().equals(pass))
-      return valid;
-    char F[] = { '.', ',', '\'', '\"', '+', '-', '_', '!' };
-    for (int i = 0; i < pass.length(); ++i)
-      for (int j = 0; j < F.length; ++j)
-        if (pass.charAt(i) == F[j])
-          return valid;
-    valid = true;
-    return valid;
-  }
 
   /**
    * Cambia el estado del atributo enabled de la tabla usuario a true, de un

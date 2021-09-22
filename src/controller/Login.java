@@ -50,6 +50,7 @@ public class Login {
   }
 
   void login() throws Exception {
+
     user = txtUsuario.getText();
     String pass = txtPass.getText();
     int acc = Usuario.entradaUsuario(user, pass);

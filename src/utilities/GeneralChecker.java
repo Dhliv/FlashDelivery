@@ -18,6 +18,7 @@ public class GeneralChecker {
         for (int k = 0; k < F.length; k++) {
           if (campo[i].charAt(j) == F[k]) {
             ch = true;
+            break;
           }
         }
       }

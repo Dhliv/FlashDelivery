@@ -74,12 +74,13 @@ public class RegistrarClientes {
     onChangeCedula(RCedula, RNombre, RCiudad, RDireccion, RTelefono, TipoCliente.Remitente);
   }
 
-  private synchronized void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion,
+  private void onChangeCedula(TextField Cedula, TextField Nombre, TextField Ciudad, TextField Direccion,
       TextField Telefono, TipoCliente tipo) {
     if (Cedula.getText() == "") // Cedula.getText().trim().equals("")
       return;
     Runnable r = () -> {
-      Cliente cliente = envio.buscarCliente(Cedula.getText(), tipo);
+      Cliente cliente = null;
+      cliente = envio.buscarCliente(Cedula.getText(), tipo);
       if (cliente != null) {
         Nombre.setText(cliente.nombre);
         Ciudad.setText(cliente.ciudad);

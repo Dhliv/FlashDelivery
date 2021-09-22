@@ -61,7 +61,7 @@ public class Cliente {
    * @param cedula
    * @return El {@code cliente} o {@code null} si no existe.
    */
-  public static Cliente buscarCliente(String cedula) {
+  public synchronized static Cliente buscarCliente(String cedula) {
     Cliente cliente;
     Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
     cliente = rs != null ? rs.into(Cliente.class) : null;
