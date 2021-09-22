@@ -65,7 +65,8 @@ public class RegistrarClientes {
     if (Cedula.getText() == "") // Cedula.getText().trim().equals("")
       return;
     Runnable r = () -> {
-      Cliente cliente = envio.buscarCliente(Cedula.getText(), tipo);
+      Cliente cliente = null;
+      cliente = envio.buscarCliente(Cedula.getText(), tipo);
       if (cliente != null) {
         Nombre.setText(cliente.nombre);
         Ciudad.setText(cliente.ciudad);

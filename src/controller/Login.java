@@ -34,7 +34,12 @@ public class Login {
   private PasswordField txtPass;
   @FXML
   private TextField txtUsuario;
-
+/**
+ * Metodo para ejecutar el login de forma alternativa; en lugar de usar el botón, se usa
+ * la tecla Enter
+ * @param event
+ * @throws Exception
+ */
   @FXML
   void loginKeyboard(KeyEvent event) throws Exception {
     System.out.println(event);
@@ -43,13 +48,21 @@ public class Login {
       login();
     }
   }
-
+/**
+ * Método del botón login
+ * @param event evento causado por el botón login
+ * @throws Exception
+ */
   @FXML
   void clicksoide(ActionEvent event) throws Exception {
     login();
   }
-
+  /**
+   * Método para iniciar sesión en los distintos roles dado un usuario y una contraseña.
+   * @throws Exception
+   */
   void login() throws Exception {
+
     user = txtUsuario.getText();
     String pass = txtPass.getText();
     int acc = Usuario.entradaUsuario(user, pass);
