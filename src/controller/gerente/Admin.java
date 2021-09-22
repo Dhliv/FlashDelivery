@@ -10,6 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import utilities.Globals;
 import utilities.View;
 
+/**
+ * Controlador de la vista usada para el Admin
+ * 
+ * @author ?
+ * @version 1.0
+ */
 public class Admin {
   private String userName;
 

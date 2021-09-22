@@ -3,12 +3,13 @@ package model.Entities;
 import java.util.List;
 import org.jooq.impl.DSL;
 import utilities.Conexion;
+import utilities.GeneralChecker;
 
 // TODO documentar.
 public class Usuario {
 
   // <editor-fold defaultstate="collapsed" desc="Atributos de la entidad">
-  private int id;
+  private String id;
   private String username;
   private String password;
   private boolean enabled;
@@ -17,14 +18,14 @@ public class Usuario {
   public Usuario() {
   }
 
-  public Usuario(int id, String username, String password, boolean enabled) {
+  public Usuario(String id, String username, String password, boolean enabled) {
     this.id = id;
     this.username = username;
     this.password = password;
     this.enabled = enabled;
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
@@ -40,7 +41,7 @@ public class Usuario {
     return enabled;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -56,16 +57,26 @@ public class Usuario {
     this.enabled = enabled;
   }
 
+  /**
+   * Busca en la base de datos un Usuario que cuente con el usuario y la 
+   * contraseña suministrados
+   * 
+   * @param user El usuario ingresado.
+   * @param pass La contraseña a ingresar
+   * @return el id  (>0) del usuario si existe con los datos suministrados ben la base de datos,
+   * -1 si no existe un usuario con esos datos suministrados, -2 si el usuario existe pero está
+   * deshabilitado.
+   */
   public static int entradaUsuario(String user, String pass) {
     int code = -1;
-    if (verificarUsuario(user) && verificarPassword(pass)) {
+    if (GeneralChecker.checkChar(new String[]{user, pass})) {
       List<Usuario> usuario = Conexion.db().select().from("usuario")
           .where("username ='" + user + "' and password ='" + pass + "'").fetch().into(Usuario.class);
       Conexion.closeConnection();
       if (!usuario.isEmpty()) {
         Usuario u = usuario.get(0);
         if (u.enabled)
-          code = u.id;
+          code = Integer.parseInt(u.id);
         else
           code = -2;
       }
@@ -73,45 +84,6 @@ public class Usuario {
     return code;
   }
 
-  /**
-   * Verifica que el user tenga el formato correcto, comprobando caracteres
-   * erroneos como #'.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' , y también
-   * verificando si está vacía o no
-   * 
-   * @param user La contraseña ingresada.
-   * @return true si es correcta la contraseña, false si tiene algún error de los
-   *         antes descritos.
-   */
-  private static boolean verificarUsuario(String user) {
-    char F[] = { '.', ',', '\'', '\"', '*', '=', '+', '-', '_', '!' };
-    for (int i = 0; i < user.length(); ++i)
-      for (int j = 0; j < F.length; ++j)
-        if (user.charAt(i) == F[j])
-          return false;
-    return true;
-  }
-
-  /**
-   * Verifica que el password tenga el formato correcto, comprobando caracteres
-   * erroneos como #'.', ',', '\'', '\"', '+', '-', '_', '!' , y también
-   * verificando si está vacía o no
-   * 
-   * @param pass La contraseña ingresada.
-   * @return true si es correcta la contraseña, false si tiene algún error de los
-   *         antes descritos.
-   */
-  private static boolean verificarPassword(String pass) {
-    boolean valid = false;
-    if (!pass.trim().equals(pass))
-      return valid;
-    char F[] = { '.', ',', '\'', '\"', '+', '-', '_', '!' };
-    for (int i = 0; i < pass.length(); ++i)
-      for (int j = 0; j < F.length; ++j)
-        if (pass.charAt(i) == F[j])
-          return valid;
-    valid = true;
-    return valid;
-  }
 
   /**
    * Cambia el estado del atributo enabled de la tabla usuario a true, de un
@@ -155,8 +127,9 @@ public class Usuario {
    * @return True si el usuario existía, False de lo contrario.
    */
   public static Boolean checkExistence(String username) {
-    if(username == null) return false;
-    
+    if (username == null)
+      return false;
+
     var user = Conexion.db().select().from("usuario").where("username = '" + username + "'").fetch()
         .into(Usuario.class);
     if (user.size() != 0)
