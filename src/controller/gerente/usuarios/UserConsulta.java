@@ -20,7 +20,7 @@ import model.Entities.Usuario;
 import utilities.*;
 
 // TODO Documentar.
-public class UserConsulta{
+public class UserConsulta {
   @FXML
   private Button btBorrar;
   @FXML
@@ -105,7 +105,7 @@ public class UserConsulta{
    */
   @FXML
   void goToUsuariosRegistro(ActionEvent event) {
-    Globals.cambiarVista("user.register", new UserRegister());
+    View.newView("user.register", new UserRegister());
   }
 
   /**

@@ -22,14 +22,10 @@ import utilities.TextFieldRestrictions;
 import utilities.View;
 import model.Entities.Empleado;
 
-// TODO escribir el CVV en la parte visual de la tarjeta.
-// TODO escribir la fecha de vencimiento en la parte visual de la tarjeta.
-// TODO poner invisible la selección de número de cuotas para la tarjeta de debito.
-// TODO cambiar el label que dice tarjeta de credito en la tarjeta de debito.
-// TODO verificar que el número de la tarjeta esté completo (16 digitos).
-// TODO verificar que el CVV esté completo (digitos >= 3).
-
 public class OperadorTarjeta implements Initializable {
+
+  private Integer CVVLENGTH = 4;
+  private Integer CARDLENGTH = 16;
   private Integer tipoTarjeta; // Almacena el tipo de la tarjeta que se haya seleccionado para el método de
                                // pago.
   private model.RegistrarEnvio envio; // Almacena la info relacionada al envio (destinatario, remitente, paquetes,
@@ -106,7 +102,7 @@ public class OperadorTarjeta implements Initializable {
   }
 
   /**
-   * Inicializa los componentes gráficos. Ademmás establece restricciones a los
+   * Inicializa los componentes gráficos. Además establece restricciones a los
    * campos de texto necesarios.
    * 
    * @param location  not used.
@@ -123,7 +119,9 @@ public class OperadorTarjeta implements Initializable {
     l.addAll(aux);
     chboxNumeroCuotas.getItems().addAll(l);
 
+    // Muestra en pantalla si es una tarjeta de credito o de debito respectivamente.
     lblTipoTarjeta.setText("Tarjeta de " + ((tipoTarjeta == CREDITO) ? "Crédito" : "Debito"));
+
     lblNumero1.setText("");
     lblNumero2.setText("");
     lblNumero3.setText("");
@@ -133,16 +131,19 @@ public class OperadorTarjeta implements Initializable {
     lblMes.setText("");
     lblAño.setText("");
 
+    // Oculta el campo numero de cuotas.
     if (tipoTarjeta == DEBITO) {
       chboxNumeroCuotas.setVisible(false);
       lblNumeroCuotas.setVisible(false);
     }
 
-    TextFieldRestrictions.textFieldMaxLength(txtNumerotarjeta, 16);
+    TextFieldRestrictions.textFieldMaxLength(txtNumerotarjeta, CARDLENGTH);
     TextFieldRestrictions.textFieldNumeric(txtNumerotarjeta);
 
-    TextFieldRestrictions.textFieldMaxLength(txtCVV, 4);
+    TextFieldRestrictions.textFieldMaxLength(txtCVV, CVVLENGTH);
     TextFieldRestrictions.textFieldNumeric(txtCVV);
+
+    TextFieldRestrictions.textFieldAlphabeticChars(txtTitular);
   }
 
   /**
@@ -156,8 +157,23 @@ public class OperadorTarjeta implements Initializable {
     getData();
     camposVacios = GeneralChecker.checkEmpty(campos, objetos);
     forbidChar = GeneralChecker.checkChar(campos);
+    Boolean pagar = true; // Booleano para ver si se puede efectuar el pago adecuadamente o existe algún
+                          // problema.
 
-    if (!(camposVacios || forbidChar)) {
+    // Revisa que tenga como minimo CVVLENGTH de tamaño el string escrito por el
+    // usuario en el campo CVV
+    if (cvv.length() < CVVLENGTH) {
+      SpecificAlerts.showCardUnexist();
+      pagar = false;
+    }
+
+    // Revisa lo mismo que en el anterior pero en el campo numeroTarjeta
+    if (numeroTarjeta.length() < CARDLENGTH) {
+      SpecificAlerts.showCardUnexist();
+      pagar = false;
+    }
+
+    if (!(camposVacios || forbidChar) && pagar) {
       parseData();
       pago.ejecutarPago(envio, tipoTarjeta == CREDITO ? "Credito" : "Debito");
       SpecificAlerts.showPagoExitoso();
@@ -216,13 +232,7 @@ public class OperadorTarjeta implements Initializable {
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
 
-    // TODO a veces no borra los caracteres en la parte visual.
-    // TODO si se edita un caracter que no esté en la última posición, el cambio se
-    // ve reflejado solo en la última posición.
-    // TODO quitar los 3 puntos suspensivos que aparecen al escibir muchos
-    // caracteres, preferiblemente colocar un endl.
-
-    if (borrar)
+    if (borrar && txtTitular.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
   }
 
@@ -234,14 +244,57 @@ public class OperadorTarjeta implements Initializable {
    */
   @FXML
   void addTitular(KeyEvent event) {
+
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
     addToText = (String) validados[2];
 
-    if (borrar)
+    System.out.println(event.getCharacter().codePointAt(0));
+    if ((borrar || event.getCharacter().codePointAt(0) == 8) && txtTitular.getText().length() < 21) {
       return;
-    lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
+    }
+
+    // Revisa que se cumpla la misma condición del txtField en el componente grafico
+    // que imprime la cadena
+    if (agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
+      lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
+  }
+  /**
+   * Agrega o elimina un caracter al componente gráfico que muestra el cvv
+   * si es el caso.
+   * @param event not used
+   */
+  @FXML
+  void addCvv(KeyEvent event) {
+    // lblCVV
+    Object[] validados = SobreTarjeta.checkErase(event, true);
+    borrar = (Boolean) validados[0];
+    agregar = (Boolean) validados[1];
+    addToText = (String) validados[2];
+
+    if (borrar) {
+      lblCVV.setText(SobreTarjeta.eraseFrom(lblCVV.getText(), 1));
+    }
+
+    if (agregar && lblCVV.getText().length() < CVVLENGTH)
+      lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
+  }
+
+/**
+ * Agrega o elimina un caracter al componente gráfico que muestra la fecha
+ * si es el caso.
+ * @param event not used.
+ */
+  @FXML
+  void addFecha(ActionEvent event) {
+
+    int month = dateFechaVencimiento.getValue().getMonthValue();
+    if (month < 10)
+      lblMes.setText("0" + Integer.toString(month));
+    else
+      lblMes.setText(Integer.toString(month));
+    lblAño.setText(Integer.toString(dateFechaVencimiento.getValue().getYear()));
   }
 
   /**

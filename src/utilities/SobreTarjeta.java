@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+//TODO Documentar la clase (Probablemente Winja o Pergüeza)
 public class SobreTarjeta {
 
   /**
@@ -12,6 +13,7 @@ public class SobreTarjeta {
   public static final Integer tNTM() {
     return 16;
   }
+
   /**
    * Método para comprobar si la tecla presionada corresponde a una tecla numerica
    * 
@@ -55,7 +57,8 @@ public class SobreTarjeta {
    * @param lblNumero3 tercer cuarteto de numeros en la tarjeta.
    * @param lblNumero4 cuarteto final de numeros en la tarjeta.
    */
-  public static void addNumber(String n, Integer counter, Label lblNumero1, Label lblNumero2, Label lblNumero3, Label lblNumero4) {
+  public static void addNumber(String n, Integer counter, Label lblNumero1, Label lblNumero2, Label lblNumero3,
+      Label lblNumero4) {
     if (counter < 4) {
       lblNumero1.setText(SobreTarjeta.addTo(lblNumero1.getText(), n + " "));
     } else if (counter < 8) {
@@ -77,7 +80,8 @@ public class SobreTarjeta {
    * @param lblNumero3 tercer cuarteto de numeros en la tarjeta.
    * @param lblNumero4 cuarteto final de numeros en la tarjeta.
    */
-  public static void eraseNumber(Integer counter, Label lblNumero1, Label lblNumero2, Label lblNumero3, Label lblNumero4) {
+  public static void eraseNumber(Integer counter, Label lblNumero1, Label lblNumero2, Label lblNumero3,
+      Label lblNumero4) {
     if (counter > 12) {
       lblNumero4.setText(SobreTarjeta.eraseFrom(lblNumero4.getText(), 2));
     } else if (counter > 8) {
@@ -92,10 +96,10 @@ public class SobreTarjeta {
   /**
    * Verifica si es necesario borrar o agregar la tecla presionada.
    * 
-   * @param event la tecla presionada.
+   * @param event      la tecla presionada.
    * @param numTarjeta si es necesario identifcar si es un numero.
    * @return una tripleta de datos: si se debe borrar datos, si se debe agregar
-   * datos y el dato a agregar.
+   *         datos y el dato a agregar.
    */
   public static Object[] checkErase(KeyEvent event, Boolean numTarjeta) {
     Boolean borrar = false;
@@ -113,7 +117,8 @@ public class SobreTarjeta {
 
     if (numTarjeta) {
       addToText = SobreTarjeta.keyEqualNumber(key);
-      if (addToText.length() != 0) agregar = true;
+      if (addToText.length() != 0)
+        agregar = true;
     } else
       agregar = true;
 

@@ -63,12 +63,24 @@ public class UserRegister {
   // FIN de los campos.
 
   /**
-   * Constructor de la clase UserRegister
+   * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
+   * restricciones a los campos necesarios.
    * 
    */
-  public UserRegister() {
+  public void initialize() {
+    ObservableList<String> rolesParaVista = FXCollections.observableArrayList();
+    ObservableList<String> sedesParaVista = FXCollections.observableArrayList();
 
-  }
+    roles = new Roles();
+    sedesParaVista.removeAll(sedesParaVista);
+    rolesParaVista.removeAll(rolesParaVista);
+    rolesParaVista.addAll(roles.rol);
+    sedesParaVista.addAll(model.Entities.Sede.getSedesParsed());
+    rolT.getItems().addAll(rolesParaVista);
+    idsedeT.getItems().addAll(sedesParaVista);
+
+    TextFieldRestrictions.textFieldNumeric(identificacionT);
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
 
   /**
    * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
@@ -95,8 +107,8 @@ public class UserRegister {
   }
 
   /**
-   * Obtiene los datos de los campos de registro y los almacena en las variables
-   * de la linea 38.
+   * Obtiene los datos de los campos de registro y los almacena en variables
+   * internas.
    */
   private void getData() {
     name = nombreT.getText();
@@ -109,23 +121,6 @@ public class UserRegister {
     idS = idsedeT.getValue();
     username = usernameT.getText();
     password = passwordT.getText();
-  }
-
-  /**
-   * Limpia todos los campos rellenables.
-   */
-  private void clearCamps() {
-    nombreT.setText("");
-    apellidoT.setText("");
-    telefonoT.setText("");
-    direccionT.setText("");
-    identificacionT.setText("");
-    usernameT.setText("");
-    passwordT.setText("");
-
-    fechaT.setValue(null);
-    idsedeT.setValue(null);
-    rolT.setValue(null);
   }
 
   /**
@@ -154,7 +149,7 @@ public class UserRegister {
    * Retorna a la pantalla de consulta de usuarios.
    */
   private void volver() {
-    Globals.cambiarVista("user.consulta", new UserConsulta());
+    View.newView("user.consulta", new UserConsulta());
   }
 
   /**
@@ -178,48 +173,40 @@ public class UserRegister {
    */
   @FXML
   void registrarUser(ActionEvent event) {
-    boolean forbidchar = false;
-    boolean emptyCamps = false;
-    boolean usernameExist = false;
-    boolean empleadoExist = false;
-    boolean registroFallido = false;
 
     getData();
-    String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, idS, apellidos };
-    emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
-    forbidchar = GeneralChecker.checkChar(campo);
+    // TODO Que mondá es esto?
+    String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, apellidos };
 
-    if (!forbidchar && !emptyCamps) { // Si no hay problemas con las validaciones hechas:
-      parseData();
-      usernameExist = Usuario.checkExistence(username);
-      empleadoExist = Empleado.checkExistence(id + "");
+    boolean emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);
+    boolean forbidchar = GeneralChecker.checkChar(campo);
+    boolean usernameExist = Usuario.checkExistence(username);
+    boolean empleadoExist = Empleado.checkExistence(ident);
 
-      if (!(usernameExist || empleadoExist)) { // Si el empleado y el usuario no están registrados, se procede a hacer
-                                               // el registro.
-        Usuario user = new Usuario(id, username, password, true);
-        Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
-        registroFallido = (Empleado.crearEmpleado(emp) == 0);
-        registroFallido |= Usuario.registrarUsuario(user);
-
-        if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
-          SpecificAlerts.showErrorUnexpt();
-        else {
-          SpecificAlerts.showRegSuccess();
-          volver();
-          clearCamps();
-        }
-      } else {
+    if (forbidchar || emptyCamps || usernameExist || empleadoExist) {
+      { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
+        if (emptyCamps)
+          SpecificAlerts.showEmptyFieldAlert();
+        if (forbidchar)
+          SpecificAlerts.showCharForbidenAlert();
         if (usernameExist)
           SpecificAlerts.showUserExist();
         if (empleadoExist)
           SpecificAlerts.showEmpleadoExists();
       }
-    } else { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
-      if (emptyCamps)
-        SpecificAlerts.showEmptyFieldAlert();
-      if (forbidchar)
-        SpecificAlerts.showCharForbidenAlert();
+    } else { // Si no hay problemas con las validaciones hechas:
+      parseData();
+
+      Usuario user = new Usuario(id, username, password, true);
+      Empleado emp = new Empleado(id + "", name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
+
+      boolean registroFallido = (Empleado.crearEmpleado(emp) == 0) | Usuario.registrarUsuario(user);
+      if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
+        SpecificAlerts.showErrorUnexpt();
+      else {
+        SpecificAlerts.showRegSuccess();
+        volver();
+      }
     }
-  }
 
 }
