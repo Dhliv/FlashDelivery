@@ -15,7 +15,6 @@ import utilities.View;
 
 /**
  * Controlador para la vista operador.cliente
- * 
  * @author Julián Orejuela
  * @version 1.2, 13/9/2021
  */

@@ -82,6 +82,26 @@ public class UserRegister {
     TextFieldRestrictions.textFieldNumeric(identificacionT);
     TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
 
+  /**
+   * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
+   * restricciones a los campos necesarios.
+   * 
+   */
+  public void initialize() {
+    ObservableList<String> l = FXCollections.observableArrayList();
+    ObservableList<String> s = FXCollections.observableArrayList();
+
+    roles = new Roles();
+    s.removeAll(s);
+    l.removeAll(l);
+    l.addAll(roles.rol);
+    s.addAll(model.Entities.Sede.getSedesParsed());
+    rolT.getItems().addAll(l);
+    idsedeT.getItems().addAll(s);
+
+    TextFieldRestrictions.textFieldNumeric(identificacionT);
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
+
     TextFieldRestrictions.textFieldNumeric(telefonoT);
     TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
   }
@@ -188,6 +208,5 @@ public class UserRegister {
         volver();
       }
     }
-  }
 
 }
