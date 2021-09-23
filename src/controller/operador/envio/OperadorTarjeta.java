@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.jooq.Row;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -111,8 +113,7 @@ public class OperadorTarjeta implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    //TODO @winja o @Reynell que es l?
-    
+    // TODO @winja o @Reynell que es l?
     ObservableList<String> l = FXCollections.observableArrayList();
     ArrayList<String> aux = new ArrayList<>();
     for (int i = 1; i <= 36; i++) {
@@ -263,9 +264,11 @@ public class OperadorTarjeta implements Initializable {
     if (agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
+
   /**
-   * Agrega o elimina un caracter al componente gráfico que muestra el cvv
-   * si es el caso.
+   * Agrega o elimina un caracter al componente gráfico que muestra el cvv si es
+   * el caso.
+   * 
    * @param event not used
    */
   @FXML
@@ -284,11 +287,12 @@ public class OperadorTarjeta implements Initializable {
       lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
   }
 
-/**
- * Agrega o elimina un caracter al componente gráfico que muestra la fecha
- * si es el caso.
- * @param event not used.
- */
+  /**
+   * Agrega o elimina un caracter al componente gráfico que muestra la fecha si es
+   * el caso.
+   * 
+   * @param event not used.
+   */
   @FXML
   void addFecha(ActionEvent event) {
 

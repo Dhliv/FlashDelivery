@@ -27,7 +27,6 @@ public class RegistrarClientes {
   public RegistrarClientes(Empleado operador) {
     envio = new model.RegistrarEnvio();
     this.operador = operador;
-    //sadsadas
   }
 
   public void initialize() {
@@ -51,6 +50,7 @@ public class RegistrarClientes {
       return;
     if (!destinatario.checkAndUpdateEnvio())
       return;
+    System.out.println("Registrar cliente: " + envio.getDestinatario().cedula);
     View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
   }
 }

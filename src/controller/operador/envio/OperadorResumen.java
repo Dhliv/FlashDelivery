@@ -23,8 +23,8 @@ public class OperadorResumen {
 
   private static final Integer DEBITO = 0;
   private static final Integer CREDITO = 1;
-  private int total;
-  private int impuesto;
+  private Double total;
+  private Double impuesto;
   private Empleado operador;
   private Pago pago;
 
@@ -72,6 +72,7 @@ public class OperadorResumen {
    * Carga la información relacionada al envío en la interfaz grafica.
    */
   public void chargeInformation() throws IOException {
+    System.out.println(envio.getDestinatario().cedula);
     lblCedulaR.setText(lblCedulaR.getText() + ": " + envio.getRemitente().cedula);
     lblNameR.setText(lblNameR.getText() + ": " + envio.getRemitente().nombre);
     lblCedulaD.setText(lblCedulaD.getText() + ": " + envio.getDestinatario().cedula);
@@ -85,10 +86,10 @@ public class OperadorResumen {
     impuesto = pago.getImpuesto();
 
     // Actualiza los datos en pantalla.
-    labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Integer.toString(total - impuesto));
-    lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
-    lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(pago.getSeguro()));
-    lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
+    labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Double.toString(total - impuesto));
+    lblImpuesto.setText(lblImpuesto.getText() + ": " + Double.toString(impuesto));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(pago.getSeguro()));
+    lblTotal.setText(lblTotal.getText() + ": " + Double.toString(total));
   }
 
   /**

@@ -26,6 +26,18 @@ public class Globals {
     return envio;
   }
 
+  /**
+   * Numero "value" es redondeado a "places" cifras decimales
+   * 
+   * @param value numero double a redondear
+   * @param place numero de cifras
+   * @return value formateado.
+   */
+  public static double roundAvoid(double value, int places) {
+    double scale = Math.pow(10, places);
+    return Math.round(value * scale) / scale;
+  }
+
   // ! --------------------------------------------
   // ! POR BORRAR
 

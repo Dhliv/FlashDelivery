@@ -50,6 +50,7 @@ public class RegistrarPaquete {
   public RegistrarPaquete(model.RegistrarEnvio envio, Empleado operador) {
     this.envio = envio;
     this.operador = operador;
+    System.out.println("constructor Registrar Paquete: " + envio.getDestinatario().cedula);
   }
 
   /**
@@ -68,13 +69,13 @@ public class RegistrarPaquete {
   }
 
   public void initialize() {
-    TextFieldRestrictions.textFieldNumeric(txtPeso);
-    TextFieldRestrictions.textFieldNumeric(txtValor);
-    TextFieldRestrictions.textFieldNumeric(txtAncho);
-    TextFieldRestrictions.textFieldNumeric(txtLargo);
-    TextFieldRestrictions.textFieldNumeric(txtAlto);
+    TextFieldRestrictions.textFieldDecimal(txtPeso);
+    TextFieldRestrictions.textFieldDecimal(txtValor);
+    TextFieldRestrictions.textFieldDecimal(txtAncho);
+    TextFieldRestrictions.textFieldDecimal(txtLargo);
+    TextFieldRestrictions.textFieldDecimal(txtAlto);
     // txtReporte.setText("xdxdxd");
-    fillDeafult();
+    // fillDeafult();
   }
 
   @FXML
@@ -92,18 +93,16 @@ public class RegistrarPaquete {
     txtAncho.setText("");
   }
 
-
-
   boolean agregarPaquete() {
     try { // Faltan validaciones
-      Integer peso = Integer.parseInt(txtPeso.getText());
-      Integer valor = Integer.parseInt(txtValor.getText());
+      Double peso = Double.parseDouble(txtPeso.getText());
+      Double valor = Double.parseDouble(txtValor.getText());
       String descripcion = txtDescripcion.getText();
       if (descripcion.trim().equals(""))
         return false;
-      Integer ancho = Integer.parseInt(txtAncho.getText());
-      Integer largo = Integer.parseInt(txtLargo.getText());
-      Integer alto = Integer.parseInt(txtAlto.getText());
+      Double ancho = Double.parseDouble(txtAncho.getText());
+      Double largo = Double.parseDouble(txtLargo.getText());
+      Double alto = Double.parseDouble(txtAlto.getText());
       Boolean seguro = checkSeguro.isSelected();
       envio.agregarPaqueteP(peso, valor, descripcion, ancho, largo, alto, seguro);
       return true;
@@ -117,8 +116,10 @@ public class RegistrarPaquete {
 
     if (!agregarPaquete())
       JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
-    else
+    else {
+      System.out.println("Registrar paquete: " + envio.getDestinatario().cedula);
       View.newView("operador.resumen", new OperadorResumen(envio, operador));
+    }
 
   }
 
@@ -126,6 +127,7 @@ public class RegistrarPaquete {
   void limpiarCampos(ActionEvent event) {
     clearFieldsPaquetes();
   }
+
   @FXML
   void superPrueba(KeyEvent event) {
     System.out.println("Será que esto sí funciona así?");

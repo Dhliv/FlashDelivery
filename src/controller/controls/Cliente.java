@@ -22,27 +22,27 @@ import java.io.IOException;
  * @version 1.0, 21/09/2021
  */
 public class Cliente extends Pane {
-    @FXML
-    private Label cedulaLabel;
-    @FXML
-    private TextField cedula;
-    @FXML
-    private TextField nombre;
-    @FXML
-    private TextField direccion;
-    @FXML
-    private TextField telefono;
-    @FXML
-    private TextField ciudad;
+  @FXML
+  private Label cedulaLabel;
+  @FXML
+  private TextField cedula;
+  @FXML
+  private TextField nombre;
+  @FXML
+  private TextField direccion;
+  @FXML
+  private TextField telefono;
+  @FXML
+  private TextField ciudad;
 
     private RegistrarEnvio envio;
     private TipoCliente tipo;
     private TextField[] textFields;
     public Thread t;
 
-    public Cliente() {
-        View.loadControlView("controls.cliente", this);
-    }
+  public Cliente() {
+    View.loadControlView("controls.cliente", this);
+  }
 
     public void initialize(RegistrarEnvio envio, Thread t) {
         this.t = t;
@@ -52,19 +52,19 @@ public class Cliente extends Pane {
         TextFieldRestrictions.textFieldNumeric(cedula);
         TextFieldRestrictions.textFieldNumeric(telefono);
 
-        textFields = new TextField[] { cedula, nombre, direccion, telefono, ciudad };
-        for (TextField textField : textFields)
-            textField.setId(textField.getId() + " del " + this.getId());
-    }
+    textFields = new TextField[] { cedula, nombre, direccion, telefono, ciudad };
+    for (TextField textField : textFields)
+      textField.setId(textField.getId() + " del " + this.getId());
+  }
 
-    /**
-     * Método encargado de buscar un cliente en la DB y mostrarlo en pantalla si
-     * existe
-     */
-    @FXML
-    void onCedulaKeyPressed(KeyEvent event) {
-        if (cedula.getText().trim().equals(""))
-            return;
+  /**
+   * Método encargado de buscar un cliente en la DB y mostrarlo en pantalla si
+   * existe
+   */
+  @FXML
+  void onCedulaKeyPressed(KeyEvent event) {
+    if (cedula.getText().trim().equals(""))
+      return;
 
         Runnable r = () -> {
             model.Entities.Cliente cliente = null;
@@ -80,17 +80,17 @@ public class Cliente extends Pane {
         t.start();
     }
 
-    /**
-     * Validar los campos y actualizar los datos del cliente en el Envio
-     * 
-     * @return true si todas las validaciones son correctas
-     */
-    public Boolean checkAndUpdateEnvio() {
-        if (!GeneralChecker.checkTextFieldEmptyAndFC(textFields))
-            return false;
-        envio.setCliente(cedula.getText(), nombre.getText(), ciudad.getText(), direccion.getText(), telefono.getText(),
-                tipo);
-        return true;
-    }
+  /**
+   * Validar los campos y actualizar los datos del cliente en el Envio
+   * 
+   * @return true si todas las validaciones son correctas
+   */
+  public Boolean checkAndUpdateEnvio() {
+    if (!GeneralChecker.checkTextFieldEmptyAndFC(textFields))
+      return false;
+    envio.setCliente(cedula.getText(), nombre.getText(), ciudad.getText(), direccion.getText(), telefono.getText(),
+        tipo);
+    return true;
+  }
 
 }
