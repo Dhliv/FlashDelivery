@@ -35,22 +35,22 @@ public class Cliente extends Pane {
   @FXML
   private TextField ciudad;
 
-    private RegistrarEnvio envio;
-    private TipoCliente tipo;
-    private TextField[] textFields;
-    public Thread t;
+  private RegistrarEnvio envio;
+  private TipoCliente tipo;
+  private TextField[] textFields;
+  public Thread t;
 
   public Cliente() {
     View.loadControlView("controls.cliente", this);
   }
 
-    public void initialize(RegistrarEnvio envio, Thread t) {
-        this.t = t;
-        this.envio = envio;
-        this.tipo = TipoCliente.valueOf(GeneralString.capitalizeFirstLetter(this.getId()));
-        cedulaLabel.setText("Ingrese la cedula del " + this.getId() + ":");
-        TextFieldRestrictions.textFieldNumeric(cedula);
-        TextFieldRestrictions.textFieldNumeric(telefono);
+  public void initialize(RegistrarEnvio envio, Thread t) {
+    this.t = t;
+    this.envio = envio;
+    this.tipo = TipoCliente.valueOf(GeneralString.capitalizeFirstLetter(this.getId()));
+    cedulaLabel.setText("Ingrese la cedula del " + this.getId() + ":");
+    TextFieldRestrictions.textFieldNumeric(cedula);
+    TextFieldRestrictions.textFieldNumeric(telefono);
 
     textFields = new TextField[] { cedula, nombre, direccion, telefono, ciudad };
     for (TextField textField : textFields)
@@ -66,19 +66,19 @@ public class Cliente extends Pane {
     if (cedula.getText().trim().equals(""))
       return;
 
-        Runnable r = () -> {
-            model.Entities.Cliente cliente = null;
-            cliente = envio.buscarCliente(cedula.getText(), tipo);
-            if (cliente != null) {
-                nombre.setText(cliente.nombre);
-                ciudad.setText(cliente.ciudad);
-                direccion.setText(cliente.direccion);
-                telefono.setText(cliente.telefono);
-            }
-        };
-        t = new Thread(r);
-        t.start();
-    }
+    Runnable r = () -> {
+      model.Entities.Cliente cliente = null;
+      cliente = envio.buscarCliente(cedula.getText(), tipo);
+      if (cliente != null) {
+        nombre.setText(cliente.nombre);
+        ciudad.setText(cliente.ciudad);
+        direccion.setText(cliente.direccion);
+        telefono.setText(cliente.telefono);
+      }
+    };
+    t = new Thread(r);
+    t.start();
+  }
 
   /**
    * Validar los campos y actualizar los datos del cliente en el Envio
