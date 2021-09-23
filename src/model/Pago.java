@@ -67,8 +67,8 @@ public class Pago {
    * @param metodo_pago Especifica el metodo de pago usado.
    */
   public void ejecutarPago(RegistrarEnvio envio, String metodo_pago) {
-    Cliente.createCliente(envio.getDestinatario());
     Cliente.createCliente(envio.getRemitente());
+    Cliente.createCliente(envio.getDestinatario());
     id_envio = Envio.createEnvio(envio, metodo_pago, operador);
     Paquete.createPaquete(envio.getPaquete(), id_envio);
 

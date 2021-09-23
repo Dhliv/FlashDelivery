@@ -15,8 +15,10 @@ import utilities.View;
  * @version 1.3, 21/09/2021
  */
 public class RegistrarClientes {
-  @FXML private Cliente remitente;
-  @FXML private Cliente destinatario;
+  @FXML
+  private Cliente remitente;
+  @FXML
+  private Cliente destinatario;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -24,7 +26,6 @@ public class RegistrarClientes {
   public RegistrarClientes(Empleado operador) {
     envio = new model.RegistrarEnvio();
     this.operador = operador;
-    // sadsadas
   }
 
   public void initialize() {
@@ -33,11 +34,15 @@ public class RegistrarClientes {
   }
 
   /**
-   * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
+   * Verificar los campos, actualizar los valores en envio, y continuar a la vista
+   * operador.paquetes
    */
-  @FXML void registrarPaquetes(ActionEvent event) {
-    if (!remitente.checkAndUpdateEnvio()) return;
-    if (!destinatario.checkAndUpdateEnvio()) return;
+  @FXML
+  void registrarPaquetes(ActionEvent event) {
+    if (!remitente.checkAndUpdateEnvio())
+      return;
+    if (!destinatario.checkAndUpdateEnvio())
+      return;
     System.out.println("Registrar cliente: " + envio.getDestinatario().cedula);
     View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
   }
