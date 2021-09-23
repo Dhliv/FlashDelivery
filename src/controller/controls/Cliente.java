@@ -38,12 +38,14 @@ public class Cliente extends Pane {
     private RegistrarEnvio envio;
     private TipoCliente tipo;
     private TextField[] textFields;
+    public Thread t;
 
     public Cliente() {
         View.loadControlView("controls.cliente", this);
     }
 
-    public void initialize(RegistrarEnvio envio) {
+    public void initialize(RegistrarEnvio envio, Thread t) {
+        this.t = t;
         this.envio = envio;
         this.tipo = TipoCliente.valueOf(GeneralString.capitalizeFirstLetter(this.getId()));
         cedulaLabel.setText("Ingrese la cedula del " + this.getId() + ":");
@@ -74,7 +76,8 @@ public class Cliente extends Pane {
                 telefono.setText(cliente.telefono);
             }
         };
-        new Thread(r).start();
+        t = new Thread(r);
+        t.start();
     }
 
     /**

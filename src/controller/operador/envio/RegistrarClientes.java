@@ -23,6 +23,7 @@ public class RegistrarClientes {
   private model.RegistrarEnvio envio;
   private Empleado operador;
 
+
   public RegistrarClientes(Empleado operador) {
     envio = new model.RegistrarEnvio();
     this.operador = operador;
@@ -30,8 +31,10 @@ public class RegistrarClientes {
   }
 
   public void initialize() {
-    destinatario.initialize(envio);
-    remitente.initialize(envio);
+
+    remitente.initialize(envio, new Thread());
+    destinatario.initialize(envio, new Thread());
+    
   }
 
   /**
@@ -40,6 +43,10 @@ public class RegistrarClientes {
    */
   @FXML
   void registrarPaquetes(ActionEvent event) {
+    while(remitente.t.isAlive() || destinatario.t.isAlive()){
+      System.out.println(remitente.t.isAlive());
+      System.out.println(destinatario.t.isAlive());
+    }
     if (!remitente.checkAndUpdateEnvio())
       return;
     if (!destinatario.checkAndUpdateEnvio())

@@ -74,7 +74,7 @@ public class Cliente {
     Cliente cliente;
     Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
     cliente = rs != null ? rs.into(Cliente.class) : null;
-    // Conexion.closeConnection();
+    Conexion.closeConnection();
     return cliente;
   }
 }
