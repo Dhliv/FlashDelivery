@@ -42,15 +42,12 @@ public class OperadorTarjeta implements Initializable {
   private String numeroTarjeta; // Almacena el número de la tarjeta.
   private String cvv; // Almacena el núremo CVV de la tarjeta.
   private String mes; // Almacena el mes de vencimiento de la tarjeta.
-  private String año;
   private String nombre; // Almacena el nombre del titular de la tarjeta.
-  private String numCuotas;
   private Object nCuotas; // Almacena la informacion del CheckBox de número de cuotas.
   private Integer counter; // Auxiliar que almacena el número de digitos en el campo de texto del numero de
                            // tarjeta.
   private Boolean agregar; // Auxiliar que almacena si de debe agregar o no un caracter a la parte gráfica.
   private Boolean borrar; // Auxiliar que almacena si de debe borrar o no un caracter a la parte gráfica.
-  private String addToText;
   private Object mesAux; // Almacena la información relacionada a la fecha de vencimiento de la tarjeta.
   private Pago pago; // Almacena toda la info relacionada con el objeto pago.
   private Empleado operador; // Almacena al operador de oficina.
@@ -210,7 +207,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, true);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     if (borrar) {
       if (counter > 0 && counter <= SobreTarjeta.tNTM())
@@ -234,7 +230,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     if (borrar && txtTitular.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
@@ -252,7 +247,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     System.out.println(event.getCharacter().codePointAt(0));
     if ((borrar || event.getCharacter().codePointAt(0) == 8) && txtTitular.getText().length() < 21) {
@@ -277,7 +271,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, true);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     if (borrar) {
       lblCVV.setText(SobreTarjeta.eraseFrom(lblCVV.getText(), 1));
@@ -330,9 +323,6 @@ public class OperadorTarjeta implements Initializable {
    */
   private void parseData() {
     mes = mesAux.toString();
-    if (tipoTarjeta == CREDITO)
-      numCuotas = nCuotas.toString();
-    año = mes.substring(2, 4);
     mes = mes.substring(5, 7);
   }
 
