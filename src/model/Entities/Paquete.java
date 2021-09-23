@@ -3,28 +3,28 @@ package model.Entities;
 import java.util.List;
 import org.jooq.impl.DSL;
 
-import model.Envio;
 import utilities.Conexion;
+import utilities.Globals;
 
 public class Paquete {
   // SQL Fields
-  public Integer id;
+  public int id;
+  public Double valor;
+  public Double valorenvio;
+  public Double total;
+  public Double peso;
+  public Double alto, ancho, largo;
+
   public String descripcion;
-  public Integer peso;
-  public Boolean seguro;
-  public Integer alto, ancho, largo;
-  public Integer valor;
+  public boolean seguro;
   // Others
 
-  public int valorenvio;
-  public int total;
-
-  public Integer getIdpaquete() {
+  public int getIdpaquete() {
     return id;
   }
 
-  public Integer getPeso() {
-    return peso;
+  public Double getPeso() {
+    return Globals.roundAvoid(peso, 2);
   }
 
   public Boolean getSeguro() {
@@ -35,32 +35,32 @@ public class Paquete {
     return descripcion;
   }
 
-  public int getValor() {
+  public Double getValor() {
     return valor;
   }
 
-  public int getVolumen() {
-    return largo * alto * ancho;
+  public Double getVolumen() {
+    return Globals.roundAvoid(largo * alto * ancho, 2);
   }
 
-  public int getValorenvio() {
+  public Double getValorenvio() {
     return valorenvio;
   }
 
-  public int getTotal() {
-    return total;
+  public Double getTotal() {
+    return Globals.roundAvoid(total, 2);
   }
 
-  public int getAlto() {
-    return alto;
+  public Double getAlto() {
+    return Globals.roundAvoid(alto, 2);
   }
 
-  public int getAncho() {
-    return ancho;
+  public Double getAncho() {
+    return Globals.roundAvoid(ancho, 2);
   }
 
-  public int getLargo() {
-    return largo;
+  public Double getLargo() {
+    return Globals.roundAvoid(largo, 2);
   }
 
   public static void createPaquete(Paquete p, int id_envio) {

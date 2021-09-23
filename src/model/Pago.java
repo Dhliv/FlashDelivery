@@ -17,19 +17,19 @@ import utilities.Globals;
  * @version 1.0 19/9/2021
  */
 public class Pago {
-  private Integer total; // Almacena el costo total del envío.
-  private Integer subTotal; // Almacena el subtotal del envío.
-  private Integer impuesto; // Almacena el impuesto del envío.
-  private Integer seguro; // Almacena el valor del seguro del envío.
+  private Double total; // Almacena el costo total del envío.
+  private Double subTotal; // Almacena el subtotal del envío.
+  private Double impuesto; // Almacena el impuesto del envío.
+  private Double seguro; // Almacena el valor del seguro del envío.
   private String[][] numeracion; // Almacena la información organizada sobre los paquetes (valor y descripción).
-  private Date date; // Almacena la fecha actual en la que se ejecuta el pago.
   private Empleado operador; // Almacena el objeto Empleado del operador de oficina que registra el pago
                              // (envío).
   private Integer id_envio; // Almacena el id del envío que se registra en la BD.
-  public static final double IMPUESTO = 0.19; // porcentaje de impuesto.
-  public static final double SEGURO = 0.06; // porcentaje de seguro.
-  public static final int ValorKG = 1000;
-  public static final double ValorCM3 = 0.1;
+  public static final Double IMPUESTO = 0.19; // porcentaje de impuesto.
+  public static final Double SEGURO = 0.06; // porcentaje de seguro.
+  public static final long ValorKG = 1000;
+  public static final Double ValorCM3 = 0.1;
+  public static final Double SEGUROMINIMO = 7000.0; // Valor mínimo a cobrar por el seguro de un paquete.
 
   /**
    * Inicializa los valores del total, impuesto y seguro del envio.
@@ -38,8 +38,6 @@ public class Pago {
    */
   public Pago(RegistrarEnvio envio, Empleado op) throws IOException {
     operador = op;
-    date = Date.valueOf(LocalDate.now());
-
     calcularTotal(envio);
   }
 
@@ -51,17 +49,18 @@ public class Pago {
    */
   public String[] parsePago() {
     String[] pago = new String[5];
-    pago[0] = getDate().toString();
-    pago[1] = Integer.toString(getTotal());
-    pago[2] = Integer.toString(getImpuesto());
-    pago[3] = Integer.toString(getSeguro());
-    pago[4] = Integer.toString(getSubTotal());
+    pago[0] = LocalDate.now().toString();
+    pago[1] = Double.toString(getTotal());
+    pago[2] = Double.toString(getImpuesto());
+    pago[3] = Double.toString(getSeguro());
+    pago[4] = Double.toString(getSubTotal());
     return pago;
   }
 
   /**
    * Ingresa los datos pertinentes a la base de datos, como los clientes, los
-   * paquetes y el envío. Adicionalmente se procede a generar la factura.
+   * paquetesel e, nvío y la factura. Adicionalmente se procede a generar un pdf
+   * de la factura.
    * 
    * @param envio       Contiene los datos relacionados al envio.
    * @param metodo_pago Especifica el metodo de pago usado.
@@ -71,6 +70,7 @@ public class Pago {
     Cliente.createCliente(envio.getDestinatario());
     id_envio = Envio.createEnvio(envio, metodo_pago, operador);
     Paquete.createPaquete(envio.getPaquete(), id_envio);
+    Facturas.createFactura(getTotal(), id_envio);
 
     CreatePDF pdf = new CreatePDF(parsePaquete(envio), parseCliente(envio.getRemitente()),
         parseCliente(envio.getDestinatario()), parsePago());
@@ -119,8 +119,8 @@ public class Pago {
    * @param costo Subtotal del envio.
    * @return Impuesto correspondiente a pagar.
    */
-  private int calcularImpuesto(int costo) {
-    return (int) (costo * IMPUESTO);
+  private Double calcularImpuesto(Double costo) {
+    return (costo * IMPUESTO);
   }
 
   /**
@@ -129,10 +129,10 @@ public class Pago {
    * @param p Datos relacionados a los paquetes del envio.
    * @return Valor del seguro a pagar.
    */
-  private int calcularSeguro(Paquete p) {
-    int seguro = 0; // Valor del seguro a pagar por el paquete
+  private Double calcularSeguro(Paquete p) {
+    Double seguro = 0.0; // Valor del seguro a pagar por el paquete
     if (p.seguro)
-      seguro = (int) (p.valor * SEGURO);
+      seguro = (p.valor * SEGURO);
     return seguro;
   }
 
@@ -142,9 +142,9 @@ public class Pago {
    * @param p Datos relacionados a los paquetes del envio.
    * @return Subtotal a pagar en el envío.
    */
-  private int calcularCosto(Paquete p) {
-    int costo = 0;
-    costo = (int) (p.peso * ValorKG + p.getVolumen() * ValorCM3);
+  private Double calcularCosto(Paquete p) {
+    Double costo = 0.0;
+    costo = (p.peso * ValorKG + p.getVolumen() * ValorCM3);
 
     return costo;
   }
@@ -164,23 +164,19 @@ public class Pago {
     total = subTotal + impuesto + seguro;
   }
 
-  public Integer getTotal() {
+  public Double getTotal() {
     return total;
   }
 
-  public Integer getSubTotal() {
+  public Double getSubTotal() {
     return subTotal;
   }
 
-  public Integer getImpuesto() {
+  public Double getImpuesto() {
     return impuesto;
   }
 
-  public Integer getSeguro() {
-    return seguro;
-  }
-
-  public Date getDate() {
-    return date;
+  public Double getSeguro() {
+    return (seguro > SEGUROMINIMO ? seguro : SEGUROMINIMO);
   }
 }
