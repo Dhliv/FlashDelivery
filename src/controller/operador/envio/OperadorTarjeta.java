@@ -109,16 +109,14 @@ public class OperadorTarjeta implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
-    // TODO @winja o @Reynell que es l?
-    ObservableList<String> l = FXCollections.observableArrayList();
+    ObservableList<String> numeroDeCuotas = FXCollections.observableArrayList();
     ArrayList<String> aux = new ArrayList<>();
     for (int i = 1; i <= 36; i++) {
       aux.add(String.valueOf(i));
     }
-    l.removeAll(l);
-    l.addAll(aux);
-    chboxNumeroCuotas.getItems().addAll(l);
+    numeroDeCuotas.removeAll(numeroDeCuotas);
+    numeroDeCuotas.addAll(aux);
+    chboxNumeroCuotas.getItems().addAll(numeroDeCuotas);
 
     // Muestra en pantalla si es una tarjeta de credito o de debito respectivamente.
     lblTipoTarjeta.setText("Tarjeta de " + ((tipoTarjeta == CREDITO) ? "Crédito" : "Debito"));

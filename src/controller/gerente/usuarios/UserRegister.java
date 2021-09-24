@@ -82,7 +82,6 @@ public class UserRegister {
     TextFieldRestrictions.textFieldNumeric(identificacionT);
     TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
 
-    
   }
 
   /**
@@ -151,8 +150,6 @@ public class UserRegister {
    * 
    * @param event not used.
    */
-
-
 
   @FXML
   void registrarUser(ActionEvent event) {
