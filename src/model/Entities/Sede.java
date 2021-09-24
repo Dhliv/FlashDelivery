@@ -1,5 +1,6 @@
 package model.Entities;
 
+import org.jooq.Field;
 import org.jooq.impl.*;
 
 import javafx.collections.FXCollections;
@@ -19,25 +20,15 @@ public class Sede {
     public String nombre;
     public String direccion;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
     /**
      * Registrar una nueva sede.
      */
-    public static int registrar(String nombre, String direccion) {
-        int idSede = Conexion.db().insertInto(DSL.table("sede"), DSL.field("nombre"), DSL.field("direccion")).values(nombre, direccion).execute();
+    public static void upsert(Sede sede, String nombre, String direccion) {
+        if (sede == null)
+            Conexion.db().insertInto(DSL.table("sede"), DSL.field("nombre"), DSL.field("direccion")).values(nombre, direccion).execute();
+        else
+            Conexion.db().update(DSL.table("sede")).set(DSL.field("nombre"), nombre).set(DSL.field("direccion"), direccion).where(DSL.field("id").eq(sede.id)).execute();
         Conexion.closeConnection();
-        return idSede;
     }
 
     public static ObservableList<Sede> getSedesList() {
@@ -98,5 +89,21 @@ public class Sede {
         }
 
         return "";
+    }
+
+    // #---------------------------------------------------------------------------
+    // # GETTERS
+    // #---------------------------------------------------------------------------
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
     }
 }

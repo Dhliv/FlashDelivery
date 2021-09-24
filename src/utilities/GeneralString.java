@@ -1,5 +1,9 @@
 package utilities;
 
+import java.net.URL;
+
+import org.apache.commons.io.FilenameUtils;
+
 public class GeneralString {
 
   /**
@@ -60,6 +64,10 @@ public class GeneralString {
       return original;
     }
     return original.substring(0, 1).toUpperCase() + original.substring(1);
+  }
+
+  public static String getName(URL location) {
+    return FilenameUtils.getBaseName(location.getPath());
   }
 
 }
