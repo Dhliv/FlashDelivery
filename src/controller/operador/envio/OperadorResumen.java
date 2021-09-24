@@ -86,10 +86,10 @@ public class OperadorResumen {
     impuesto = pago.getImpuesto();
 
     // Actualiza los datos en pantalla.
-    labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Double.toString(total - impuesto));
-    lblImpuesto.setText(lblImpuesto.getText() + ": " + Double.toString(impuesto));
-    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(pago.getSeguro()));
-    lblTotal.setText(lblTotal.getText() + ": " + Double.toString(total));
+    labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Double.toString(Globals.roundAvoid(total - impuesto,2)));
+    lblImpuesto.setText(lblImpuesto.getText() + ": " + Double.toString(Globals.roundAvoid(impuesto,2)));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(Globals.roundAvoid(pago.getSeguro(),2)));
+    lblTotal.setText(lblTotal.getText() + ": " + Double.toString(Globals.roundAvoid(total,2)));
   }
 
   /**
