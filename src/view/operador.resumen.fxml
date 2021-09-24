@@ -23,43 +23,43 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCedulaR" layoutX="14.0" layoutY="54.0" minWidth="145.0" text="Cedula del remitente:">
+                  <Label fx:id="lblCedulaR" layoutX="14.0" layoutY="54.0" minWidth="145.0" text="Cedula del remitente">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblNameR" layoutX="14.0" layoutY="79.0" minWidth="145.0" text="Nombre del remitente:">
+                  <Label fx:id="lblNameR" layoutX="14.0" layoutY="79.0" minWidth="145.0" text="Nombre del remitente">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblCedulaD" layoutX="14.0" layoutY="108.0" minWidth="145.0" text="Cedula del destinario:">
+                  <Label fx:id="lblCedulaD" layoutX="14.0" layoutY="108.0" minWidth="145.0" text="Cedula del destinario">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblNameD" layoutX="14.0" layoutY="134.0" minWidth="145.0" text="Nombre del destinario:">
+                  <Label fx:id="lblNameD" layoutX="14.0" layoutY="134.0" minWidth="145.0" text="Nombre del destinario">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblDirD" layoutX="14.0" layoutY="169.0" minWidth="145.0" text="Dirección del destinatario:">
+                  <Label fx:id="lblDirD" layoutX="14.0" layoutY="169.0" minWidth="145.0" text="Dirección del destinatario">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblnumP" layoutX="14.0" layoutY="194.0" minWidth="145.0" text="Numero de paquetes:">
+                  <Label fx:id="lblnumP" layoutX="14.0" layoutY="194.0" minWidth="145.0" text="Numero de paquetes">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="labelCostoEnvio" layoutX="14.0" layoutY="331.0" text="Costo de envío:">
+                  <Label fx:id="labelCostoEnvio" layoutX="14.0" layoutY="331.0" text="Costo de envío">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblImpuesto" layoutX="14.0" layoutY="358.0" text="Impuesto:">
+                  <Label fx:id="lblImpuesto" layoutX="14.0" layoutY="358.0" text="Impuesto">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblSeguro" layoutX="14.0" layoutY="390.0" text="Seguro:">
+                  <Label fx:id="lblSeguro" layoutX="14.0" layoutY="390.0" text="Seguro">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="lblTotal" layoutX="14.0" layoutY="440.0" text="Valor total:">
+                  <Label fx:id="lblTotal" layoutX="14.0" layoutY="440.0" text="Valor total">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
