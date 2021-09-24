@@ -1,8 +1,6 @@
 package controller.operador.envio;
 
 import java.io.IOException;
-
-import controller.operador.OperadorOficina;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,10 +11,15 @@ import utilities.View;
 import utilities.Globals;
 
 /**
- * Clase encargada de controlar la vista OperadorResumen Despliega el metodo de
+ * Clase encargada de controlar la vista OperadorResumen. Despliega el metodo de
  * pago que se quiere elegir y reenvia a el seleccionado Efectivo = Devolverse a
  * la pantalla principal de operador Credito = Muestra la vista de credito
  * Debito = Muestra la vista de debito.
+ * 
+ * @author David Henao
+ * @author Alejandro Pergueza Amaya
+ * @version 1.0
+ * @since 24/09/2021
  */
 public class OperadorResumen {
   private model.RegistrarEnvio envio;
@@ -77,17 +80,17 @@ public class OperadorResumen {
     lblNameD.setText(lblNameD.getText() + ": " + envio.getDestinatario().nombre);
     lblDirD.setText(lblDirD.getText() + ": " + envio.getDestinatario().direccion);
 
-
     // Calcula el total del envio y su respectivo impuesto.
     pago = new Pago(envio, operador);
     total = pago.getTotal();
     impuesto = pago.getImpuesto();
 
     // Actualiza los datos en pantalla.
-    labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Double.toString(Globals.roundAvoid(total - impuesto,2)));
-    lblImpuesto.setText(lblImpuesto.getText() + ": " + Double.toString(Globals.roundAvoid(impuesto,2)));
-    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(Globals.roundAvoid(pago.getSeguro(),2)));
-    lblTotal.setText(lblTotal.getText() + ": " + Double.toString(Globals.roundAvoid(total,2)));
+    labelCostoEnvio
+        .setText(labelCostoEnvio.getText() + ": " + Double.toString(Globals.roundAvoid(total - impuesto, 2)));
+    lblImpuesto.setText(lblImpuesto.getText() + ": " + Double.toString(Globals.roundAvoid(impuesto, 2)));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(Globals.roundAvoid(pago.getSeguro(), 2)));
+    lblTotal.setText(lblTotal.getText() + ": " + Double.toString(Globals.roundAvoid(total, 2)));
   }
 
   /**

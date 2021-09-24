@@ -1,13 +1,15 @@
 package utilities;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
 
 /**
  * Esta clase está diseñada para construir y mostrar los mensajes de alerta
  * pertinentes a diversas pantallas.
+ * 
+ * @author David Henao
+ * @version 1.0
+ * @since 24/09/2021
  */
 public class SpecificAlerts {
   private static Alert cEmpty; // Alerta para campos vacios
@@ -87,9 +89,15 @@ public class SpecificAlerts {
     cEmpty.showAndWait();
   }
 
+  /**
+   * Alerta que indica la existencia de un campo vacío, e indica cual campo es.
+   * 
+   * @param fieldName Campo vacío.
+   */
   public static void showEmptyFieldAlert(String fieldName) {
     cEmpty.setHeaderText("Se requiere información en el campo " + fieldName + ".");
     cEmpty.showAndWait();
+    cEmpty.setHeaderText("Existen campos vacíos");
   }
 
   /**
@@ -99,9 +107,16 @@ public class SpecificAlerts {
     cForbi.showAndWait();
   }
 
+  /**
+   * Alerta que indica que se usaron caracteres prohibidos, adicionalmente indica
+   * el primer campo donde se encuentra el uso de caracteres prohibidos.
+   * 
+   * @param fieldName
+   */
   public static void showCharForbidenAlert(String fieldName) {
     cForbi.setHeaderText("Se detectó el uso de caracteres prohibidos en el campo " + fieldName);
     cForbi.showAndWait();
+    cForbi.setHeaderText("Se detectó el uso de caracteres prohibidos");
   }
 
   /**
@@ -161,6 +176,9 @@ public class SpecificAlerts {
     empleadoExists.showAndWait();
   }
 
+  /**
+   * Alerta que muestra que existe alguna incongruencia con la tarjeta.
+   */
   public static void showCardUnexist() {
     cardUnexist.showAndWait();
   }

@@ -1,20 +1,21 @@
 package model;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
-import controller.operador.OperadorConsulta;
 import model.Entities.Paquete;
 import model.Entities.Cliente;
 import model.Entities.Empleado;
 import utilities.CreatePDF;
-import utilities.Globals;
 
 /**
+ * Clase Pago. Contiene los atributos relacionados al pago de un envío, ademas
+ * de los métodos e interacciones necesarias para la inserción y comunicación
+ * con la BD. También es el proxy para la generación del pdf de la factura.
+ * 
  * @author David Henao
- * @version 1.0 19/9/2021
+ * @version 1.1
+ * @since 24/09/2021
  */
 public class Pago {
   private Double total; // Almacena el costo total del envío.
@@ -66,6 +67,8 @@ public class Pago {
    * @param metodo_pago Especifica el metodo de pago usado.
    */
   public void ejecutarPago(RegistrarEnvio envio, String metodo_pago) {
+
+    // TODO implementar los siguientes métodos en hilos:
     Cliente.createCliente(envio.getRemitente());
     Cliente.createCliente(envio.getDestinatario());
     id_envio = Envio.createEnvio(envio, metodo_pago, operador);

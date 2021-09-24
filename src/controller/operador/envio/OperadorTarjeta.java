@@ -3,9 +3,6 @@ package controller.operador.envio;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import org.jooq.Row;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +21,17 @@ import utilities.TextFieldRestrictions;
 import utilities.View;
 import model.Entities.Empleado;
 
+/**
+ * Clase controller OperadorTarjeta. Contiene parámetros de front y back end
+ * relacionados a una tarjeta. Posee diversos métodos para el manejo visual de
+ * los datos insertados por el usuario, ademas de control sobre lo que el
+ * usuario digita.
+ * 
+ * @author David Henao
+ * @author Alejandro Pergueza Amaya
+ * @version 1.0
+ * @since 24/09/2021
+ */
 public class OperadorTarjeta implements Initializable {
 
   private Integer CVVLENGTH = 4;

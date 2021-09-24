@@ -4,7 +4,15 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-//TODO Documentar la clase (Probablemente Winja o Pergüeza)
+/**
+ * Clase backend SobreTarjeta. Se manejan varios métodos no visuales para la
+ * ventana relacionada a la tarjeta del cliente.
+ * 
+ * @author David Henao
+ * @author Alejandro Pergueza Amaya
+ * @version 1.0
+ * @since 24/09/2021
+ */
 public class SobreTarjeta {
 
   /**

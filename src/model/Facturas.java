@@ -5,9 +5,17 @@ import org.jooq.impl.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
-
 import utilities.Conexion;
 
+/**
+ * Clase Facturas. Contiene parámetros relacionados a la facturación de un
+ * envío. Posee métodos para la comunicación con la BD relacionados a la
+ * facturación.
+ * 
+ * @author David Henao
+ * @version 1.0
+ * @since 24/09/2021
+ */
 public class Facturas {
   public class Factura {
     public Integer id_factura;
