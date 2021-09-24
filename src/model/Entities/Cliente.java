@@ -36,15 +36,27 @@ public class Cliente {
    * @param ciudad    del Cliente
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono, String ciudad) {
-    try {
-      Conexion.db()
-          .insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"),
-              DSL.field("direccion"), DSL.field("telefono"))
-          .values(cedula, nombre, ciudad, direccion, telefono).execute();
-      Conexion.closeConnection();
-    } catch (Exception e) {
+    Conexion.db()
+        .insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"),
+            DSL.field("direccion"), DSL.field("telefono"))
+        .values(cedula, nombre, ciudad, direccion, telefono).execute();
+    Conexion.closeConnection();
+  }
 
-    }
+  /**
+   * Actualizaz los datos de un cliente en la BD.
+   * 
+   * @param cedula    del cliente.
+   * @param nombre    del cliente.
+   * @param direccion del cliente.
+   * @param telefono  del cliente.
+   * @param ciudad    de cliente.
+   */
+  public static void updateCliente(String cedula, String nombre, String direccion, String telefono, String ciudad) {
+    String sql = "update cliente set cedula='" + cedula + "', nombre='" + nombre + "', direccion='" + direccion
+        + "', telefono='" + telefono + "', ciudad='" + ciudad + "' where cedula='" + cedula + "'";
+
+    Conexion.db().execute(sql);
   }
 
   /**
@@ -54,7 +66,10 @@ public class Cliente {
    * @param c Cliente a registrar en la BD.
    */
   public static void createCliente(Cliente c) {
-    createCliente(c.cedula, c.nombre, c.direccion, c.telefono, c.ciudad);
+    if (!clientExists(c.cedula))
+      createCliente(c.cedula, c.nombre, c.direccion, c.telefono, c.ciudad);
+    else
+      updateCliente(c.cedula, c.nombre, c.direccion, c.telefono, c.ciudad);
   }
 
   /**
