@@ -8,53 +8,79 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="atrasPaquete" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" text="Atras" />
-      <Label layoutX="951.0" layoutY="29.0" text="Pago">
+      <Button fx:id="atrasPaquete" layoutX="30.0" layoutY="23.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" text="Atras" />
+      <Label layoutX="942.0" layoutY="29.0" text="Pago">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Pane layoutX="26.0" layoutY="92.0" prefHeight="663.0" prefWidth="973.0" style="-fx-border-color: #9B9B9B; -fx-border-width: 2px;">
+      <Pane layoutX="30.0" layoutY="100.0" prefHeight="660.0" prefWidth="960.0" style="-fx-border-color: #9B9B9B; -fx-border-width: 2px;">
          <children>
-            <Pane layoutX="43.0" layoutY="44.0" prefHeight="518.0" prefWidth="335.0">
+            <Pane layoutX="43.0" layoutY="44.0" prefHeight="518.0" prefWidth="458.0">
                <children>
                   <Label layoutX="14.0" layoutY="14.0" text="Resumen">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCedulaR" layoutX="14.0" layoutY="47.0" text="Cedula del remitente" />
-                  <Label fx:id="lblNameR" layoutX="14.0" layoutY="72.0" text="Nombre del remitente" />
-                  <Label fx:id="lblCedulaD" layoutX="14.0" layoutY="101.0" text="Cedula del destinario" />
-                  <Label fx:id="lblNameD" layoutX="14.0" layoutY="127.0" text="Nombre del destinario" />
-                  <Label fx:id="lblDirD" layoutX="14.0" layoutY="162.0" text="Dirección del destinatario" />
-                  <Label fx:id="lblnumP" layoutX="14.0" layoutY="187.0" text="Numero de paquetes" />
-                  <Label fx:id="labelCostoEnvio" layoutX="14.0" layoutY="331.0" text="Costo de envío" />
-                  <Label fx:id="lblImpuesto" layoutX="14.0" layoutY="358.0" text="Impuesto" />
-                  <Label fx:id="lblSeguro" layoutX="14.0" layoutY="390.0" text="Seguro" />
-                  <Label fx:id="lblTotal" layoutX="14.0" layoutY="440.0" text="Valor total" />
+                  <Label fx:id="lblCedulaR" layoutX="14.0" layoutY="54.0" minWidth="145.0" text="Cedula del remitente">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="lblNameR" layoutX="14.0" layoutY="79.0" minWidth="145.0" text="Nombre del remitente">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="lblCedulaD" layoutX="14.0" layoutY="108.0" minWidth="145.0" text="Cedula del destinario">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="lblNameD" layoutX="14.0" layoutY="134.0" minWidth="145.0" text="Nombre del destinario">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="lblDirD" layoutX="14.0" layoutY="169.0" minWidth="145.0" text="Dirección del destinatario">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="labelCostoEnvio" layoutX="14.0" layoutY="331.0" text="Costo de envío">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="lblImpuesto" layoutX="14.0" layoutY="358.0" text="Impuesto">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="lblSeguro" layoutX="14.0" layoutY="390.0" text="Seguro">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label fx:id="lblTotal" layoutX="14.0" layoutY="440.0" text="Valor total">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                </children>
             </Pane>
-            <Pane layoutX="402.0" layoutY="44.0" prefHeight="488.0" prefWidth="560.0">
+            <Pane layoutX="572.0" prefHeight="660.0" prefWidth="390.0">
                <children>
-                  <Button layoutX="253.0" layoutY="78.0" mnemonicParsing="false" onAction="#pagoEfectivo" text="Efectivo">
+                  <Button layoutX="112.0" layoutY="96.0" mnemonicParsing="false" onAction="#pagoEfectivo" prefHeight="60.0" prefWidth="180.0" text="Efectivo">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="216.0" layoutY="203.0" mnemonicParsing="false" onAction="#pagoCredito" text="Tarjeta de Crédito">
+                  <Button layoutX="112.0" layoutY="408.0" mnemonicParsing="false" onAction="#pagoCredito" prefHeight="60.0" prefWidth="180.0" text="Tarjeta de Crédito">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="216.0" layoutY="311.0" mnemonicParsing="false" onAction="#pagoDebito" text="Tarjeta de Débito">
+                  <Button layoutX="112.0" layoutY="252.0" mnemonicParsing="false" onAction="#pagoDebito" prefHeight="60.0" prefWidth="180.0" text="Tarjeta de Débito">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Line endY="600.0" layoutY="30.0" stroke="#9b9b9b" strokeWidth="2.0" />
                </children>
             </Pane>
-            <Line endX="367.0" endY="606.0" layoutX="19.0" layoutY="-11.0" startX="360.0" startY="40.0" stroke="#9b9b9b" strokeWidth="2.0" />
          </children>
       </Pane>
    </children>

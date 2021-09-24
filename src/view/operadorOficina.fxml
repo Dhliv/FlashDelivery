@@ -95,12 +95,12 @@
                      </font>
                   </Label>
                   <Pane layoutY="210.0" />
-                  <Button fx:id="btnSolicitudRecogida" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="516.0" mnemonicParsing="false" onAction="#registrarRecogida" prefHeight="70.0" prefWidth="160.0" text="Generar solitud de recogida" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="btnRegistrarPaquete" layoutX="47.0" layoutY="363.0" mnemonicParsing="false" onAction="#registrarEnvio" prefHeight="70.0" prefWidth="160.0" text="Registrar envío" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnRegistrarPaquete" layoutX="47.0" layoutY="363.0" mnemonicParsing="false" onAction="#registrarEnvio" prefHeight="70.0" prefWidth="160.0" text="Registrar envío" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="btnSolicitudRecogida" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="516.0" mnemonicParsing="false" onAction="#registrarRecogida" prefHeight="70.0" prefWidth="160.0" text="Generar solitud de recogida" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
