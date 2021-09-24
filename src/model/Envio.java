@@ -39,6 +39,7 @@ public class Envio {
   }
 
   /**
+   * TODO DOCUMENTAR @WINJA
    * Inserta un envío en la base de datos con sus respectivos parametros.
    * 
    * @param fecha_registro
