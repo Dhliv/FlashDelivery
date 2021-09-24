@@ -2,18 +2,36 @@ package model.Entities;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import utilities.Conexion;
 
+/**
+ * Clase de Empleado. Se almacenan los parámetros relacionados a los datos de un
+ * empleado. Posee métodos para la comunicación con la BD pertinentes al
+ * empleado.
+ * 
+ * @author David Henao
+ * @author Reynel Arkad Devji Quevedo
+ * @version 1.0
+ * @since 24/09/2021
+ */
 public class Empleado {
   private String cedula;
   private String nombres, apellidos, rol, direccion, telefono;
   private LocalDate birthdate;
   public int id_sede;
 
-  public Empleado() {
-  }
-
+  /**
+   * Constructor de la clase empleado. Se crea directamente un empleado.
+   * 
+   * @param cedula    del empleado.
+   * @param nombres   del empleado.
+   * @param apellidos del empleado.
+   * @param rol       del empleado.
+   * @param direccion del empleado.
+   * @param telefono  del empleado.
+   * @param birthdate del empleado.
+   * @param sede      del empleado.
+   */
   public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
       LocalDate birthdate, int sede) {
     this.cedula = cedula;
@@ -111,8 +129,8 @@ public class Empleado {
   }
 
   /**
-   * Actualiza en la BD los datos del empleadoa los editados (la cedula no cambia
-   * nunca).
+   * Actualiza en la BD los datos del empleado que fueron editados (la cedula no
+   * cambia nunca).
    * 
    * @param empleado informacion completa a actualizar (incluso sin cambios).
    */
@@ -143,12 +161,15 @@ public class Empleado {
 
     return res;
   }
-/**
- * Carga un objeto de tipo Empleado si existe un empleado en la base de datos con la cedula
- * introducida 
- * @param cedula la cedula del empleado a buscar
- * @return un objeto de la clase Empleado si existe en la base de datos, null si no existe
- */
+
+  /**
+   * Carga un objeto de tipo Empleado si existe un empleado en la base de datos
+   * con la cedula introducida
+   * 
+   * @param cedula la cedula del empleado a buscar
+   * @return un objeto de la clase Empleado si existe en la base de datos, null si
+   *         no existe
+   */
   public static Empleado cargarEmpleado(String cedula) {
 
     List<Empleado> empleado = Conexion.db().select().from("empleado").where("cedula ='" + cedula + "'").fetch()

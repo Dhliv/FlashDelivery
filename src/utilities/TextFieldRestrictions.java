@@ -7,7 +7,7 @@ import javafx.scene.control.TextFormatter;
 
 public class TextFieldRestrictions {
   /**
-   * Limite el numero maximo de caracteres de un TextField.
+   * Limita el numero maximo de caracteres de un TextField.
    * 
    * @param txt  TextField al que se le desea aplicar la restricción.
    * @param size El tamañano maximo permitido en el TextField.
@@ -22,6 +22,29 @@ public class TextFieldRestrictions {
       return pattern.matcher(change.getControlNewText()).matches() ? change : null;
     });
     txt.setTextFormatter(formatter);
+  }
+
+  /**
+   * Permite que el TextField 'txt' acepte solo entradas de tipo decimal (y de
+   * enteros).
+   * 
+   * @param txt TextField al que se aplica la restriccion.
+   */
+  public static void textFieldDecimal(TextField txt) {
+    TextFormatter prevFormatter = txt.getTextFormatter();
+    TextFormatter formatterNOnly = new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+      String aux = change.getText();
+      if (!checkPreviousFilter(prevFormatter, change))
+        return null;
+      if (change.isDeleted())
+        return change;
+      if (aux.length() > 0 && (aux.charAt(0) == '.' || Character.isDigit(aux.charAt(0))))
+        return change;
+      else
+        return null;
+    });
+
+    txt.setTextFormatter(formatterNOnly);
   }
 
   /**

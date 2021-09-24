@@ -5,7 +5,14 @@ import org.jooq.impl.DSL;
 import utilities.Conexion;
 import utilities.GeneralChecker;
 
-// TODO documentar.
+/**
+ * Clase Usuario. Contiene los parámetros asignados a un usuario, y los métodos
+ * para la comunicación con la BD relacionados a un usuario.
+ * 
+ * @author David Henao
+ * @version 1.0
+ * @since 24/09/2021
+ */
 public class Usuario {
 
   // <editor-fold defaultstate="collapsed" desc="Atributos de la entidad">
@@ -107,8 +114,8 @@ public class Usuario {
   }
 
   /**
-   * !TODO USAR LAS OPCIONES QUE PROPORCIONA jOOQ Cambia el estado del atributo
-   * enabled de la tabla usuario a true, de un usuario con un id especificado
+   * Cambia el estado del atributo enabled de la tabla usuario a true, de un
+   * usuario con un id especificado
    * 
    * @param id      El ID del usuario a modificar
    * @param enabled el estado a modificar

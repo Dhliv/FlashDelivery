@@ -1,20 +1,14 @@
 package model;
 
-import java.sql.Date;
-
 import model.Entities.Cliente;
 import model.Entities.Paquete;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.ArrayList;
-
 /**
- * Clase encargada de almacenar todos los datos en memoria para registrar un envio y posteriormente
- * guardarlos en la base de datos.
+ * Clase encargada de almacenar todos los datos en memoria para registrar un
+ * envio y posteriormente guardarlos en la base de datos.
  * 
  * @author Julián Orejuela
- * @version 1.0, 29/4/2021
+ * @version 1.1, 23/9/2021
  */
 public class RegistrarEnvio {
   private Cliente remitente;
@@ -36,15 +30,18 @@ public class RegistrarEnvio {
    */
   public synchronized Cliente buscarCliente(String cedula, TipoCliente tipo) {
     Cliente cliente = Cliente.buscarCliente(cedula);
-    if (tipo == TipoCliente.Remitente) remitente = cliente;
-    if (tipo == TipoCliente.Destinatario) destinatario = cliente;
+    if (tipo == TipoCliente.Remitente)
+      remitente = cliente;
+    if (tipo == TipoCliente.Destinatario)
+      destinatario = cliente;
     return cliente;
   }
 
   /**
    * Modifica el estado del cliente.
    */
-  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
+  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono,
+      TipoCliente tipo) {
     Cliente cliente = new Cliente(cedula, nombre, ciudad, direccion, telefono);
     if (tipo == TipoCliente.Destinatario)
       destinatario = cliente;
@@ -52,8 +49,10 @@ public class RegistrarEnvio {
       remitente = cliente;
   }
 
-  public void agregarPaqueteP(Integer peso, Integer valor, String descripcion, Integer ancho, Integer largo, Integer alto, Boolean seguro) {
-    if (paquete == null) this.paquete = new Paquete();
+  public void agregarPaqueteP(Double peso, Double valor, String descripcion, Double ancho, Double largo, Double alto,
+      Boolean seguro) {
+    if (paquete == null)
+      this.paquete = new Paquete();
     paquete.peso = peso;
     paquete.valor = valor;
     paquete.descripcion = descripcion;
@@ -68,12 +67,12 @@ public class RegistrarEnvio {
     paquete = null;
   }
 
-  public Integer getCost(Integer peso, Integer volumen) { // añadir parametros int ciudadOrigen, int ciudadDestino
-    return (int) (volumen * Pago.ValorCM3 + peso * Pago.ValorKG);
+  public Double getCost(Double peso, Double volumen) { // añadir parametros int ciudadOrigen, int ciudadDestino
+    return (volumen * Pago.ValorCM3 + peso * Pago.ValorKG);
   }
 
-  public Integer getTotal(Integer costo, Integer valor_declarado, Boolean seguro) {
-    return (int) (costo + (int) (costo * Pago.IMPUESTO) + (seguro ? (valor_declarado * Pago.SEGURO) : 0.0));
+  public Double getTotal(Double costo, Double valor_declarado, Boolean seguro) {
+    return (costo + (int) (costo * Pago.IMPUESTO) + (seguro ? (valor_declarado * Pago.SEGURO) : 0.0));
   }
 
   // #---------------------------------------------------------------------------

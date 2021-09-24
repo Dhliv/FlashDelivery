@@ -4,10 +4,19 @@ import java.net.URL;
 
 import org.apache.commons.io.FilenameUtils;
 
+/**
+ * Clase GeneralString. Contiene métodos de (posible) uso general con strings.
+ * 
+ * @author David Henao
+ * @author Alejandro Pergueza Amaya
+ * @version 1.0
+ * @since 24/09/2021
+ */
 public class GeneralString {
 
   /**
    * Remueve los NewLine de un String.
+   * 
    * @param s Cadena de texto.
    * @return Retorna la cadena en la que cada caracter '\n' es cambiado por ". ".
    */
@@ -38,6 +47,7 @@ public class GeneralString {
 
   /**
    * Añade espacios al inicio del string para que todos tengan el mismo tamaño
+   * 
    * @param s Array de strings
    * @return Array con todos los strings del mismo tamaño
    */

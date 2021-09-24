@@ -1,7 +1,6 @@
 package controller.gerente.usuarios;
 
 import java.time.LocalDate;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,7 +9,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
@@ -18,6 +16,11 @@ import utilities.*;
 /**
  * La clase UserRegister se encarga de brindar al cliente la interfaz gráfica
  * para el resgistro de un empleado en la base de datos.
+ * 
+ * @author David Henao
+ * @author Alejandro Pergueza Amaya
+ * @version 1.0
+ * @since 24/09/2021
  */
 public class UserRegister {
   // private Roles roles; // Cargos de la empresa
@@ -82,7 +85,6 @@ public class UserRegister {
     TextFieldRestrictions.textFieldNumeric(identificacionT);
     TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
 
-    
   }
 
   /**
@@ -151,8 +153,6 @@ public class UserRegister {
    * 
    * @param event not used.
    */
-
-
 
   @FXML
   void registrarUser(ActionEvent event) {

@@ -3,7 +3,6 @@ package controller.operador.envio;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +21,17 @@ import utilities.TextFieldRestrictions;
 import utilities.View;
 import model.Entities.Empleado;
 
+/**
+ * Clase controller OperadorTarjeta. Contiene parámetros de front y back end
+ * relacionados a una tarjeta. Posee diversos métodos para el manejo visual de
+ * los datos insertados por el usuario, ademas de control sobre lo que el
+ * usuario digita.
+ * 
+ * @author David Henao
+ * @author Alejandro Pergueza Amaya
+ * @version 1.0
+ * @since 24/09/2021
+ */
 public class OperadorTarjeta implements Initializable {
 
   private Integer CVVLENGTH = 4;
@@ -40,15 +50,12 @@ public class OperadorTarjeta implements Initializable {
   private String numeroTarjeta; // Almacena el número de la tarjeta.
   private String cvv; // Almacena el núremo CVV de la tarjeta.
   private String mes; // Almacena el mes de vencimiento de la tarjeta.
-  private String año;
   private String nombre; // Almacena el nombre del titular de la tarjeta.
-  private String numCuotas;
   private Object nCuotas; // Almacena la informacion del CheckBox de número de cuotas.
   private Integer counter; // Auxiliar que almacena el número de digitos en el campo de texto del numero de
                            // tarjeta.
   private Boolean agregar; // Auxiliar que almacena si de debe agregar o no un caracter a la parte gráfica.
   private Boolean borrar; // Auxiliar que almacena si de debe borrar o no un caracter a la parte gráfica.
-  private String addToText;
   private Object mesAux; // Almacena la información relacionada a la fecha de vencimiento de la tarjeta.
   private Pago pago; // Almacena toda la info relacionada con el objeto pago.
   private Empleado operador; // Almacena al operador de oficina.
@@ -110,16 +117,14 @@ public class OperadorTarjeta implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
-    //TODO @winja o @Reynell que es l?
-    ObservableList<String> l = FXCollections.observableArrayList();
+    ObservableList<String> numeroDeCuotas = FXCollections.observableArrayList();
     ArrayList<String> aux = new ArrayList<>();
     for (int i = 1; i <= 36; i++) {
       aux.add(String.valueOf(i));
     }
-    l.removeAll(l);
-    l.addAll(aux);
-    chboxNumeroCuotas.getItems().addAll(l);
+    numeroDeCuotas.removeAll(numeroDeCuotas);
+    numeroDeCuotas.addAll(aux);
+    chboxNumeroCuotas.getItems().addAll(numeroDeCuotas);
 
     // Muestra en pantalla si es una tarjeta de credito o de debito respectivamente.
     lblTipoTarjeta.setText("Tarjeta de " + ((tipoTarjeta == CREDITO) ? "Crédito" : "Debito"));
@@ -208,7 +213,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, true);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     if (borrar) {
       if (counter > 0 && counter <= SobreTarjeta.tNTM())
@@ -232,7 +236,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     if (borrar && txtTitular.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
@@ -250,7 +253,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     System.out.println(event.getCharacter().codePointAt(0));
     if ((borrar || event.getCharacter().codePointAt(0) == 8) && txtTitular.getText().length() < 21) {
@@ -262,9 +264,11 @@ public class OperadorTarjeta implements Initializable {
     if (agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
       lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
+
   /**
-   * Agrega o elimina un caracter al componente gráfico que muestra el cvv
-   * si es el caso.
+   * Agrega o elimina un caracter al componente gráfico que muestra el cvv si es
+   * el caso.
+   * 
    * @param event not used
    */
   @FXML
@@ -273,7 +277,6 @@ public class OperadorTarjeta implements Initializable {
     Object[] validados = SobreTarjeta.checkErase(event, true);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
-    addToText = (String) validados[2];
 
     if (borrar) {
       lblCVV.setText(SobreTarjeta.eraseFrom(lblCVV.getText(), 1));
@@ -283,11 +286,12 @@ public class OperadorTarjeta implements Initializable {
       lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
   }
 
-/**
- * Agrega o elimina un caracter al componente gráfico que muestra la fecha
- * si es el caso.
- * @param event not used.
- */
+  /**
+   * Agrega o elimina un caracter al componente gráfico que muestra la fecha si es
+   * el caso.
+   * 
+   * @param event not used.
+   */
   @FXML
   void addFecha(ActionEvent event) {
 
@@ -325,9 +329,6 @@ public class OperadorTarjeta implements Initializable {
    */
   private void parseData() {
     mes = mesAux.toString();
-    if (tipoTarjeta == CREDITO)
-      numCuotas = nCuotas.toString();
-    año = mes.substring(2, 4);
     mes = mes.substring(5, 7);
   }
 

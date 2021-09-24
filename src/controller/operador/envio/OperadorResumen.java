@@ -1,8 +1,6 @@
 package controller.operador.envio;
 
 import java.io.IOException;
-
-import controller.operador.OperadorOficina;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,35 +11,50 @@ import utilities.View;
 import utilities.Globals;
 
 /**
- * Clase encargada de controlar la vista OperadorResumen Despliega el metodo de pago que se quiere
- * elegir y reenvia a el seleccionado Efectivo = Devolverse a la pantalla principal de operador
- * Credito = Muestra la vista de credito Debito = Muestra la vista de debito.
+ * Clase encargada de controlar la vista OperadorResumen. Despliega el metodo de
+ * pago que se quiere elegir y reenvia a el seleccionado Efectivo = Devolverse a
+ * la pantalla principal de operador Credito = Muestra la vista de credito
+ * Debito = Muestra la vista de debito.
+ * 
+ * @author David Henao
+ * @author Alejandro Pergueza Amaya
+ * @version 1.0
+ * @since 24/09/2021
  */
 public class OperadorResumen {
   private model.RegistrarEnvio envio;
 
   private static final Integer DEBITO = 0;
   private static final Integer CREDITO = 1;
-  private int total;
-  private int impuesto;
+  private Double total;
+  private Double impuesto;
   private Empleado operador;
   private Pago pago;
 
-  @FXML private Label lblCedulaR; // label Cedula del Remitente
-  @FXML private Label lblNameR; // label nombre de remitente
-  @FXML private Label lblCedulaD; // label cedula del destinatario
-  @FXML private Label lblNameD; // label Nombre del Destinatario
-  @FXML private Label lblDirD; // direccion del destinatario
-  @FXML private Label lblnumP; // numero de paquetes en el pedido
-  @FXML private Label labelCostoEnvio; // costo del envio
-  @FXML private Label lblImpuesto; // valor del impuesto
-  @FXML private Label lblSeguro; // Costo de los seguros de los paquetes.
-  @FXML private Label lblTotal; // Costo total del envío.
+  @FXML
+  private Label lblCedulaR; // label Cedula del Remitente
+  @FXML
+  private Label lblNameR; // label nombre de remitente
+  @FXML
+  private Label lblCedulaD; // label cedula del destinatario
+  @FXML
+  private Label lblNameD; // label Nombre del Destinatario
+  @FXML
+  private Label lblDirD; // direccion del destinatario
+  @FXML
+  private Label labelCostoEnvio; // costo del envio
+  @FXML
+  private Label lblImpuesto; // valor del impuesto
+  @FXML
+  private Label lblSeguro; // Costo de los seguros de los paquetes.
+  @FXML
+  private Label lblTotal; // Costo total del envío.
 
   /**
    * Constructor de la clase OperadorResumen.
    * 
-   * @param envio Clase que almacena métodos e informacion de los clientes y paquetes del envío.
+   * @param envio Clase que almacena métodos e informacion de los clientes y
+   *              paquetes del envío.
    */
   public OperadorResumen(model.RegistrarEnvio envio, Empleado operador) {
     this.envio = envio;
@@ -49,7 +62,8 @@ public class OperadorResumen {
   }
 
   /**
-   * Iniciliaza los componentes gráficos con los datos del cliente y los costos de su envío.
+   * Iniciliaza los componentes gráficos con los datos del cliente y los costos de
+   * su envío.
    */
   public void initialize() throws IOException {
     chargeInformation();
@@ -65,7 +79,6 @@ public class OperadorResumen {
     lblCedulaD.setText(lblCedulaD.getText() + ": " + envio.getDestinatario().cedula);
     lblNameD.setText(lblNameD.getText() + ": " + envio.getDestinatario().nombre);
     lblDirD.setText(lblDirD.getText() + ": " + envio.getDestinatario().direccion);
-    lblnumP.setText(lblnumP.getText() + ": 1");
 
     // Calcula el total del envio y su respectivo impuesto.
     pago = new Pago(envio, operador);
@@ -73,10 +86,11 @@ public class OperadorResumen {
     impuesto = pago.getImpuesto();
 
     // Actualiza los datos en pantalla.
-    labelCostoEnvio.setText(labelCostoEnvio.getText() + ": " + Integer.toString(total - impuesto));
-    lblImpuesto.setText(lblImpuesto.getText() + ": " + Integer.toString(impuesto));
-    lblSeguro.setText(lblSeguro.getText() + ": " + Integer.toString(pago.getSeguro()));
-    lblTotal.setText(lblTotal.getText() + ": " + Integer.toString(total));
+    labelCostoEnvio
+        .setText(labelCostoEnvio.getText() + ": " + Double.toString(Globals.roundAvoid(total - impuesto, 2)));
+    lblImpuesto.setText(lblImpuesto.getText() + ": " + Double.toString(Globals.roundAvoid(impuesto, 2)));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(Globals.roundAvoid(pago.getSeguro(), 2)));
+    lblTotal.setText(lblTotal.getText() + ": " + Double.toString(Globals.roundAvoid(total, 2)));
   }
 
   /**
@@ -84,13 +98,14 @@ public class OperadorResumen {
    * 
    * @param event not used.
    */
-  @FXML void atras(ActionEvent event) {
+  @FXML
+  void atras(ActionEvent event) {
     View.cambiar("operador.paquetes");
   }
 
   /**
-   * Accede a la pantalla de pago con tarjeta. Se deshabilitan componentes gráficos según el tipo de
-   * la tarjeta.
+   * Accede a la pantalla de pago con tarjeta. Se deshabilitan componentes
+   * gráficos según el tipo de la tarjeta.
    * 
    * @param tipo de la tarjeta.
    */
@@ -103,7 +118,8 @@ public class OperadorResumen {
    * 
    * @param event not used.
    */
-  @FXML void pagoCredito(ActionEvent event) {
+  @FXML
+  void pagoCredito(ActionEvent event) {
     pagar(CREDITO);
   }
 
@@ -112,17 +128,19 @@ public class OperadorResumen {
    * 
    * @param event not used.
    */
-  @FXML void pagoDebito(ActionEvent event) {
+  @FXML
+  void pagoDebito(ActionEvent event) {
     pagar(DEBITO);
   }
 
   /**
-   * El pago se hace efectivo (o eso asumimos) y se vuelve a la pantalla principal del Operador de
-   * Oficina.
+   * El pago se hace efectivo (o eso asumimos) y se vuelve a la pantalla principal
+   * del Operador de Oficina.
    * 
    * @param event not used.
    */
-  @FXML void pagoEfectivo(ActionEvent event) {
+  @FXML
+  void pagoEfectivo(ActionEvent event) {
     pago.ejecutarPago(envio, "Efectivo");
     SpecificAlerts.showPagoExitoso();
     goBack();
