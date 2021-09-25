@@ -1,19 +1,17 @@
 package controller.operador.envio;
 
-import javax.swing.JOptionPane;
-
 import controller.controls.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.Entities.Empleado;
-import utilities.Globals;
 import utilities.View;
 
 /**
  * Controlador para la vista operador.cliente
  * 
  * Copia casi identica de RegistrarCientes
+ * 
  * @author Alejandro Pergueza
  * @version 0.1, 25/09/2021
  */
@@ -28,11 +26,10 @@ public class OperadorRecoger {
   private model.RegistrarEnvio envio;
   private Empleado operador;
 
-
   public OperadorRecoger(Empleado operador) {
     envio = new model.RegistrarEnvio();
     this.operador = operador;
-    
+
   }
 
   public void initialize() {
@@ -53,7 +50,6 @@ public class OperadorRecoger {
       return;
     if (!destinatario.checkAndUpdateEnvio())
       return;
-    
 
     View.cambiar("operador.recoger", new RecogerPaquete(envio, operador));
   }
