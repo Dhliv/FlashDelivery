@@ -19,6 +19,10 @@ import utilities.*;
 /**
  * Clase controller UserEdit. Contiene la parte visual de la edición de un
  * usuario.
+ * 
+ * @author David Henao
+ * @version 1.0
+ * @since 25/09/2021
  */
 public class UserEdit implements Initializable {
   private Empleado aEditar;
@@ -29,16 +33,19 @@ public class UserEdit implements Initializable {
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
-  private String telefono;
+  private String apellidos; // Apellidos
+  private String telefono; // Telefono
   private String dir; // Dirección
   private String ident; // Identificación
-  private String rol;
+  private String rol; // Rol
   private LocalDate fecha; // Fecha de nacimiento
-  private int idSede;
+  private int idSede; // Id de la Sede
 
   // Campos de texto que se pueden rellenar en user.register view
   @FXML
   private TextField nombreT;
+  @FXML
+  private TextField apellidoT;
   @FXML
   private TextField identificacionT;
   @FXML
@@ -85,6 +92,7 @@ public class UserEdit implements Initializable {
     idsedeT.getItems().addAll(sedes);
 
     nombreT.setText(aEditar.getNombres());
+    apellidoT.setText(aEditar.getApellidos());
     identificacionT.setText(aEditar.getCedula());
     telefonoT.setText(aEditar.getTelefono());
     direccionT.setText(aEditar.getDireccion());
@@ -95,16 +103,16 @@ public class UserEdit implements Initializable {
     lblEmpleadoEditar.setText(lblEmpleadoEditar.getText() + " " + aEditar.getNombres());
     identificacionT.setEditable(false);
 
-    TextFieldRestrictions.textFieldMaxLength(telefonoT, 16);
+    TextFieldRestrictions.textFieldMaxLength(telefonoT, 12);
   }
 
   /**
-   * Verifica si el teléfono cumple con el formato numérico.
+   * Verifica si la cédula y el teléfono cumplen con el formato numérico.
    * 
    * @return True si se cumple el formato numérico, false de lo contrario.
    */
   private Boolean checkFormat() {
-    String[] campos = { telefono };
+    String[] campos = { telefono, ident };
     return TextFieldRestrictions.checkNumericExpression(campos);
   }
 
@@ -113,6 +121,7 @@ public class UserEdit implements Initializable {
    */
   private void getData() {
     name = nombreT.getText();
+    apellidos = apellidoT.getText();
     telefono = telefonoT.getText();
     dir = direccionT.getText();
     ident = identificacionT.getText();
@@ -134,7 +143,7 @@ public class UserEdit implements Initializable {
    * Retorna a la pantalla de consulta de empleados.
    */
   private void volver() {
-    View.cambiar("user.consulta");
+    View.newView("user.consulta", new UserConsulta());
   }
 
   /**
@@ -158,7 +167,8 @@ public class UserEdit implements Initializable {
   }
 
   /**
-   * Actualiza los datos de un usuario en la base de datos.
+   * Actualiza los datos de un usuario en la base de datos, haciendo las
+   * validaciones necesarias.
    * 
    * @param event not used.
    */
@@ -174,7 +184,7 @@ public class UserEdit implements Initializable {
 
     if (!(camposVacios || forbidChar || !formatoCorrecto)) {
       parseData();
-      Empleado updated = new Empleado(ident, name, "", rol, dir, telefono, fecha, idSede);
+      Empleado updated = new Empleado(ident, name, apellidos, rol, dir, telefono, fecha, idSede);
       Empleado.updateEmpleado(updated);
       SpecificAlerts.showUpdSucces();
       volver();

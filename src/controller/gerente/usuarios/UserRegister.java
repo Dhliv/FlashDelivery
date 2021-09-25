@@ -131,7 +131,7 @@ public class UserRegister {
    * Retorna a la pantalla de consulta de usuarios.
    */
   private void volver() {
-    View.cambiar("user.consulta", new UserConsulta());
+    View.newView("user.consulta", new UserConsulta());
   }
 
   /**

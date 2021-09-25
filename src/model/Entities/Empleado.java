@@ -21,6 +21,14 @@ public class Empleado {
   public int id_sede;
 
   /**
+   * Constructor vacío de Empleado. Se conserva para que no haya errores al
+   * insertar datos en la clase de Empleado despues de hacer join de Empleado y
+   * Usuario.
+   */
+  public Empleado() {
+  }
+
+  /**
    * Constructor de la clase empleado. Se crea directamente un empleado.
    * 
    * @param cedula    del empleado.
@@ -30,7 +38,7 @@ public class Empleado {
    * @param direccion del empleado.
    * @param telefono  del empleado.
    * @param birthdate del empleado.
-   * @param sede      del empleado.
+   * @param id_sede   del empleado.
    */
   public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
       LocalDate birthdate, int id_sede) {
@@ -111,7 +119,7 @@ public class Empleado {
   @Override
   public String toString() {
     return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
-        + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + id_sede
+        + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", id_sede=" + id_sede
         + '}';
   }
 
@@ -135,9 +143,10 @@ public class Empleado {
    * @param empleado informacion completa a actualizar (incluso sin cambios).
    */
   public static void updateEmpleado(Empleado empleado) {
-    String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol()
-        + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
-        + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
+    String sql = "update empleado set nombres='" + empleado.getNombres() + "', apellidos='" + empleado.getApellidos()
+        + "', rol='" + empleado.getRol() + "', direccion='" + empleado.getDireccion() + "', telefono='"
+        + empleado.getTelefono() + "', birthdate='" + empleado.getBirthdate() + "', id_sede=" + empleado.getSede()
+        + " where cedula='" + empleado.getCedula() + "'";
 
     Conexion.db().execute(sql);
   }
@@ -178,20 +187,6 @@ public class Empleado {
     return (!empleado.isEmpty() ? empleado.get(0) : null);
   }
 
-  // TODO Caused by: org.jooq.exception.MappingException: No matching constructor
-  // found on type class model.Entities.Empleado for row type
-  // "empleado"."cedula",
-  // "empleado"."nombres",
-  // "empleado"."apellidos",
-  // "empleado"."rol",
-  // "empleado"."direccion",
-  // "empleado"."telefono",
-  // "empleado"."birthdate",
-  // "empleado"."id_sede",
-  // "usuario"."id",
-  // "usuario"."username",
-  // "usuario"."password",
-  // "usuario"."enabled"
   /**
    * Obtiene todos los empleados en la base de datos que están habilitados (el
    * atributo enabled correspondiente en la tabla usuario es true).
@@ -206,20 +201,6 @@ public class Empleado {
     return sedes;
   }
 
-  // TODO Caused by: org.jooq.exception.MappingException: No matching constructor
-  // found on type class model.Entities.Empleado for row type
-  // "empleado"."cedula",
-  // "empleado"."nombres",
-  // "empleado"."apellidos",
-  // "empleado"."rol",
-  // "empleado"."direccion",
-  // "empleado"."telefono",
-  // "empleado"."birthdate",
-  // "empleado"."id_sede",
-  // "usuario"."id",
-  // "usuario"."username",
-  // "usuario"."password",
-  // "usuario"."enabled"
   /**
    * Obtiene todos los empleados en la base de datos que están habilitados (el
    * atributo enabled correspondiente en la tabla usuario es false).
