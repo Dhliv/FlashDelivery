@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import controller.controls.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import model.Entities.Empleado;
 import utilities.Globals;
 import utilities.View;
@@ -34,7 +35,6 @@ public class RegistrarClientes {
 
     remitente.initialize(envio, new Thread());
     destinatario.initialize(envio, new Thread());
-    
   }
 
   /**
