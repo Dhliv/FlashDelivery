@@ -17,6 +17,7 @@ public class Globals {
   public static Stage pantalla;
   private static Ventana ventana;
   private static model.RegistrarEnvio envio;
+  private static Boolean REGISTRARENVIO;
 
   public static void setEnvio(model.RegistrarEnvio r) {
     envio = r;
@@ -25,6 +26,7 @@ public class Globals {
   public static model.RegistrarEnvio getEnvio() {
     return envio;
   }
+
 
   /**
    * Numero "value" es redondeado a "places" cifras decimales
@@ -112,6 +114,25 @@ public class Globals {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * Retorna el valor de REGISTRARENVIO.
+   * Esta variable se usa para cambiar entre la
+   * vista OperadorRecoger y
+   * RecogerPaquete
+   * @return
+   */
+  public static boolean getRegistrarEnvio() {
+    return REGISTRARENVIO;
+  }
+
+  /**
+   * Setea la variable REGISTRARENVIO con el dato que se manda por parametro.
+   * @param b Booleano que se manda por parametro.
+   */
+  public static void setRegistarEnvio(boolean b){
+    REGISTRARENVIO = b;
   }
 
 }

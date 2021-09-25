@@ -6,6 +6,7 @@ import controller.controls.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import model.Entities.Empleado;
+import utilities.Globals;
 import utilities.View;
 
 /**
@@ -51,6 +52,13 @@ public class RegistrarClientes {
     if (!destinatario.checkAndUpdateEnvio())
       return;
     System.out.println("Registrar cliente: " + envio.getDestinatario().cedula);
-    View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
+    
+
+    if(Globals.getRegistrarEnvio()){
+      View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
+    }
+    else{
+      View.cambiar("operador.recoger", new RecogerPaquete(envio, operador));      
+    }
   }
 }

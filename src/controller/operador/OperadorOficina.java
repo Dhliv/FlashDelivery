@@ -22,6 +22,9 @@ public class OperadorOficina {
   @FXML
   private Pane rightContent;
   private Empleado operador;
+  private final Boolean REGISTRARENVIO = true;
+  private final Boolean RECOGERPAQUETE = false;
+  
 
   public OperadorOficina(Empleado operador) {
     this.operador = operador;
@@ -41,12 +44,14 @@ public class OperadorOficina {
    */
   @FXML
   void registrarEnvio(ActionEvent event) {
+    Globals.setRegistarEnvio(true);
     View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
   @FXML
   void registrarRecogida(ActionEvent event) {
-
+    Globals.setRegistarEnvio(false);
+    View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
   /**
