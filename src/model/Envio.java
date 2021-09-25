@@ -13,7 +13,7 @@ import utilities.Conexion;
 /**
  * 
  * @author David Henao
- * @version 1.0 19/9/2021
+ * @version 1.1 24/09/2021
  */
 public class Envio {
   public Integer id;
