@@ -60,15 +60,18 @@ public class Envio {
         + fecha_registro + "', '" + metodo_pago + "', '" + direccion_entrega + "', " + id_sede + ", '" + emp_entrega
         + "', FALSE, '" + cliente_envio + "', '" + cliente_entrega + "')";
     Conexion.db().fetch(sql);
+    
     Conexion.closeConnection();
 
+    //Posible causante de ERROR: duplicate key value violates unique constraint "paquete_pkey"
     sql = "select * from envio where fecha_registro='" + fecha_registro + "' and direccion_entrega='"
         + direccion_entrega + "' and id_sede=" + id_sede + " and empleado_entrega='" + emp_entrega
         + "' and cliente_envio='" + cliente_envio + "' and cliente_entrega='" + cliente_entrega + "'";
     List<Envio> query = Conexion.db().fetch(sql).into(Envio.class);
     Conexion.closeConnection();
-
-    return query.get(0).id;
+    
+    //Solución que parece funcionar pero sabrá Dios hasta cuando
+    return query.get(query.size()-1).id;
   }
 
   /**
