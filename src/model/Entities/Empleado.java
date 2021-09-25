@@ -2,7 +2,11 @@ package model.Entities;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import org.jooq.impl.DSL;
+
 import utilities.Conexion;
+import utilities.Roles;
 
 /**
  * Clase de Empleado. Se almacenan los parámetros relacionados a los datos de un
@@ -239,5 +243,22 @@ public class Empleado {
   public static Boolean checkExistence(String id) {
     var res = Conexion.db().select().from("empleado").where("cedula = '" + id + "'").fetch().into(Empleado.class);
     return res.size() != 0;
+  }
+
+  /**
+   * Retorna una lista de empleados que son auxiliares y están en la sede
+   * 'id_sede'.
+   * 
+   * @param id_sede Sede donde se desean ubicar a los auxiliares.
+   * @return Lista de empleados que son auxiliares y se ubican en la sede
+   *         especificada.
+   */
+  public static List<Empleado> getAuxiliaresBySede(int id_sede) {
+    String rol = Roles.rol[Roles.AUXILIAR];
+
+    List<Empleado> auxiliares = Conexion.db().select().from(DSL.table("empleado"))
+        .where("rol = '" + rol + "' and id_sede = " + Integer.toString(id_sede)).fetch().into(Empleado.class);
+
+    return auxiliares;
   }
 }
