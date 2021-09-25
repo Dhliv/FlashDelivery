@@ -22,7 +22,7 @@ public class Pago {
   private Double subTotal; // Almacena el subtotal del envío.
   private Double impuesto; // Almacena el impuesto del envío.
   private Double seguro; // Almacena el valor del seguro del envío.
-  private String[][] numeracion; // Almacena la información organizada sobre los paquetes (valor y descripción).
+  private String[] numeracion; // Almacena la información organizada sobre los paquetes (valor y descripción).
   private Empleado operador; // Almacena el objeto Empleado del operador de oficina que registra el pago
                              // (envío).
   private Integer id_envio; // Almacena el id del envío que se registra en la BD.
@@ -105,11 +105,11 @@ public class Pago {
    * 
    * @param envio Contiene los datos relacionados al envio.
    */
-  private String[][] parsePaquete(model.RegistrarEnvio envio) {
+  private String[] parsePaquete(model.RegistrarEnvio envio) {
     Paquete p = envio.getPaquete();
-    numeracion = new String[1][2];
-    numeracion[0][0] = p.descripcion;
-    numeracion[0][1] = String.valueOf(calcularCosto(p));
+    numeracion = new String[2];
+    numeracion[0] = p.descripcion;
+    numeracion[1] = String.valueOf(calcularCosto(p));
 
     return numeracion;
   }
@@ -133,7 +133,7 @@ public class Pago {
   private Double calcularSeguro(Paquete p) {
     Double seguro = 0.0; // Valor del seguro a pagar por el paquete
     if (p.seguro) seguro = (p.valor * SEGURO);
-    return seguro;
+    return (seguro > SEGUROMINIMO ? seguro : SEGUROMINIMO);
   }
 
   /**

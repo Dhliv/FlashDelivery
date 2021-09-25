@@ -11,7 +11,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="atrasCliente" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="84.0" text="Atras" />
-      <Label layoutX="827.0" layoutY="29.0" text="Registro de envío">
+      <Label fx:id="lblTipoInterfaz" layoutX="827.0" layoutY="29.0" text="a">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

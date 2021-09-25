@@ -1,5 +1,6 @@
 package utilities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
 
@@ -10,7 +11,8 @@ public class FacturaContenido {
 
   private PDDocument document;          // Documento PDF.
 
-  private String[][] infoPaq;           //INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
+  private String monto;                 //Monto de la factura
+  private String[] texto;      //Descripción de la factura
   private String[] infoDest;            //INFORMACION DEL CLIENTE DESTINATARIO
   private String[] infoRem;             //INFORMACION DEL CLIENTE REMITENTE
   private String[] infoPago;            //INFORMACION DEL PAGO
@@ -21,26 +23,15 @@ public class FacturaContenido {
    * @param document  Documento PDF.
    * @param contenido Informacion que ha de ubicarse en la factura
    */
-  public FacturaContenido(PDDocument document, String[][] infoPaq, String[] infoRem, String[] infoDest, String[] infoPago, String idPDF) {
+  public FacturaContenido(PDDocument document, String[] infoPaq, String[] infoRem, String[] infoDest, String[] infoPago, String idPDF) {
     this.document = document;
-    this.infoPaq = infoPaq;
     this.infoRem = infoRem;
     this.infoDest = infoDest;
     this.infoPago = infoPago;
     this.idPDF = idPDF;
+    texto = (String[]) GeneralString.parseText(infoPaq[0], 85);
+    monto = infoPaq[1];
   }
-
-
-  // public void printRandom(PDPageContentStream contentStream) throws IOException{
-  //   float y=0f;
-  //   for(int i=0; i<100; i++){
-  //     contentStream.beginText();
-  //       contentStream.newLineAtOffset(0, y);
-  //       contentStream.showText("MaxTamaño: " + Float.toString(y));
-  //     contentStream.endText();
-  //     y+=10f;
-  //   }
-  // }
 
 
   /**
@@ -57,16 +48,17 @@ public class FacturaContenido {
     final int YTABLE_NEXT_PAGE = 770-30; //Posición Y inicial de las paginas siguientes.
     final int YMIN = 70; //Posición minima en Y en donde se es permitido dibujar.
     
+
     int yTable = YTABLE_PAGE1;
     int rowsPerPage = (int)((yTable-YMIN)/rowHeight);//Filas de la columna por pagina
     int nextRow = 0;
 
     //Dibujar las primeras N paginas sin desbordamiento
-    while(infoPaq.length-nextRow > rowsPerPage){ //Split
+    while(texto.length-nextRow > rowsPerPage){ //Split
 
-      PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(infoPaq, nextRow, nextRow+rowsPerPage), XTABLE, yTable, rowHeight);
+      PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(texto, nextRow, nextRow+rowsPerPage), "", XTABLE, yTable, rowHeight);
       PDFTableGenerator.drawHeader();
-
+      
       contentStream.close();
       contentStream.close();
 
@@ -81,7 +73,7 @@ public class FacturaContenido {
     }
     
     // Dibujar la ultima pagina
-    PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(infoPaq, nextRow, infoPaq.length), XTABLE, yTable, rowHeight);
+    PDFTableGenerator.drawTable(document, contentStream, Arrays.copyOfRange(texto, nextRow, texto.length), monto, XTABLE, yTable, rowHeight);
     PDFTableGenerator.drawHeader();
     contentStream.close();
     
@@ -98,7 +90,7 @@ public class FacturaContenido {
     final int XREM = 92; //Pocision X respecto a la izquierda de la información del remitente
     final int XDEST = 302; //Pocision X respecto a la izquierda de la información del remitente
     final float ROWHEIGTH = 20f; //Ancho de las filas.
-    final float tableHeight = ROWHEIGTH*infoPaq.length; //Ancho de la tabla
+    final float tableHeight = ROWHEIGTH*texto.length; //Ancho de la tabla
 
     PDPage page = document.getPage(0);
     

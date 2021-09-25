@@ -23,6 +23,8 @@ public class SpecificAlerts {
   private static Alert empleadoExists; // Alerta para indicar que el empleado ya existía.
   private static Alert badLogin; // Alerta para indicar que el usuario/contraseña es erroneo.
   private static Alert cardUnexist; // Alerta que indica que una tarjeta es inexistente o está mal escrita.
+  private static Alert numericFormat; // Alerta que indica que un campo no tiene formato numérico.
+  private static Alert decimalFormat; // Alerta que indica que un campo no tiene formato decimal.
 
   public static void init() {
 
@@ -80,6 +82,17 @@ public class SpecificAlerts {
     cardUnexist.setContentText("Tarjeta de crédito inexistente");
     cardUnexist.setTitle("Comprobar número de tarjeta de crédito");
     cardUnexist.setHeaderText("Tarjeta erronea");
+
+    numericFormat = new Alert(AlertType.ERROR);
+    numericFormat.setContentText("Se ha ingresado texto en un campo que esperaba un número");
+    numericFormat.setTitle("Comprobar campos llenados");
+    numericFormat.setHeaderText("Formato numérico errado");
+
+    decimalFormat = new Alert(AlertType.ERROR);
+    decimalFormat.setContentText(
+        "Se ha ingresado texto en un campo que esperaba un número decimal (asegúrese de usar el . y no la ,");
+    decimalFormat.setTitle("Comprobar campos llenados");
+    decimalFormat.setHeaderText("Formato numérico errado");
   }
 
   /**
@@ -181,5 +194,19 @@ public class SpecificAlerts {
    */
   public static void showCardUnexist() {
     cardUnexist.showAndWait();
+  }
+
+  /**
+   * Alerta que indica que un campo no tiene formato numérico.
+   */
+  public static void showNumericFormat() {
+    numericFormat.showAndWait();
+  }
+
+  /**
+   * Alerta que indica que un campo no tiene formato decimal.
+   */
+  public static void showDecimalFormat() {
+    decimalFormat.showAndWait();
   }
 }

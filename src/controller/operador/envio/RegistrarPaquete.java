@@ -9,7 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import model.Entities.Empleado;
-
+import utilities.SpecificAlerts;
 import utilities.TextFieldRestrictions;
 import utilities.View;
 
@@ -59,17 +59,17 @@ public class RegistrarPaquete {
   }
 
   public void initialize() {
-    TextFieldRestrictions.textFieldDecimal(txtPeso);
-    TextFieldRestrictions.textFieldDecimal(txtValor);
-    TextFieldRestrictions.textFieldDecimal(txtAncho);
-    TextFieldRestrictions.textFieldDecimal(txtLargo);
-    TextFieldRestrictions.textFieldDecimal(txtAlto);
-    // txtReporte.setText("xdxdxd");
+    // TextFieldRestrictions.textFieldDecimal(txtPeso);
+    // TextFieldRestrictions.textFieldDecimal(txtValor);
+    // TextFieldRestrictions.textFieldDecimal(txtAncho);
+    // TextFieldRestrictions.textFieldDecimal(txtLargo);
+    // TextFieldRestrictions.textFieldDecimal(txtAlto);
+
     // fillDeafult();
   }
 
   @FXML void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente");
+    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
   private void clearFieldsPaquetes() {
@@ -98,11 +98,22 @@ public class RegistrarPaquete {
     }
   }
 
+  /**
+   * Verifica que todos los campos numéricos/decimales cumplan el formato esperado.
+   * 
+   * @return True de no presentar problemas, false si existe un campo con formato picho.
+   */
+  private boolean checkFormatosEnCampos() {
+    String campos[] = { txtPeso.getText(), txtValor.getText(), txtAncho.getText(), txtLargo.getText(), txtAlto.getText() };
+    return TextFieldRestrictions.checkDecimalExpression(campos);
+  }
+
   @FXML void resumenEnvio(ActionEvent event) {
 
-    if (!agregarPaquete())
-      JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
-    else {
+    if (!agregarPaquete() || !checkFormatosEnCampos()) {
+      if (!agregarPaquete()) JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
+      if (!checkFormatosEnCampos()) SpecificAlerts.showDecimalFormat();
+    } else {
       System.out.println("Registrar paquete: " + envio.getDestinatario().cedula);
       View.newView("operador.resumen", new OperadorResumen(envio, operador));
     }

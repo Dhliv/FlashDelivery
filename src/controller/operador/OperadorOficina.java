@@ -1,5 +1,7 @@
 package controller.operador;
 
+import controller.operador.envio.OperadorRecoger;
+import controller.operador.envio.RecogerPaquete;
 import controller.operador.envio.RegistrarClientes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,10 +32,10 @@ public class OperadorOficina {
   public void initialize() {
     View.setViewPane(rightContent, true);
     View.cambiar("operadorOficinaTabla", new OperadorConsulta(operador));
-    
-    labelUsuario.setText("Bienvenido " + operador.getNombres()); 
-    labelPOS.setText("Punto de venta " + operador.getSede() );
+    labelUsuario.setText("Bienvenido " + operador.getNombres());
+    labelPOS.setText("Punto de venta " + operador.getSede());
     // View.cambiar("operador.cliente", new RegistrarClientes(operador));
+
   }
 
   /**
@@ -46,7 +48,7 @@ public class OperadorOficina {
 
   @FXML
   void registrarRecogida(ActionEvent event) {
-
+    View.cambiar("operador.cliente", new OperadorRecoger(operador));
   }
 
   /**

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import org.apache.pdfbox.pdmodel.*;
+import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
@@ -30,12 +31,12 @@ public class PDFTableGenerator {
   private static PDPageContentStream contentStream; // contentStream del PDF
   private static PDDocument document;
 
-  public static void init(PDDocument documento, float margen, float y, float rowH, String[][] content,
+  public static void init(PDDocument documento, float margen, float y, float rowH, String[] content,
       PDPageContentStream cs) throws IOException {
     document = documento;
     margin = margen;
     yFirstCol = y;
-    // rows = content.length;
+    rows = content.length;
     rowHeight = rowH;
     tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
     // tableHeight = rowHeight * rows;
@@ -55,19 +56,16 @@ public class PDFTableGenerator {
    * @param yFirst    Coordenada y de la primer fila.
    * @param rowHeight Altura de las casillas
    */
-  public static void drawTable(PDDocument document, PDPageContentStream cs, String[][] content, float margen,
+  public static void drawTable(PDDocument document, PDPageContentStream cs, String[] texto, String monto, float margen,
       float yFirst, float rowHeight) throws IOException {
-    init(document, margen, yFirst, rowHeight, content, cs);
+    init(document, margen, yFirst, rowHeight, texto, cs);
+
+    rows = texto.length;
+    tableHeight = rowHeight * rows;
 
     
-    Object[] contenido = new Object[2];
-    ArrayList<String> texto = parseText(content[0][0]);
-    contenido[0] = parseText(content[0][0]);
-    contenido[1] = content[0][1];
-    rows = texto.size();
-    tableHeight = rowHeight * rows;
     drawDecoration(0, rows);
-    addText(contenido);
+    addText(texto, monto);
     drawColumns();
     drawRow(0);
     drawRow(rows);
@@ -82,16 +80,8 @@ public class PDFTableGenerator {
 
     float headerPosY = yFirstCol + 4; // Posición del header
     drawCellBackgroundColor("orange", 0);
-    contentStream.beginText();
-    contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-    contentStream.newLineAtOffset(margin + cellMargin, headerPosY);
-    contentStream.showText("Descripción");
-    contentStream.endText();
-    contentStream.beginText();
-    contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-    contentStream.newLineAtOffset(margin + cellMargin + tableWidth - WIDTHLASTCOL, headerPosY);
-    contentStream.showText("Precio(COP)");
-    contentStream.endText();
+    drawText(margin + cellMargin, headerPosY, "Descripción", PDType1Font.TIMES_BOLD, 12);
+    drawText(margin + cellMargin + tableWidth - WIDTHLASTCOL, headerPosY, "Precio(COP)", PDType1Font.TIMES_BOLD, 12);
   }
 
   /**
@@ -167,62 +157,9 @@ public class PDFTableGenerator {
   //     nexty -= rowHeight;
   //   }
   // }
+  
 
-  /**
-   * Formatea un String para que pueda ser dibujado en pantalla. Generalmente se
-   * usa en la descripción del producto.
-   * 
-   * @param s String que se va a formatear
-   * @return String formateado
-   */
-  public static ArrayList<String> parseText(String s) {
-    final int MAXLENGTHSTRING = 85; // Maximo numero de caracteres que puede ocupar una cadena en la tabla.
-    ArrayList<String> sFormat = new ArrayList<String>();
-    String aux, wrd;
-    Queue<Pair<String, Boolean>> words = new LinkedList<>();
-    int pos = 0;
-    aux = s;
-    aux = aux + "\n";
-
-    for (int i = 0; i < aux.length(); i++) {
-      if (aux.charAt(i) == '\n' || Character.isWhitespace(aux.charAt(i))) {
-        wrd = aux.substring(pos, i);
-        pos = i + 1;
-        if (wrd.length() > 0)
-          words.add(new Pair<String, Boolean>(wrd, (aux.charAt(i) == '\n' ? Boolean.TRUE : Boolean.FALSE)));
-      }
-    }
-
-    Pair<String, Boolean> par;
-
-    int sum = 1;
-    aux = "";
-    while (!words.isEmpty()) {
-      par = words.poll();
-      sum += par.getKey().length();
-      if (sum > MAXLENGTHSTRING) {
-        sFormat.add(aux);
-        sum = par.getKey().length();
-        aux = par.getKey();
-      } else if (par.getValue()) {
-        sum = 1;
-        aux += " " + par.getKey();
-        sFormat.add(aux);
-        aux = "";
-      } else {
-        if (aux.length() > 0) {
-          aux += " ";
-          sum++;
-        }
-        aux += par.getKey();
-      }
-    }
-    if (aux.length() > 1)
-      sFormat.add(aux);
-
-    return sFormat;
-  }
-
+  //TODO @Jaoe cuando vea esto si quiere me escribe para hablar lo de la letra del PDF.
   /**
    * Dibuja el texto text en las posiciones X=posX y Y=posY
    * 
@@ -231,9 +168,9 @@ public class PDFTableGenerator {
    * @param text texto en string
    * @throws IOException
    */
-  public static void drawText(float posX, float posY, String text) throws IOException {
+  public static void drawText(float posX, float posY, String text, PDFont fuente, int fuenteSize) throws IOException {
     contentStream.beginText();
-    contentStream.setFont(PDType1Font.TIMES_ROMAN, 10); // Fuente de la letra
+    contentStream.setFont(fuente, fuenteSize); // Fuente de la letra
     contentStream.newLineAtOffset(posX, posY);
     contentStream.showText(text);
     contentStream.endText();
@@ -244,23 +181,19 @@ public class PDFTableGenerator {
    * 
    * @param content Texto que se añade en la tabla
    */
-  public static void addText(Object[] content) throws IOException {
+  public static void addText(String[] text, String monto) throws IOException {
     float textx = margin + cellMargin;
     float texty = yFirstCol - 15;
-    ArrayList<String> text = (ArrayList<String>) content[0];
 
         //Primer columna
-        for (int k = 0; k < text.size(); k++) {
-          drawText(textx, texty, text.get(k));
+        for (int k = 0; k < text.length; k++) {
+          drawText(textx, texty, text[k], PDType1Font.TIMES_ROMAN, 10);
           texty -= rowHeight;
         }
 
         texty = (yFirstCol + texty) / 2; // Centrar verticalmente la segunda columna
         textx += (tableWidth - WIDTHLASTCOL); // Segunda columna horizontalmente
-        drawText(textx,texty,(String) content[1]);
-      // texty -= rowHeight;
-      // textx = margin + cellMargin;
-    
+        drawText(textx,texty, monto, PDType1Font.TIMES_ROMAN, 10);
   }
 
 }

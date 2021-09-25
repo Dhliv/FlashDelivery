@@ -1,133 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <AnchorPane prefHeight="800.0" prefWidth="1280.0">
-         <children>
-            <Button layoutX="68.0" layoutY="33.0" mnemonicParsing="false" text="Regresar">
+            <Button fx:id="atrasPaquete" layoutX="68.0" layoutY="33.0" mnemonicParsing="false" onAction="#atras" text="Regresar">
                <font>
                   <Font size="22.0" />
                </font>
             </Button>
-            <Label layoutX="933.0" layoutY="59.0" text="Registro de paquetes">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <ScrollPane layoutX="140.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0">
-               <content>
-                  <AnchorPane prefHeight="670.0" prefWidth="984.0">
+            <AnchorPane layoutX="10.0" layoutY="90.0" prefHeight="670.0" prefWidth="1000.0">
+               <children>
+                  <Pane layoutX="190.0" layoutY="90.0" prefHeight="500.0" prefWidth="620.0">
                      <children>
-                        <Pane layoutX="165.0" layoutY="50.0" prefHeight="350.0" prefWidth="280.0">
-                           <children>
-                              <Label layoutX="20.0" layoutY="165.0" text="Costo del envío">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="240.0" text="Empresa de envíos encargada">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="15.0" text="Dirección de entrada">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="90.0" text="Valor del paquete">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="20.0" layoutY="40.0" prefHeight="25.0" prefWidth="240.0" />
-                              <TextField layoutX="20.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
-                              <TextField layoutX="20.0" layoutY="190.0" prefHeight="25.0" prefWidth="240.0" />
-                              <TextField layoutX="20.0" layoutY="265.0" prefHeight="25.0" prefWidth="240.0" />
-                           </children>
-                        </Pane>
-                        <Pane layoutX="510.0" layoutY="50.0" prefHeight="350.0" prefWidth="280.0">
-                           <children>
-                              <Label layoutX="20.0" layoutY="165.0" text="Fecha de registro">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="15.0" text="Peso del paquete">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="20.0" layoutY="90.0" text="Método de pago">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="20.0" layoutY="40.0" prefHeight="25.0" prefWidth="240.0" />
-                              <TextField layoutX="20.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
-                              <TextField layoutX="20.0" layoutY="190.0" prefHeight="25.0" prefWidth="240.0" />
-                           </children>
-                        </Pane>
-                        <Pane layoutX="165.0" layoutY="351.0" prefHeight="266.0" prefWidth="625.0">
-                           <children>
-                              <Label layoutX="20.0" layoutY="14.0" text="Descripción">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextArea layoutX="20.0" layoutY="41.0" prefHeight="144.0" prefWidth="585.0" />
-                              <Label layoutX="20.0" layoutY="193.0" text="Impuesto del envío:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <CheckBox layoutX="20.0" layoutY="220.0" mnemonicParsing="false" text="Seguro" />
-                              <Button layoutX="440.0" layoutY="217.0" mnemonicParsing="false" text="Registrar paquete">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6e9ec00" height="520.0" layoutX="-10.0" layoutY="-10.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
+                        <Label fx:id="txtDescripcion" layoutX="10.0" layoutY="13.0" text="Descripción">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="txtAreaDescripcion" layoutX="10.0" layoutY="40.0" prefHeight="184.0" prefWidth="600.0" />
+                        <Label fx:id="txtAuxiliar" layoutX="10.0" layoutY="358.0" text="Auxiliar">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="choiceAuxiliar" layoutX="10.0" layoutY="384.0" prefWidth="150.0" />
+                        <Label fx:id="txtSede" layoutX="10.0" layoutY="272.0" text="Sede">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="choiceSede" onAction="#selectSede" layoutX="10.0" layoutY="300.0" prefWidth="150.0" />
+                        <Button layoutX="420.0" layoutY="437.0" mnemonicParsing="false" onAction="#finalizarEntrega" text="Registrar recolección">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
                      </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
+                  </Pane>
+                  <Label layoutX="793.0" layoutY="14.0" text="Registro de paquetes">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
    </children>
-</VBox>
+</Pane>

@@ -5,7 +5,9 @@ import javax.swing.JOptionPane;
 import controller.controls.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import model.Entities.Empleado;
+import utilities.Globals;
 import utilities.View;
 
 /**
@@ -17,6 +19,7 @@ import utilities.View;
 public class RegistrarClientes {
   @FXML private Cliente remitente;
   @FXML private Cliente destinatario;
+  @FXML private Label lblTipoInterfaz;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -27,10 +30,9 @@ public class RegistrarClientes {
   }
 
   public void initialize() {
-
+    lblTipoInterfaz.setText("Registro envío");
     remitente.initialize(envio, new Thread());
     destinatario.initialize(envio, new Thread());
-
   }
 
   /**
@@ -45,5 +47,6 @@ public class RegistrarClientes {
     if (!destinatario.checkAndUpdateEnvio()) return;
     System.out.println("Registrar cliente: " + envio.getDestinatario().cedula);
     View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
+
   }
 }
