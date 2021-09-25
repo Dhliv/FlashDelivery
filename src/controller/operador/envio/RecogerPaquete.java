@@ -25,6 +25,7 @@ import utilities.View;
 
 /**
  * Controlador de la vista operador.recoger
+ * 
  * @author Alejandro pergueza
  * @version 0.1
  * @since 25/09/2021
@@ -48,7 +49,6 @@ public class RecogerPaquete {
   @FXML
   private ComboBox<String> choiceSede;
 
-
   private model.RegistrarEnvio envio;
   private Empleado operador;
   List<Empleado> auxiliar;
@@ -61,20 +61,19 @@ public class RecogerPaquete {
   public void initialize() {
     ObservableList<String> sedes = FXCollections.observableArrayList();
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
-    
+
     sedes.removeAll(sedes);
     sedes.addAll(Sede.getSedesParsed());
-    
+
     choiceSede.getItems().addAll(sedes);
     choiceSede.setValue(sedes.get(0).toString());
-    
 
     auxiliares.removeAll(auxiliares);
     auxiliar = Empleado.getEmpleadosHabilitados();
-    for(int i=0; i<auxiliar.size(); i++){
-      if(Roles.rol[Roles.AUXILIAR] == auxiliar.get(i).getRol())  //Revisa si es auxiliar.
+    for (int i = 0; i < auxiliar.size(); i++) {
+      if (Roles.rol[Roles.AUXILIAR] == auxiliar.get(i).getRol()) // Revisa si es auxiliar.
         auxiliares.add(auxiliar.get(i).getNombres() + " " + auxiliar.get(i).getApellidos());
-      else{
+      else {
         auxiliar.remove(i);
         --i;
       }
@@ -83,12 +82,12 @@ public class RecogerPaquete {
   }
 
   @FXML
-  void selectSede(ActionEvent event){
+  void selectSede(ActionEvent event) {
     var idSede = Sede.getIdSede(choiceSede.getValue());
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
     auxiliares.removeAll(auxiliares);
-    for(int i=0; i<auxiliar.size(); i++){
-      if(idSede == auxiliar.get(i).getSede())  //Revisa si es auxiliar.
+    for (int i = 0; i < auxiliar.size(); i++) {
+      if (idSede == auxiliar.get(i).getSede()) // Revisa si es auxiliar.
         auxiliares.add(auxiliar.get(i).getNombres() + " " + auxiliar.get(i).getApellidos());
     }
   }
@@ -99,16 +98,14 @@ public class RecogerPaquete {
       View.cambiar("operador.cliente", new OperadorRecoger(operador));
   }
 
-  
-
   @FXML
   void finalizarEntrega(ActionEvent event) {
     insertData();
     goBack();
   }
 
-  //TODO INSERTAR DATOS EN BD
-  public void insertData(){
+  // TODO INSERTAR DATOS EN BD
+  public void insertData() {
     txtAreaDescripcion.getText();
     choiceAuxiliar.getValue();
     choiceSede.getValue();
