@@ -22,8 +22,6 @@ public class OperadorOficina {
   @FXML
   private Pane rightContent;
   private Empleado operador;
-  private final Boolean REGISTRARENVIO = true;
-  private final Boolean RECOGERPAQUETE = false;
   
 
   public OperadorOficina(Empleado operador) {
