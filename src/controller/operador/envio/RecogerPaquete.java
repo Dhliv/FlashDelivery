@@ -69,27 +69,16 @@ public class RecogerPaquete {
     choiceSede.setValue(sedes.get(0).toString());
 
     auxiliares.removeAll(auxiliares);
-    auxiliar = Empleado.getEmpleadosHabilitados();
-    for (int i = 0; i < auxiliar.size(); i++) {
-      if (Roles.rol[Roles.AUXILIAR] == auxiliar.get(i).getRol()) // Revisa si es auxiliar.
-        auxiliares.add(auxiliar.get(i).getNombres() + " " + auxiliar.get(i).getApellidos());
-      else {
-        auxiliar.remove(i);
-        --i;
-      }
-    }
-    choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
   @FXML
   void selectSede(ActionEvent event) {
     var idSede = Sede.getIdSede(choiceSede.getValue());
+
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
     auxiliares.removeAll(auxiliares);
-    for (int i = 0; i < auxiliar.size(); i++) {
-      if (idSede == auxiliar.get(i).getSede()) // Revisa si es auxiliar.
-        auxiliares.add(auxiliar.get(i).getNombres() + " " + auxiliar.get(i).getApellidos());
-    }
+    auxiliares = Empleado.getAuxiliaresByIdParsed(idSede);
+    choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
   @FXML
@@ -107,7 +96,7 @@ public class RecogerPaquete {
   // TODO INSERTAR DATOS EN BD
   public void insertData() {
     txtAreaDescripcion.getText();
-    choiceAuxiliar.getValue();
+    getCedulaAuxiliar(choiceAuxiliar.getValue());
     choiceSede.getValue();
     envio.getDestinatario();
     envio.getRemitente();
