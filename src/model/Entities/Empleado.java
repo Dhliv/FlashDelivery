@@ -1,6 +1,7 @@
 package model.Entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.impl.DSL;
@@ -15,8 +16,8 @@ import utilities.Roles;
  * 
  * @author David Henao
  * @author Reynel Arkad Devji Quevedo
- * @version 1.0
- * @since 24/09/2021
+ * @version 1.1
+ * @since 25/09/2021
  */
 public class Empleado {
   private String cedula;
@@ -260,5 +261,40 @@ public class Empleado {
         .where("rol = '" + rol + "' and id_sede = " + Integer.toString(id_sede)).fetch().into(Empleado.class);
 
     return auxiliares;
+  }
+
+  /**
+   * Transforma una lista de empleados que son auxiliares de una sede específica,
+   * a strings con su cedula y su nombre completo.
+   * 
+   * @param id_sede Sede en la que se buscan a los auxiliares.
+   * @return ArrayList con los auxiliares en string.
+   */
+  public static ArrayList<String> getAuxiliaresByIdParsed(int id_sede) {
+    List<Empleado> auxiliares = getAuxiliaresBySede(id_sede);
+    ArrayList<String> auxiliaresParsed = new ArrayList<>();
+
+    for (int i = 0; i < auxiliares.size(); i++) {
+      auxiliaresParsed
+          .add(auxiliares.get(i).cedula + " - " + auxiliares.get(i).nombres + " " + auxiliares.get(i).apellidos);
+    }
+    return auxiliaresParsed;
+  }
+
+  /**
+   * Obtiene la cédula de un empleado auxiliar respecto a su representación
+   * parseada por el método getAuxiliaresByIdParsed (cedula - nombre_completo).
+   * 
+   * @param name Nombre del auxiliar.
+   * @return Cédula del auxiliar.
+   */
+  public static String getCedulaAuxiliar(String name) {
+    String idAux = "";
+    for (int i = 0; i < name.length(); i++) {
+      if (Character.isWhitespace(name.charAt(i)))
+        break;
+      idAux += name.charAt(i);
+    }
+    return idAux;
   }
 }
