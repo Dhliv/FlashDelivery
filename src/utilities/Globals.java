@@ -83,8 +83,7 @@ public class Globals {
    */
   public static Parent loadView(String name, Object control) {
     FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-    if (control != null)
-      loader.setController(control);
+    if (control != null) loader.setController(control);
     Parent root = null;
     try {
       root = loader.load();

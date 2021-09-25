@@ -37,22 +37,14 @@ public class UserEdit implements Initializable {
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
-  @FXML
-  private TextField nombreT;
-  @FXML
-  private TextField identificacionT;
-  @FXML
-  private TextField telefonoT;
-  @FXML
-  private TextField direccionT;
-  @FXML
-  private DatePicker fechaT;
-  @FXML
-  private ChoiceBox<String> rolT;
-  @FXML
-  private ChoiceBox<String> idsedeT;
-  @FXML
-  private Label lblEmpleadoEditar;
+  @FXML private TextField nombreT;
+  @FXML private TextField identificacionT;
+  @FXML private TextField telefonoT;
+  @FXML private TextField direccionT;
+  @FXML private DatePicker fechaT;
+  @FXML private ChoiceBox<String> rolT;
+  @FXML private ChoiceBox<String> idsedeT;
+  @FXML private Label lblEmpleadoEditar;
   // FIN de los campos.
 
   /**
@@ -66,14 +58,13 @@ public class UserEdit implements Initializable {
   }
 
   /**
-   * Inicializador de algunos componentes gráficos. Además, se agregan
-   * restricciones a algunos campos de texto.
+   * Inicializador de algunos componentes gráficos. Además, se agregan restricciones a algunos campos
+   * de texto.
    * 
    * @param url not used.
    * @param rb  not used.
    */
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
+  @Override public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> l = FXCollections.observableArrayList();
     ObservableList<String> s = FXCollections.observableArrayList();
 
@@ -135,8 +126,7 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosConsulta(ActionEvent event) {
+  @FXML void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
@@ -145,8 +135,7 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosRegistro(ActionEvent event) {
+  @FXML void goToUsuariosRegistro(ActionEvent event) {
     Globals.cambiarVista("user.register", new UserRegister());
   }
 
@@ -155,8 +144,7 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void updateEmpleado(ActionEvent event) {
+  @FXML void updateEmpleado(ActionEvent event) {
     getData();
 
     String campos[] = { name, telefono, dir, ident };

@@ -14,35 +14,25 @@ import utilities.TextFieldRestrictions;
 import utilities.View;
 
 public class RegistrarPaquete {
-  @FXML
-  private Button atrasPaquete;
+  @FXML private Button atrasPaquete;
 
-  @FXML
-  private Button btRegistrarEnvios;
+  @FXML private Button btRegistrarEnvios;
 
-  @FXML
-  private TextArea txtDescripcion;
+  @FXML private TextArea txtDescripcion;
 
-  @FXML
-  private TextField txtAncho;
+  @FXML private TextField txtAncho;
 
-  @FXML
-  private TextField txtAlto;
+  @FXML private TextField txtAlto;
 
-  @FXML
-  private TextField txtLargo;
+  @FXML private TextField txtLargo;
 
-  @FXML
-  private CheckBox checkSeguro;
+  @FXML private CheckBox checkSeguro;
 
-  @FXML
-  private TextField txtPeso;
+  @FXML private TextField txtPeso;
 
-  @FXML
-  private TextField txtValor;
+  @FXML private TextField txtValor;
 
-  @FXML
-  private Button btBorrar;
+  @FXML private Button btBorrar;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -54,8 +44,8 @@ public class RegistrarPaquete {
   }
 
   /**
-   * Llena con datos el paquete para no tener que escibirlos cada maldita vez que
-   * queramos ensayar cosas en estas ventanas. Buenas noches.
+   * Llena con datos el paquete para no tener que escibirlos cada maldita vez que queramos ensayar
+   * cosas en estas ventanas. Buenas noches.
    * 
    * PD: XD
    */
@@ -78,10 +68,8 @@ public class RegistrarPaquete {
     // fillDeafult();
   }
 
-  @FXML
-  void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete)
-      View.cambiar("operador.cliente");
+  @FXML void atras(ActionEvent event) {
+    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente");
   }
 
   private void clearFieldsPaquetes() {
@@ -98,8 +86,7 @@ public class RegistrarPaquete {
       Double peso = Double.parseDouble(txtPeso.getText());
       Double valor = Double.parseDouble(txtValor.getText());
       String descripcion = txtDescripcion.getText();
-      if (descripcion.trim().equals(""))
-        return false;
+      if (descripcion.trim().equals("")) return false;
       Double ancho = Double.parseDouble(txtAncho.getText());
       Double largo = Double.parseDouble(txtLargo.getText());
       Double alto = Double.parseDouble(txtAlto.getText());
@@ -111,8 +98,7 @@ public class RegistrarPaquete {
     }
   }
 
-  @FXML
-  void resumenEnvio(ActionEvent event) {
+  @FXML void resumenEnvio(ActionEvent event) {
 
     if (!agregarPaquete())
       JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
@@ -123,13 +109,11 @@ public class RegistrarPaquete {
 
   }
 
-  @FXML
-  void limpiarCampos(ActionEvent event) {
+  @FXML void limpiarCampos(ActionEvent event) {
     clearFieldsPaquetes();
   }
 
-  @FXML
-  void superPrueba(KeyEvent event) {
+  @FXML void superPrueba(KeyEvent event) {
     System.out.println("Será que esto sí funciona así?");
   }
 }

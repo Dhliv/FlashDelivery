@@ -64,12 +64,8 @@ public class Paquete {
   }
 
   public static void createPaquete(Paquete p, int id_envio) {
-    Conexion.db()
-        .insertInto(DSL.table("paquete"), DSL.field("id"), DSL.field("descripcion"), DSL.field("peso"),
-            DSL.field("seguro"), DSL.field("alto"), DSL.field("ancho"), DSL.field("largo"), DSL.field("valor"))
-        .values(id_envio, p.getDescripcion(), p.getPeso(), p.getSeguro(), p.getAlto(), p.getAncho(), p.getLargo(),
-            p.getValor())
-        .execute();
+    Conexion.db().insertInto(DSL.table("paquete"), DSL.field("id"), DSL.field("descripcion"), DSL.field("peso"), DSL.field("seguro"), DSL.field("alto"), DSL.field("ancho"), DSL.field("largo"), DSL.field("valor"))
+        .values(id_envio, p.getDescripcion(), p.getPeso(), p.getSeguro(), p.getAlto(), p.getAncho(), p.getLargo(), p.getValor()).execute();
     Conexion.closeConnection();
   }
 
@@ -79,8 +75,7 @@ public class Paquete {
    * @return
    */
   public static List<Paquete> queryPaquetesSede(Integer id_sede) {
-    List<Paquete> pq = Conexion.db().select().from("paquete").innerJoin("envio").on("paquete.id_envio = envio.id")
-        .where("id_sede = " + id_sede).fetch().into(Paquete.class);
+    List<Paquete> pq = Conexion.db().select().from("paquete").innerJoin("envio").on("paquete.id_envio = envio.id").where("id_sede = " + id_sede).fetch().into(Paquete.class);
     return pq;
   }
 

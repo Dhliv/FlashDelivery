@@ -13,35 +13,29 @@ import javafx.collections.*;
 
 public class OperadorConsulta implements Initializable {
 
-  @FXML
-  private TableView<Paquete> tPaquetes;
-  @FXML
-  private TableColumn<Paquete, String> tcDestinatario;
-  @FXML
-  private TableColumn<Paquete, Integer> tcIdPaquete;
-  @FXML
-  private TableColumn<Paquete, Integer> tcPesoPaquete;
-  @FXML
-  private TableColumn<Paquete, Boolean> tcEstado;
+  @FXML private TableView<Paquete> tPaquetes;
+  @FXML private TableColumn<Paquete, String> tcDestinatario;
+  @FXML private TableColumn<Paquete, Integer> tcIdPaquete;
+  @FXML private TableColumn<Paquete, Integer> tcPesoPaquete;
+  @FXML private TableColumn<Paquete, Boolean> tcEstado;
   private Empleado e;
 
   public OperadorConsulta(Empleado e) {
     this.e = e;
-    
+
   }
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  @Override public void initialize(URL location, ResourceBundle resources) {
     /*
     ArrayList<Paquete> pq = (ArrayList<Paquete>) Paquete.queryPaquetesSede(e.getSede());
-
+    
     tcDestinatario.setCellValueFactory(new PropertyValueFactory<Paquete, String>("destinatario"));
     tcIdPaquete.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("idpaquete"));
     tcPesoPaquete.setCellValueFactory(new PropertyValueFactory<Paquete, Integer>("peso"));
     tcEstado.setCellValueFactory(new PropertyValueFactory<Paquete, Boolean>("estado"));
-
+    
     ObservableList<Paquete> list = FXCollections.observableArrayList(pq);
-
+    
     tPaquetes.setItems(list);
     */
   }
