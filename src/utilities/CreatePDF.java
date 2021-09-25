@@ -8,7 +8,7 @@ import org.apache.pdfbox.pdmodel.*;
 
 public class CreatePDF {
 
-  private String[][] infoPaq; // INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
+  private String[] infoPaq; // INFORMACION DEL PAQUETE QUE DEBE IR ESCRITA EN LA FACTURA.
   private String[] infoDest;  //INFORMACION DEL CLIENTE DESTINATARIO
   private String[] infoRem;   //INFORMACION DEL CLIENTE REMITENTE
   private String[] infoPago;  //INFORMACION DEL PAGO
@@ -21,7 +21,7 @@ public class CreatePDF {
    * @param infoDest  Datos del destinatario
    * @param infoPago  Datos monetarios del pago
    */
-  public CreatePDF(String[][] infoPaq, String[] infoRem, String[] infoDest, String[] infoPago) {
+  public CreatePDF(String[] infoPaq, String[] infoRem, String[] infoDest, String[] infoPago) {
     this.infoPaq = infoPaq;
     this.infoRem = infoRem;
     this.infoDest = infoDest;
