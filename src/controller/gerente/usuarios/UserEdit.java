@@ -16,16 +16,16 @@ import javafx.scene.control.TextField;
 import model.Entities.Empleado;
 import utilities.*;
 
+/**
+ * Clase controller UserEdit. Contiene la parte visual de la edición de un
+ * usuario.
+ */
 public class UserEdit implements Initializable {
-  private Roles roles; // Cargos de la empresa
   private Empleado aEditar;
 
   // Auxiliares para los datos del usuario.
-  private Object fc; // Dato parcial de fecha de nacimiento
-  private Object idS; // Dato parcial de id sede
-  private Object rl; // Dato parcial de rol
-  private Boolean camposVacios; // Identifica si existen campos sin llenar.
-  private Boolean forbidChar; // Identifica si se usaron carácteres prohibidos.
+  private String fc; // Dato parcial de fecha de nacimiento
+  private String idS; // Dato parcial de id sede
 
   // Variables que contienen los datos del usuario.
   private String name; // Nombre
@@ -74,16 +74,15 @@ public class UserEdit implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    ObservableList<String> l = FXCollections.observableArrayList();
-    ObservableList<String> s = FXCollections.observableArrayList();
+    ObservableList<String> roles = FXCollections.observableArrayList();
+    ObservableList<String> sedes = FXCollections.observableArrayList();
 
-    roles = new Roles();
-    s.removeAll(s);
-    l.removeAll(l);
-    l.addAll(roles.rol);
-    s.addAll(model.Entities.Sede.getSedesParsed());
-    rolT.getItems().addAll(l);
-    idsedeT.getItems().addAll(s);
+    sedes.removeAll(sedes);
+    roles.removeAll(roles);
+    roles.addAll(Roles.roles);
+    sedes.addAll(model.Entities.Sede.getSedesParsed());
+    rolT.getItems().addAll(roles);
+    idsedeT.getItems().addAll(sedes);
 
     nombreT.setText(aEditar.getNombres());
     identificacionT.setText(aEditar.getCedula());
@@ -96,8 +95,17 @@ public class UserEdit implements Initializable {
     lblEmpleadoEditar.setText(lblEmpleadoEditar.getText() + " " + aEditar.getNombres());
     identificacionT.setEditable(false);
 
-    TextFieldRestrictions.textFieldNumeric(telefonoT);
     TextFieldRestrictions.textFieldMaxLength(telefonoT, 16);
+  }
+
+  /**
+   * Verifica si el teléfono cumple con el formato numérico.
+   * 
+   * @return True si se cumple el formato numérico, false de lo contrario.
+   */
+  private Boolean checkFormat() {
+    String[] campos = { telefono };
+    return TextFieldRestrictions.checkNumericExpression(campos);
   }
 
   /**
@@ -109,25 +117,24 @@ public class UserEdit implements Initializable {
     dir = direccionT.getText();
     ident = identificacionT.getText();
 
-    fc = fechaT.getValue();
-    idS = idsedeT.getValue();
-    rl = rolT.getValue();
+    fc = fechaT.getValue() == null ? "" : fechaT.getValue().toString();
+    idS = idsedeT.getValue() == null ? "" : idsedeT.getValue().toString();
+    rol = rolT.getValue() == null ? "" : rolT.getValue().toString();
   }
 
   /**
    * Se transforman los tipos de datos que tienen tipo distinto a string.
    */
   private void parseData() {
-    fecha = LocalDate.parse(fc.toString());
-    idSede = model.Entities.Sede.getIdSede(idS.toString());
-    rol = rl.toString();
+    fecha = LocalDate.parse(fc);
+    idSede = model.Entities.Sede.getIdSede(idS);
   }
 
   /**
    * Retorna a la pantalla de consulta de empleados.
    */
   private void volver() {
-    Globals.cambiarVista("user.consulta");
+    View.cambiar("user.consulta");
   }
 
   /**
@@ -147,7 +154,7 @@ public class UserEdit implements Initializable {
    */
   @FXML
   void goToUsuariosRegistro(ActionEvent event) {
-    Globals.cambiarVista("user.register", new UserRegister());
+    View.newView("user.register", new UserRegister());
   }
 
   /**
@@ -159,13 +166,13 @@ public class UserEdit implements Initializable {
   void updateEmpleado(ActionEvent event) {
     getData();
 
-    String campos[] = { name, telefono, dir, ident };
-    Object objetos[] = { fc, idS, rl };
+    String campos[] = { name, telefono, dir, ident, fc, idS, rol };
 
-    camposVacios = GeneralChecker.checkEmpty(campos, objetos);
-    forbidChar = GeneralChecker.checkChar(campos);
+    Boolean camposVacios = GeneralChecker.checkEmpty(campos, new Object[0]);
+    Boolean forbidChar = GeneralChecker.checkChar(campos);
+    Boolean formatoCorrecto = checkFormat();
 
-    if (!(camposVacios || forbidChar)) {
+    if (!(camposVacios || forbidChar || !formatoCorrecto)) {
       parseData();
       Empleado updated = new Empleado(ident, name, "", rol, dir, telefono, fecha, idSede);
       Empleado.updateEmpleado(updated);
@@ -174,8 +181,10 @@ public class UserEdit implements Initializable {
     } else {
       if (camposVacios)
         SpecificAlerts.showEmptyFieldAlert();
-      else
+      if (forbidChar)
         SpecificAlerts.showCharForbidenAlert();
+      if (!formatoCorrecto)
+        SpecificAlerts.showNumericFormat();
     }
   }
 

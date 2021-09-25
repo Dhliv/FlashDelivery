@@ -178,6 +178,20 @@ public class Empleado {
     return (!empleado.isEmpty() ? empleado.get(0) : null);
   }
 
+  // TODO Caused by: org.jooq.exception.MappingException: No matching constructor
+  // found on type class model.Entities.Empleado for row type
+  // "empleado"."cedula",
+  // "empleado"."nombres",
+  // "empleado"."apellidos",
+  // "empleado"."rol",
+  // "empleado"."direccion",
+  // "empleado"."telefono",
+  // "empleado"."birthdate",
+  // "empleado"."id_sede",
+  // "usuario"."id",
+  // "usuario"."username",
+  // "usuario"."password",
+  // "usuario"."enabled"
   /**
    * Obtiene todos los empleados en la base de datos que están habilitados (el
    * atributo enabled correspondiente en la tabla usuario es true).
@@ -192,6 +206,20 @@ public class Empleado {
     return sedes;
   }
 
+  // TODO Caused by: org.jooq.exception.MappingException: No matching constructor
+  // found on type class model.Entities.Empleado for row type
+  // "empleado"."cedula",
+  // "empleado"."nombres",
+  // "empleado"."apellidos",
+  // "empleado"."rol",
+  // "empleado"."direccion",
+  // "empleado"."telefono",
+  // "empleado"."birthdate",
+  // "empleado"."id_sede",
+  // "usuario"."id",
+  // "usuario"."username",
+  // "usuario"."password",
+  // "usuario"."enabled"
   /**
    * Obtiene todos los empleados en la base de datos que están habilitados (el
    * atributo enabled correspondiente en la tabla usuario es false).
