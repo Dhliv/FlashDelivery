@@ -24,7 +24,6 @@ public class OperadorOficina {
   @FXML
   private Pane rightContent;
   private Empleado operador;
-  
 
   public OperadorOficina(Empleado operador) {
     this.operador = operador;
@@ -33,10 +32,10 @@ public class OperadorOficina {
   public void initialize() {
     View.setViewPane(rightContent, true);
     View.cambiar("operadorOficinaTabla", new OperadorConsulta(operador));
-    labelUsuario.setText("Bienvenido " + operador.getNombres()); 
-    labelPOS.setText("Punto de venta " + operador.getSede() );
+    labelUsuario.setText("Bienvenido " + operador.getNombres());
+    labelPOS.setText("Punto de venta " + operador.getSede());
     // View.cambiar("operador.cliente", new RegistrarClientes(operador));
-    
+
   }
 
   /**

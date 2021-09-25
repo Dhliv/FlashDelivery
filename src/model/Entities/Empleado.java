@@ -20,10 +20,6 @@ public class Empleado {
   private LocalDate birthdate;
   public int id_sede;
 
-  public Empleado() {
-
-  }
-
   /**
    * Constructor vacío de Empleado. Se conserva para que no haya errores al
    * insertar datos en la clase de Empleado despues de hacer join de Empleado y
