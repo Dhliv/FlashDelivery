@@ -102,7 +102,8 @@ public class UserEdit implements Initializable {
     lblEmpleadoEditar.setText(lblEmpleadoEditar.getText() + " " + aEditar.getNombres());
     identificacionT.setEditable(false);
 
-    TextFieldRestrictions.textFieldMaxLength(telefonoT, 12);
+    TextFieldRestrictions.textFieldMaxLength(telefonoT, 10);
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 10);
   }
 
   /**
