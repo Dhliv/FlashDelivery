@@ -1,11 +1,55 @@
 package utilities;
 
 import java.util.function.UnaryOperator;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 
 public class TextFieldRestrictions {
+
+  /**
+   * Verifica que todos los strings cumplan con la expresión regular de formato
+   * decimal.
+   * 
+   * @param input String a verificar.
+   * @return True si cumple el formato, false de lo contrario.
+   */
+  public static Boolean checkDecimalExpression(String[] input) {
+    String regex = "^(\\d+\\.\\d*|\\d+)$";
+    Pattern pat = Pattern.compile(regex);
+    Matcher mat;
+
+    for (int i = 0; i < input.length; i++) {
+      mat = pat.matcher(input[i]);
+      if (!mat.find())
+        return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Verifica que todos los strings cumplan con la expresión regular de formato
+   * numérico.
+   * 
+   * @param input Strings a verificar.
+   * @return True si cumplen el formato, false de lo contrario.
+   */
+  public static boolean checkNumericExpression(String[] input) {
+    String regex = "^(\\d+)$";
+    Pattern pat = Pattern.compile(regex);
+    Matcher mat;
+
+    for (int i = 0; i < input.length; i++) {
+      mat = pat.matcher(input[i]);
+      if (!mat.find())
+        return false;
+    }
+
+    return true;
+  }
+
   /**
    * Limita el numero maximo de caracteres de un TextField.
    * 

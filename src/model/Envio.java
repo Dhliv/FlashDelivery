@@ -4,16 +4,13 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.jooq.False;
-import org.jooq.impl.DSL;
-
 import model.Entities.Empleado;
 import utilities.Conexion;
 
 /**
  * 
  * @author David Henao
- * @version 1.0 19/9/2021
+ * @version 1.1 24/09/2021
  */
 public class Envio {
   public Integer id;
@@ -58,20 +55,11 @@ public class Envio {
       String emp_entrega, String cliente_envio, String cliente_entrega) {
     String sql = "insert into envio(fecha_registro, metodo_pago, direccion_entrega, id_sede, empleado_entrega, delivered, cliente_envio, cliente_entrega) values('"
         + fecha_registro + "', '" + metodo_pago + "', '" + direccion_entrega + "', " + id_sede + ", '" + emp_entrega
-        + "', FALSE, '" + cliente_envio + "', '" + cliente_entrega + "')";
-    Conexion.db().fetch(sql);
-    
+        + "', FALSE, '" + cliente_envio + "', '" + cliente_entrega + "') returning id";
+    var query = Conexion.db().fetchOne(sql);
     Conexion.closeConnection();
 
-    //Posible causante de ERROR: duplicate key value violates unique constraint "paquete_pkey"
-    sql = "select * from envio where fecha_registro='" + fecha_registro + "' and direccion_entrega='"
-        + direccion_entrega + "' and id_sede=" + id_sede + " and empleado_entrega='" + emp_entrega
-        + "' and cliente_envio='" + cliente_envio + "' and cliente_entrega='" + cliente_entrega + "'";
-    List<Envio> query = Conexion.db().fetch(sql).into(Envio.class);
-    Conexion.closeConnection();
-    
-    //Solución que parece funcionar pero sabrá Dios hasta cuando
-    return query.get(query.size()-1).id;
+    return Integer.parseInt(query.getValue(0).toString());
   }
 
   /**
