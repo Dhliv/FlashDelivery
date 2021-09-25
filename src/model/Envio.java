@@ -4,9 +4,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.jooq.False;
-import org.jooq.impl.DSL;
-
 import model.Entities.Empleado;
 import utilities.Conexion;
 

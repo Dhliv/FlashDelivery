@@ -136,7 +136,7 @@ public class Pago {
     Double seguro = 0.0; // Valor del seguro a pagar por el paquete
     if (p.seguro)
       seguro = (p.valor * SEGURO);
-    return seguro;
+    return (seguro > SEGUROMINIMO ? seguro : SEGUROMINIMO);
   }
 
   /**

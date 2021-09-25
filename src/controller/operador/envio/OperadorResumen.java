@@ -28,6 +28,7 @@ public class OperadorResumen {
   private static final Integer CREDITO = 1;
   private Double total;
   private Double impuesto;
+  private Double seguro;
   private Empleado operador;
   private Pago pago;
 
@@ -84,12 +85,13 @@ public class OperadorResumen {
     pago = new Pago(envio, operador);
     total = pago.getTotal();
     impuesto = pago.getImpuesto();
+    seguro = pago.getSeguro();
 
     // Actualiza los datos en pantalla.
     labelCostoEnvio
-        .setText(labelCostoEnvio.getText() + ": " + Double.toString(Globals.roundAvoid(total - impuesto, 2)));
+        .setText(labelCostoEnvio.getText() + ": " + Double.toString(Globals.roundAvoid(total - impuesto - seguro, 2)));
     lblImpuesto.setText(lblImpuesto.getText() + ": " + Double.toString(Globals.roundAvoid(impuesto, 2)));
-    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(Globals.roundAvoid(pago.getSeguro(), 2)));
+    lblSeguro.setText(lblSeguro.getText() + ": " + Double.toString(Globals.roundAvoid(seguro, 2)));
     lblTotal.setText(lblTotal.getText() + ": " + Double.toString(Globals.roundAvoid(total, 2)));
   }
 
