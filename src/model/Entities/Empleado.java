@@ -33,7 +33,7 @@ public class Empleado {
    * @param sede      del empleado.
    */
   public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
-      LocalDate birthdate, int sede) {
+      LocalDate birthdate, int id_sede) {
     this.cedula = cedula;
     this.nombres = nombres;
     this.apellidos = apellidos;
@@ -41,7 +41,7 @@ public class Empleado {
     this.direccion = direccion;
     this.telefono = telefono;
     this.birthdate = birthdate;
-    this.id_sede = sede;
+    this.id_sede = id_sede;
   }
 
   public String getCedula() {
