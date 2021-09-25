@@ -57,17 +57,11 @@ public class Envio {
       String emp_entrega, String cliente_envio, String cliente_entrega) {
     String sql = "insert into envio(fecha_registro, metodo_pago, direccion_entrega, id_sede, empleado_entrega, delivered, cliente_envio, cliente_entrega) values('"
         + fecha_registro + "', '" + metodo_pago + "', '" + direccion_entrega + "', " + id_sede + ", '" + emp_entrega
-        + "', FALSE, '" + cliente_envio + "', '" + cliente_entrega + "')";
-    Conexion.db().fetch(sql);
+        + "', FALSE, '" + cliente_envio + "', '" + cliente_entrega + "') returning id";
+    var query = Conexion.db().fetchOne(sql);
     Conexion.closeConnection();
 
-    sql = "select * from envio where fecha_registro='" + fecha_registro + "' and direccion_entrega='"
-        + direccion_entrega + "' and id_sede=" + id_sede + " and empleado_entrega='" + emp_entrega
-        + "' and cliente_envio='" + cliente_envio + "' and cliente_entrega='" + cliente_entrega + "'";
-    List<Envio> query = Conexion.db().fetch(sql).into(Envio.class);
-    Conexion.closeConnection();
-
-    return query.get(0).id;
+    return Integer.parseInt(query.getValue(0).toString());
   }
 
   /**
