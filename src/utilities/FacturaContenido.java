@@ -9,6 +9,8 @@ import org.apache.pdfbox.util.Matrix;
 
 public class FacturaContenido {
 
+  private final Integer CARACTERES_POR_LINEA = 82; //INDICA EL NUMERO MAXIMO DE CARACTERES POSIBLES EN UNA LINEA DEL PDF.
+
   private PDDocument document;          // Documento PDF.
 
   private String monto;                 //Monto de la factura
@@ -29,7 +31,7 @@ public class FacturaContenido {
     this.infoDest = infoDest;
     this.infoPago = infoPago;
     this.idPDF = idPDF;
-    texto = (String[]) GeneralString.parseText(infoPaq[0], 85);
+    texto = (String[]) GeneralString.parseText(infoPaq[0], CARACTERES_POR_LINEA);
     monto = infoPaq[1];
   }
 

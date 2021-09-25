@@ -1,17 +1,12 @@
 package utilities;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.ConnectException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
-import javafx.util.Pair;
 
 /**
  * Genera una tabla en un pdf
@@ -30,6 +25,8 @@ public class PDFTableGenerator {
   private static float yFirstCol; // Coordenada y de la primera fila de la tabla.
   private static PDPageContentStream contentStream; // contentStream del PDF
   private static PDDocument document;
+  private static PDType0Font regularFont;
+  private static PDType0Font regularBoldFont;
 
   public static void init(PDDocument documento, float margen, float y, float rowH, String[] content,
       PDPageContentStream cs) throws IOException {
@@ -39,7 +36,11 @@ public class PDFTableGenerator {
     rows = content.length;
     rowHeight = rowH;
     tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
-    // tableHeight = rowHeight * rows;
+    
+    //SE IMPORTAN LAS FUENTES TIPOGRAFICAS.
+    regularFont = PDType0Font.load(document, new File("C:/Users/pract/Downloads/Lato/Lato-Regular.ttf")); 
+    regularBoldFont =  PDType0Font.load(document, new File("C:/Users/pract/Downloads/Lato/Lato-Bold.ttf"));
+    
     cellMargin = 5f;
     marginWidth = 0.1f;
     contentStream = cs;
@@ -62,7 +63,7 @@ public class PDFTableGenerator {
 
     rows = texto.length;
     tableHeight = rowHeight * rows;
-
+    
     
     drawDecoration(0, rows);
     addText(texto, monto);
@@ -80,8 +81,8 @@ public class PDFTableGenerator {
 
     float headerPosY = yFirstCol + 4; // Posición del header
     drawCellBackgroundColor("orange", 0);
-    drawText(margin + cellMargin, headerPosY, "Descripción", PDType1Font.TIMES_BOLD, 12);
-    drawText(margin + cellMargin + tableWidth - WIDTHLASTCOL, headerPosY, "Precio(COP)", PDType1Font.TIMES_BOLD, 12);
+    drawText(margin + cellMargin, headerPosY, "Descripción", regularBoldFont, 12);
+    drawText(margin + cellMargin + tableWidth - WIDTHLASTCOL, headerPosY, "Precio(COP)", regularBoldFont, 12);
   }
 
   /**
@@ -144,28 +145,16 @@ public class PDFTableGenerator {
       contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
     }
   }
-
-  /**
-   * Dibuja todas lineas que separan las filas.
-   * 
-   * @throws IOException
-   */
-  // public static void drawRow() throws IOException {
-  //   float nexty = yFirstCol;
-  //   for (int i = 0; i <= rows; i++) {
-  //     contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
-  //     nexty -= rowHeight;
-  //   }
-  // }
   
 
-  //TODO @Jaoe cuando vea esto si quiere me escribe para hablar lo de la letra del PDF.
   /**
    * Dibuja el texto text en las posiciones X=posX y Y=posY
    * 
    * @param posX posición X en formato float
    * @param posY posición Y en formato float
    * @param text texto en string
+   * @param fuente Tipo de fuente tipografica
+   * @param fuenteSize Tamaño de la fuente
    * @throws IOException
    */
   public static void drawText(float posX, float posY, String text, PDFont fuente, int fuenteSize) throws IOException {
@@ -179,21 +168,23 @@ public class PDFTableGenerator {
   /**
    * Añadir texto a la tabla del PDF
    * 
-   * @param content Texto que se añade en la tabla
+   * @param text Texto a escribir en la primer columna de la tabla.
+   * @param monto Valor del paquete
    */
   public static void addText(String[] text, String monto) throws IOException {
-    float textx = margin + cellMargin;
-    float texty = yFirstCol - 15;
+    
+    float textx = margin + cellMargin; //Posición en X del texto
+    float texty = yFirstCol - 15; //Posición en Y del texto
 
         //Primer columna
         for (int k = 0; k < text.length; k++) {
-          drawText(textx, texty, text[k], PDType1Font.TIMES_ROMAN, 10);
+          drawText(textx, texty, text[k], regularFont, 10);
           texty -= rowHeight;
         }
 
         texty = (yFirstCol + texty) / 2; // Centrar verticalmente la segunda columna
         textx += (tableWidth - WIDTHLASTCOL); // Segunda columna horizontalmente
-        drawText(textx,texty, monto, PDType1Font.TIMES_ROMAN, 10);
+        drawText(textx,texty, monto, regularFont, 10);
   }
 
 }
