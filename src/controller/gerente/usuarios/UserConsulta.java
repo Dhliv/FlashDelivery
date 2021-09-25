@@ -64,12 +64,14 @@ public class UserConsulta {
     mostrarTabla();
   }
 
+  //TODO QUE ES S? DOCUMENTAR FUNCIÓN
   void mostrarTabla() {
     ObservableList<Empleado> s = FXCollections.observableArrayList();
     s.addAll(borrar ? Empleado.getEmpleadosHabilitados() : Empleado.getEmpleadosDeshabilitados());
     tableUsers.setItems(s);
   }
 
+  //TODO DOCUMENTAR FUNCIÓN
   @FXML
   void borrar(ActionEvent event) {
     System.out.println();
@@ -85,6 +87,7 @@ public class UserConsulta {
     }
   }
 
+  //TODO DOCUMENTAR FUNCIÓN
   @FXML
   void showOtherUsers(ActionEvent event) {
     borrar = !borrar;
@@ -97,6 +100,7 @@ public class UserConsulta {
     btChange.setText(borrar ? "Mostrar deshabilitados" : "Mostrar habilitados");
   }
 
+  //TODO DOCUMENTAR FUNCIÓN
   /**
    * Accede a la pestaña de registro de usuarios.
    * 
@@ -107,6 +111,7 @@ public class UserConsulta {
     View.newView("user.register", new UserRegister());
   }
 
+  //TODO DOCUMENTAR FUNCIÓN
   /**
    * Accede a la pestaña de edicion de empleado segúm el empleado seleccionado.
    * 

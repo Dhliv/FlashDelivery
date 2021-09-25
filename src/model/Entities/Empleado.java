@@ -20,6 +20,10 @@ public class Empleado {
   private LocalDate birthdate;
   public int id_sede;
 
+  public Empleado() {
+
+  }
+
   /**
    * Constructor vacío de Empleado. Se conserva para que no haya errores al
    * insertar datos en la clase de Empleado despues de hacer join de Empleado y
@@ -42,6 +46,18 @@ public class Empleado {
    */
   public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
       LocalDate birthdate, int id_sede) {
+    this.cedula = cedula;
+    this.nombres = nombres;
+    this.apellidos = apellidos;
+    this.rol = rol;
+    this.direccion = direccion;
+    this.telefono = telefono;
+    this.birthdate = birthdate;
+    this.id_sede = id_sede;
+  }
+
+  public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
+      LocalDate birthdate, int id_sede, int id, String username, String password, boolean enabled) {
     this.cedula = cedula;
     this.nombres = nombres;
     this.apellidos = apellidos;

@@ -13,10 +13,11 @@ import utilities.View;
 /**
  * Controlador para la vista operador.cliente
  * 
- * @author Julián Orejuela
- * @version 1.3, 21/09/2021
+ * Copia casi identica de RegistrarCientes
+ * @author Alejandro Pergueza
+ * @version 0.1, 25/09/2021
  */
-public class RegistrarClientes {
+public class OperadorRecoger {
   @FXML
   private Cliente remitente;
   @FXML
@@ -28,15 +29,18 @@ public class RegistrarClientes {
   private Empleado operador;
 
 
-  public RegistrarClientes(Empleado operador) {
+  public OperadorRecoger(Empleado operador) {
     envio = new model.RegistrarEnvio();
     this.operador = operador;
+    
   }
 
   public void initialize() {
-    lblTipoInterfaz.setText("Registro envío");
+
     remitente.initialize(envio, new Thread());
     destinatario.initialize(envio, new Thread());
+    lblTipoInterfaz.setText("Recoger un paquete");
+    View.setViewPane(View.getViewPane(), false);
   }
 
   /**
@@ -45,16 +49,12 @@ public class RegistrarClientes {
    */
   @FXML
   void registrarPaquetes(ActionEvent event) {
-    while(remitente.t.isAlive() || destinatario.t.isAlive()){
-      System.out.println(remitente.t.isAlive());
-      System.out.println(destinatario.t.isAlive());
-    }
     if (!remitente.checkAndUpdateEnvio())
       return;
     if (!destinatario.checkAndUpdateEnvio())
       return;
-    System.out.println("Registrar cliente: " + envio.getDestinatario().cedula);
-    View.cambiar("operador.paquetes", new RegistrarPaquete(envio, operador));
     
+
+    View.cambiar("operador.recoger", new RecogerPaquete(envio, operador));
   }
 }
