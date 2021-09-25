@@ -20,6 +20,10 @@ public class Empleado {
   private LocalDate birthdate;
   public int id_sede;
 
+  public Empleado() {
+
+  }
+
   /**
    * Constructor de la clase empleado. Se crea directamente un empleado.
    * 
@@ -30,7 +34,7 @@ public class Empleado {
    * @param direccion del empleado.
    * @param telefono  del empleado.
    * @param birthdate del empleado.
-   * @param sede      del empleado.
+   * @param id_sede   del empleado.
    */
   public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
       LocalDate birthdate, int id_sede) {
