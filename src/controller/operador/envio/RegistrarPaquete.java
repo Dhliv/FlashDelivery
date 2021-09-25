@@ -81,7 +81,7 @@ public class RegistrarPaquete {
   @FXML
   void atras(ActionEvent event) {
     if (event.getSource() == atrasPaquete)
-      View.cambiar("operador.cliente");
+      View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
   private void clearFieldsPaquetes() {

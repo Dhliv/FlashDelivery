@@ -44,6 +44,18 @@ public class Empleado {
     this.id_sede = sede;
   }
 
+  public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
+      LocalDate birthdate, int id_sede, int id, String username, String password, boolean enabled) {
+    this.cedula = cedula;
+    this.nombres = nombres;
+    this.apellidos = apellidos;
+    this.rol = rol;
+    this.direccion = direccion;
+    this.telefono = telefono;
+    this.birthdate = birthdate;
+    this.id_sede = id_sede;
+  }
+
   public String getCedula() {
     return cedula;
   }
