@@ -20,28 +20,17 @@ import utilities.*;
 
 // TODO Documentar.
 public class UserConsulta {
-  @FXML
-  private Button btBorrar;
-  @FXML
-  private TableView<Empleado> tableUsers;
-  @FXML
-  private TableColumn<Empleado, Integer> cedula;
-  @FXML
-  private TableColumn<Empleado, String> nombre;
-  @FXML
-  private TableColumn<Empleado, String> apellido;
-  @FXML
-  private TableColumn<Empleado, Integer> sede;
-  @FXML
-  private TableColumn<Empleado, String> rol;
-  @FXML
-  private TableColumn<Empleado, String> direccion;
-  @FXML
-  private TableColumn<Empleado, String> telefono;
-  @FXML
-  private TableColumn<Empleado, LocalDate> birthdate;
-  @FXML
-  private Button btChange;
+  @FXML private Button btBorrar;
+  @FXML private TableView<Empleado> tableUsers;
+  @FXML private TableColumn<Empleado, Integer> cedula;
+  @FXML private TableColumn<Empleado, String> nombre;
+  @FXML private TableColumn<Empleado, String> apellido;
+  @FXML private TableColumn<Empleado, Integer> sede;
+  @FXML private TableColumn<Empleado, String> rol;
+  @FXML private TableColumn<Empleado, String> direccion;
+  @FXML private TableColumn<Empleado, String> telefono;
+  @FXML private TableColumn<Empleado, LocalDate> birthdate;
+  @FXML private Button btChange;
   private boolean borrar;
 
   /**
@@ -64,20 +53,18 @@ public class UserConsulta {
     mostrarTabla();
   }
 
-  //TODO QUE ES S? DOCUMENTAR FUNCIÓN
+  // TODO QUE ES S? DOCUMENTAR FUNCIÓN
   void mostrarTabla() {
     ObservableList<Empleado> s = FXCollections.observableArrayList();
     s.addAll(borrar ? Empleado.getEmpleadosHabilitados() : Empleado.getEmpleadosDeshabilitados());
     tableUsers.setItems(s);
   }
 
-  //TODO DOCUMENTAR FUNCIÓN
-  @FXML
-  void borrar(ActionEvent event) {
+  // TODO DOCUMENTAR FUNCIÓN
+  @FXML void borrar(ActionEvent event) {
     System.out.println();
     Empleado e = tableUsers.getItems().get(tableUsers.getSelectionModel().getFocusedIndex());
-    int op = JOptionPane.showConfirmDialog(null,
-        "¿Está seguro que desea " + (borrar ? "borrar" : "habilitar") + " a " + e.getNombres() + "?");
+    int op = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea " + (borrar ? "borrar" : "habilitar") + " a " + e.getNombres() + "?");
     if (op == 0) {
       if (borrar)
         Usuario.deshabilitarUsuario(e.getCedula());
@@ -87,9 +74,8 @@ public class UserConsulta {
     }
   }
 
-  //TODO DOCUMENTAR FUNCIÓN
-  @FXML
-  void showOtherUsers(ActionEvent event) {
+  // TODO DOCUMENTAR FUNCIÓN
+  @FXML void showOtherUsers(ActionEvent event) {
     borrar = !borrar;
     changeButtons();
     mostrarTabla();
@@ -100,25 +86,23 @@ public class UserConsulta {
     btChange.setText(borrar ? "Mostrar deshabilitados" : "Mostrar habilitados");
   }
 
-  //TODO DOCUMENTAR FUNCIÓN
+  // TODO DOCUMENTAR FUNCIÓN
   /**
    * Accede a la pestaña de registro de usuarios.
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosRegistro(ActionEvent event) {
+  @FXML void goToUsuariosRegistro(ActionEvent event) {
     View.newView("user.register", new UserRegister());
   }
 
-  //TODO DOCUMENTAR FUNCIÓN
+  // TODO DOCUMENTAR FUNCIÓN
   /**
    * Accede a la pestaña de edicion de empleado segúm el empleado seleccionado.
    * 
    * @param event not used.
    */
-  @FXML
-  void userEditButton(ActionEvent event) {
+  @FXML void userEditButton(ActionEvent event) {
     Empleado e = tableUsers.getSelectionModel().getSelectedItem();
     if (e != null)
       Globals.cambiarVista("user.edit", new UserEdit(e));

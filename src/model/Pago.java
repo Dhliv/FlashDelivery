@@ -9,9 +9,9 @@ import model.Entities.Empleado;
 import utilities.CreatePDF;
 
 /**
- * Clase Pago. Contiene los atributos relacionados al pago de un envío, ademas
- * de los métodos e interacciones necesarias para la inserción y comunicación
- * con la BD. También es el proxy para la generación del pdf de la factura.
+ * Clase Pago. Contiene los atributos relacionados al pago de un envío, ademas de los métodos e
+ * interacciones necesarias para la inserción y comunicación con la BD. También es el proxy para la
+ * generación del pdf de la factura.
  * 
  * @author David Henao
  * @version 1.1
@@ -43,8 +43,8 @@ public class Pago {
   }
 
   /**
-   * Inserta toda la información relacionada al pago en un array de string para
-   * ordenar esta info en la factura.
+   * Inserta toda la información relacionada al pago en un array de string para ordenar esta info en
+   * la factura.
    * 
    * @return Array con la info organizada.
    */
@@ -59,9 +59,8 @@ public class Pago {
   }
 
   /**
-   * Ingresa los datos pertinentes a la base de datos, como los clientes, los
-   * paquetesel e, nvío y la factura. Adicionalmente se procede a generar un pdf
-   * de la factura.
+   * Ingresa los datos pertinentes a la base de datos, como los clientes, los paquetesel e, nvío y la
+   * factura. Adicionalmente se procede a generar un pdf de la factura.
    * 
    * @param envio       Contiene los datos relacionados al envio.
    * @param metodo_pago Especifica el metodo de pago usado.
@@ -75,8 +74,7 @@ public class Pago {
     Paquete.createPaquete(envio.getPaquete(), id_envio);
     Facturas.createFactura(getTotal(), id_envio);
 
-    CreatePDF pdf = new CreatePDF(parsePaquete(envio), parseCliente(envio.getRemitente()),
-        parseCliente(envio.getDestinatario()), parsePago());
+    CreatePDF pdf = new CreatePDF(parsePaquete(envio), parseCliente(envio.getRemitente()), parseCliente(envio.getDestinatario()), parsePago());
     try {
       pdf.pdfCreate(Integer.toString(id_envio));
     } catch (IOException e) {
@@ -85,8 +83,8 @@ public class Pago {
   }
 
   /**
-   * Almacena toda la información relacionada al cliente en un array de string
-   * para organizarla posteriormente en la factura.
+   * Almacena toda la información relacionada al cliente en un array de string para organizarla
+   * posteriormente en la factura.
    * 
    * @param cliente Objeto cliente con la información pertinente a él.
    * @return Array con la info del cliente organizada.
@@ -134,8 +132,7 @@ public class Pago {
    */
   private Double calcularSeguro(Paquete p) {
     Double seguro = 0.0; // Valor del seguro a pagar por el paquete
-    if (p.seguro)
-      seguro = (p.valor * SEGURO);
+    if (p.seguro) seguro = (p.valor * SEGURO);
     return (seguro > SEGUROMINIMO ? seguro : SEGUROMINIMO);
   }
 
