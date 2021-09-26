@@ -12,20 +12,21 @@ public class GeneralChecker {
      * @return True si existe un caracter prohibido.
      */
     public static boolean checkChar(String campo[]) {
-        boolean ch = false;
         char F[] = { ',', '\'', '\"', '*', '=', '+', '!' };
 
         for (int i = 0; i < campo.length; i++) {
+            if(campo[i] == null) return true;
+            
             for (int j = 0; j < campo[i].length(); j++) {
                 for (int k = 0; k < F.length; k++) {
                     if (campo[i].charAt(j) == F[k]) {
-                        ch = true;
+                        return true;
                     }
                 }
             }
         }
 
-        return ch;
+        return false;
     }
 
     /**
@@ -37,23 +38,21 @@ public class GeneralChecker {
      * @return True si se encontró algún string u objeto vacío.
      */
     public static boolean checkEmpty(String campo[], Object objetos[]) {
-        boolean ch = false;
-
-        for (int i = 0; i < campo.length; i++) {
-            if (campo[i].trim() == "") {
-                ch = true;
-                break;
-            }
-        }
-
+        
         for (int i = 0; i < objetos.length; i++) {
             if (objetos[i] == null) {
-                ch = true;
-                break;
+                return true;
             }
         }
 
-        return ch;
+        for (int i = 0; i < campo.length; i++) {
+            if(campo[i] == null) return true;
+            if (campo[i].trim() == "") {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
