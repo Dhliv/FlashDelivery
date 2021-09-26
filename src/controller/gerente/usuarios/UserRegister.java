@@ -40,7 +40,6 @@ public class UserRegister {
   private String password;
   private String rol;
   private LocalDate fc; // Fecha de nacimiento
-  private int id;
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
@@ -82,9 +81,8 @@ public class UserRegister {
     rolT.getItems().addAll(rolesParaVista);
     idsedeT.getItems().addAll(sedesParaVista);
 
-    TextFieldRestrictions.textFieldNumeric(identificacionT);
-    TextFieldRestrictions.textFieldMaxLength(identificacionT, 16);
-
+    TextFieldRestrictions.textFieldMaxLength(identificacionT, 10);
+    TextFieldRestrictions.textFieldMaxLength(telefonoT, 10);
   }
 
   /**
@@ -106,6 +104,16 @@ public class UserRegister {
   }
 
   /**
+   * Verifica si la cédula y el teléfono cumplen con el formato numérico.
+   * 
+   * @return True si se cumple el formato numérico, false de lo contrario.
+   */
+  private Boolean checkFormat() {
+    String[] campos = { telefono, ident };
+    return TextFieldRestrictions.checkNumericExpression(campos);
+  }
+
+  /**
    * Convierte el rol visual a un rol interno.
    * 
    * @param rol String con rol visual.
@@ -121,7 +129,6 @@ public class UserRegister {
    * Se transforman los tipos de datos que tienen tipo distinto a string.
    */
   private void parseData() {
-    id = Integer.valueOf(ident);
     fc = LocalDate.parse(fecha);
     idSede = model.Entities.Sede.getIdSede(idS);
     rol = parseRol(rl.toString());
@@ -131,7 +138,7 @@ public class UserRegister {
    * Retorna a la pantalla de consulta de usuarios.
    */
   private void volver() {
-    View.cambiar("user.consulta", new UserConsulta());
+    View.newView("user.consulta", new UserConsulta());
   }
 
   /**
@@ -165,8 +172,9 @@ public class UserRegister {
     boolean forbidchar = GeneralChecker.checkChar(campo);
     boolean usernameExist = Usuario.checkExistence(username);
     boolean empleadoExist = Empleado.checkExistence(ident);
+    Boolean formatoCorrecto = checkFormat();
 
-    if (forbidchar || emptyCamps || usernameExist || empleadoExist) {
+    if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto) {
       { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           SpecificAlerts.showEmptyFieldAlert();
@@ -176,6 +184,8 @@ public class UserRegister {
           SpecificAlerts.showUserExist();
         if (empleadoExist)
           SpecificAlerts.showEmpleadoExists();
+        if (!formatoCorrecto)
+          SpecificAlerts.showNumericFormat();
       }
     } else { // Si no hay problemas con las validaciones hechas:
       parseData();
@@ -183,7 +193,7 @@ public class UserRegister {
       Usuario user = new Usuario(ident, username, password, true);
       Empleado emp = new Empleado(ident, name, apellidos, parseRol(rol), dir, telefono, fc, idSede);
 
-      boolean registroFallido = (Empleado.crearEmpleado(emp) == 0) | Usuario.registrarUsuario(user);
+      boolean registroFallido = (Empleado.crearEmpleado(emp) == 0) | !Usuario.registrarUsuario(user);
       if (registroFallido) // Si ocurrió algún error, se muestra eso en pantalla.
         SpecificAlerts.showErrorUnexpt();
       else {

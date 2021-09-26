@@ -1,8 +1,13 @@
 package model.Entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.jooq.impl.DSL;
+
 import utilities.Conexion;
+import utilities.Roles;
 
 /**
  * Clase de Empleado. Se almacenan los parámetros relacionados a los datos de un
@@ -11,8 +16,8 @@ import utilities.Conexion;
  * 
  * @author David Henao
  * @author Reynel Arkad Devji Quevedo
- * @version 1.0
- * @since 24/09/2021
+ * @version 1.1
+ * @since 25/09/2021
  */
 public class Empleado {
   private String cedula;
@@ -20,8 +25,12 @@ public class Empleado {
   private LocalDate birthdate;
   public int id_sede;
 
+  /**
+   * Constructor vacío de Empleado. Se conserva para que no haya errores al
+   * insertar datos en la clase de Empleado despues de hacer join de Empleado y
+   * Usuario.
+   */
   public Empleado() {
-
   }
 
   /**
@@ -38,6 +47,18 @@ public class Empleado {
    */
   public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
       LocalDate birthdate, int id_sede) {
+    this.cedula = cedula;
+    this.nombres = nombres;
+    this.apellidos = apellidos;
+    this.rol = rol;
+    this.direccion = direccion;
+    this.telefono = telefono;
+    this.birthdate = birthdate;
+    this.id_sede = id_sede;
+  }
+
+  public Empleado(String cedula, String nombres, String apellidos, String rol, String direccion, String telefono,
+      LocalDate birthdate, int id_sede, int id, String username, String password, boolean enabled) {
     this.cedula = cedula;
     this.nombres = nombres;
     this.apellidos = apellidos;
@@ -115,7 +136,7 @@ public class Empleado {
   @Override
   public String toString() {
     return "Empleado{" + "cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", rol=" + rol
-        + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", sede=" + id_sede
+        + ", direccion=" + direccion + ", telefono=" + telefono + ", birthdate=" + birthdate + ", id_sede=" + id_sede
         + '}';
   }
 
@@ -139,9 +160,11 @@ public class Empleado {
    * @param empleado informacion completa a actualizar (incluso sin cambios).
    */
   public static void updateEmpleado(Empleado empleado) {
-    String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol()
-        + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
-        + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
+    String sql = "update empleado set nombres='" + empleado.getNombres() + "', apellidos='" + empleado.getApellidos()
+        + "', rol='" + empleado.getRol() + "', direccion='" + empleado.getDireccion() + "', telefono='"
+        + empleado.getTelefono() + "', birthdate='" + empleado.getBirthdate() + "', id_sede=" + empleado.getSede()
+        + " where cedula='" + empleado.getCedula() + "'";
+
     Conexion.db().execute(sql);
   }
 
@@ -182,20 +205,6 @@ public class Empleado {
     return (!empleado.isEmpty() ? empleado.get(0) : null);
   }
 
-  // TODO Caused by: org.jooq.exception.MappingException: No matching constructor
-  // found on type class model.Entities.Empleado for row type
-  // "empleado"."cedula",
-  // "empleado"."nombres",
-  // "empleado"."apellidos",
-  // "empleado"."rol",
-  // "empleado"."direccion",
-  // "empleado"."telefono",
-  // "empleado"."birthdate",
-  // "empleado"."id_sede",
-  // "usuario"."id",
-  // "usuario"."username",
-  // "usuario"."password",
-  // "usuario"."enabled"
   /**
    * Obtiene todos los empleados en la base de datos que están habilitados (el
    * atributo enabled correspondiente en la tabla usuario es true).
@@ -210,20 +219,6 @@ public class Empleado {
     return sedes;
   }
 
-  // TODO Caused by: org.jooq.exception.MappingException: No matching constructor
-  // found on type class model.Entities.Empleado for row type
-  // "empleado"."cedula",
-  // "empleado"."nombres",
-  // "empleado"."apellidos",
-  // "empleado"."rol",
-  // "empleado"."direccion",
-  // "empleado"."telefono",
-  // "empleado"."birthdate",
-  // "empleado"."id_sede",
-  // "usuario"."id",
-  // "usuario"."username",
-  // "usuario"."password",
-  // "usuario"."enabled"
   /**
    * Obtiene todos los empleados en la base de datos que están habilitados (el
    * atributo enabled correspondiente en la tabla usuario es false).
@@ -250,5 +245,57 @@ public class Empleado {
   public static Boolean checkExistence(String id) {
     var res = Conexion.db().select().from("empleado").where("cedula = '" + id + "'").fetch().into(Empleado.class);
     return res.size() != 0;
+  }
+
+  /**
+   * Retorna una lista de empleados que son auxiliares y están en la sede
+   * 'id_sede'.
+   * 
+   * @param id_sede Sede donde se desean ubicar a los auxiliares.
+   * @return Lista de empleados que son auxiliares y se ubican en la sede
+   *         especificada.
+   */
+  public static List<Empleado> getAuxiliaresBySede(int id_sede) {
+    String rol = Roles.rol[Roles.AUXILIAR];
+
+    List<Empleado> auxiliares = Conexion.db().select().from(DSL.table("empleado"))
+        .where("rol = '" + rol + "' and id_sede = " + Integer.toString(id_sede)).fetch().into(Empleado.class);
+
+    return auxiliares;
+  }
+
+  /**
+   * Transforma una lista de empleados que son auxiliares de una sede específica,
+   * a strings con su cedula y su nombre completo.
+   * 
+   * @param id_sede Sede en la que se buscan a los auxiliares.
+   * @return ArrayList con los auxiliares en string.
+   */
+  public static ArrayList<String> getAuxiliaresByIdParsed(int id_sede) {
+    List<Empleado> auxiliares = getAuxiliaresBySede(id_sede);
+    ArrayList<String> auxiliaresParsed = new ArrayList<>();
+
+    for (int i = 0; i < auxiliares.size(); i++) {
+      auxiliaresParsed
+          .add(auxiliares.get(i).cedula + " - " + auxiliares.get(i).nombres + " " + auxiliares.get(i).apellidos);
+    }
+    return auxiliaresParsed;
+  }
+
+  /**
+   * Obtiene la cédula de un empleado auxiliar respecto a su representación
+   * parseada por el método getAuxiliaresByIdParsed (cedula - nombre_completo).
+   * 
+   * @param name Nombre del auxiliar.
+   * @return Cédula del auxiliar.
+   */
+  public static String getCedulaAuxiliar(String name) {
+    String idAux = "";
+    for (int i = 0; i < name.length(); i++) {
+      if (Character.isWhitespace(name.charAt(i)))
+        break;
+      idAux += name.charAt(i);
+    }
+    return idAux;
   }
 }

@@ -18,7 +18,15 @@ import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
 
-// TODO Documentar.
+/**
+ * Clase controller UserConsulta. Contiene componentes y métodos gráficos
+ * relacionados a la consulta de usuarios.
+ * 
+ * @author David Henao
+ * @author Reynell Arkad Devji Quevedo
+ * @version 1.0
+ * @since 25/09/2021
+ */
 public class UserConsulta {
   @FXML
   private Button btBorrar;
@@ -46,9 +54,7 @@ public class UserConsulta {
 
   /**
    * Inicializa los datos de la tabla de empleados.
-   * 
    */
-
   public void initialize() {
 
     borrar = true;
@@ -64,12 +70,22 @@ public class UserConsulta {
     mostrarTabla();
   }
 
+  /**
+   * Carga la información en la tabla, mostrando a los empleados
+   * habilitados/deshabilitados según sea el caso.
+   */
   void mostrarTabla() {
     ObservableList<Empleado> s = FXCollections.observableArrayList();
     s.addAll(borrar ? Empleado.getEmpleadosHabilitados() : Empleado.getEmpleadosDeshabilitados());
     tableUsers.setItems(s);
   }
 
+  /**
+   * Deshabilita/habilita, según sea el caso, al empleado seleccionado en la tabla
+   * de empleados.
+   * 
+   * @param event not used.
+   */
   @FXML
   void borrar(ActionEvent event) {
     System.out.println();
@@ -85,6 +101,13 @@ public class UserConsulta {
     }
   }
 
+  /**
+   * Cambia la información desplegada en la tabla, mostrando empleados
+   * deshabilitados/habilitados. Adicionalmenre también cambia el estado actual de
+   * 'borrar', que indica si un usuario se va a habilitar o deshabilitar.
+   * 
+   * @param event not used.
+   */
   @FXML
   void showOtherUsers(ActionEvent event) {
     borrar = !borrar;
@@ -92,6 +115,10 @@ public class UserConsulta {
     mostrarTabla();
   }
 
+  /**
+   * Cambia los valores visuales de los botones que implican borrar/habilitar a un
+   * usuario, o desplegar a los empleados habilitados/deshabilitados.
+   */
   private void changeButtons() {
     btBorrar.setText(borrar ? "Borrar" : "Habilitar");
     btChange.setText(borrar ? "Mostrar deshabilitados" : "Mostrar habilitados");
@@ -108,7 +135,9 @@ public class UserConsulta {
   }
 
   /**
-   * Accede a la pestaña de edicion de empleado segúm el empleado seleccionado.
+   * Accede a la pestaña de edicion de empleado según el empleado seleccionado. En
+   * caso de no haberse seleccionado un empleado para su edición, se mostrará la
+   * respectuva alerta indicando esa situación.
    * 
    * @param event not used.
    */
