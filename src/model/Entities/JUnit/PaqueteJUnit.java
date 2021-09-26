@@ -8,7 +8,7 @@ import model.Entities.Paquete;
 public class PaqueteJUnit {
     @Test
     public void prueba1() {
-        System.out.println(Paquete.queryPaquetesSede(1));
+        // System.out.println(Paquete.queryPaquetesSede(1));
         Assert.assertTrue(true);
     }
 

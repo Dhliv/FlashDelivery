@@ -2,24 +2,19 @@ package controller.operador.envio;
 
 import model.Entities.Cliente;
 import java.util.List;
-import javax.swing.JOptionPane;
+
+import controller.operador.OperadorConsulta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import model.Entities.Empleado;
 import model.Entities.Sede;
-import utilities.Roles;
 import utilities.GeneralChecker;
-import utilities.TextFieldRestrictions;
 import utilities.View;
 import utilities.SpecificAlerts;
 
@@ -145,9 +140,8 @@ public class RecogerPaquete {
   }
 
 
-  //TODO cuando exista la pantalla operadorTabla se ha de cambiar la vista hacia la ya antes mencionada :v.
   private void goBack() {
     View.clearViews();
-    View.cambiar("operador.cliente", new OperadorRecoger(operador));
+    View.newView("operadorOficinaTabla", new OperadorConsulta(operador));
   }
 }
