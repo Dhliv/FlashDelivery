@@ -271,7 +271,7 @@ public class Empleado {
    * @param id_sede Sede en la que se buscan a los auxiliares.
    * @return ArrayList con los auxiliares en string.
    */
-  public static ArrayList<String> getAuxiliaresByIdParsed(int id_sede) {
+  public static ArrayList<String> getAuxiliaresBySedeParsed(int id_sede) {
     List<Empleado> auxiliares = getAuxiliaresBySede(id_sede);
     ArrayList<String> auxiliaresParsed = new ArrayList<>();
 
@@ -284,7 +284,7 @@ public class Empleado {
 
   /**
    * Obtiene la cédula de un empleado auxiliar respecto a su representación
-   * parseada por el método getAuxiliaresByIdParsed (cedula - nombre_completo).
+   * parseada por el método getAuxiliaresBySedeParsed (cedula - nombre_completo).
    * 
    * @param name Nombre del auxiliar.
    * @return Cédula del auxiliar.
