@@ -46,6 +46,10 @@ public class OperadorRecoger {
    */
   @FXML
   void registrarPaquetes(ActionEvent event) {
+    while (remitente.t.isAlive() || destinatario.t.isAlive()) {
+      System.out.println(remitente.t.isAlive());
+      System.out.println(destinatario.t.isAlive());
+    }
     if (!remitente.checkAndUpdateEnvio())
       return;
     if (!destinatario.checkAndUpdateEnvio())
