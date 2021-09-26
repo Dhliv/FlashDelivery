@@ -82,7 +82,7 @@ public class RegistrarPaquete {
   }
 
   boolean agregarPaquete() {
-    try { // Faltan validaciones
+    try { //TODO Faltan validaciones
       Double peso = Double.parseDouble(txtPeso.getText());
       Double valor = Double.parseDouble(txtValor.getText());
       String descripcion = txtDescripcion.getText();

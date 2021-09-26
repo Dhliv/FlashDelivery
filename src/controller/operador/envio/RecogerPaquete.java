@@ -105,7 +105,7 @@ public class RecogerPaquete {
 
     Cliente.createCliente(envio.getRemitente());
     Cliente.createCliente(envio.getDestinatario());
-
+    
     model.Peticion.createPeticion(txtAreaDescripcion.getText(), //descripcion
                                   operador.getCedula(), //Cedula operador
                                   envio.getRemitente().cedula, //cedula remitente

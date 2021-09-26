@@ -67,7 +67,6 @@ public class Pago {
    */
   public void ejecutarPago(RegistrarEnvio envio, String metodo_pago) {
 
-    // TODO implementar los siguientes métodos en hilos:
     Cliente.createCliente(envio.getRemitente());
     Cliente.createCliente(envio.getDestinatario());
     id_envio = Envio.createEnvio(envio, metodo_pago, operador);
@@ -78,7 +77,7 @@ public class Pago {
     try {
       pdf.pdfCreate(Integer.toString(id_envio));
     } catch (IOException e) {
-      // e.printStackTrace();
+      
     }
   }
 
