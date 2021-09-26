@@ -14,9 +14,6 @@ public class Peticion {
   // private int id;
   // private String descripcion, id_empleado, estado, cliente_solicitud, cliente_destinatario;
 
-  public Peticion(){
-  }
-
   /**
    * Inserta una nueva factura en la base de datos. .
    * 

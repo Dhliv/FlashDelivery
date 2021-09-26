@@ -81,6 +81,7 @@ public class RecogerPaquete {
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
     auxiliares.removeAll(auxiliares);
     auxiliares.addAll(Empleado.getAuxiliaresByIdParsed(idSede));
+    choiceAuxiliar.getItems().clear();
     choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
