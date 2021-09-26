@@ -15,15 +15,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-
 import model.Entities.Empleado;
 import model.Entities.Sede;
-
 import utilities.Roles;
 import utilities.GeneralChecker;
 import utilities.TextFieldRestrictions;
 import utilities.View;
 import utilities.SpecificAlerts;
+
 /**
  * Controlador de la vista operador.recoger
  * 
@@ -70,7 +69,7 @@ public class RecogerPaquete {
     choiceSede.setValue(sedes.get(0).toString());
 
     auxiliares.removeAll(auxiliares);
-    auxiliares.addAll(Empleado.getAuxiliaresByIdParsed(Sede.getSedes().get(0).getId()));
+    auxiliares.addAll(Empleado.getAuxiliaresBySedeParsed(Sede.getSedes().get(0).getId()));
     choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
@@ -80,7 +79,7 @@ public class RecogerPaquete {
 
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
     auxiliares.removeAll(auxiliares);
-    auxiliares.addAll(Empleado.getAuxiliaresByIdParsed(idSede));
+    auxiliares.addAll(Empleado.getAuxiliaresBySedeParsed(idSede));
     choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
@@ -97,39 +96,45 @@ public class RecogerPaquete {
   }
 
   /**
-   * Valida los datos obtenidos de los campos rellenables verificando que no haya campos sin llenar o que existan caracteres vacíos.
-   * @return True si cumple las validaciones y no hay problemas, False de lo contrario.
+   * Valida los datos obtenidos de los campos rellenables verificando que no haya
+   * campos sin llenar o que existan caracteres vacíos.
+   * 
+   * @return True si cumple las validaciones y no hay problemas, False de lo
+   *         contrario.
    */
-  private Boolean validateData(){
+  private Boolean validateData() {
     String desc = txtAreaDescripcion.getText();
     String cedula = choiceAuxiliar.getValue() == null ? "" : Empleado.getCedulaAuxiliar(choiceAuxiliar.getValue());
     String idSede = choiceSede.getValue() == null ? "" : Integer.toString(Sede.getIdSede(choiceSede.getValue()));
 
-    String[] campos = {desc, cedula, idSede};
+    String[] campos = { desc, cedula, idSede };
     boolean camposVacios = GeneralChecker.checkEmpty(campos, new Object[0]);
     boolean forbiddenChar = GeneralChecker.checkChar(campos);
 
-    if(camposVacios || forbiddenChar){
-      if(camposVacios)
+    if (camposVacios || forbiddenChar) {
+      if (camposVacios)
         SpecificAlerts.showEmptyFieldAlert();
-      if(forbiddenChar)
+      if (forbiddenChar)
         SpecificAlerts.showCharForbidenAlert();
       return Boolean.FALSE;
-    }else return Boolean.TRUE;
+    } else
+      return Boolean.TRUE;
   }
 
   public void insertData() {
-    if(!validateData())
+    if (!validateData())
       return;
-    
+
     String descripcion = txtAreaDescripcion.getText();
-    // String cedulaAuxiliar = Empleado.getCedulaAuxiliar(choiceAuxiliar.getValue());
+    // String cedulaAuxiliar =
+    // Empleado.getCedulaAuxiliar(choiceAuxiliar.getValue());
     // int idSede = Sede.getIdSede(choiceSede.getValue());
 
     Cliente.createCliente(envio.getRemitente());
     Cliente.createCliente(envio.getDestinatario());
-    model.Peticion.createPeticion(descripcion, operador.getCedula(), envio.getRemitente().cedula, envio.getDestinatario().cedula);
-  
+    model.Peticion.createPeticion(descripcion, operador.getCedula(), envio.getRemitente().cedula,
+        envio.getDestinatario().cedula);
+
   }
 
   private void goBack() {
