@@ -14,7 +14,6 @@ public class Paquete {
   public Double total;
   public Double peso;
   public Double alto, ancho, largo;
-
   public String descripcion;
   public boolean seguro;
   // Others
@@ -68,15 +67,4 @@ public class Paquete {
         .values(id_envio, p.getDescripcion(), p.getPeso(), p.getSeguro(), p.getAlto(), p.getAncho(), p.getLargo(), p.getValor()).execute();
     Conexion.closeConnection();
   }
-
-  /**
-   * @deprecated !TODO NO ESTÁ IMPLEMENTADO DE ACUERDO A LOS CAMBIOS
-   * @param id_sede
-   * @return
-   */
-  public static List<Paquete> queryPaquetesSede(Integer id_sede) {
-    List<Paquete> pq = Conexion.db().select().from("paquete").innerJoin("envio").on("paquete.id_envio = envio.id").where("id_sede = " + id_sede).fetch().into(Paquete.class);
-    return pq;
-  }
-
 }

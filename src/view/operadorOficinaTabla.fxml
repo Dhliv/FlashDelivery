@@ -9,10 +9,12 @@
    <children>
       <TableView fx:id="tPaquetes" focusTraversable="false" layoutY="10.0" prefHeight="760.0" prefWidth="1010.0">
          <columns>
-            <TableColumn fx:id="tcDestinatario" prefWidth="315.9999809265137" text="Destinatario" />
-            <TableColumn fx:id="tcIdPaquete" prefWidth="110.4000244140625" text="ID del paquete" />
-            <TableColumn fx:id="tcPesoPaquete" prefWidth="309.5999755859375" text="Peso del paquete" />
-            <TableColumn fx:id="tcEstado" prefWidth="280.800048828125" text="Estado" />
+            <TableColumn fx:id="tcFechaRegistro" prefWidth="96.0" text="Fecha registro" />
+            <TableColumn fx:id="tcMetodoPago" prefWidth="118.0" text="Metodo de pago" />
+            <TableColumn fx:id="tcDireccionEntrega" prefWidth="355.0" text="Direccion de entrega" />
+            <TableColumn fx:id="tcRemitente" prefWidth="190.0" text="Remitente" />
+            <TableColumn fx:id="tcDestinatario" minWidth="0.0" prefWidth="166.0" text="Destinatario" />
+            <TableColumn fx:id="tcEstado" maxWidth="432.0" prefWidth="84.0" text="Estado" />
          </columns>
       </TableView>
    </children>
