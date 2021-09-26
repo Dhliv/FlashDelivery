@@ -15,7 +15,7 @@ public class GeneralChecker {
         char F[] = { ',', '\'', '\"', '*', '=', '+', '!' };
 
         for (int i = 0; i < campo.length; i++) {
-            if(campo[i] == null) return true;
+            if(campo[i] == null) continue;
             
             for (int j = 0; j < campo[i].length(); j++) {
                 for (int k = 0; k < F.length; k++) {
