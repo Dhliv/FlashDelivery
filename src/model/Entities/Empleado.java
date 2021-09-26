@@ -128,11 +128,11 @@ public class Empleado {
     List<Empleado> sedes = Conexion.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query
                                                                                                  // 'sql'.
     Conexion.closeConnection();
-
     return sedes;
   }
 
   /**
+   * TODO Usar los metodoss de jOOQ
    * Actualiza en la BD los datos del empleado que fueron editados (la cedula no
    * cambia nunca).
    * 
@@ -142,11 +142,11 @@ public class Empleado {
     String sql = "update empleado set nombres='" + empleado.getNombres() + "', rol='" + empleado.getRol()
         + "', direccion='" + empleado.getDireccion() + "', telefono='" + empleado.getTelefono() + "', birthdate='"
         + empleado.getBirthdate() + "', sede=" + empleado.getSede() + " where cedula='" + empleado.getCedula() + "'";
-
     Conexion.db().execute(sql);
   }
 
   /**
+   * TODO usar los metodos de jOOQ
    * El método inserta un empleado en la base de datos.
    * 
    * @param e Empleado a insertar.
