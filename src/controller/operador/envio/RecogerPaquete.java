@@ -3,7 +3,7 @@ package controller.operador.envio;
 import model.Entities.Cliente;
 import java.util.List;
 
-import controller.operador.OperadorConsulta;
+import controller.operador.verPaquetes.OperadorConsulta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
