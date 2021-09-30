@@ -47,7 +47,7 @@ public class Envio {
     return metodo_pago;
   }
 
-  public String getCliente_envio(){
+  public String getCliente_envio() {
     return cliente_envio;
   }
 
@@ -56,8 +56,8 @@ public class Envio {
   }
 
   /**
-   * Inserta un envío en la base de datos con sus
-   * respectivos parametros, y retorna el id del envío recién insertado.
+   * Inserta un envío en la base de datos con sus respectivos parametros, y
+   * retorna el id del envío recién insertado.
    * 
    * @param fecha_registro
    * @param metodo_pago
@@ -110,19 +110,8 @@ public class Envio {
    * @return Lista de envíos existentes en la sede.
    */
   public static List<Envio> getEnviosBySede(Integer id_sede) {
-    List<Envio> envios = Conexion.db().select().from("envio").where("id_sede = " + id_sede).fetch().into(Envio.class);
+    List<Envio> envios = Conexion.db().select().from("envio").naturalJoin("paquete").where("id_sede = " + id_sede).fetch().into(Envio.class);
     Conexion.closeConnection();
     return envios;
-  }
-
-  /**
-   * Obtiene una lista de envíos que están asigndaos en una sede en específico.
-   *
-   * @param id_sede Sede donde se buscan los envíos.
-   * @return Lista de envíos.
-   */
-  public static List<Envio> queryPaquetesSede(Integer id_sede) {
-    List<Envio> pq = Conexion.db().select().from("envio").where("id_sede = " + id_sede).fetch().into(Envio.class);
-    return pq;
   }
 }

@@ -71,4 +71,10 @@ public class Paquete {
         .execute();
     Conexion.closeConnection();
   }
+
+  public static Paquete cargarPaquete(int id) {
+    List<Paquete> pq = Conexion.db().select().from("paquete").where("id =" + id).fetch().into(Paquete.class);
+    Conexion.closeConnection();
+    return (!pq.isEmpty() ? pq.get(0) : null);
+  }
 }
