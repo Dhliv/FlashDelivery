@@ -1,29 +1,15 @@
 package controller.gerente;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Vector;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.input.MouseEvent;
-import utilities.Globals;
-import utilities.View;
 
 public class ReporteEmpresa implements Initializable {
 
-    final static String austria = "Austria";
-    final static String brazil = "Brazil";
-    final static String france = "France";
-    final static String italy = "Italy";
-    final static String usa = "USA";
     private String[] fecha;           //Fechas o Intervalos de tiempo que se mostrarán en el grafico
     private String[] sedeNombre;      //Nombre de la o las sedes que son solicitadas en el reporte
     private Number[][] sedeInformacion; //Información cuantitativa que se quiere mostrar en el grafico
@@ -31,19 +17,17 @@ public class ReporteEmpresa implements Initializable {
     private Integer NUMERO_SEDES;
     private String[] informe;
 
-    // @FXML
-    // private ChoiceBox<?> sedeChoicebox;
     @FXML
     private BarChart<String, Number> barchart;
 
     /**
      * Crea una grafica de barras.
      * 
-     * @param informe           Array conformado por: nombre del informe, eje X y eje Y.
+     * @param informe           Array conformado por nombre de: {informe, eje X y eje Y}.
      * @param fecha             Textos UNICOS que aparecen en el eje X
      * @param sedeNombre        Nombre de la o las sedes que son solicitadas en el reporte
      * @param sedeInformacion   Información cuantitativa que se quiere mostrar en el grafico
-     *                          En el primer Array identifica una sede, en el segundo
+     *                          En la primer dimesión se identifica una sede, en la segunda
      *                          se añaden cada uno de los datos correspondientes a esta.
      */
     public ReporteEmpresa(String[] informe, String[] fecha, String[] sedeNombre, Number[][] sedeInformacion){

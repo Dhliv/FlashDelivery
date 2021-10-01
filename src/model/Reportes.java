@@ -23,9 +23,9 @@ public class Reportes {
 
   /**
    * Obtiene el número de paquetes que hay en una sede (enviados o no) y la sede a
-   * la que pertenecen.
+   * la que pertenecen. (Overview)
    * 
-   * @return Lista de sedes y su respecitov número de paquetes.
+   * @return Lista de sedes y su respectivos número de paquetes.
    */
   public static List<Reportes> getNumeroPaquetesBySede() {
     String sql = "select S.nombre as nombre_sede, count(E.id_sede) as numero_paquetes from envio as E inner join sede as S on E.id_sede = S.id group by S.nombre;";
@@ -42,5 +42,14 @@ public class Reportes {
     String sql = "select metodo_pago, count(metodo_pago) as veces_usado from envio group by metodo_pago;";
     List<Reportes> frecuenciaMetodoPago = Conexion.db().fetch(sql).into(Reportes.class);
     return frecuenciaMetodoPago;
+  }
+
+  /**
+   * Retorna los medios de pago usados por la
+   * @return
+   */
+  public static Number[] getMedioDePago(int sede){
+    Number[] prueba = new Number[]{1,2,3,4,5,6,7,8,9,10,11,12};
+    return prueba;
   }
 }

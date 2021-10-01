@@ -1,6 +1,9 @@
 package controller.gerente;
 
 import utilities.View;
+
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import model.Entities.Sede;
 
 public class Reportes {
+
     @FXML
     private ChoiceBox<String> sedeChoicebox;
 
@@ -23,36 +27,37 @@ public class Reportes {
 
     @FXML
     void mediosDePago(MouseEvent event) {
-      enviar(CreateChart.medioDePago());
+      ArrayList<Integer> sedeSeleccionada = new ArrayList<Integer>();
+
+      if(sedeChoicebox.getValue().equals("Todas")){
+        var items = sedeChoicebox.getItems();
+        for (int i=1; i<items.size(); i++) {
+          sedeSeleccionada.add(Sede.getIdSede(items.get(i)));
+        }
+      } 
+      else sedeSeleccionada.add(Sede.getIdSede(sedeChoicebox.getValue()));
+      
+      CreateChart.medioDePago(sedeSeleccionada);
     }
 
     @FXML
     void paquetesEnviados(MouseEvent event) {
-      enviar(CreateChart.paquetesEnviados());
+      CreateChart.paquetesEnviados();
     }
 
     @FXML
     void servicioSolicitado(MouseEvent event) {
-      enviar(CreateChart.servicioSolicitado());
+      CreateChart.servicioSolicitado();
     }
 
     @FXML
     void ventasMensuales(MouseEvent event) {
-      enviar(CreateChart.ventasMensuales());
+      CreateChart.ventasMensuales();
     }
 
     @FXML
     void ventasSemanales(MouseEvent event) {
-      enviar(CreateChart.ventasSemanales());
-    }
-
-    void enviar(Object[] chartInformation){
-      View.newView("vacio.completo", new ReporteEmpresa(
-                                                        (String[]) chartInformation[0],
-                                                        (String[]) chartInformation[1],
-                                                        (String[]) chartInformation[2],
-                                                        (Number[][]) chartInformation[3]
-        ));
+      CreateChart.ventasSemanales();
     }
 
 }
