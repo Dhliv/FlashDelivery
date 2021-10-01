@@ -49,7 +49,7 @@ public class Admin {
 
   @FXML
   void goToAdminReportes(ActionEvent event) {
-    Globals.cambiarVista("reportes");
+    Globals.cambiarVista("reportes", new Reportes());
   }
 
   @FXML
