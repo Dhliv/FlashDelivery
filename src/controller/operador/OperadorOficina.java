@@ -3,6 +3,7 @@ package controller.operador;
 import controller.operador.envio.OperadorRecoger;
 import controller.operador.envio.RecogerPaquete;
 import controller.operador.envio.RegistrarClientes;
+import controller.operador.verPaquetes.OperadorConsulta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

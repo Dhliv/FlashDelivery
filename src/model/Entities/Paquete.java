@@ -63,8 +63,18 @@ public class Paquete {
   }
 
   public static void createPaquete(Paquete p, int id_envio) {
-    Conexion.db().insertInto(DSL.table("paquete"), DSL.field("id"), DSL.field("descripcion"), DSL.field("peso"), DSL.field("seguro"), DSL.field("alto"), DSL.field("ancho"), DSL.field("largo"), DSL.field("valor"))
-        .values(id_envio, p.getDescripcion(), p.getPeso(), p.getSeguro(), p.getAlto(), p.getAncho(), p.getLargo(), p.getValor()).execute();
+    Conexion.db()
+        .insertInto(DSL.table("paquete"), DSL.field("id"), DSL.field("descripcion"), DSL.field("peso"),
+            DSL.field("seguro"), DSL.field("alto"), DSL.field("ancho"), DSL.field("largo"), DSL.field("valor"))
+        .values(id_envio, p.getDescripcion(), p.getPeso(), p.getSeguro(), p.getAlto(), p.getAncho(), p.getLargo(),
+            p.getValor())
+        .execute();
     Conexion.closeConnection();
+  }
+
+  public static Paquete cargarPaquete(int id) {
+    List<Paquete> pq = Conexion.db().select().from("paquete").where("id =" + id).fetch().into(Paquete.class);
+    Conexion.closeConnection();
+    return (!pq.isEmpty() ? pq.get(0) : null);
   }
 }
