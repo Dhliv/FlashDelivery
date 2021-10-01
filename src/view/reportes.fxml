@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -15,42 +14,23 @@
       <Separator layoutY="90.0" prefWidth="1020.0" />
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="90.0" prefWidth="1020.0">
          <children>
-            <Pane layoutX="494.0" layoutY="26.0">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="94.5" text="Diario" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Semanal" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Mensual" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
-            <ChoiceBox layoutX="60.0" layoutY="40.0" prefWidth="150.0" />
-            <Label layoutX="60.0" layoutY="26.0" text="Sede" />
+            <ChoiceBox fx:id="sedeChoicebox" layoutX="60.0" layoutY="40.0" prefWidth="150.0" />
+            <Label layoutX="60.0" layoutY="23.0" text="Sede" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="90.0" minHeight="0.0" minWidth="0.0" prefHeight="670.0" prefWidth="1020.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="116.0" layoutY="295.0" text="Paquetes Entregados">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="116.0" layoutY="295.0" text="Ventas semanales">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="476.0" layoutY="295.0" text="Ingresos">
+            <Label layoutX="439.0" layoutY="295.0" text="Ventas mensuales">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="783.0" layoutY="295.0" text="Algo mas">
+            <Label layoutX="746.0" layoutY="295.0" text="Paquetes enviados">
                <font>
                   <Font size="18.0" />
                </font>
@@ -60,32 +40,32 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="483.0" layoutY="608.0" text="Gastos">
+            <Label layoutX="438.0" layoutY="608.0" text="Servicio solicitado">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="125.0" layoutY="608.0" text="Paquetes recibidos">
+            <Label layoutX="92.0" layoutY="608.0" text="Medios de pago usados">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="35.0" pickOnBounds="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="35.0" onMouseClicked="#ventasSemanales" pickOnBounds="true">
                <image>
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="35.0" pickOnBounds="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="35.0" onMouseClicked="#paquetesEnviados" pickOnBounds="true">
                <image>
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="35.0" pickOnBounds="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="35.0" onMouseClicked="#ventasMensuales" pickOnBounds="true">
                <image>
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="350.0" pickOnBounds="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="350.0" onMouseClicked="#mediosDePago" pickOnBounds="true">
                <image>
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
@@ -95,7 +75,7 @@
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="350.0" pickOnBounds="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="350.0" onMouseClicked="#servicioSolicitado" pickOnBounds="true">
                <image>
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
