@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.impl.*;
@@ -44,13 +45,24 @@ public class Reportes {
     return frecuenciaMetodoPago;
   }
 
-  //TODO @WINJA REALIZAR ESTA Y LAS DEMÁS QUERIES SOLITICADAS.
+  //TODO @WINJA REALIZAR ESTA Y LAS DEMÁS QUERIES SOLICITADAS.
+
   /**
    * Retorna los medios de pago usados por la
+   * sede
+   * @param id_sede El id de la sede.
    * @return
    */
-  public static Number[] getMedioDePago(int sede){
-    Number[] prueba = new Number[]{1,2,3,4,5,6,7,8,9,10,11,12};
+  public static Number[] getMedioDePago(int id_sede){
+    Number[] prueba = new Number[]{1,2,3,4,5,6,7,8,9,10,11,12}; //Solo para efectos practicos.
+    ArrayList<Number> datos = new ArrayList<Number>();
+
+    //TODO @REYJALL @WINNELL @ARKADIA 
+    //! VAN EN MESES LAS FECHAS QUE NECESITO A MENOS DE QUE SE REQUIERA EXPLICITAMENTE LO CONTRARIO.
+    // for(int i=0; i<NUMERO_DE_DATOS_ARBITRARIO; i++){
+    //   datos.add(funcion_que_me_de_los_cosos_de_pago(id_sede, fecha_que_necesito_arbitrariamente));
+    // }
+    // return datos.toArray();
     return prueba;
   }
 
@@ -66,6 +78,9 @@ public class Reportes {
     //1 - Semanas
     //2 - Meses
     //3 - Años
+    //! SE REQUIERE EXPLICITAMENTE LO CONTRARIO AL MENSAJE QUE ESTÁ EN getMedioDePago.
+
+
     return null;
   }
   
