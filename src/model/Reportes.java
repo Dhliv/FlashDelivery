@@ -44,6 +44,7 @@ public class Reportes {
     return frecuenciaMetodoPago;
   }
 
+  //TODO @WINJA REALIZAR ESTA Y LAS DEMÁS QUERIES SOLITICADAS.
   /**
    * Retorna los medios de pago usados por la
    * @return
