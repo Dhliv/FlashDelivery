@@ -16,12 +16,9 @@ public class CreateChart {
   private final Integer SEMANAS = 1;
   private final Integer MESES = 2;
   private final Integer AÑOS = 3;
-  private Integer periodo = MESES;
   private final String[][] intervalos;
   private ArrayList<Integer> sedeId;
- 
-
-
+  
   /**
    * Crea un Diagrama de barras con los datos de las sedes y el periodo seleccionado.
    */
@@ -34,7 +31,7 @@ public class CreateChart {
     this.intervalos[MESES] = new String[]{"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
     this.intervalos[AÑOS] = new String[]{};
 
-    this.fecha = intervalos[periodo];
+    this.fecha = intervalos[MESES];
     this.sedeNombre = new ArrayList<String>();
   }
 
@@ -47,10 +44,9 @@ public class CreateChart {
   public void setSedeId(ArrayList<Integer> sedeId){
     this.sedeId = sedeId;
     sedeNombre.clear();
-    this.sedeId.forEach((sede) -> {
-                                    sedeNombre.add(Sede.parseSede(sede));
-                                  }
-                      );
+    for (Integer sede : sedeId) 
+      sedeNombre.add(Sede.parseSede(sede));
+    
     this.sedeInformacion = new Number[sedeId.size()][];
   }
 
@@ -63,7 +59,7 @@ public class CreateChart {
    * 3 - AÑOS
    */
   public void setPeriodo(Integer periodo){
-    this.periodo = periodo;
+    this.fecha = intervalos[periodo];
   }
 
   /**
@@ -119,7 +115,7 @@ public class CreateChart {
     informe = new String[]{"Ventas mensuales", "Mes", "Dinero"};
 
     for(int i=0; i<sedeId.size(); i++){
-      sedeInformacion[i] = model.Reportes.ventas(sedeId.get(i), 2);  //Agrega la información de la query de pago.
+      sedeInformacion[i] = model.Reportes.ventas(sedeId.get(i), MESES);  //Agrega la información de la query de pago.
     }
     
     View.newView("vacio.completo", new ReporteEmpresa(informe,fecha,sedeNombre.toArray(new String[0]),sedeInformacion));
@@ -134,7 +130,7 @@ public class CreateChart {
     informe = new String[]{"Ventas semanales", "Mes", "Dinero"};
 
     for(int i=0; i<sedeId.size(); i++){
-      sedeInformacion[i] = model.Reportes.ventas(sedeId.get(i), 1);  //Agrega la información de la query de pago.
+      sedeInformacion[i] = model.Reportes.ventas(sedeId.get(i), SEMANAS);  //Agrega la información de la query de pago.
     }
 
     View.newView("vacio.completo", new ReporteEmpresa(informe,fecha,sedeNombre.toArray(new String[0]),sedeInformacion));
