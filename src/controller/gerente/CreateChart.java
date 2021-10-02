@@ -1,46 +1,145 @@
 package controller.gerente;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Consumer;
 
 import model.Entities.Sede;
 import utilities.View;
 
 public class CreateChart {
 
-  private static String[] informe;
-  private static String[] fecha;
-  private static ArrayList<String> sedeNombre;
-  private static Number[][] sedeInformacion;
-  private static final String[] MESES = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+  private String[] informe;
+  private String[] fecha;
+  private ArrayList<String> sedeNombre;
+  private Number[][] sedeInformacion;
+  private final Integer DIAS = 0;
+  private final Integer SEMANAS = 1;
+  private final Integer MESES = 2;
+  private final Integer AÑOS = 3;
+  private Integer periodo = MESES;
+  private final String[][] intervalos;
+  private ArrayList<Integer> sedeId;
+ 
+
 
   /**
-   * Carga los datos que necesita ReporteEmpresa para crear un Chart
-   * relacionada a los métodos de pago.
-   * @param sedeId  Lista con los IDs de las sedes solicitadas.
+   * Crea un Diagrama de barras con los datos de las sedes y el periodo seleccionado.
+   * @param sedeId  Las sedes o sede seleccionada para crear el informe
+   * @param periodo El periodo en el que se dispondrá a realizar dicho informe.
    */
-  public static void medioDePago(ArrayList<Integer> sedeId){
+  public CreateChart(){
+
+    this.intervalos = new String[4][];
+    //TODO @Winja HACER FUNCIÓN PARA LOS DÍAS, MESES Y AÑOS.
+    this.intervalos[DIAS] = new String[]{"Lunes","Marter","Miercoles","Jueves","Viernes","Sabado","Domingo"};
+    this.intervalos[SEMANAS] = new String[]{"Lunes","Marter","Miercoles","Jueves","Viernes","Sabado","Domingo"};
+    this.intervalos[MESES] = new String[]{"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+    this.intervalos[AÑOS] = new String[]{};
+
+    this.fecha = intervalos[periodo];
+    this.sedeNombre = new ArrayList<String>();
+  }
+
+  /**
+   * Cambia las sedes seleccionadas para mostrar en el diagrama.
+   * Además, modifica el array sedeNombre que almacena los nombres
+   * correspondientes a las sedes.
+   * @param sedeId Lista de sedes que se mostraran en el diagrama
+   */
+  public void setSedeId(ArrayList<Integer> sedeId){
+    this.sedeId = sedeId;
+    sedeNombre.clear();
+    this.sedeId.forEach((sede) -> {
+                                    sedeNombre.add(Sede.parseSede(sede));
+                                  }
+                      );
+    this.sedeInformacion = new Number[sedeId.size()][];
+  }
+
+  /**
+   * Cambia el periodo en el que se mostrarán los datos.
+   * @param periodo valor numerico que representa:
+   * 0 - DIAS
+   * 1 - SEMANAS
+   * 2 - MESES
+   * 3 - AÑOS
+   */
+  public void setPeriodo(Integer periodo){
+    this.periodo = periodo;
+  }
+
+  /**
+   * Carga los datos que necesita ReporteEmpresa para crear un 
+   * diagrama de barras relacionada a los métodos de pago.
+   */
+  public void medioDePago(){
 
     informe = new String[]{"Dinero Mensual","Mes","Dinero"};
-    fecha = MESES;
-    sedeNombre =  new ArrayList<String>();
-    sedeInformacion = new Number[2][];
 
     for(int i=0; i<sedeId.size(); i++){
-      sedeNombre.add(Sede.parseSede(sedeId.get(i)));                      //Agrega el nombre de la sede con ID "sedeId.get(i)"
       sedeInformacion[i] = model.Reportes.getMedioDePago(sedeId.get(i));  //Agrega la información de la query de pago.
+    }
+
+
+    View.newView("vacio.completo", new ReporteEmpresa(informe,fecha,sedeNombre.toArray(new String[0]),sedeInformacion));
+  }
+
+  /**
+   * Carga los datos que necesita ReporteEmpresa para crear un 
+   * diagrama de barras relacionada a los paquetes enviados
+   */
+  public void paquetesEnviados(){
+    
+    informe = new String[]{"Paquetes enviados por mes", "Mes", "Dinero"};
+    
+    for(int i=0; i<sedeId.size(); i++){
+      sedeInformacion[i] = model.Reportes.getPaquetesEnviados(sedeId.get(i));  //Agrega la información de la query de pago.
+    }
+
+    View.newView("vacio.completo", new ReporteEmpresa(informe,fecha,sedeNombre.toArray(new String[0]),sedeInformacion));
+  }
+
+  /**
+   * Carga los datos que necesita ReporteEmpresa para crear un 
+   * diagrama de barras relacionada a los servicios solicitados.
+   */
+  public void servicioSolicitado(){
+    
+    informe = new String[]{"servicios solicitados por mes", "Mes", "Dinero"};
+    for(int i=0; i<sedeId.size(); i++){
+      sedeInformacion[i] = model.Reportes.getServicioSoliticado(sedeId.get(i));  //Agrega la información de la query de pago.
+    }
+
+    View.newView("vacio.completo", new ReporteEmpresa(informe,fecha,sedeNombre.toArray(new String[0]),sedeInformacion));
+  }
+
+  /**
+   * Carga los datos que necesita ReporteEmpresa para crear un 
+   * diagrama de barras relacionada a las ventas mensuales
+   */
+  public void ventasMensuales(){
+    informe = new String[]{"Ventas mensuales", "Mes", "Dinero"};
+
+    for(int i=0; i<sedeId.size(); i++){
+      sedeInformacion[i] = model.Reportes.ventas(sedeId.get(i), 2);  //Agrega la información de la query de pago.
     }
     
     View.newView("vacio.completo", new ReporteEmpresa(informe,fecha,sedeNombre.toArray(new String[0]),sedeInformacion));
   }
-  public static void paquetesEnviados(){
+
+  /**
+   * Carga los datos que necesita ReporteEmpresa para crear un 
+   * diagrama de barras relacionada a las ventas semanales
+   */
+  public void ventasSemanales(){
     
-  }
-  public static void servicioSolicitado(){
-  }
-  public static void ventasMensuales(){
-  }
-  public static void ventasSemanales(){
+    informe = new String[]{"Ventas semanales", "Mes", "Dinero"};
+
+    for(int i=0; i<sedeId.size(); i++){
+      sedeInformacion[i] = model.Reportes.ventas(sedeId.get(i), 1);  //Agrega la información de la query de pago.
+    }
+
+    View.newView("vacio.completo", new ReporteEmpresa(informe,fecha,sedeNombre.toArray(new String[0]),sedeInformacion));
   }
   
 }
