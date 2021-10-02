@@ -24,8 +24,6 @@ public class CreateChart {
 
   /**
    * Crea un Diagrama de barras con los datos de las sedes y el periodo seleccionado.
-   * @param sedeId  Las sedes o sede seleccionada para crear el informe
-   * @param periodo El periodo en el que se dispondrá a realizar dicho informe.
    */
   public CreateChart(){
 
