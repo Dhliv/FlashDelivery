@@ -53,4 +53,21 @@ public class Reportes {
     Number[] prueba = new Number[]{1,2,3,4,5,6,7,8,9,10,11,12};
     return prueba;
   }
+
+  //TODO @WINJA
+  public static Number[] getPaquetesEnviados(Integer sede) {
+    return null;
+  }
+  public static Number[] getServicioSoliticado(Integer sede) {
+    return null;
+  }
+  public static Number[] ventas(Integer sede, Integer intervalos) {
+    //0 - Dias
+    //1 - Semanas
+    //2 - Meses
+    //3 - Años
+    return null;
+  }
+  
+  
 }
