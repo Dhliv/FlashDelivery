@@ -25,6 +25,7 @@ public class ReporteEmpresa implements Initializable {
     @FXML
     private BarChart<String, Number> barchart;
 
+    
     /**
      * Crea una grafica de barras.
      * 

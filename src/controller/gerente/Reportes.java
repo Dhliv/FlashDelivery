@@ -25,6 +25,7 @@ public class Reportes {
       
     }
 
+    
     @FXML
     void mediosDePago(MouseEvent event) {
       createChart.setSedeId(getSedesSeleccionadas());
