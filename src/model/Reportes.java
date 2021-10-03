@@ -31,77 +31,73 @@ public class Reportes {
    * 
    * @return Lista de sedes y su respectivos número de paquetes.
    */
-  public static List<Reportes> getNumeroPaquetesBySede() {
-    String sql = "select S.nombre as nombre_sede, count(E.id_sede) as numero_paquetes from envio as E inner join sede as S on E.id_sede = S.id group by S.nombre;";
-    List<Reportes> numeroPaquetesBySede = Conexion.db().fetch(sql).into(Reportes.class);
-    return numeroPaquetesBySede;
+  public static Number[] getNumeroPaquetesBySede(int id_sede) {
+    Number[] data = new Number[6];
+    String sql = "select S.nombre as nombre_sede, count(E.id_sede) as numero_paquetes from envio as E inner join sede as S on E.id_sede = S.id where E.id_sede = "
+        + id_sede + " and ";
+
+    String aux;
+    LocalDate present = LocalDate.now();
+    for (int i = 0; i < 6; ++i) {
+      aux = sql + " (E.fecha_registro <= '" + present.toString() + "' and E.fecha_registro >'"
+          + present.minusMonths(1).toString() + "') group by S.nombre";
+      present = present.minusMonths(1);
+      List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
+      data[i] = (!list.isEmpty() ? list.get(0).numero_paquetes : 0);
+    }
+
+    return data;
   }
 
+  // TODO no sabemos exactamente como armar esta query, pues por sede existen 3
+  // métodos de pago.
   /**
    * Obtiene el número de veces que se ha usado un método de pago en específico.
    * 
    * @return Lista de métodos de pago y las veces que se ha usado.
    */
-  public static List<Reportes> getFrecuenciaMetodoPago() {
-    String sql = "select metodo_pago, count(metodo_pago) as veces_usado from envio group by metodo_pago;";
-    List<Reportes> frecuenciaMetodoPago = Conexion.db().fetch(sql).into(Reportes.class);
-    return frecuenciaMetodoPago;
+  public static List<Reportes> getFrecuenciaMetodoPago(int id_sede) {
+    Number[] data = new Number[6];
+    LocalDate present = LocalDate.now();
+    String aux;
+    String sql = "select metodo_pago, count(metodo_pago) as veces_usado from envio where id_sede = " + id_sede + " and";
+
+    for (int i = 0; i < 6; ++i) {
+      aux = sql + " (fecha_registro <= '" + present.toString() + "' and fecha_registro >'"
+          + (mensual ? present.minusMonths(1).toString() : present.minusWeeks(1)).toString()
+          + "') group by metodo_pago;";
+      present = mensual ? present.minusMonths(1) : present.minusWeeks(1);
+      List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
+      data[i] = (!list.isEmpty() ? list.get(0).veces_usado : 0);
+    }
+
+    return data;
   }
 
   /**
-   * Obtiene una lista de ventas por sede para un periodo de tiempo espicificado.
-   * El tamaño de la lista es el número de dias que hay desde el inicio hasta al
-   * final del intervalo de tiempo.
+   * Obtiene una array de Number con las ventas en la sede específica para un
+   * periodo de tiempo de 6 semanas o 6 meses sugún se desee. El tamaño del array
+   * es siempre 6.
    * 
-   * @param inicio Inicio del intervalo de tiempo a consultar.
-   * @param end    Fin del intervalo de tiempo a consultar.
-   * @return Lista de ventas por sede.
+   * @return Array de ventas por sede.
    */
-  public static List<Reportes> getVentasBySedeAndSpecificTime(LocalDate inicio, LocalDate end) {
-    String sql = "select S.nombre as nombre_sede, cast(sum(F.costo) as numeric) as total_sede from envio as E inner join facturacion as F on E.id = F.id_envio inner join sede as S on S.id = E.id_sede where E.fecha_registro = '"
-        + inicio.toString() + "' group by S.nombre";
-    List<Reportes> ventasBySede = Conexion.db().fetch(sql).into(Reportes.class);
-    return ventasBySede;
-  }
+  public static Number[] getVentasBySedeAndSpecificTime(int id_sede, Boolean mensual) {
+    Number[] data = new Number[6];
+    LocalDate present = LocalDate.now();
+    String aux;
+    String sql = "select S.nombre as nombre_sede, cast(sum(F.costo) as numeric) "
+        + "as total_sede from envio as E inner join facturacion as F on E.id = F.id_envio "
+        + "inner join sede as S on S.id = E.id_sede where E.id_sede =" + id_sede + " and";
 
-  // TODO @WINJA REALIZAR ESTA Y LAS DEMÁS QUERIES SOLICITADAS.
+    for (int i = 0; i < 6; ++i) {
+      aux = sql + " (E.fecha_registro <= '" + present.toString() + "' and E.fecha_registro >'"
+          + (mensual ? present.minusMonths(1).toString() : present.minusWeeks(1)).toString() + "') group by S.nombre";
+      present = mensual ? present.minusMonths(1) : present.minusWeeks(1);
+      List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
+      data[i] = (!list.isEmpty() ? list.get(0).total_sede : 0);
+    }
 
-  /**
-   * Retorna los medios de pago usados por la sede
-   * 
-   * @param id_sede El id de la sede.
-   * @return
-   */
-  public static Number[] getMedioDePago(int id_sede) {
-    Number[] prueba = new Number[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }; // Solo para efectos practicos.
-    ArrayList<Number> datos = new ArrayList<Number>();
-
-    // TODO @REYJALL @WINNELL @ARKADIA
-    // ! VAN EN MESES LAS FECHAS QUE NECESITO A MENOS DE QUE SE REQUIERA
-    // EXPLICITAMENTE LO CONTRARIO.
-    // for(int i=0; i<NUMERO_DE_DATOS_ARBITRARIO; i++){
-    // datos.add(funcion_que_me_de_los_cosos_de_pago(id_sede,
-    // fecha_que_necesito_arbitrariamente));
-    // }
-    // return datos.toArray();
-    return prueba;
-  }
-
-  // TODO @WINJA
-  public static Number[] getPaquetesEnviados(Integer sede) {
-    return null;
-  }
-
-  public static Number[] getServicioSoliticado(Integer sede) {
-    return null;
-  }
-
-  public static Number[] ventas(Integer sede, Integer intervalos) {
-    // 0 - Dias
-    // 1 - Semanas
-    // 2 - Meses
-    // 3 - Años
-    return null;
+    return data;
   }
 
 }

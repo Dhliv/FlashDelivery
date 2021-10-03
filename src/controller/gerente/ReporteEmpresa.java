@@ -42,7 +42,6 @@ public class ReporteEmpresa implements Initializable {
       NUMERO_FECHAS = fecha.length;
       NUMERO_SEDES = sedeInformacion.length;
       this.informe = informe;
-
     }
 
     @Override
