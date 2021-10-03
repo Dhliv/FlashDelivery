@@ -8,6 +8,11 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
+/**
+ * Controlador de la vista vacio.completo.fxml
+ * @author Alejandro Pergueza Amaya (El crack)
+ * @version 1.0.0.0, 31/9/2021
+ */
 public class ReporteEmpresa implements Initializable {
 
     private String[] fecha;           //Fechas o Intervalos de tiempo que se mostrarán en el grafico
