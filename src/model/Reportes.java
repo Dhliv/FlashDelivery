@@ -1,5 +1,7 @@
 package model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.jooq.impl.*;
@@ -17,6 +19,7 @@ public class Reportes {
 
   private String nombre_sede, metodo_pago;
   private int numero_paquetes, veces_usado;
+  private Double total_sede;
 
   public Reportes() {
   }
@@ -44,30 +47,48 @@ public class Reportes {
     return frecuenciaMetodoPago;
   }
 
-  //TODO @WINJA REALIZAR ESTA Y LAS DEMÁS QUERIES SOLITICADAS.
+  /**
+   * Obtiene una lista de ventas por sede para un periodo de tiempo espicificado.
+   * El tamaño de la lista es el número de dias que hay desde el inicio hasta al
+   * final del intervalo de tiempo.
+   * 
+   * @param inicio Inicio del intervalo de tiempo a consultar.
+   * @param end    Fin del intervalo de tiempo a consultar.
+   * @return Lista de ventas por sede.
+   */
+  public static List<Reportes> getVentasBySedeAndSpecificTime(LocalDate inicio, LocalDate end) {
+    String sql = "select S.nombre as nombre_sede, cast(sum(F.costo) as numeric) as total_sede from envio as E inner join facturacion as F on E.id = F.id_envio inner join sede as S on S.id = E.id_sede where E.fecha_registro = '"
+        + inicio.toString() + "' group by S.nombre";
+    List<Reportes> ventasBySede = Conexion.db().fetch(sql).into(Reportes.class);
+    return ventasBySede;
+  }
+
+  // TODO @WINJA REALIZAR ESTA Y LAS DEMÁS QUERIES SOLITICADAS.
   /**
    * Retorna los medios de pago usados por la
+   * 
    * @return
    */
-  public static Number[] getMedioDePago(int sede){
-    Number[] prueba = new Number[]{1,2,3,4,5,6,7,8,9,10,11,12};
+  public static Number[] getMedioDePago(int sede) {
+    Number[] prueba = new Number[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
     return prueba;
   }
 
-  //TODO @WINJA
+  // TODO @WINJA
   public static Number[] getPaquetesEnviados(Integer sede) {
     return null;
   }
+
   public static Number[] getServicioSoliticado(Integer sede) {
     return null;
   }
+
   public static Number[] ventas(Integer sede, Integer intervalos) {
-    //0 - Dias
-    //1 - Semanas
-    //2 - Meses
-    //3 - Años
+    // 0 - Dias
+    // 1 - Semanas
+    // 2 - Meses
+    // 3 - Años
     return null;
   }
-  
-  
+
 }
