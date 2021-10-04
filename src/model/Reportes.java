@@ -60,20 +60,22 @@ public class Reportes {
    */
   public static Number[] getFrecuenciaMetodoPago(int id_sede) {
     Number[] data = new Number[6];
-    /*
-    LocalDate present = LocalDate.now();
-    String aux;
-    String sql = "select metodo_pago, count(metodo_pago) as veces_usado from envio where id_sede = " + id_sede + " and";
 
-    for (int i = 0; i < 6; ++i) {
-      aux = sql + " (fecha_registro <= '" + present.toString() + "' and fecha_registro >'"
-          + (mensual ? present.minusMonths(1).toString() : present.minusWeeks(1)).toString()
-          + "') group by metodo_pago;";
-      present = mensual ? present.minusMonths(1) : present.minusWeeks(1);
-      List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
-      data[i] = (!list.isEmpty() ? list.get(0).veces_usado : 0);
-    }
-    */
+    // LocalDate present = LocalDate.now();
+    // String aux;
+    // String sql = "select metodo_pago, count(metodo_pago) as veces_usado from
+    // envio where id_sede = " + id_sede + " and";
+
+    // for (int i = 0; i < 6; ++i) {
+    // aux = sql + " (fecha_registro <= '" + present.toString() + "' and
+    // fecha_registro >'"
+    // + (mensual ? present.minusMonths(1).toString() :
+    // present.minusWeeks(1)).toString()
+    // + "') group by metodo_pago;";
+    // present = mensual ? present.minusMonths(1) : present.minusWeeks(1);
+    // List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
+    // data[i] = (!list.isEmpty() ? list.get(0).veces_usado : 0);
+    // }
     return data;
   }
 
@@ -101,18 +103,6 @@ public class Reportes {
     }
 
     return data;
-  }
-
-  public static Number[] getMedioDePago(int id_sede){
-    return new Number[]{1,2,3,4,5,6,7,8,9,10,11,12};
-  }
-
-  public static Number[] ventas(Integer sede, Integer intervalos) {
-    // 0 - Dias
-    // 1 - Semanas
-    // 2 - Meses
-    // 3 - Años
-    return null;
   }
 
   /**
