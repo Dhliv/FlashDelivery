@@ -32,7 +32,7 @@ public class Admin {
 
   @FXML
   private void initialize() {
-    View.setViewPane(content, false);
+    View.setViewPane(content);
     Globals.viewPane = content;
     labelNameUser.setText("Bienvenido " + userName);
   }

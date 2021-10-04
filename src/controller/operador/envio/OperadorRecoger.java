@@ -37,7 +37,7 @@ public class OperadorRecoger {
     remitente.initialize(envio, new Thread());
     destinatario.initialize(envio, new Thread());
     lblTipoInterfaz.setText("Recoger un paquete");
-    View.setViewPane(View.getViewPane(), false);
+    View.setViewPane(View.getViewPane());
   }
 
   /**
