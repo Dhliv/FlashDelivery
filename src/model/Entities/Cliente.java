@@ -36,10 +36,7 @@ public class Cliente {
    * @param ciudad    del Cliente
    */
   public static void createCliente(String cedula, String nombre, String direccion, String telefono, String ciudad) {
-    Conexion.db()
-        .insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"),
-            DSL.field("direccion"), DSL.field("telefono"))
-        .values(cedula, nombre, ciudad, direccion, telefono).execute();
+    Conexion.db().insertInto(DSL.table("cliente"), DSL.field("cedula"), DSL.field("nombre"), DSL.field("ciudad"), DSL.field("direccion"), DSL.field("telefono")).values(cedula, nombre, ciudad, direccion, telefono).execute();
     Conexion.closeConnection();
   }
 
@@ -53,15 +50,14 @@ public class Cliente {
    * @param ciudad    de cliente.
    */
   public static void updateCliente(String cedula, String nombre, String direccion, String telefono, String ciudad) {
-    String sql = "update cliente set cedula='" + cedula + "', nombre='" + nombre + "', direccion='" + direccion
-        + "', telefono='" + telefono + "', ciudad='" + ciudad + "' where cedula='" + cedula + "'";
+    String sql = "update cliente set cedula='" + cedula + "', nombre='" + nombre + "', direccion='" + direccion + "', telefono='" + telefono + "', ciudad='" + ciudad + "' where cedula='" + cedula + "'";
 
     Conexion.db().execute(sql);
   }
 
   /**
-   * Interfaz para registrar a un cliente mediante el objeto de Cliente, solo en
-   * caso de que ya no existiera.
+   * Interfaz para registrar a un cliente mediante el objeto de Cliente, solo en caso de que ya no
+   * existiera.
    * 
    * @param c Cliente a registrar en la BD.
    */

@@ -2,6 +2,7 @@ package controller;
 
 import model.Entities.Empleado;
 import model.Entities.Usuario;
+import model.Entities.Usuario.UsuarioInhabilitado;
 import utilities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +56,13 @@ public class Login {
 
     user = txtUsuario.getText();
     String pass = txtPass.getText();
-    int acc = Usuario.entradaUsuario(user, pass);
+    int acc = -2;
+    try {
+      acc = Usuario.entradaUsuario(user, pass);
+      // siguientes codigos
+    } catch (UsuarioInhabilitado e) {
+      JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
+    }
 
     if (acc == -2)
       JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
@@ -76,7 +83,8 @@ public class Login {
         vent = new Ventana("admin", new Admin(user));
         vent.start(Globals.pantalla);
       } else if (rolAcc.equals(Roles.rol[Roles.AUXILIAR])) {
-        vent = new Ventana("admin", new Admin(user));
+        vent = new Ventana("auxiliar", new Auxiliar(userActual));
+        vent.start(Globals.pantalla);
       } else if (rolAcc.equals(Roles.rol[Roles.CONTADOR])) {
         // vent = new Ventana("operadorOficina", new OperadorOficina());
         // vent.start(Globals.pantalla);

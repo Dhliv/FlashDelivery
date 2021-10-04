@@ -36,8 +36,7 @@ public class Envio {
   }
 
   /**
-   * TODO DOCUMENTAR @WINJA
-   * Inserta un envío en la base de datos con sus respectivos parametros.
+   * TODO DOCUMENTAR @WINJA Inserta un envío en la base de datos con sus respectivos parametros.
    * 
    * @param fecha_registro
    * @param metodo_pago
@@ -51,11 +50,9 @@ public class Envio {
    * @param cliente_entrega
    * @return El ID del envío.
    */
-  public static Integer createEnvio(Date fecha_registro, String metodo_pago, String direccion_entrega, Integer id_sede,
-      String emp_entrega, String cliente_envio, String cliente_entrega) {
-    String sql = "insert into envio(fecha_registro, metodo_pago, direccion_entrega, id_sede, empleado_entrega, delivered, cliente_envio, cliente_entrega) values('"
-        + fecha_registro + "', '" + metodo_pago + "', '" + direccion_entrega + "', " + id_sede + ", '" + emp_entrega
-        + "', FALSE, '" + cliente_envio + "', '" + cliente_entrega + "') returning id";
+  public static Integer createEnvio(Date fecha_registro, String metodo_pago, String direccion_entrega, Integer id_sede, String emp_entrega, String cliente_envio, String cliente_entrega) {
+    String sql = "insert into envio(fecha_registro, metodo_pago, direccion_entrega, id_sede, empleado_entrega, delivered, cliente_envio, cliente_entrega) values('" + fecha_registro + "', '" + metodo_pago + "', '" + direccion_entrega + "', "
+        + id_sede + ", '" + emp_entrega + "', FALSE, '" + cliente_envio + "', '" + cliente_entrega + "') returning id";
     var query = Conexion.db().fetchOne(sql);
     Conexion.closeConnection();
 
@@ -78,8 +75,7 @@ public class Envio {
     e.id_sede = operador.getSede();
     e.emp_entrega = operador.getCedula();
 
-    Integer id_envio = createEnvio(e.fecha_registro, e.metodo_pago, e.direccion_entrega, e.id_sede, e.emp_entrega,
-        e.cliente_envio, e.cliente_entrega);
+    Integer id_envio = createEnvio(e.fecha_registro, e.metodo_pago, e.direccion_entrega, e.id_sede, e.emp_entrega, e.cliente_envio, e.cliente_entrega);
     return id_envio;
   }
 
