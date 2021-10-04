@@ -41,7 +41,6 @@ public class CreateChart {
     this.sedeNombre = new ArrayList<String>();
   }
 
-  
   /**
    * Cambia las sedes seleccionadas para mostrar en el diagrama. Además, modifica
    * el array sedeNombre que almacena los nombres correspondientes a las sedes.
@@ -113,8 +112,9 @@ public class CreateChart {
     informe = new String[] { "servicios solicitados por mes", "Mes", "Dinero" };
     String[] intervalos = formatIntervalos(SIZEINTERVALO);
     for (int i = 0; i < sedeId.size(); i++) {
-      //sedeInformacion[i] = model.Reportes.getServicioSolicitado(sedeId.get(i)); // Agrega la información de la query de
-                                                                                // pago.
+      // sedeInformacion[i] = model.Reportes.getServicioSolicitado(sedeId.get(i)); //
+      // Agrega la información de la query de
+      // pago.
     }
 
     View.newView("vacio.completo",
