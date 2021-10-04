@@ -27,7 +27,6 @@ public class Globals {
     return envio;
   }
 
-
   /**
    * Numero "value" es redondeado a "places" cifras decimales
    * 
@@ -85,7 +84,8 @@ public class Globals {
    */
   public static Parent loadView(String name, Object control) {
     FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-    if (control != null) loader.setController(control);
+    if (control != null)
+      loader.setController(control);
     Parent root = null;
     try {
       root = loader.load();
@@ -116,10 +116,9 @@ public class Globals {
   }
 
   /**
-   * Retorna el valor de REGISTRARENVIO.
-   * Esta variable se usa para cambiar entre la
-   * vista OperadorRecoger y
-   * RecogerPaquete
+   * Retorna el valor de REGISTRARENVIO. Esta variable se usa para cambiar entre
+   * la vista OperadorRecoger y RecogerPaquete
+   * 
    * @return
    */
   public static boolean getRegistrarEnvio() {
@@ -128,9 +127,10 @@ public class Globals {
 
   /**
    * Setea la variable REGISTRARENVIO con el dato que se manda por parametro.
+   * 
    * @param b Booleano que se manda por parametro.
    */
-  public static void setRegistarEnvio(boolean b){
+  public static void setRegistarEnvio(boolean b) {
     REGISTRARENVIO = b;
   }
 

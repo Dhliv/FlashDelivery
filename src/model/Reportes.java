@@ -19,10 +19,11 @@ import utilities.Conexion;
 public class Reportes {
 
   private String nombre_sede, metodo_pago;
-  private int numero_paquetes, veces_usado, peticiones_recogida;
+  private int numero_paquetes, veces_usado, peticiones_recogida, clientes;
   private Double total_sede;
   private final static int MESES = 0;
   private final static int SEMANAS = 1;
+  private final static int SIZEINTERVALO = 6;
 
   public Reportes() {
   }
@@ -34,13 +35,13 @@ public class Reportes {
    * @return Lista de sedes y su respectivos número de paquetes.
    */
   public static Number[] getNumeroPaquetesBySede(int id_sede) {
-    Number[] data = new Number[6];
+    Number[] data = new Number[SIZEINTERVALO];
     String sql = "select S.nombre as nombre_sede, count(E.id_sede) as numero_paquetes from envio as E inner join sede as S on E.id_sede = S.id where E.id_sede = "
         + id_sede + " and ";
 
     String aux;
     LocalDate present = LocalDate.now();
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < SIZEINTERVALO; ++i) {
       aux = sql + " (E.fecha_registro <= '" + present.toString() + "' and E.fecha_registro >'"
           + present.minusMonths(1).toString() + "') group by S.nombre";
       present = present.minusMonths(1);
@@ -58,24 +59,21 @@ public class Reportes {
    * 
    * @return Lista de métodos de pago y las veces que se ha usado.
    */
-  public static Number[] getFrecuenciaMetodoPago(int id_sede) {
+  public static Number[] getFrecuenciaMetodoPago(int id_sede, String medioPago) {
     Number[] data = new Number[6];
 
-    // LocalDate present = LocalDate.now();
-    // String aux;
-    // String sql = "select metodo_pago, count(metodo_pago) as veces_usado from
-    // envio where id_sede = " + id_sede + " and";
+    LocalDate present = LocalDate.now();
+    String aux;
+    String sql = "select metodo_pago, count(metodo_pago) as veces_usado from envio where id_sede = " + id_sede
+        + " and metodo_pago = '" + medioPago + "' and";
 
-    // for (int i = 0; i < 6; ++i) {
-    // aux = sql + " (fecha_registro <= '" + present.toString() + "' and
-    // fecha_registro >'"
-    // + (mensual ? present.minusMonths(1).toString() :
-    // present.minusWeeks(1)).toString()
-    // + "') group by metodo_pago;";
-    // present = mensual ? present.minusMonths(1) : present.minusWeeks(1);
-    // List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
-    // data[i] = (!list.isEmpty() ? list.get(0).veces_usado : 0);
-    // }
+    for (int i = 0; i < 6; ++i) {
+      aux = sql + " (fecha_registro <= '" + present.toString() + "' and fecha_registro >'"
+          + present.minusMonths(1).toString() + "') group by metodo_pago;";
+      present = present.minusMonths(1);
+      List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
+      data[i] = (!list.isEmpty() ? list.get(0).veces_usado : 0);
+    }
     return data;
   }
 
@@ -87,17 +85,18 @@ public class Reportes {
    * @return Array de ventas por sede.
    */
   public static Number[] getVentasBySedeAndSpecificTime(int id_sede, Boolean mensual) {
-    Number[] data = new Number[6];
+    Number[] data = new Number[SIZEINTERVALO];
     LocalDate present = LocalDate.now();
+    int periodo = mensual ? MESES : SEMANAS;
     String aux;
     String sql = "select S.nombre as nombre_sede, cast(sum(F.costo) as numeric) "
         + "as total_sede from envio as E inner join facturacion as F on E.id = F.id_envio "
         + "inner join sede as S on S.id = E.id_sede where E.id_sede =" + id_sede + " and";
 
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < SIZEINTERVALO; ++i) {
       aux = sql + " (E.fecha_registro <= '" + present.toString() + "' and E.fecha_registro >'"
-          + (mensual ? present.minusMonths(1).toString() : present.minusWeeks(1)).toString() + "') group by S.nombre";
-      present = mensual ? present.minusMonths(1) : present.minusWeeks(1);
+          + backTime(present, periodo).toString() + "') group by S.nombre";
+      present = backTime(present, periodo);
       List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
       data[i] = (!list.isEmpty() ? list.get(0).total_sede : 0);
     }
@@ -137,6 +136,41 @@ public class Reportes {
 
     var qr = Conexion.db().fetch(sql).into(Reportes.class);
     data[0] = (qr.isEmpty() ? 0 : qr.get(0).peticiones_recogida);
+
+    return data;
+  }
+
+  /**
+   * Obtiene el número de clientes registrados en una sede en un intervalo de 6
+   * meses.
+   * 
+   * @param id_sede La sede a consultar.
+   * @return Array Number con el número de clientes registrados en la sede para
+   *         cada mes en un intervalo de 6 meses atrás.
+   */
+  public static Number[] getClientesBySedeAndSpecificTime(int id_sede) {
+    Number[] data = new Number[SIZEINTERVALO];
+    String aux, sql;
+    LocalDate present = LocalDate.now();
+    int periodo = MESES;
+    sql = "select count(rem) as clientes from "
+        + "(select distinct rem, (first_value(fr) over ( partition by rem order by fr)) as fr, (first_value (se) over ( partition by rem order by fr)) as se "
+        + "from ((select * from " + "(select distinct e.cliente_envio as rem, "
+        + "(first_value(e.fecha_registro) over ( partition by e.cliente_envio order by fecha_registro)) as fr, "
+        + "(first_value (e.id_sede) over ( partition by e.cliente_envio order by fecha_registro)) as se from envio e) as sb"
+        + ") UNION (select * from " + "(select distinct e.cliente_entrega as rem, "
+        + "(first_value(e.fecha_registro) over ( partition by e.cliente_entrega order by fecha_registro)) as fr, "
+        + "(first_value (e.id_sede) over ( partition by e.cliente_entrega order by fecha_registro)) as se from envio e) as sb "
+        + ")) as sb2 where ";
+
+    for (int i = 0; i < SIZEINTERVALO; i++) {
+      aux = sql + "fr > '" + backTime(present, periodo).toString() + "' and fr <= '" + present.toString()
+          + "' and se = " + id_sede + ") as sb3;";
+      present = backTime(present, periodo);
+      List<Reportes> lista = Conexion.db().fetch(aux).into(Reportes.class);
+      data[i] = (lista.isEmpty() ? 0 : lista.get(0).clientes); // TODO Cambiar campo al que se inserta el
+                                                               // conteo.
+    }
 
     return data;
   }

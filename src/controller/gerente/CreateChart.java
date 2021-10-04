@@ -70,18 +70,20 @@ public class CreateChart {
    * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras
    * relacionada a los métodos de pago.
    */
-  public void medioDePago() {
+  public void medioDePago(String medioPago) {
+    informe = new String[] { "Medio de pago: ", "Mes", "Veces usado" };
+    periodo = MESES;
+    String[] intervalos = formatIntervalos(SIZEINTERVALO);
+    informe[0] = informe[0] + medioPago;
 
-    // informe = new String[] { "Dinero Mensual", "Mes", "Dinero" };
+    for (int i = 0; i < sedeId.size(); i++) {
+      sedeInformacion[i] = model.Reportes.getFrecuenciaMetodoPago(sedeId.get(i), medioPago);
+    }
 
-    // for (int i = 0; i < sedeId.size(); i++) {
-    // sedeInformacion[i] = model.Reportes.getMedioDePago(sedeId.get(i)); // Agrega
-    // la información de la query de pago.
-    // }
-
-    // View.newView("vacio.completo",
-    // new ReporteEmpresa(informe, fecha, sedeNombre.toArray(new String[0]),
-    // sedeInformacion));
+    ReporteEmpresa controller = new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]),
+        sedeInformacion, true);
+    controller.setSedeId(sedeId);
+    View.newView("vacio.completo", controller);
   }
 
   /**
@@ -101,7 +103,7 @@ public class CreateChart {
     }
 
     View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion));
+        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
   /**
@@ -118,9 +120,15 @@ public class CreateChart {
     }
 
     View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion));
+        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
+  /**
+   * Se formatean los intervalos de tiempo a (dia_del_mes/mes - dia_del_mes/mes].
+   * 
+   * @param cant tamaño del intervalo de tiempo.
+   * @return Array de String con el nuevo formato de tiempo.
+   */
   private String[] formatIntervalos(int cant) {
     String[] intervalos = new String[cant];
 
@@ -135,6 +143,13 @@ public class CreateChart {
     return intervalos;
   }
 
+  /**
+   * Obtiene una fecha a partir de la otorgada por parámetro que está atrás en el
+   * tiempo en el periodo determinado.
+   * 
+   * @param l Fecha a restar un periodo de tiempo.
+   * @return Fecha con el periodo de tiempo indicado sustraido.
+   */
   private LocalDate backDate(LocalDate l) {
     if (periodo == DIAS)
       return l.minusDays(1);
@@ -162,7 +177,7 @@ public class CreateChart {
     }
 
     View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion));
+        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
   /**
@@ -181,7 +196,21 @@ public class CreateChart {
     }
 
     View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion));
+        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
+  }
+
+  public void clientesRegistrados() {
+    informe = new String[] { "Clientes Registrados", "Mes", "Clientes" };
+    periodo = MESES;
+    String[] intervalos = formatIntervalos(SIZEINTERVALO);
+
+    for (int i = 0; i < sedeId.size(); i++) {
+      sedeInformacion[i] = model.Reportes.getClientesBySedeAndSpecificTime(sedeId.get(i)); // Agrega la información
+                                                                                           // de la query de pago.
+    }
+
+    View.newView("vacio.completo",
+        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
 }
