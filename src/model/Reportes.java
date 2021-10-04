@@ -56,8 +56,9 @@ public class Reportes {
    * 
    * @return Lista de métodos de pago y las veces que se ha usado.
    */
-  public static List<Reportes> getFrecuenciaMetodoPago(int id_sede) {
+  public static Number[] getFrecuenciaMetodoPago(int id_sede) {
     Number[] data = new Number[6];
+    /*
     LocalDate present = LocalDate.now();
     String aux;
     String sql = "select metodo_pago, count(metodo_pago) as veces_usado from envio where id_sede = " + id_sede + " and";
@@ -70,7 +71,7 @@ public class Reportes {
       List<Reportes> list = Conexion.db().fetch(aux).into(Reportes.class);
       data[i] = (!list.isEmpty() ? list.get(0).veces_usado : 0);
     }
-
+    */
     return data;
   }
 
@@ -100,4 +101,7 @@ public class Reportes {
     return data;
   }
 
+  public static Number[] getMedioDePago(int id_sede){
+    return new Number[]{1,2,3,4,5,6,7,8,9,10,11,12};
+  }
 }

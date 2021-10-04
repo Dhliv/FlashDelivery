@@ -112,7 +112,7 @@ public class CreateChart {
     informe = new String[] { "servicios solicitados por mes", "Mes", "Dinero" };
     String[] intervalos = formatIntervalos(SIZEINTERVALO);
     for (int i = 0; i < sedeId.size(); i++) {
-      sedeInformacion[i] = model.Reportes.getServicioSoliticado(sedeId.get(i)); // Agrega la información de la query de
+      //sedeInformacion[i] = model.Reportes.getServicioSolicitado(sedeId.get(i)); // Agrega la información de la query de
                                                                                 // pago.
     }
 
