@@ -19,8 +19,10 @@ import utilities.Conexion;
 public class Reportes {
 
   private String nombre_sede, metodo_pago;
-  private int numero_paquetes, veces_usado;
+  private int numero_paquetes, veces_usado, peticiones_recogida;
   private Double total_sede;
+  private final static int MESES = 0;
+  private final static int SEMANAS = 1;
 
   public Reportes() {
   }
@@ -104,4 +106,39 @@ public class Reportes {
     return null;
   }
 
+  /**
+   * Obtiene una fecha a partir de la otorgada por parámetro que está 1 mes o
+   * semana atrás en el tiempo.
+   * 
+   * @param t       Fecha a restar un periodo de tiempo.
+   * @param periodo Indica cuánto tiempo se restará.
+   * @return Fecha con el periodo de tiempo indicado sustraido.
+   */
+  private static LocalDate backTime(LocalDate t, int periodo) {
+    if (periodo == MESES)
+      return t.minusMonths(1);
+    if (periodo == SEMANAS)
+      return t.minusWeeks(1);
+    return null;
+  }
+
+  /**
+   * Obtiene el número de peticiones de recogida que se hicieron en una sede
+   * específica.
+   * 
+   * @param id_sede Sede que se consulta.
+   * @return Arreglo de Number de una posición donde estará el número de
+   *         peticiones de recogida.
+   */
+  public static Number[] getPeticionesBySedeAndSpecificTime(int id_sede) {
+    Number[] data = new Number[1];
+    String sql = "select E.id_sede, count(E.id_sede) as peticiones_recogida"
+        + " from peticion_recogida as P inner join empleado as E on E.cedula = P.id_empleado where E.id_sede = "
+        + id_sede + " group by E.id_sede";
+
+    var qr = Conexion.db().fetch(sql).into(Reportes.class);
+    data[0] = (qr.isEmpty() ? 0 : qr.get(0).peticiones_recogida);
+
+    return data;
+  }
 }
