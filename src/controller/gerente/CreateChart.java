@@ -41,6 +41,7 @@ public class CreateChart {
     this.sedeNombre = new ArrayList<String>();
   }
 
+  
   /**
    * Cambia las sedes seleccionadas para mostrar en el diagrama. Además, modifica
    * el array sedeNombre que almacena los nombres correspondientes a las sedes.
