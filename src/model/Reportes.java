@@ -52,8 +52,6 @@ public class Reportes {
     return data;
   }
 
-  // TODO no sabemos exactamente como armar esta query, pues por sede existen 3
-  // métodos de pago.
   /**
    * Obtiene el número de veces que se ha usado un método de pago en específico.
    * 
@@ -168,8 +166,7 @@ public class Reportes {
           + "' and se = " + id_sede + ") as sb3;";
       present = backTime(present, periodo);
       List<Reportes> lista = Conexion.db().fetch(aux).into(Reportes.class);
-      data[i] = (lista.isEmpty() ? 0 : lista.get(0).clientes); // TODO Cambiar campo al que se inserta el
-                                                               // conteo.
+      data[i] = (lista.isEmpty() ? 0 : lista.get(0).clientes);
     }
 
     return data;

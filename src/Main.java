@@ -48,7 +48,6 @@ public class Main extends Application {
     // generatePDF();
 
     View.init(this);
-    Globals.init(this);
     SpecificAlerts.init();
     Globals.pantalla = stage;
 

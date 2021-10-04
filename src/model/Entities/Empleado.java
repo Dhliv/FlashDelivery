@@ -153,7 +153,6 @@ public class Empleado {
   }
 
   /**
-   * TODO Usar los metodoss de jOOQ
    * Actualiza en la BD los datos del empleado que fueron editados (la cedula no
    * cambia nunca).
    * 
@@ -169,7 +168,6 @@ public class Empleado {
   }
 
   /**
-   * TODO usar los metodos de jOOQ
    * El método inserta un empleado en la base de datos.
    * 
    * @param e Empleado a insertar.

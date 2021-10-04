@@ -1,7 +1,5 @@
 package controller.gerente;
 
-import javax.swing.JOptionPane;
-
 import controller.gerente.usuarios.UserConsulta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,11 +8,13 @@ import javafx.scene.layout.AnchorPane;
 import utilities.Globals;
 import utilities.View;
 
-//TODO Documentar y cambiar métodos visuales de Globals a View.
 /**
  * Controlador de la vista usada para el Admin
  * 
- * @author ?
+ * @author Alejandro Pergueza
+ * @author David Henao
+ * @author Julián Andres Orejuela
+ * @author Reynell Arkad Devji Quevedo
  * @version 1.0
  */
 public class Admin {
@@ -33,13 +33,12 @@ public class Admin {
   @FXML
   private void initialize() {
     View.setViewPane(content);
-    Globals.viewPane = content;
     labelNameUser.setText("Bienvenido " + userName);
   }
 
   @FXML
   void goToSedeConsulta(ActionEvent event) {
-    Globals.cambiarVista("sede.consulta");
+    View.cambiar("sede.consulta");
   }
 
   @FXML
@@ -49,7 +48,7 @@ public class Admin {
 
   @FXML
   void goToAdminReportes(ActionEvent event) {
-    Globals.cambiarVista("reportes", new Reportes());
+    View.cambiar("reportes", new Reportes());
   }
 
   @FXML

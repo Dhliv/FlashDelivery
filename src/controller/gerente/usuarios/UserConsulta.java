@@ -145,7 +145,7 @@ public class UserConsulta {
   void userEditButton(ActionEvent event) {
     Empleado e = tableUsers.getSelectionModel().getSelectedItem();
     if (e != null)
-      Globals.cambiarVista("user.edit", new UserEdit(e));
+      View.cambiar("user.edit", new UserEdit(e));
     else
       SpecificAlerts.showUserNullAlert();
   }
