@@ -29,7 +29,6 @@ public class CreateChart {
   public CreateChart() {
 
     this.intervalos = new String[4][];
-    // TODO @Winja HACER FUNCIÓN PARA LOS DÍAS, MESES Y AÑOS.
     this.intervalos[DIAS] = new String[] { "Lunes", "Marter", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
     this.intervalos[SEMANAS] = new String[] { "Lunes", "Marter", "Miercoles", "Jueves", "Viernes", "Sabado",
         "Domingo" };
@@ -73,14 +72,16 @@ public class CreateChart {
    */
   public void medioDePago() {
 
-    informe = new String[] { "Dinero Mensual", "Mes", "Dinero" };
+    // informe = new String[] { "Dinero Mensual", "Mes", "Dinero" };
 
-    for (int i = 0; i < sedeId.size(); i++) {
-      sedeInformacion[i] = model.Reportes.getMedioDePago(sedeId.get(i)); // Agrega la información de la query de pago.
-    }
+    // for (int i = 0; i < sedeId.size(); i++) {
+    // sedeInformacion[i] = model.Reportes.getMedioDePago(sedeId.get(i)); // Agrega
+    // la información de la query de pago.
+    // }
 
-    View.newView("vacio.completo",
-        new ReporteEmpresa(informe, fecha, sedeNombre.toArray(new String[0]), sedeInformacion));
+    // View.newView("vacio.completo",
+    // new ReporteEmpresa(informe, fecha, sedeNombre.toArray(new String[0]),
+    // sedeInformacion));
   }
 
   /**
@@ -105,16 +106,15 @@ public class CreateChart {
 
   /**
    * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras
-   * relacionada a los servicios solicitados.
+   * relacionada a las peticiones de recogida.
    */
   public void servicioSolicitado() {
+    informe = new String[] { "Peticiones de Recogida", "Global", "Dinero" };
+    String[] intervalos = { "All Time" };
 
-    informe = new String[] { "servicios solicitados por mes", "Mes", "Dinero" };
-    String[] intervalos = formatIntervalos(SIZEINTERVALO);
     for (int i = 0; i < sedeId.size(); i++) {
-      // sedeInformacion[i] = model.Reportes.getServicioSolicitado(sedeId.get(i)); //
-      // Agrega la información de la query de
-      // pago.
+      sedeInformacion[i] = model.Reportes.getPeticionesBySedeAndSpecificTime(sedeId.get(i)); // Agrega la información de
+                                                                                             // la query de pago.
     }
 
     View.newView("vacio.completo",
@@ -139,7 +139,7 @@ public class CreateChart {
     if (periodo == DIAS)
       return l.minusDays(1);
     else if (periodo == SEMANAS)
-      return l.minusDays(1);
+      return l.minusWeeks(1);
     else if (periodo == MESES)
       return l.minusMonths(1);
     else if (periodo == AÑOS)
@@ -173,7 +173,7 @@ public class CreateChart {
 
     informe = new String[] { "Ventas semanales", "Mes", "Dinero" };
     periodo = SEMANAS;
-    String[] intervalos = new String[SIZEINTERVALO];
+    String[] intervalos = formatIntervalos(SIZEINTERVALO);
 
     for (int i = 0; i < sedeId.size(); i++) {
       sedeInformacion[i] = model.Reportes.getVentasBySedeAndSpecificTime(sedeId.get(i), false); // Agrega la información

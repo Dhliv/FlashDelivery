@@ -105,18 +105,6 @@ public class Reportes {
     return data;
   }
 
-  public static Number[] getMedioDePago(int id_sede) {
-    return new Number[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-  }
-
-  public static Number[] ventas(Integer sede, Integer intervalos) {
-    // 0 - Dias
-    // 1 - Semanas
-    // 2 - Meses
-    // 3 - Años
-    return null;
-  }
-
   /**
    * Obtiene una fecha a partir de la otorgada por parámetro que está 1 mes o
    * semana atrás en el tiempo.
