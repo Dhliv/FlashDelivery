@@ -9,6 +9,7 @@ import utilities.Conexion;
 /**
  * Clase Petición. Contiene parámetros relacionados a la petición de recogida. Posee métodos para la
  * comunicación con la BD.
+ * 
  * @author David Henao
  * @author Julián Orejuela
  * @version 1.0, 25/09/2021

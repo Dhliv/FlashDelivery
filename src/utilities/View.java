@@ -6,7 +6,6 @@ import javafx.scene.layout.Pane;
 
 import java.util.Map;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -19,7 +18,6 @@ public class View {
   private static Object referenceObject;
   private static Pane viewPane;
   private static Map<String, Parent> views;
-  private static Boolean memory;
 
   /**
    * inicializar los atributos de la clase
@@ -37,9 +35,8 @@ public class View {
    * @param view
    * @param memory
    */
-  public static void setViewPane(Pane view, Boolean memory) {
+  public static void setViewPane(Pane view) {
     viewPane = view;
-    View.memory = memory;
   }
 
   // #---------------------------------------------------------------------------
@@ -54,19 +51,22 @@ public class View {
    */
   public static void cambiar(String name, Object control) {
     Parent view = views.get(name) == null ? loadView(name, control) : views.get(name);
-    if (views.get(name) == null) views.put(name, memory == true ? view : null);
+    if (views.get(name) == null)
+      views.put(name, view);
     cambiar(view);
   }
 
   /**
    * cargar vista desde FXML
+   * 
    * @param name    nombre del archivo fxml
    * @param control control a asignar
    * @return theView
    */
   public static Parent loadView(String name, Object control) {
     FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-    if (control != null) loader.setController(control);
+    if (control != null)
+      loader.setController(control);
     Parent root = null;
     try {
       root = loader.load();
@@ -78,6 +78,7 @@ public class View {
 
   /**
    * cargar vista para un control personalizado desde FXML
+   * 
    * @param name    nombre del archivo fxml
    * @param control control a asignar
    */

@@ -35,8 +35,30 @@ public class Envio {
     return delivered;
   }
 
+  public Date getFecha_registro() {
+    return fecha_registro;
+  }
+
+  public String getDireccion_entrega() {
+    return direccion_entrega;
+  }
+
+  public String getMetodo_pago() {
+    return metodo_pago;
+  }
+
+  public String getCliente_envio() {
+    return cliente_envio;
+  }
+
+  public String getCliente_entrega() {
+    return cliente_entrega;
+  }
+
   /**
    * TODO DOCUMENTAR @WINJA Inserta un envío en la base de datos con sus respectivos parametros.
+   * Inserta un envío en la base de datos con sus respectivos parametros, y retorna el id del envío
+   * recién insertado.
    * 
    * @param fecha_registro
    * @param metodo_pago
@@ -86,7 +108,7 @@ public class Envio {
    * @return Lista de envíos existentes en la sede.
    */
   public static List<Envio> getEnviosBySede(Integer id_sede) {
-    List<Envio> envios = Conexion.db().select().from("envio").where("id_sede = " + id_sede).fetch().into(Envio.class);
+    List<Envio> envios = Conexion.db().select().from("envio").naturalJoin("paquete").where("id_sede = " + id_sede).fetch().into(Envio.class);
     Conexion.closeConnection();
     return envios;
   }

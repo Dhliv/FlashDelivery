@@ -149,7 +149,6 @@ public class Empleado {
     List<Empleado> sedes = Conexion.db().select().from("empleado").fetch().into(Empleado.class); // Ejecuto la query
                                                                                                  // 'sql'.
     Conexion.closeConnection();
-
     return sedes;
   }
 

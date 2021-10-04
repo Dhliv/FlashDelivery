@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="atrasPaquete" layoutX="30.0" layoutY="23.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" text="Atras" />
+      <Label layoutX="763.0" layoutY="29.0" text="Descripcion del paquete">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Pane layoutX="30.0" layoutY="86.0" prefHeight="660.0" prefWidth="960.0" style="-fx-border-color: #9B9B9B; -fx-border-width: 2px;">
+         <children>
+            <Label layoutX="93.0" layoutY="65.0" text="ID: ">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelID" layoutX="164.0" layoutY="65.0" prefHeight="39.0" prefWidth="490.0">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="93.0" layoutY="139.0" text="Fecha de registro:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelFechaRegistro" layoutX="339.0" layoutY="141.0" prefHeight="30.0" prefWidth="266.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="93.0" layoutY="169.0" prefHeight="30.0" prefWidth="156.0" text="Metodo de pago:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelMetodoPago" layoutX="353.0" layoutY="169.0" prefHeight="30.0" prefWidth="266.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="93.0" layoutY="199.0" prefHeight="30.0" prefWidth="199.0" text="Direccion de entrega:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelDireccionEntrega" layoutX="353.0" layoutY="199.0" prefHeight="30.0" prefWidth="266.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="checkEntregado" focusTraversable="false" layoutX="93.0" layoutY="238.0" mnemonicParsing="false" text="Entregado">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </CheckBox>
+            <Label layoutX="93.0" layoutY="283.0" prefHeight="30.0" prefWidth="117.0" text="Descripcion:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtDescripcion" disable="true" layoutX="339.0" layoutY="283.0" prefHeight="159.0" prefWidth="561.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <Label layoutX="93.0" layoutY="466.0" prefHeight="30.0" prefWidth="84.0" text="Volumen:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelVolumen" layoutX="220.0" layoutY="466.0" prefHeight="30.0" prefWidth="266.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="93.0" layoutY="531.0" prefHeight="30.0" prefWidth="108.0" text="Remitente">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelRemitente" layoutX="251.0" layoutY="528.0" prefHeight="30.0" prefWidth="266.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="93.0" layoutY="570.0" prefHeight="30.0" prefWidth="108.0" text="Destinatario">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelDestinatario" layoutX="251.0" layoutY="567.0" prefHeight="30.0" prefWidth="266.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>

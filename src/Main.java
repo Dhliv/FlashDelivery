@@ -9,6 +9,7 @@ import java.util.Random;
 import controller.Auxiliar;
 import controller.Login;
 import controller.gerente.Admin;
+import controller.gerente.ReporteEmpresa;
 import controller.operador.OperadorOficina;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -48,17 +49,15 @@ public class Main extends Application {
     // generatePDF();
 
     View.init(this);
-    Globals.init(this);
     SpecificAlerts.init();
     Globals.pantalla = stage;
 
     Ventana login = new Ventana("login", new Login());
     login.start(stage);
+    // probarGraficas(stage);
 
-    /*
-     * Ventana vent2 = new Ventana("admin", new Admin("APA"));
-     * vent2.start(Globals.pantalla);
-     */
+    // Ventana vent2 = new Ventana("admin", new Admin("APA"));
+    // vent2.start(Globals.pantalla);
 
     // Ventana vent = new Ventana("operadorOficina", new
     // OperadorOficina(model.Entities.Empleado.cargarEmpleado("12345")));
@@ -66,5 +65,24 @@ public class Main extends Application {
 
     /*Ventana vent2 = new Ventana("auxiliar", new Auxiliar("APA"));
     vent2.start(Globals.pantalla);*/
+  }
+
+  /**
+   * función para probar los graficos de barras y pies directamente.
+   * 
+   * @param stage
+   * @throws Exception
+   */
+  private void probarGraficas(Stage stage) throws Exception {
+    String[] informe = { "Dinero Mensual", "Mes", "Dinero" };
+    String[] fecha = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
+        "Octubre", "Noviembre", "Diciembre" };
+    String[] sedeNombre = { "Sede 1", "Sede 2" };
+    Number[][] sedeInformacion = { { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 },
+        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 } };
+
+    Ventana login = new Ventana("vacio.completo",
+        new ReporteEmpresa(informe, fecha, sedeNombre, sedeInformacion, false));
+    login.start(stage);
   }
 }

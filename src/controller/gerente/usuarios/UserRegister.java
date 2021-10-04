@@ -165,7 +165,6 @@ public class UserRegister {
   void registrarUser(ActionEvent event) {
 
     getData();
-    // TODO Cambiar a manejo por objeto (Empleado y Usuario)
     String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, apellidos };
 
     boolean emptyCamps = GeneralChecker.checkEmpty(campo, new Object[0]);

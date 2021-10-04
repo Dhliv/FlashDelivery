@@ -1,6 +1,9 @@
 package model.Entities;
 
 import org.jooq.impl.*;
+
+import java.sql.SQLException;
+
 import org.jooq.Record;
 import utilities.Conexion;
 
@@ -85,10 +88,16 @@ public class Cliente {
    * @return El {@code cliente} o {@code null} si no existe.
    */
   public synchronized static Cliente buscarCliente(String cedula) {
-    Cliente cliente;
-    Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
-    cliente = rs != null ? rs.into(Cliente.class) : null;
-    Conexion.closeConnection();
+
+    Cliente cliente = null;
+    try{
+      Record rs = Conexion.db().select().from("cliente").where("cedula='" + cedula + "'").fetchOne();
+      cliente = rs != null ? rs.into(Cliente.class) : null;
+      Conexion.closeConnection();
+    }catch(Exception ex){
+      Conexion.closeConnection();
+    }
+    
     return cliente;
   }
 }

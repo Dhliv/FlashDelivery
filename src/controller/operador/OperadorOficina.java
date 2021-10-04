@@ -3,6 +3,7 @@ package controller.operador;
 import controller.operador.envio.OperadorRecoger;
 import controller.operador.envio.RecogerPaquete;
 import controller.operador.envio.RegistrarClientes;
+import controller.operador.verPaquetes.OperadorConsulta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,7 +31,7 @@ public class OperadorOficina {
   }
 
   public void initialize() {
-    View.setViewPane(rightContent, true);
+    View.setViewPane(rightContent);
     View.cambiar("operadorOficinaTabla", new OperadorConsulta(operador));
     labelUsuario.setText("Bienvenido " + operador.getNombres());
     labelPOS.setText("Punto de venta " + operador.getSede());

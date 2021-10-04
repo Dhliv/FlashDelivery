@@ -139,8 +139,8 @@ public class Usuario {
     if (username == null) return false;
 
     var user = Conexion.db().select().from("usuario").where("username = '" + username + "'").fetch().into(Usuario.class);
-    if (user.size() != 0) return Boolean.TRUE;
-    return Boolean.FALSE;
+    if (user.size() != 0) return true;
+    return false;
   }
 
   /**
