@@ -139,7 +139,7 @@ public class CreateChart {
     if (periodo == DIAS)
       return l.minusDays(1);
     else if (periodo == SEMANAS)
-      return l.minusDays(1);
+      return l.minusWeeks(1);
     else if (periodo == MESES)
       return l.minusMonths(1);
     else if (periodo == AÑOS)
@@ -173,7 +173,7 @@ public class CreateChart {
 
     informe = new String[] { "Ventas semanales", "Mes", "Dinero" };
     periodo = SEMANAS;
-    String[] intervalos = new String[SIZEINTERVALO];
+    String[] intervalos = formatIntervalos(SIZEINTERVALO);
 
     for (int i = 0; i < sedeId.size(); i++) {
       sedeInformacion[i] = model.Reportes.getVentasBySedeAndSpecificTime(sedeId.get(i), false); // Agrega la información
