@@ -34,11 +34,6 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="278.0" layoutY="30.0" mnemonicParsing="false" text="Reload Chart">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
          </children>
       </AnchorPane>
       <BarChart fx:id="barchart" layoutX="110.0" layoutY="160.0" prefHeight="530.0" prefWidth="800.0">
