@@ -6,8 +6,8 @@ import utilities.Conexion;
 import utilities.GeneralChecker;
 
 /**
- * Clase Usuario. Contiene los parámetros asignados a un usuario, y los métodos
- * para la comunicación con la BD relacionados a un usuario.
+ * Clase Usuario. Contiene los parámetros asignados a un usuario, y los métodos para la comunicación
+ * con la BD relacionados a un usuario.
  * 
  * @author David Henao
  * @version 1.0
@@ -65,35 +65,38 @@ public class Usuario {
   }
 
   /**
-   * Busca en la base de datos un Usuario que cuente con el usuario y la
-   * contraseña suministrados
+   * Busca en la base de datos un Usuario que cuente con el usuario y la contraseña suministrados
    * 
    * @param user El usuario ingresado.
    * @param pass La contraseña a ingresar
-   * @return el id (>0) del usuario si existe con los datos suministrados ben la
-   *         base de datos, -1 si no existe un usuario con esos datos
-   *         suministrados, -2 si el usuario existe pero está deshabilitado.
+   * @return el id (>0) del usuario si existe con los datos suministrados ben la base de datos, -1 si
+   *         no existe un usuario con esos datos suministrados, -2 si el usuario existe pero está
+   *         deshabilitado.
+   * @throws UsuarioInhabilitado
    */
-  public static int entradaUsuario(String user, String pass) {
+  public static int entradaUsuario(String user, String pass) throws UsuarioInhabilitado {
     int code = -1;
     if (!GeneralChecker.checkChar(new String[] { user, pass })) {
-      List<Usuario> usuario = Conexion.db().select().from("usuario")
-          .where("username ='" + user + "' and password ='" + pass + "'").fetch().into(Usuario.class);
+      List<Usuario> usuario = Conexion.db().select().from("usuario").where("username ='" + user + "' and password ='" + pass + "'").fetch().into(Usuario.class);
       Conexion.closeConnection();
       if (!usuario.isEmpty()) {
         Usuario u = usuario.get(0);
         if (u.enabled)
           code = Integer.parseInt(u.id);
         else
-          code = -2;
+          throw new Usuario.UsuarioInhabilitado();
       }
     }
     return code;
   }
 
+  public static class UsuarioInhabilitado extends Exception {
+
+  }
+
   /**
-   * Cambia el estado del atributo enabled de la tabla usuario a true, de un
-   * usuario con un id especificado (lo mismo que cambiarEstado(id, true))
+   * Cambia el estado del atributo enabled de la tabla usuario a true, de un usuario con un id
+   * especificado (lo mismo que cambiarEstado(id, true))
    * 
    * @param id El ID del usuario
    * @return
@@ -103,8 +106,8 @@ public class Usuario {
   }
 
   /**
-   * Cambia el estado del atributo enabled de la tabla usuario a false, de un
-   * usuario con un id especificado (lo mismo que cambiarEstado(id, false))
+   * Cambia el estado del atributo enabled de la tabla usuario a false, de un usuario con un id
+   * especificado (lo mismo que cambiarEstado(id, false))
    * 
    * @param id El ID del usuario
    * @return
@@ -114,8 +117,8 @@ public class Usuario {
   }
 
   /**
-   * Cambia el estado del atributo enabled de la tabla usuario a true, de un
-   * usuario con un id especificado
+   * Cambia el estado del atributo enabled de la tabla usuario a true, de un usuario con un id
+   * especificado
    * 
    * @param id      El ID del usuario a modificar
    * @param enabled el estado a modificar
@@ -133,13 +136,10 @@ public class Usuario {
    * @return True si el usuario existía, False de lo contrario.
    */
   public static Boolean checkExistence(String username) {
-    if (username == null)
-      return false;
+    if (username == null) return false;
 
-    var user = Conexion.db().select().from("usuario").where("username = '" + username + "'").fetch()
-        .into(Usuario.class);
-    if (user.size() != 0)
-      return true;
+    var user = Conexion.db().select().from("usuario").where("username = '" + username + "'").fetch().into(Usuario.class);
+    if (user.size() != 0) return true;
     return false;
   }
 
@@ -152,9 +152,7 @@ public class Usuario {
   public static Boolean registrarUsuario(Usuario u) {
     int res;
     try {
-      res = Conexion.db().insertInto(DSL.table("usuario"), DSL.field("id"), DSL.field("username"),
-          DSL.field("password"), DSL.field("enabled")).values(u.getId(), u.getUsername(), u.getPassword(), Boolean.TRUE)
-          .execute();
+      res = Conexion.db().insertInto(DSL.table("usuario"), DSL.field("id"), DSL.field("username"), DSL.field("password"), DSL.field("enabled")).values(u.getId(), u.getUsername(), u.getPassword(), Boolean.TRUE).execute();
     } catch (Exception e) {
       res = 0;
     }

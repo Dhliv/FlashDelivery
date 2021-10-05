@@ -10,74 +10,80 @@ import model.Entities.Sede;
 
 public class Reportes {
 
-    @FXML
-    private ChoiceBox<String> sedeChoicebox;
-    CreateChart createChart;
+  @FXML
+  private ChoiceBox<String> sedeChoicebox;
+  CreateChart createChart;
 
-    public void initialize(){
-      ObservableList<String> sedesObservable = FXCollections.observableArrayList(); //Lista con las Sedes
-      sedesObservable.add("Todas");
-      sedesObservable.addAll(Sede.getSedesParsed());
+  public void initialize() {
+    ObservableList<String> sedesObservable = FXCollections.observableArrayList(); // Lista con las Sedes
+    sedesObservable.add("Todas");
+    sedesObservable.addAll(Sede.getSedesParsed());
 
-      sedeChoicebox.getItems().addAll(sedesObservable);
-      sedeChoicebox.setValue("Todas");
-      createChart = new CreateChart();
-      
-    }
+    sedeChoicebox.getItems().addAll(sedesObservable);
+    sedeChoicebox.setValue("Todas");
+    createChart = new CreateChart();
 
-    
-    @FXML
-    void mediosDePago(MouseEvent event) {
-      createChart.setSedeId(getSedesSeleccionadas());
-      createChart.setPeriodo(2);
-      createChart.medioDePago();
-    }
+  }
 
-    @FXML
-    void paquetesEnviados(MouseEvent event) {
-      createChart.setSedeId(getSedesSeleccionadas());
-      createChart.setPeriodo(2);
-      createChart.paquetesEnviados();
-    }
+  @FXML
+  void mediosDePago(MouseEvent event) {
+    createChart.setSedeId(getSedesSeleccionadas());
+    createChart.setPeriodo(2);
+    createChart.medioDePago("Efectivo");
+  }
 
-    @FXML
-    void servicioSolicitado(MouseEvent event) {
-      createChart.setSedeId(getSedesSeleccionadas());
-      createChart.setPeriodo(2);
-      createChart.servicioSolicitado();
-    }
+  @FXML
+  void paquetesEnviados(MouseEvent event) {
+    createChart.setSedeId(getSedesSeleccionadas());
+    createChart.setPeriodo(2);
+    createChart.paquetesEnviados();
+  }
 
-    @FXML
-    void ventasMensuales(MouseEvent event) {
-      createChart.setSedeId(getSedesSeleccionadas());
-      createChart.setPeriodo(2);
-      createChart.ventasMensuales();
-    }
+  @FXML
+  void servicioSolicitado(MouseEvent event) {
+    createChart.setSedeId(getSedesSeleccionadas());
+    createChart.setPeriodo(2);
+    createChart.servicioSolicitado();
+  }
 
-    @FXML
-    void ventasSemanales(MouseEvent event) {
-      createChart.setSedeId(getSedesSeleccionadas());
-      createChart.setPeriodo(1);
-      createChart.ventasSemanales();
-    }
+  @FXML
+  void ventasMensuales(MouseEvent event) {
+    createChart.setSedeId(getSedesSeleccionadas());
+    createChart.setPeriodo(2);
+    createChart.ventasMensuales();
+  }
 
+  @FXML
+  void ventasSemanales(MouseEvent event) {
+    createChart.setSedeId(getSedesSeleccionadas());
+    createChart.setPeriodo(1);
+    createChart.ventasSemanales();
+  }
 
-    ArrayList<Integer> getSedesSeleccionadas(){
-      ArrayList<Integer> sedeSeleccionada = new ArrayList<Integer>();
+  /**
+   * Abre el reporte de clientes registrados para las sedes que se deseen.
+   * 
+   * @param event not used.
+   */
+  @FXML
+  void clientesRegistrados(MouseEvent event) {
+    createChart.setSedeId(getSedesSeleccionadas());
+    createChart.clientesRegistrados();
+  }
 
-      if(sedeChoicebox.getValue().equals("Todas")){
-        var items = sedeChoicebox.getItems();
+  ArrayList<Integer> getSedesSeleccionadas() {
+    ArrayList<Integer> sedeSeleccionada = new ArrayList<Integer>();
 
-        for (int i=1; i<items.size(); i++) {
-          sedeSeleccionada.add(Sede.getIdSede(items.get(i)));
-        }
-      } 
-      else 
-        sedeSeleccionada.add(Sede.getIdSede(sedeChoicebox.getValue()));
+    if (sedeChoicebox.getValue().equals("Todas")) {
+      var items = sedeChoicebox.getItems();
 
-      return sedeSeleccionada;
-    }
+      for (int i = 1; i < items.size(); i++) {
+        sedeSeleccionada.add(Sede.getIdSede(items.get(i)));
+      }
+    } else
+      sedeSeleccionada.add(Sede.getIdSede(sedeChoicebox.getValue()));
 
-    
+    return sedeSeleccionada;
+  }
 
 }

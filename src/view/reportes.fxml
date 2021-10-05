@@ -35,7 +35,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="763.0" layoutY="608.0" text="Otra cosa mas">
+            <Label layoutX="742.0" layoutY="608.0" text="Clientes registrados">
                <font>
                   <Font size="18.0" />
                </font>
@@ -70,7 +70,7 @@
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="350.0" pickOnBounds="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="350.0" onMouseClicked="#clientesRegistrados" pickOnBounds="true">
                <image>
                   <Image url="@../resources/Images/iconTest.png" />
                </image>
