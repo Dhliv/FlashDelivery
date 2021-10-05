@@ -31,8 +31,8 @@ public class OperadorRecoger {
 
   public void initialize() {
 
-    remitente.initialize(envio, new Thread());
-    destinatario.initialize(envio, new Thread());
+    remitente.initialize(envio);
+    destinatario.initialize(envio);
     lblTipoInterfaz.setText("Recoger un paquete");
     View.setViewPane(View.getViewPane(), false);
   }
@@ -40,13 +40,22 @@ public class OperadorRecoger {
   /**
    * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
    */
-  @FXML void registrarPaquetes(ActionEvent event) {
-    while (remitente.t.isAlive() || destinatario.t.isAlive()) {
-      System.out.println(remitente.t.isAlive());
-      System.out.println(destinatario.t.isAlive());
+  @FXML
+  void registrarPaquetes(ActionEvent event) {
+    remitente.stopBusqueda();
+    destinatario.stopBusqueda();
+    while (remitente.st.isRunning() || destinatario.st.isRunning()) {
     }
-    if (!remitente.checkAndUpdateEnvio()) return;
-    if (!destinatario.checkAndUpdateEnvio()) return;
+    if (!remitente.checkAndUpdateEnvio()) {
+      remitente.restart();
+      destinatario.restart();
+      return;
+    }
+    if (!destinatario.checkAndUpdateEnvio()) {
+      remitente.restart();
+      destinatario.restart();
+      return;
+    }
 
     View.cambiar("operador.recoger", new RecogerPaquete(envio, operador));
   }

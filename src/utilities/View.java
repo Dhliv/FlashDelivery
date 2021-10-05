@@ -102,18 +102,8 @@ public class View {
   // #---------------------------------------------------------------------------
 
   /**
-   * cambiar la vista con controlador por defecto
    * 
-   * @param name nombre del archivo fxml
-   */
-  public static void cambiar(String name) {
-    cambiar(name, null);
-  }
-
-  /**
-   * cambiar la vista con controlador por defecto
-   * 
-   * @param name nombre del archivo fxml
+   * @param name
    */
   public static void cambiarFull(String name) {
     cambiarFull(name, null);
@@ -124,6 +114,15 @@ public class View {
     fullLoad = true;
     cambiar(name, control);
     fullLoad = swapFullLoad;
+  }
+
+  /**
+   * cambiar la vista con controlador por defecto
+   * 
+   * @param name nombre del archivo fxml
+   */
+  public static void cambiar(String name) {
+    cambiar(name, null);
   }
 
   /**

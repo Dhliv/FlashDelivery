@@ -38,11 +38,11 @@ public class OperadorOficina {
    * Accede a la pantalla de registro de paquetes.
    */
   @FXML void registrarEnvio(ActionEvent event) {
-    View.cambiar("operador.cliente", new RegistrarClientes(operador));
+    View.cambiarFull("operador.cliente", new RegistrarClientes(operador));
   }
 
   @FXML void registrarRecogida(ActionEvent event) {
-    View.cambiar("operador.cliente", new OperadorRecoger(operador));
+    View.cambiarFull("operador.cliente", new OperadorRecoger(operador));
   }
 
   /**
