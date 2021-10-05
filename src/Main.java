@@ -63,8 +63,10 @@ public class Main extends Application {
     // OperadorOficina(model.Entities.Empleado.cargarEmpleado("12345")));
     // vent.start(Globals.pantalla);
 
-    /*Ventana vent2 = new Ventana("auxiliar", new Auxiliar("APA"));
-    vent2.start(Globals.pantalla);*/
+    /*
+     * Ventana vent2 = new Ventana("auxiliar", new Auxiliar("APA"));
+     * vent2.start(Globals.pantalla);
+     */
   }
 
   /**
