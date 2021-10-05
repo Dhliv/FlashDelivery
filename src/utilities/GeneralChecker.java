@@ -108,6 +108,7 @@ public class GeneralChecker {
      * false de lo contrario.
      */
     public static Boolean checkFecha(LocalDate fecha, int años) {
+    if(fecha == null) return false;
         if(fecha.isAfter(LocalDate.now().minusYears(años))) return true;
       return false;
     }

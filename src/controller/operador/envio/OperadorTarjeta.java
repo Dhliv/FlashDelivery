@@ -173,8 +173,10 @@ public class OperadorTarjeta implements Initializable {
       SpecificAlerts.showCardUnexist();
       pagar = false;
     }
-
-    if(GeneralChecker.checkFecha(dateFechaVencimiento.getValue(), 0));
+    Boolean fechaVencimientoCorrecta = GeneralChecker.checkFecha(dateFechaVencimiento.getValue(), 0);
+    if(!fechaVencimientoCorrecta){
+      pagar = false;
+    }
 
     // Revisa lo mismo que en el anterior pero en el campo numeroTarjeta
     if (numeroTarjeta.length() < CARDLENGTH) {
@@ -192,6 +194,10 @@ public class OperadorTarjeta implements Initializable {
         SpecificAlerts.showEmptyFieldAlert();
       if (forbidChar)
         SpecificAlerts.showCharForbidenAlert();
+      if(!fechaVencimientoCorrecta){
+        SpecificAlerts.showFechaNoValida();
+      }
+      
     }
   }
 
