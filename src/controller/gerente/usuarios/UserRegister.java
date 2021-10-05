@@ -172,8 +172,9 @@ public class UserRegister {
     boolean usernameExist = Usuario.checkExistence(username);
     boolean empleadoExist = Empleado.checkExistence(ident);
     Boolean formatoCorrecto = checkFormat();
+    Boolean trabajaLegalmente = GeneralChecker.checkFecha(fc, 16);
 
-    if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto) {
+    if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto || !trabajaLegalmente) {
       { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           SpecificAlerts.showEmptyFieldAlert();
