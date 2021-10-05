@@ -172,9 +172,9 @@ public class UserRegister {
     boolean usernameExist = Usuario.checkExistence(username);
     boolean empleadoExist = Empleado.checkExistence(ident);
     Boolean formatoCorrecto = checkFormat();
-    Boolean trabajaLegalmente = GeneralChecker.checkFecha(fc, 16);
+    Boolean noTrabajaLegalmente = GeneralChecker.checkFecha(fechaT.getValue(), 16);
 
-    if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto || !trabajaLegalmente) {
+    if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto || noTrabajaLegalmente) {
       { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           SpecificAlerts.showEmptyFieldAlert();
@@ -186,6 +186,9 @@ public class UserRegister {
           SpecificAlerts.showEmpleadoExists();
         if (!formatoCorrecto)
           SpecificAlerts.showNumericFormat();
+        if(noTrabajaLegalmente){
+          SpecificAlerts.showFechaNoValida();
+        }
       }
     } else { // Si no hay problemas con las validaciones hechas:
       parseData();
