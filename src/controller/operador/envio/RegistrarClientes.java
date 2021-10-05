@@ -16,12 +16,9 @@ import utilities.View;
  * @version 1.3, 21/09/2021
  */
 public class RegistrarClientes {
-  @FXML
-  private Cliente remitente;
-  @FXML
-  private Cliente destinatario;
-  @FXML
-  private Label lblTipoInterfaz;
+  @FXML private Cliente remitente;
+  @FXML private Cliente destinatario;
+  @FXML private Label lblTipoInterfaz;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -36,12 +33,11 @@ public class RegistrarClientes {
     remitente.initialize(envio);
     destinatario.initialize(envio);
 
-    View.setViewPane(View.getViewPane());
+    View.setViewPane(View.getViewPane(), false);
   }
 
   /**
-   * Verificar los campos, actualizar los valores en envio, y continuar a la vista
-   * operador.paquetes
+   * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
    */
   @FXML
   void registrarPaquetes(ActionEvent event) {

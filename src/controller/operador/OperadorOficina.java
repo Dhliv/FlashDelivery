@@ -14,16 +14,11 @@ import utilities.Globals;
 import utilities.View;
 
 public class OperadorOficina {
-  @FXML
-  private Label labelPOS;
-  @FXML
-  private Button btnSolicitudRecogida;
-  @FXML
-  private Button btnRegistrarPaquete;
-  @FXML
-  private Label labelUsuario;
-  @FXML
-  private Pane rightContent;
+  @FXML private Label labelPOS;
+  @FXML private Button btnSolicitudRecogida;
+  @FXML private Button btnRegistrarPaquete;
+  @FXML private Label labelUsuario;
+  @FXML private Pane rightContent;
   private Empleado operador;
 
   public OperadorOficina(Empleado operador) {
@@ -31,7 +26,7 @@ public class OperadorOficina {
   }
 
   public void initialize() {
-    View.setViewPane(rightContent);
+    View.setViewPane(rightContent, false);
     View.cambiar("operadorOficinaTabla", new OperadorConsulta(operador));
     labelUsuario.setText("Bienvenido " + operador.getNombres());
     labelPOS.setText("Punto de venta " + operador.getSede());
@@ -42,21 +37,18 @@ public class OperadorOficina {
   /**
    * Accede a la pantalla de registro de paquetes.
    */
-  @FXML
-  void registrarEnvio(ActionEvent event) {
+  @FXML void registrarEnvio(ActionEvent event) {
     View.cambiar("operador.cliente", new RegistrarClientes(operador));
   }
 
-  @FXML
-  void registrarRecogida(ActionEvent event) {
+  @FXML void registrarRecogida(ActionEvent event) {
     View.cambiar("operador.cliente", new OperadorRecoger(operador));
   }
 
   /**
    * Vuelve al login.
    */
-  @FXML
-  void logOut(ActionEvent event) {
+  @FXML void logOut(ActionEvent event) {
     Globals.logOut();
   }
 }

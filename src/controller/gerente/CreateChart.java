@@ -23,17 +23,14 @@ public class CreateChart {
   private ArrayList<Integer> sedeId;
 
   /**
-   * Crea un Diagrama de barras con los datos de las sedes y el periodo
-   * seleccionado.
+   * Crea un Diagrama de barras con los datos de las sedes y el periodo seleccionado.
    */
   public CreateChart() {
 
     this.intervalos = new String[4][];
     this.intervalos[DIAS] = new String[] { "Lunes", "Marter", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
-    this.intervalos[SEMANAS] = new String[] { "Lunes", "Marter", "Miercoles", "Jueves", "Viernes", "Sabado",
-        "Domingo" };
-    this.intervalos[MESES] = new String[] { "Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Agosto", "Sep", "Oct",
-        "Nov", "Dic" };
+    this.intervalos[SEMANAS] = new String[] { "Lunes", "Marter", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
+    this.intervalos[MESES] = new String[] { "Enero", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Agosto", "Sep", "Oct", "Nov", "Dic" };
     this.intervalos[AÑOS] = new String[] {};
 
     this.fecha = intervalos[MESES];
@@ -41,8 +38,8 @@ public class CreateChart {
   }
 
   /**
-   * Cambia las sedes seleccionadas para mostrar en el diagrama. Además, modifica
-   * el array sedeNombre que almacena los nombres correspondientes a las sedes.
+   * Cambia las sedes seleccionadas para mostrar en el diagrama. Además, modifica el array sedeNombre
+   * que almacena los nombres correspondientes a las sedes.
    * 
    * @param sedeId Lista de sedes que se mostraran en el diagrama
    */
@@ -58,8 +55,7 @@ public class CreateChart {
   /**
    * Cambia el periodo en el que se mostrarán los datos.
    * 
-   * @param periodo valor numerico que representa: 0 - DIAS 1 - SEMANAS 2 - MESES
-   *                3 - AÑOS
+   * @param periodo valor numerico que representa: 0 - DIAS 1 - SEMANAS 2 - MESES 3 - AÑOS
    */
   public void setPeriodo(Integer periodo) {
     this.periodo = periodo;
@@ -67,8 +63,8 @@ public class CreateChart {
   }
 
   /**
-   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras
-   * relacionada a los métodos de pago.
+   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras relacionada a los
+   * métodos de pago.
    */
   public void medioDePago(String medioPago) {
     informe = new String[] { "Medio de pago: ", "Mes", "Veces usado" };
@@ -80,15 +76,14 @@ public class CreateChart {
       sedeInformacion[i] = model.Reportes.getFrecuenciaMetodoPago(sedeId.get(i), medioPago);
     }
 
-    ReporteEmpresa controller = new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]),
-        sedeInformacion, true);
+    ReporteEmpresa controller = new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, true);
     controller.setSedeId(sedeId);
     View.newView("vacio.completo", controller);
   }
 
   /**
-   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras
-   * relacionada a los paquetes enviados
+   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras relacionada a los
+   * paquetes enviados
    */
   public void paquetesEnviados() {
 
@@ -102,13 +97,12 @@ public class CreateChart {
                                                                                   // pago.
     }
 
-    View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
+    View.newView("vacio.completo", new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
   /**
-   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras
-   * relacionada a las peticiones de recogida.
+   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras relacionada a las
+   * peticiones de recogida.
    */
   public void servicioSolicitado() {
     informe = new String[] { "Peticiones de Recogida", "Global", "Dinero" };
@@ -119,8 +113,7 @@ public class CreateChart {
                                                                                              // la query de pago.
     }
 
-    View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
+    View.newView("vacio.completo", new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
   /**
@@ -135,8 +128,7 @@ public class CreateChart {
     LocalDate present = LocalDate.now();
     for (int i = 0; i < cant; i++) {
       LocalDate a = backDate(present);
-      intervalos[i] = "(" + a.getDayOfMonth() + "/" + this.intervalos[MESES][a.getMonthValue()] + " - "
-          + present.getDayOfMonth() + "/" + this.intervalos[MESES][present.getMonthValue()] + "]";
+      intervalos[i] = "(" + a.getDayOfMonth() + "/" + this.intervalos[MESES][a.getMonthValue()] + " - " + present.getDayOfMonth() + "/" + this.intervalos[MESES][present.getMonthValue()] + "]";
       present = backDate(present);
     }
 
@@ -144,8 +136,8 @@ public class CreateChart {
   }
 
   /**
-   * Obtiene una fecha a partir de la otorgada por parámetro que está atrás en el
-   * tiempo en el periodo determinado.
+   * Obtiene una fecha a partir de la otorgada por parámetro que está atrás en el tiempo en el periodo
+   * determinado.
    * 
    * @param l Fecha a restar un periodo de tiempo.
    * @return Fecha con el periodo de tiempo indicado sustraido.
@@ -157,14 +149,13 @@ public class CreateChart {
       return l.minusWeeks(1);
     else if (periodo == MESES)
       return l.minusMonths(1);
-    else if (periodo == AÑOS)
-      return l.minusYears(1);
+    else if (periodo == AÑOS) return l.minusYears(1);
     return null;
   }
 
   /**
-   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras
-   * relacionada a las ventas mensuales
+   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras relacionada a las
+   * ventas mensuales
    */
   public void ventasMensuales() {
     informe = new String[] { "Ventas mensuales", "Mes", "Dinero" };
@@ -176,13 +167,12 @@ public class CreateChart {
                                                                                                // de la query de pago.
     }
 
-    View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
+    View.newView("vacio.completo", new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
   /**
-   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras
-   * relacionado a las ventas semanales
+   * Carga los datos que necesita ReporteEmpresa para crear un diagrama de barras relacionado a las
+   * ventas semanales
    */
   public void ventasSemanales() {
 
@@ -195,8 +185,7 @@ public class CreateChart {
                                                                                                 // de la query de pago.
     }
 
-    View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
+    View.newView("vacio.completo", new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
   public void clientesRegistrados() {
@@ -209,8 +198,7 @@ public class CreateChart {
                                                                                            // de la query de pago.
     }
 
-    View.newView("vacio.completo",
-        new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
+    View.newView("vacio.completo", new ReporteEmpresa(informe, intervalos, sedeNombre.toArray(new String[0]), sedeInformacion, false));
   }
 
 }

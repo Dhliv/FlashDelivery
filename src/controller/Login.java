@@ -2,6 +2,7 @@ package controller;
 
 import model.Entities.Empleado;
 import model.Entities.Usuario;
+import model.Entities.Usuario.UsuarioInhabilitado;
 import utilities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,18 +18,22 @@ import controller.operador.OperadorOficina;
 public class Login {
   private String user;
 
-  @FXML private Button btIngresar;
-  @FXML private PasswordField txtPass;
-  @FXML private TextField txtUsuario;
+  @FXML
+  private Button btIngresar;
+  @FXML
+  private PasswordField txtPass;
+  @FXML
+  private TextField txtUsuario;
 
   /**
-   * Metodo para ejecutar el login de forma alternativa; en lugar de usar el botón, se usa la tecla
-   * Enter
+   * Metodo para ejecutar el login de forma alternativa; en lugar de usar el
+   * botón, se usa la tecla Enter
    * 
    * @param event
    * @throws Exception
    */
-  @FXML void loginKeyboard(KeyEvent event) throws Exception {
+  @FXML
+  void loginKeyboard(KeyEvent event) throws Exception {
     System.out.println(event);
     KeyCode key = event.getCode();
     if (key.equals(KeyCode.ENTER)) {
@@ -42,12 +47,14 @@ public class Login {
    * @param event evento causado por el botón login
    * @throws Exception
    */
-  @FXML void clicksoide(ActionEvent event) throws Exception {
+  @FXML
+  void clicksoide(ActionEvent event) throws Exception {
     login();
   }
 
   /**
-   * Método para iniciar sesión en los distintos roles dado un usuario y una contraseña.
+   * Método para iniciar sesión en los distintos roles dado un usuario y una
+   * contraseña.
    * 
    * @throws Exception
    */
@@ -55,7 +62,13 @@ public class Login {
 
     user = txtUsuario.getText();
     String pass = txtPass.getText();
-    int acc = Usuario.entradaUsuario(user, pass);
+    int acc = -2;
+    try {
+      acc = Usuario.entradaUsuario(user, pass);
+      // siguientes codigos
+    } catch (UsuarioInhabilitado e) {
+      JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
+    }
 
     if (acc == -2)
       JOptionPane.showMessageDialog(null, "Ud. no se encuentra habilitado en el sistema");
@@ -76,7 +89,8 @@ public class Login {
         vent = new Ventana("admin", new Admin(user));
         vent.start(Globals.pantalla);
       } else if (rolAcc.equals(Roles.rol[Roles.AUXILIAR])) {
-        vent = new Ventana("admin", new Admin(user));
+        vent = new Ventana("auxiliar", new Auxiliar(userActual));
+        vent.start(Globals.pantalla);
       } else if (rolAcc.equals(Roles.rol[Roles.CONTADOR])) {
         // vent = new Ventana("operadorOficina", new OperadorOficina());
         // vent.start(Globals.pantalla);

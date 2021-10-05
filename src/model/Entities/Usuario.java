@@ -73,8 +73,9 @@ public class Usuario {
    * @return el id (>0) del usuario si existe con los datos suministrados ben la
    *         base de datos, -1 si no existe un usuario con esos datos
    *         suministrados, -2 si el usuario existe pero está deshabilitado.
+   * @throws UsuarioInhabilitado
    */
-  public static int entradaUsuario(String user, String pass) {
+  public static int entradaUsuario(String user, String pass) throws UsuarioInhabilitado {
     int code = -1;
     if (!GeneralChecker.checkChar(new String[] { user, pass })) {
       List<Usuario> usuario = Conexion.db().select().from("usuario")
@@ -85,10 +86,14 @@ public class Usuario {
         if (u.enabled)
           code = Integer.parseInt(u.id);
         else
-          code = -2;
+          throw new Usuario.UsuarioInhabilitado();
       }
     }
     return code;
+  }
+
+  public static class UsuarioInhabilitado extends Exception {
+
   }
 
   /**

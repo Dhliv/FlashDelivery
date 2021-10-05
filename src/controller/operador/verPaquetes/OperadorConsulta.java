@@ -19,20 +19,13 @@ import javafx.collections.*;
 
 public class OperadorConsulta implements Initializable {
 
-  @FXML
-  private TableView<Envio> tPaquetes;
-  @FXML
-  private TableColumn<Envio, Date> tcFechaRegistro;
-  @FXML
-  private TableColumn<Envio, String> tcMetodoPago;
-  @FXML
-  private TableColumn<Envio, String> tcDireccionEntrega;
-  @FXML
-  private TableColumn<Envio, String> tcRemitente;
-  @FXML
-  private TableColumn<Envio, String> tcDestinatario;
-  @FXML
-  private TableColumn<Envio, Boolean> tcEstado;
+  @FXML private TableView<Envio> tPaquetes;
+  @FXML private TableColumn<Envio, Date> tcFechaRegistro;
+  @FXML private TableColumn<Envio, String> tcMetodoPago;
+  @FXML private TableColumn<Envio, String> tcDireccionEntrega;
+  @FXML private TableColumn<Envio, String> tcRemitente;
+  @FXML private TableColumn<Envio, String> tcDestinatario;
+  @FXML private TableColumn<Envio, Boolean> tcEstado;
   private Empleado e;
   private Envio en;
 
@@ -40,8 +33,7 @@ public class OperadorConsulta implements Initializable {
     this.e = e;
   }
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  @Override public void initialize(URL location, ResourceBundle resources) {
     tcFechaRegistro.setCellValueFactory(new PropertyValueFactory<Envio, Date>("fecha_registro"));
     tcMetodoPago.setCellValueFactory(new PropertyValueFactory<Envio, String>("metodo_pago"));
     tcDireccionEntrega.setCellValueFactory(new PropertyValueFactory<Envio, String>("direccion_entrega"));
@@ -54,18 +46,17 @@ public class OperadorConsulta implements Initializable {
     tPaquetes.setItems(envios);
   }
 
-  @FXML
-  void seleccionarEnvio(MouseEvent event) {
-    
+  @FXML void seleccionarEnvio(MouseEvent event) {
+
     int index = tPaquetes.getSelectionModel().getSelectedIndex();
     if (index != -1) {
       en = tPaquetes.getSelectionModel().getSelectedItem();
       int op = JOptionPane.showConfirmDialog(null, "¿Desea ver los datos de este paquete?");
-      if(op == JOptionPane.YES_OPTION){
+      if (op == JOptionPane.YES_OPTION) {
         View.newView("operador.ver.paquete", new operadorVerInfo(en));
-        
+
       }
-      
+
     }
     tPaquetes.getSelectionModel().clearSelection();
   }
