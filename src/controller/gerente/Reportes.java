@@ -10,8 +10,7 @@ import model.Entities.Sede;
 
 public class Reportes {
 
-  @FXML
-  private ChoiceBox<String> sedeChoicebox;
+  @FXML private ChoiceBox<String> sedeChoicebox;
   CreateChart createChart;
 
   public void initialize() {
@@ -25,36 +24,31 @@ public class Reportes {
 
   }
 
-  @FXML
-  void mediosDePago(MouseEvent event) {
+  @FXML void mediosDePago(MouseEvent event) {
     createChart.setSedeId(getSedesSeleccionadas());
     createChart.setPeriodo(2);
     createChart.medioDePago("Efectivo");
   }
 
-  @FXML
-  void paquetesEnviados(MouseEvent event) {
+  @FXML void paquetesEnviados(MouseEvent event) {
     createChart.setSedeId(getSedesSeleccionadas());
     createChart.setPeriodo(2);
     createChart.paquetesEnviados();
   }
 
-  @FXML
-  void servicioSolicitado(MouseEvent event) {
+  @FXML void servicioSolicitado(MouseEvent event) {
     createChart.setSedeId(getSedesSeleccionadas());
     createChart.setPeriodo(2);
     createChart.servicioSolicitado();
   }
 
-  @FXML
-  void ventasMensuales(MouseEvent event) {
+  @FXML void ventasMensuales(MouseEvent event) {
     createChart.setSedeId(getSedesSeleccionadas());
     createChart.setPeriodo(2);
     createChart.ventasMensuales();
   }
 
-  @FXML
-  void ventasSemanales(MouseEvent event) {
+  @FXML void ventasSemanales(MouseEvent event) {
     createChart.setSedeId(getSedesSeleccionadas());
     createChart.setPeriodo(1);
     createChart.ventasSemanales();
@@ -65,8 +59,7 @@ public class Reportes {
    * 
    * @param event not used.
    */
-  @FXML
-  void clientesRegistrados(MouseEvent event) {
+  @FXML void clientesRegistrados(MouseEvent event) {
     createChart.setSedeId(getSedesSeleccionadas());
     createChart.clientesRegistrados();
   }

@@ -16,12 +16,9 @@ import utilities.View;
  * @version 0.1, 25/09/2021
  */
 public class OperadorRecoger {
-  @FXML
-  private Cliente remitente;
-  @FXML
-  private Cliente destinatario;
-  @FXML
-  private Label lblTipoInterfaz;
+  @FXML private Cliente remitente;
+  @FXML private Cliente destinatario;
+  @FXML private Label lblTipoInterfaz;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -37,23 +34,19 @@ public class OperadorRecoger {
     remitente.initialize(envio, new Thread());
     destinatario.initialize(envio, new Thread());
     lblTipoInterfaz.setText("Recoger un paquete");
-    View.setViewPane(View.getViewPane());
+    View.setViewPane(View.getViewPane(), false);
   }
 
   /**
-   * Verificar los campos, actualizar los valores en envio, y continuar a la vista
-   * operador.paquetes
+   * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
    */
-  @FXML
-  void registrarPaquetes(ActionEvent event) {
+  @FXML void registrarPaquetes(ActionEvent event) {
     while (remitente.t.isAlive() || destinatario.t.isAlive()) {
       System.out.println(remitente.t.isAlive());
       System.out.println(destinatario.t.isAlive());
     }
-    if (!remitente.checkAndUpdateEnvio())
-      return;
-    if (!destinatario.checkAndUpdateEnvio())
-      return;
+    if (!remitente.checkAndUpdateEnvio()) return;
+    if (!destinatario.checkAndUpdateEnvio()) return;
 
     View.cambiar("operador.recoger", new RecogerPaquete(envio, operador));
   }

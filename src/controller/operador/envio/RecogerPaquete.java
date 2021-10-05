@@ -26,23 +26,17 @@ import utilities.SpecificAlerts;
  * @since 25/09/2021
  */
 public class RecogerPaquete {
-  @FXML
-  private Button atrasPaquete;
+  @FXML private Button atrasPaquete;
 
-  @FXML
-  private TextArea txtAreaDescripcion;
+  @FXML private TextArea txtAreaDescripcion;
 
-  @FXML
-  private Label txtAuxiliar;
+  @FXML private Label txtAuxiliar;
 
-  @FXML
-  private ComboBox<String> choiceAuxiliar;
+  @FXML private ComboBox<String> choiceAuxiliar;
 
-  @FXML
-  private Label txtSede;
+  @FXML private Label txtSede;
 
-  @FXML
-  private ComboBox<String> choiceSede;
+  @FXML private ComboBox<String> choiceSede;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -57,26 +51,24 @@ public class RecogerPaquete {
     ObservableList<String> sedes = FXCollections.observableArrayList();
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
 
-    //Se añaden los datos pertinentes a las colecciones
+    // Se añaden los datos pertinentes a las colecciones
     sedes.addAll(Sede.getSedesParsed());
     auxiliares.addAll(Empleado.getAuxiliaresBySedeParsed(Sede.getSedes().get(0).getId()));
 
-    //Se insertan las colecciones en los choiceBox
+    // Se insertan las colecciones en los choiceBox
     choiceSede.getItems().addAll(sedes);
     choiceAuxiliar.getItems().addAll(auxiliares);
-  
-    //Se selecciona por defecto la sede 1.
+
+    // Se selecciona por defecto la sede 1.
     choiceSede.setValue(sedes.get(0).toString());
   }
 
   /**
-   * El nombre no es muy representativo.
-   * Se cambia la información del choiceBox de Auxiliares
-   * Por uno que sea acorde a la nueva sede seleccionada
+   * El nombre no es muy representativo. Se cambia la información del choiceBox de Auxiliares Por uno
+   * que sea acorde a la nueva sede seleccionada
    * @param event Seleccionar una sede diferente.
    */
-  @FXML
-  void selectSede(ActionEvent event) {
+  @FXML void selectSede(ActionEvent event) {
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
 
     choiceAuxiliar.getItems().clear();
@@ -84,47 +76,43 @@ public class RecogerPaquete {
     choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
-  @FXML
-  void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete)
-      View.cambiar("operador.cliente", new OperadorRecoger(operador));
+  @FXML void atras(ActionEvent event) {
+    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente", new OperadorRecoger(operador));
   }
 
   /**
    * Inserta la información registrada por el usuario en la BD.
    */
-  @FXML
-  void finalizarEntrega(ActionEvent event) {
-    if (!validateData()) //Comprueba si hay errores y lanza alertas independientemente del caso
+  @FXML void finalizarEntrega(ActionEvent event) {
+    if (!validateData()) // Comprueba si hay errores y lanza alertas independientemente del caso
       return;
 
     Cliente.createCliente(envio.getRemitente());
     Cliente.createCliente(envio.getDestinatario());
-    
-    model.Peticion.createPeticion(txtAreaDescripcion.getText(), //descripcion
-                                  operador.getCedula(), //Cedula operador
-                                  envio.getRemitente().cedula, //cedula remitente
-                                  envio.getDestinatario().cedula); //Cedula destinatario
-    
+
+    model.Peticion.createPeticion(txtAreaDescripcion.getText(), // descripcion
+        operador.getCedula(), // Cedula operador
+        envio.getRemitente().cedula, // cedula remitente
+        envio.getDestinatario().cedula); // Cedula destinatario
+
     goBack();
   }
 
   /**
-   * Valida los datos obtenidos de los campos rellenables verificando que no haya
-   * campos sin llenar o que existan caracteres vacíos.
-   * Además, muestra en pantalla las alertas correspondientes en cada caso.
+   * Valida los datos obtenidos de los campos rellenables verificando que no haya campos sin llenar o
+   * que existan caracteres vacíos. Además, muestra en pantalla las alertas correspondientes en cada
+   * caso.
    * 
-   * @return True si cumple las validaciones y no hay problemas, False de lo
-   *         contrario.
+   * @return True si cumple las validaciones y no hay problemas, False de lo contrario.
    */
   private Boolean validateData() {
 
-    String[] campos = { txtAreaDescripcion.getText(),                           //Descripción
-                        choiceAuxiliar.getValue(),                              //Cedula Auxiliar
-                        Integer.toString(Sede.getIdSede(choiceSede.getValue())) //Sede que recoge
-                      };
+    String[] campos = { txtAreaDescripcion.getText(), // Descripción
+        choiceAuxiliar.getValue(), // Cedula Auxiliar
+        Integer.toString(Sede.getIdSede(choiceSede.getValue())) // Sede que recoge
+    };
 
-    //Se revisa que los campos cumplan con las restricciones.
+    // Se revisa que los campos cumplan con las restricciones.
     boolean camposVacios = GeneralChecker.checkEmpty(campos, new Object[0]);
     boolean forbiddenChar = GeneralChecker.checkChar(campos);
 
@@ -134,11 +122,10 @@ public class RecogerPaquete {
       if (forbiddenChar) SpecificAlerts.showCharForbidenAlert();
       return false;
     }
-    
+
     SpecificAlerts.showPagoExitoso();
     return true;
   }
-
 
   private void goBack() {
     View.clearViews();

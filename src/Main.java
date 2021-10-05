@@ -63,8 +63,10 @@ public class Main extends Application {
     // OperadorOficina(model.Entities.Empleado.cargarEmpleado("12345")));
     // vent.start(Globals.pantalla);
 
-    /*Ventana vent2 = new Ventana("auxiliar", new Auxiliar("APA"));
-    vent2.start(Globals.pantalla);*/
+    /*
+     * Ventana vent2 = new Ventana("auxiliar", new Auxiliar("APA"));
+     * vent2.start(Globals.pantalla);
+     */
   }
 
   /**
@@ -75,14 +77,11 @@ public class Main extends Application {
    */
   private void probarGraficas(Stage stage) throws Exception {
     String[] informe = { "Dinero Mensual", "Mes", "Dinero" };
-    String[] fecha = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
-        "Octubre", "Noviembre", "Diciembre" };
+    String[] fecha = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
     String[] sedeNombre = { "Sede 1", "Sede 2" };
-    Number[][] sedeInformacion = { { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 },
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 } };
+    Number[][] sedeInformacion = { { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 } };
 
-    Ventana login = new Ventana("vacio.completo",
-        new ReporteEmpresa(informe, fecha, sedeNombre, sedeInformacion, false));
+    Ventana login = new Ventana("vacio.completo", new ReporteEmpresa(informe, fecha, sedeNombre, sedeInformacion, false));
     login.start(stage);
   }
 }
