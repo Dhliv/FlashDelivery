@@ -69,7 +69,7 @@ public class RegistrarPaquete {
   }
 
   @FXML void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente", new RegistrarClientes(operador));
+    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente");
   }
 
   private void clearFieldsPaquetes() {
@@ -82,7 +82,7 @@ public class RegistrarPaquete {
   }
 
   boolean agregarPaquete() {
-    try { //TODO Faltan validaciones
+    try { // TODO Faltan validaciones
       Double peso = Double.parseDouble(txtPeso.getText());
       Double valor = Double.parseDouble(txtValor.getText());
       String descripcion = txtDescripcion.getText();

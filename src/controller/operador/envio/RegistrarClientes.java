@@ -33,8 +33,6 @@ public class RegistrarClientes {
     lblTipoInterfaz.setText("Registro envío");
     remitente.initialize(envio, new Thread());
     destinatario.initialize(envio, new Thread());
-
-    View.setViewPane(View.getViewPane(), false);
   }
 
   /**

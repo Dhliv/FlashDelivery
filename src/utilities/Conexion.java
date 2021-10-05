@@ -6,6 +6,8 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import jdk.jshell.spi.ExecutionControl.ExecutionControlException;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Properties;
@@ -25,8 +27,7 @@ public class Conexion {
     static class MiShDwnHook extends Thread {
         // Justo antes de finalizar el programa la JVM invocará
         // este método donde podemos cerrar la conexión
-        @Override
-        public void run() {
+        @Override public void run() {
             try {
                 Connection con = Conexion.startConnection();
                 con.close();
@@ -61,8 +62,8 @@ public class Conexion {
     public static void closeConnection() {
         try {
             conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            // e.printStackTrace();
         }
         conn = null;
     }
