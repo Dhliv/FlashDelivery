@@ -34,7 +34,7 @@ public class RegistrarClientes {
     remitente.initialize(envio, new Thread());
     destinatario.initialize(envio, new Thread());
 
-    View.setViewPane(View.getViewPane(), false);
+    // View.setViewPane(View.getViewPane(), false);
   }
 
   /**

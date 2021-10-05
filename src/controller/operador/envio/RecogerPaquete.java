@@ -77,7 +77,7 @@ public class RecogerPaquete {
   }
 
   @FXML void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente", new OperadorRecoger(operador));
+    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente");
   }
 
   /**
