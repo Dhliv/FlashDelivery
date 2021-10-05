@@ -5,27 +5,27 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="javafx.scene.layout.Pane" prefHeight="418.0" prefWidth="312.0" xmlns:fx="http://javafx.com/fxml">
+<fx:root prefHeight="418.0" prefWidth="312.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
     <Label fx:id="cedulaLabel" layoutX="14.0" layoutY="14.0" text="Ingrese la cedula del ">
         <font>
         <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="cedula" id="Cedula" layoutX="14.0" layoutY="42.0" onKeyPressed="#onCedulaKeyPressed" prefHeight="25.0" prefWidth="193.0" />
+    <TextField id="Cedula" fx:id="cedula" layoutX="14.0" layoutY="42.0" onKeyReleased="#onCedulaTextChanged" prefHeight="25.0" prefWidth="193.0" />
     <Label layoutX="14.0" layoutY="91.0" text="Nombre:">
         <font>
             <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="nombre" id="Nombre" layoutX="12.0" layoutY="117.0" prefHeight="25.0" prefWidth="281.0" />
+    <TextField id="Nombre" fx:id="nombre" layoutX="12.0" layoutY="117.0" prefHeight="25.0" prefWidth="281.0" />
     <Label layoutX="12.0" layoutY="168.0" text="Ciudad:">
         <font>
         <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="ciudad" id="Ciudad" layoutX="11.0" layoutY="196.0" prefHeight="25.0" prefWidth="193.0" />
-    <TextField fx:id="direccion" id="Dirección" layoutX="13.0" layoutY="276.0" prefHeight="25.0" prefWidth="281.0" />
+    <TextField id="Ciudad" fx:id="ciudad" layoutX="11.0" layoutY="196.0" prefHeight="25.0" prefWidth="193.0" />
+    <TextField id="Dirección" fx:id="direccion" layoutX="13.0" layoutY="276.0" prefHeight="25.0" prefWidth="281.0" />
     <Label layoutX="14.0" layoutY="248.0" text="Dirección:">
         <font>
         <Font size="14.0" />
@@ -36,6 +36,6 @@
         <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="telefono" id="Teléfono" layoutX="15.0" layoutY="358.0" prefHeight="25.0" prefWidth="281.0" />
+    <TextField id="Teléfono" fx:id="telefono" layoutX="15.0" layoutY="358.0" prefHeight="25.0" prefWidth="281.0" />
 
 </fx:root>

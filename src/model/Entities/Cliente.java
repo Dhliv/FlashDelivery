@@ -99,6 +99,7 @@ public class Cliente {
       cliente = rs != null ? rs.into(Cliente.class) : null;
       Conexion.closeConnection();
     }catch(Exception ex){
+      System.out.println(ex.getMessage());
       Conexion.closeConnection();
     }
     
