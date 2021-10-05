@@ -262,7 +262,7 @@ public class OperadorTarjeta implements Initializable {
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
 
-    System.out.println(event.getCharacter().codePointAt(0));
+    // System.out.println(event.getCharacter().codePointAt(0));
     if ((borrar || event.getCharacter().codePointAt(0) == 8) && txtTitular.getText().length() < 21) {
       return;
     }
