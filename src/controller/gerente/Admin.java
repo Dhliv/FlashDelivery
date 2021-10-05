@@ -13,7 +13,6 @@ import utilities.View;
  * 
  * @author Alejandro Pergueza
  * @author David Henao
- * @author Julián Andres Orejuela
  * @author Reynell Arkad Devji Quevedo
  * @version 1.0
  */
@@ -24,35 +23,34 @@ public class Admin {
     this.userName = userName;
   }
 
-  @FXML
-  private Label labelNameUser;
+  @FXML private Label labelNameUser;
 
-  @FXML
-  private AnchorPane content;
+  @FXML private AnchorPane content;
 
-  @FXML
-  private void initialize() {
-    View.setViewPane(content);
+  @FXML private void initialize() {
+    View.setViewPane(content, false);
     labelNameUser.setText("Bienvenido " + userName);
   }
 
-  @FXML
-  void goToSedeConsulta(ActionEvent event) {
+  @FXML void goToSedeConsulta(ActionEvent event) {
     View.cambiar("sede.consulta");
   }
 
-  @FXML
-  void goToUsuariosConsulta(ActionEvent event) {
+  @FXML void goToUsuariosConsulta() {
     View.newView("user.consulta", new UserConsulta());
+    /*Runnable r = () -> {
+      View.newView("user.consulta", new UserConsulta());
+    };
+    
+    Thread t = new Thread(r);
+    t.start();*/
   }
 
-  @FXML
-  void goToAdminReportes(ActionEvent event) {
+  @FXML void goToAdminReportes(ActionEvent event) {
     View.cambiar("reportes", new Reportes());
   }
 
-  @FXML
-  void logOut(ActionEvent event) {
+  @FXML void logOut(ActionEvent event) {
     Globals.logOut();
   }
 }
