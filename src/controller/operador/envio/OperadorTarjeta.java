@@ -174,6 +174,8 @@ public class OperadorTarjeta implements Initializable {
       pagar = false;
     }
 
+    if(GeneralChecker.checkFecha(dateFechaVencimiento.getValue(), 0));
+
     // Revisa lo mismo que en el anterior pero en el campo numeroTarjeta
     if (numeroTarjeta.length() < CARDLENGTH) {
       SpecificAlerts.showCardUnexist();
