@@ -70,6 +70,7 @@ public class RecogerPaquete {
 
     Globals.style.setParent(choiceAuxiliar);
     Globals.style.setParent(choiceSede);
+    Globals.style.setParent(txtAreaDescripcion);
   }
 
   /**

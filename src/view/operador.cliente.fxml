@@ -12,10 +12,10 @@
 <Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" fx:id="atrasCliente" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="84.0" text="Atras">
-      <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-            </JFXButton>
+         <font>
+            <Font name="Lato Bold" size="14.0" />
+         </font>
+      </JFXButton>
       <Label fx:id="lblTipoInterfaz" layoutX="860.0" layoutY="32.0" text="a">
          <font>
             <Font name="Lato Bold" size="20.0" />
