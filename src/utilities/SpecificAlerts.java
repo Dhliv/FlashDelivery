@@ -27,6 +27,7 @@ public class SpecificAlerts {
   private static Alert decimalFormat; // Alerta que indica que un campo no tiene formato decimal.
   private static Alert fechaNoValida; // Alerta que indica que la fecha ingresada no es valida.
   private static Alert peticionExitosa; // Alerta que indica que laa petición de recogida se generó con éxito.
+  private static Alert usernameEqualPass; // Alerta que indica que la contraseña es igual al username.
 
   public static void init() {
 
@@ -98,13 +99,18 @@ public class SpecificAlerts {
 
     fechaNoValida = new Alert(AlertType.ERROR);
     fechaNoValida.setContentText("La fecha ingresada no es valida.");
-    fechaNoValida.setContentText("Comprobar fecha");
+    fechaNoValida.setTitle("Comprobar fecha");
     fechaNoValida.setHeaderText("Error en la fecha.");
 
     peticionExitosa = new Alert(AlertType.INFORMATION);
     peticionExitosa.setContentText("Se ha generado con éxito la petición de recogida.");
-    peticionExitosa.setContentText("Petición Generada con Éxito");
+    peticionExitosa.setTitle("Petición Generada con Éxito");
     peticionExitosa.setHeaderText("Petición Exitosa");
+
+    usernameEqualPass = new Alert(AlertType.ERROR);
+    usernameEqualPass.setContentText("Por razones de seguridad, el username y la contraseña no pueden ser iguales.");
+    usernameEqualPass.setTitle("Error de registro");
+    usernameEqualPass.setHeaderText("Password = Username");
   }
 
   /**
@@ -235,5 +241,12 @@ public class SpecificAlerts {
    */
   public static void showPeticionExitosa() {
     peticionExitosa.showAndWait();
+  }
+
+  /**
+   * Alerta que indica que la contraseña es igual al nomobre de usuario.
+   */
+  public static void showUsernameEqualPass() {
+    usernameEqualPass.showAndWait();
   }
 }
