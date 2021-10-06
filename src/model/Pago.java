@@ -79,7 +79,7 @@ public class Pago {
     try {
       pdf.pdfCreate(Integer.toString(id_envio));
     } catch (IOException e) {
-
+      System.out.print(e.getMessage());
     }
   }
 
