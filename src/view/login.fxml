@@ -46,10 +46,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.Font?>
 
 <VBox maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <AnchorPane maxHeight="300.0" maxWidth="500.0" onKeyPressed="#loginKeyboard" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane style="-fx-background-color: white;" maxHeight="300.0" maxWidth="500.0" onKeyPressed="#loginKeyboard" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Pane style="-fx-background-color: white;"  layoutY="14.0" maxHeight="100.0" maxWidth="500.0" prefHeight="69.0" prefWidth="500.0">
                <children>
@@ -64,7 +65,11 @@
             <Label layoutX="117.0" layoutY="167.0" text="Contraseña" />
             <JFXTextField fx:id="txtUsuario" layoutX="217.0" layoutY="111.0"  prefWidth="150.0" />
             <JFXPasswordField fx:id="txtPass" layoutX="218.0" layoutY="163.0" prefWidth="150.0" />
-            <JFXButton fx:id="btIngresar" layoutX="310.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" />
+            <JFXButton fx:id="btIngresar" layoutX="300.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" textFill="WHITE">
+              <font>
+                <Font name="Lato Bold" size="14.0" />
+             </font>
+            </JFXButton>
          </children>
     </AnchorPane>
   </children>
