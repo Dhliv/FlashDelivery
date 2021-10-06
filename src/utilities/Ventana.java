@@ -27,6 +27,12 @@ public class Ventana extends Application {
   @Override public void start(Stage stage) throws Exception {
     Parent root = View.loadView(ventana, cont);
     Scene scene = new Scene(root);
+
+    var a = new Image(this.getClass().getResourceAsStream("../resources/Images/icon.png"));
+    stage.getIcons().add(a);
+    /*JMetro jMetro = new JMetro(Style.LIGHT);
+    jMetro.setScene(scene);*/
+
     stage.setTitle(ventana);
 
     stage.setScene(scene);

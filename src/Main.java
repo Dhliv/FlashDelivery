@@ -18,6 +18,7 @@ import utilities.Globals;
 import utilities.SpecificAlerts;
 import utilities.Ventana;
 import utilities.View;
+import javafx.scene.image.Image;
 
 public class Main extends Application {
   public static void main(String[] args) {
