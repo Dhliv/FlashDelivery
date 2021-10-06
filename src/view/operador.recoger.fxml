@@ -12,11 +12,11 @@
 
 <Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-            <JFXButton fx:id="atrasPaquete" layoutX="68.0" layoutY="33.0" mnemonicParsing="false" onAction="#atras" text="Regresar">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </JFXButton>
+      <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" onAction="#atras" fx:id="atrasPaquete" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="84.0" text="Atras">
+         <font>
+                     <Font name="Lato Bold" size="22.0" />
+                  </font>
+               </JFXButton>
             <AnchorPane layoutX="10.0" layoutY="90.0" prefHeight="670.0" prefWidth="1000.0">
                <children>
                   <Pane style="-fx-background-color: white;"  layoutX="190.0" layoutY="90.0" prefHeight="500.0" prefWidth="620.0">
@@ -40,16 +40,17 @@
                            </font>
                         </Label>
                         <ComboBox fx:id="choiceSede" onAction="#selectSede" layoutX="10.0" layoutY="300.0" prefWidth="150.0" />
-                        <JFXButton layoutX="420.0" layoutY="437.0" mnemonicParsing="false" onAction="#finalizarEntrega" text="Registrar recolección">
+                        <JFXButton style="-fx-background-color: #21ba45; -fx-text-fill: #ffffff;" prefHeight="40.0" prefWidth="175.0" layoutX="415.0" layoutY="437.0" mnemonicParsing="false" onAction="#finalizarEntrega" text="Registrar recolección">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Lato Bold" size="14.0" />
                            </font>
                         </JFXButton>
+                        
                      </children>
                   </Pane>
-                  <Label layoutX="793.0" layoutY="14.0" text="Registro de paquetes">
+                  <Label layoutX="616.0" layoutY="14.0" text="Registro de paquetes">
                      <font>
-                        <Font size="22.0" />
+                        <Font size="22.0" name="Lato Bold" />
                      </font>
                   </Label>
                </children>
