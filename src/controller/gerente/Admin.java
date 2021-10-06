@@ -4,7 +4,11 @@ import controller.gerente.usuarios.UserConsulta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.JMetroStyleClass;
+import jfxtras.styles.jmetro.Style;
 import utilities.Globals;
 import utilities.View;
 
@@ -27,9 +31,13 @@ public class Admin {
 
   @FXML private AnchorPane content;
 
+  @FXML private SplitPane splitPanel;
+  
+
   @FXML private void initialize() {
     View.setViewPane(content, false);
     labelNameUser.setText("Bienvenido " + userName);
+    // splitPanel.getStyleClass().add(xd.getStyle().toString());
   }
 
   @FXML void goToSedeConsulta(ActionEvent event) {

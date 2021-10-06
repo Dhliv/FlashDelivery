@@ -19,21 +19,16 @@ public class Peticion {
   public String descripcion, id_empleado, estado, cliente_solicitud, cliente_destinatario;
 
   /**
-   * Inserta una nueva factura en la base de datos
+   * Inserta una petición de recogida en la base de datos.
    * 
-   * @param costo    del envío
-   * @param id_envio de la factura.
+   * @param descripcion  del paquete.
+   * @param auxiliar     cedula del auxiliar.
+   * @param remitente    del paquete.
+   * @param destinatario del paquete.
    */
-  public static void createPeticion(String descripcion, String empleado, String remitente, String destinatario) {
-    // Conexion.db().insertInto(DSL.table("peticion_recogida"),
-    // DSL.field("descripcion"),
-    // DSL.field("id_empleado"), DSL.field("estado"),
-    // DSL.field("cliente_solicitud"),
-    // DSL.field("cliente_destinatario"))
-    // .values(descripcion, empleado, "Pendiente", remitente,
-    // destinatario).execute();
+  public static void createPeticion(String descripcion, String auxiliar, String remitente, String destinatario) {
     String sql = "insert into peticion_recogida(descripcion, id_empleado, estado, cliente_solicitud, cliente_destinatario) values('"
-        + descripcion + "', '" + empleado + "', 'Pendiente', '" + remitente + "', '" + destinatario + "')";
+        + descripcion + "', '" + auxiliar + "', 'Pendiente', '" + remitente + "', '" + destinatario + "')";
     Conexion.db().execute(sql);
     Conexion.closeConnection();
   }

@@ -1,5 +1,8 @@
 package utilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +35,7 @@ public class Ventana extends Application {
     jMetro.setScene(scene);*/
 
     stage.setTitle(ventana);
+
     stage.setScene(scene);
     stage.show();
   }

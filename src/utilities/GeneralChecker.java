@@ -1,5 +1,9 @@
 package utilities;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Year;
+
 import javafx.scene.control.TextField;
 
 public class GeneralChecker {
@@ -94,6 +98,19 @@ public class GeneralChecker {
                 return false;
             }
         return true;
+    }
+
+    /**
+     * Revisa que tenga una edad superior a años 
+     * @param fecha Fecha que se desea comparar
+     * @param años Años atrás que se quiere comparar.
+     * @return true si tiene edad superior a los años enviados.
+     * false de lo contrario.
+     */
+    public static Boolean checkFecha(LocalDate fecha, int años) {
+    if(fecha == null) return false;
+        if(fecha.isAfter(LocalDate.now().minusYears(años))) return true;
+      return false;
     }
 
 }

@@ -9,8 +9,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane style="-fx-background-color: white;" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="494.0" layoutY="26.0">
          <children>
@@ -39,6 +40,11 @@
                </font>
             </Label>
             <Label layoutX="250.0" layoutY="60.0" text="Apellidos">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="585.0" layoutY="61.0" text="Nombres">
                <font>
                   <Font size="18.0" />
                </font>
@@ -78,14 +84,14 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="apellidoT" layoutX="250.0" layoutY="85.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="nombreT" layoutX="585.0" layoutY="86.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="apellidoT" layoutX="250.0" layoutY="85.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="nombreT" layoutX="585.0" layoutY="86.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
             <DatePicker fx:id="fechaT" layoutX="585.0" layoutY="285.0" prefWidth="184.0" />
             <ChoiceBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
             <ChoiceBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
             <PasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
             <Button layoutX="538.0" layoutY="548.0" mnemonicParsing="false" onAction="#registrarUser" text="Registrar">
@@ -98,11 +104,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="585.0" layoutY="61.0" text="Nombres">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
+            
          </children>
       </Pane>
       <Separator layoutY="90.0" prefWidth="1020.0" />

@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import com.jfoenix.controls.JFXTextField;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
@@ -44,21 +45,21 @@ public class UserRegister {
 
   // Campos de texto que se pueden rellenar en user.register view
   @FXML
-  private TextField nombreT;
+  private JFXTextField nombreT;
   @FXML
-  private TextField apellidoT;
+  private JFXTextField apellidoT;
   @FXML
-  private TextField identificacionT;
+  private JFXTextField identificacionT;
   @FXML
-  private TextField telefonoT;
+  private JFXTextField telefonoT;
   @FXML
-  private TextField direccionT;
+  private JFXTextField direccionT;
   @FXML
   private DatePicker fechaT;
   @FXML
   private ChoiceBox<String> rolT;
   @FXML
-  private TextField usernameT;
+  private JFXTextField usernameT;
   @FXML
   private ChoiceBox<String> idsedeT;
   @FXML
@@ -172,8 +173,9 @@ public class UserRegister {
     boolean usernameExist = Usuario.checkExistence(username);
     boolean empleadoExist = Empleado.checkExistence(ident);
     Boolean formatoCorrecto = checkFormat();
+    Boolean noTrabajaLegalmente = GeneralChecker.checkFecha(fechaT.getValue(), 16);
 
-    if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto) {
+    if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto || noTrabajaLegalmente) {
       { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
         if (emptyCamps)
           SpecificAlerts.showEmptyFieldAlert();
@@ -185,6 +187,9 @@ public class UserRegister {
           SpecificAlerts.showEmpleadoExists();
         if (!formatoCorrecto)
           SpecificAlerts.showNumericFormat();
+        if(noTrabajaLegalmente){
+          SpecificAlerts.showFechaNoValida();
+        }
       }
     } else { // Si no hay problemas con las validaciones hechas:
       parseData();

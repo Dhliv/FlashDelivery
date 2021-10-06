@@ -27,22 +27,22 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="65.0" layoutY="56.0" prefHeight="25.0" prefWidth="111.0" text="Alto (unidades)">
+                  <Label layoutX="65.0" layoutY="56.0" prefHeight="25.0" prefWidth="111.0" text="Alto (cm)">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="255.0" layoutY="56.0" prefHeight="25.0" prefWidth="125.0" text="Largo (unidades)">
+                  <Label layoutX="255.0" layoutY="56.0" prefHeight="25.0" prefWidth="125.0" text="Largo (cm)">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="445.0" layoutY="56.0" prefHeight="25.0" prefWidth="125.0" text="Ancho (unidades)">
+                  <Label layoutX="445.0" layoutY="56.0" prefHeight="25.0" prefWidth="125.0" text="Ancho (cm)">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="65.0" layoutY="145.0" prefHeight="17.0" prefWidth="71.0" text="Peso">
+                  <Label layoutX="65.0" layoutY="145.0" prefHeight="17.0" prefWidth="71.0" text="Peso (Kg)">
                      <font>
                         <Font size="16.0" />
                      </font>

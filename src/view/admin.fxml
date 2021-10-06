@@ -48,48 +48,9 @@
 
 <VBox fx:id="ventana" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
       <SplitPane fx:id="splitPanel" dividerPositions="0.2" prefWidth="1280.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="253.0">
+          <AnchorPane style="-fx-background-color: white;" minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="253.0">
                <children>
                   <ImageView fitWidth="175.0" layoutX="41.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -106,21 +67,21 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </JFXButton>
-                  <Button alignment="CENTER" layoutX="65.0" layoutY="466.0" mnemonicParsing="false" onAction="#goToSedeConsulta" prefHeight="42.0" prefWidth="127.0" text="Sedes" textAlignment="CENTER">
+                  <JFXButton alignment="CENTER" layoutX="65.0" layoutY="466.0" mnemonicParsing="false" onAction="#goToSedeConsulta" prefHeight="42.0" prefWidth="127.0" text="Sedes" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="65.0" layoutY="576.0" mnemonicParsing="false" onAction="#goToAdminReportes" prefHeight="46.0" prefWidth="127.0" text="Reportes" textAlignment="CENTER">
+                  </JFXButton>
+                  <JFXButton alignment="CENTER" layoutX="65.0" layoutY="576.0" mnemonicParsing="false" onAction="#goToAdminReportes" prefHeight="46.0" prefWidth="127.0" text="Reportes" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="65.0" layoutY="686.0" mnemonicParsing="false" onAction="#logOut" prefHeight="42.0" prefWidth="127.0" text="Log Out" textAlignment="CENTER">
+                  </JFXButton>
+                  <JFXButton alignment="CENTER" layoutX="65.0" layoutY="686.0" mnemonicParsing="false" onAction="#logOut" prefHeight="42.0" prefWidth="127.0" text="Log Out" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
-                  </Button>
+                  </JFXButton>
                </children>
             </AnchorPane>
           <AnchorPane fx:id="content" minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="1024.0">

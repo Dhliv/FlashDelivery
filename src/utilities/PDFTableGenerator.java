@@ -38,8 +38,8 @@ public class PDFTableGenerator {
     tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
     
     //SE IMPORTAN LAS FUENTES TIPOGRAFICAS.
-    regularFont = PDType0Font.load(document, new File("C:/Users/pract/Downloads/Lato/Lato-Regular.ttf")); 
-    regularBoldFont =  PDType0Font.load(document, new File("C:/Users/pract/Downloads/Lato/Lato-Bold.ttf"));
+    regularFont = PDType0Font.load(document, new File("src/resources/fonts/Lato-Regular.ttf")); 
+    regularBoldFont =  PDType0Font.load(document, new File("src/resources/fonts/Lato-Bold.ttf"));
     
     cellMargin = 5f;
     marginWidth = 0.1f;

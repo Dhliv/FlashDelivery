@@ -56,7 +56,7 @@ public class Envio {
   }
 
   /**
-   * TODO DOCUMENTAR @WINJA Inserta un envío en la base de datos con sus
+   * Inserta un envío en la base de datos con sus
    * respectivos parametros. Inserta un envío en la base de datos con sus
    * respectivos parametros, y retorna el id del envío recién insertado.
    * 
