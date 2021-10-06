@@ -32,28 +32,16 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.Font?>
 
-<Pane onKeyPressed="#loginKeyboard"  maxHeight="300.0" maxWidth="500.0" prefHeight="254.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="300.0" maxWidth="500.0" onKeyPressed="#loginKeyboard" prefHeight="254.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <JFXTextField fx:id="txtUsuario" layoutX="243.0" layoutY="60.0" prefHeight="25.0" prefWidth="202.0" />
             <JFXPasswordField fx:id="txtPass" layoutX="243.0" layoutY="138.0" prefHeight="25.0" prefWidth="202.0" />

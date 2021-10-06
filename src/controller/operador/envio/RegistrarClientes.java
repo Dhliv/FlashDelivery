@@ -33,8 +33,6 @@ public class RegistrarClientes {
     lblTipoInterfaz.setText("Registro envío");
     remitente.initialize(envio);
     destinatario.initialize(envio);
-
-    // View.setViewPane(View.getViewPane(), false);
   }
   @FXML
   void atras(ActionEvent event) {
