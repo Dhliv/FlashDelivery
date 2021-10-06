@@ -94,14 +94,14 @@
             <JFXTextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
             <JFXComboBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
             <JFXPasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
-            <JFXButton layoutX="538.0" layoutY="548.0" mnemonicParsing="false" onAction="#registrarUser" text="Registrar">
+            <JFXButton ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" textFill="WHITE" layoutX="538.0" layoutY="540.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" onAction="#registrarUser" text="Registrar" >
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="384.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
+            <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" layoutX="384.0" layoutY="540.0" mnemonicParsing="false" prefHeight="42.0" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="18.0" />
                </font>
             </JFXButton>
             
