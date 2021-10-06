@@ -25,7 +25,8 @@ public class SpecificAlerts {
   private static Alert cardUnexist; // Alerta que indica que una tarjeta es inexistente o está mal escrita.
   private static Alert numericFormat; // Alerta que indica que un campo no tiene formato numérico.
   private static Alert decimalFormat; // Alerta que indica que un campo no tiene formato decimal.
-  private static Alert fechaNoValida; //Alerta que indica que la fecha ingresada no es valida.
+  private static Alert fechaNoValida; // Alerta que indica que la fecha ingresada no es valida.
+  private static Alert peticionExitosa; // Alerta que indica que laa petición de recogida se generó con éxito.
 
   public static void init() {
 
@@ -99,6 +100,11 @@ public class SpecificAlerts {
     fechaNoValida.setContentText("La fecha ingresada no es valida.");
     fechaNoValida.setContentText("Comprobar fecha");
     fechaNoValida.setHeaderText("Error en la fecha.");
+
+    peticionExitosa = new Alert(AlertType.INFORMATION);
+    peticionExitosa.setContentText("Se ha generado con éxito la petición de recogida.");
+    peticionExitosa.setContentText("Petición Generada con Éxito");
+    peticionExitosa.setHeaderText("Petición Exitosa");
   }
 
   /**
@@ -216,7 +222,18 @@ public class SpecificAlerts {
     decimalFormat.showAndWait();
   }
 
+  /**
+   * Alerta que muestra que la fecha indicada no es válida dentro de algún
+   * contexto.
+   */
   public static void showFechaNoValida() {
     fechaNoValida.showAndWait();
+  }
+
+  /**
+   * Alerta que indica que la petición de recogida fue generada con éxito.
+   */
+  public static void showPeticionExitosa() {
+    peticionExitosa.showAndWait();
   }
 }
