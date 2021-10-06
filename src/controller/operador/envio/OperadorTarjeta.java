@@ -38,7 +38,7 @@ import model.Entities.Empleado;
  */
 public class OperadorTarjeta implements Initializable {
 
-  private Integer CVVLENGTH = 4;
+  private Integer CVVLENGTH = 3;
   private Integer CARDLENGTH = 16;
   private Integer tipoTarjeta; // Almacena el tipo de la tarjeta que se haya seleccionado para el método de
                                // pago.
