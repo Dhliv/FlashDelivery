@@ -33,7 +33,7 @@ public class Ventana extends Application {
     /*JMetro jMetro = new JMetro(Style.LIGHT);
     jMetro.setScene(scene);*/
 
-    stage.setTitle(ventana);
+    stage.setTitle("Flash Delivery");
 
     stage.setScene(scene);
     stage.show();

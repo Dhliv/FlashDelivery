@@ -57,34 +57,34 @@
          <items>
              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="253.0" style="-fx-background-color: #252525;">
                   <children>
-                     <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="27.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="37.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../resources/logo2.png" />
                         </image>
                      </ImageView>
-                     <Label fx:id="labelNameUser" alignment="CENTER" contentDisplay="CENTER" layoutY="195.0" prefHeight="124.0" prefWidth="253.0" text="Bienvenido 'USER'" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <Label fx:id="labelNameUser" alignment="CENTER" contentDisplay="CENTER" layoutY="213.0" prefHeight="124.0" prefWidth="253.0" text="Bienvenido 'USER'" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                         <font>
-                           <Font name="Dubai Bold" size="20.0" />
+                           <Font name="Lato Bold" size="20.0" />
                         </font>
                      </Label>
-                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="348.0" mnemonicParsing="false" onMouseClicked="#goToUsuariosConsulta" prefHeight="57.0" prefWidth="160.0" style="-fx-background-color: #aaaaaa;" text="Usuarios" textAlignment="CENTER">
+                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#goToUsuariosConsulta" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #FDFDFD;" text="Usuarios" textAlignment="CENTER">
                         <font>
-                           <Font name="Dubai Bold" size="22.0" />
+                           <Font name="Lato Bold" size="18.0" />
                         </font>
                      </JFXButton>
-                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="460.0" mnemonicParsing="false" onAction="#goToSedeConsulta" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #aaaaaa;" text="Sedes" textAlignment="CENTER">
+                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="491.0" mnemonicParsing="false" onAction="#goToSedeConsulta" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #FDFDFD;" text="Sedes" textAlignment="CENTER">
                         <font>
-                           <Font name="Dubai Bold" size="22.0" />
+                           <Font name="Lato Bold" size="18.0" />
                         </font>
                      </JFXButton>
-                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="570.0" mnemonicParsing="false" onAction="#goToAdminReportes" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #aaaaaa;" text="Reportes" textAlignment="CENTER">
+                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="587.0" mnemonicParsing="false" onAction="#goToAdminReportes" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #FDFDFD;" text="Reportes" textAlignment="CENTER">
                         <font>
-                           <Font name="Dubai Bold" size="22.0" />
+                           <Font name="Lato Bold" size="18.0" />
                         </font>
                      </JFXButton>
-                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="681.0" mnemonicParsing="false" onAction="#logOut" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #aaaaaa;" text="Log Out" textAlignment="CENTER">
+                     <JFXButton alignment="CENTER" layoutX="47.0" layoutY="683.0" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #FDFDFD;" text="Log Out" textAlignment="CENTER">
                         <font>
-                           <Font name="Dubai Bold" size="22.0" />
+                           <Font name="Lato Bold" size="18.0" />
                         </font>
                      </JFXButton>
                   </children>

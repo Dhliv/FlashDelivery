@@ -1,8 +1,0 @@
-#hola{
--fx-background-color: #ffffff;
-}
-
-#hola:hover{
-    -fx-background-color: #cacbcd;
-    -fx-text-fill: #000000ee;
-}
