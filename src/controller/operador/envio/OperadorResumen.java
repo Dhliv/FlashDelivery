@@ -85,7 +85,7 @@ public class OperadorResumen {
     pago = new Pago(envio, operador);
     total = pago.getTotal();
     impuesto = pago.getImpuesto();
-    seguro = pago.getSeguro();
+    seguro = envio.getPaquete().seguro ? pago.getSeguro() : 0;
 
     // Actualiza los datos en pantalla.
     labelCostoEnvio

@@ -4,8 +4,8 @@ import model.Entities.Cliente;
 import model.Entities.Paquete;
 
 /**
- * Clase encargada de almacenar todos los datos en memoria para registrar un envio y posteriormente
- * guardarlos en la base de datos.
+ * Clase encargada de almacenar todos los datos en memoria para registrar un
+ * envio y posteriormente guardarlos en la base de datos.
  * 
  * @author Julián Orejuela
  * @version 1.1, 23/9/2021
@@ -30,15 +30,18 @@ public class RegistrarEnvio {
    */
   public synchronized Cliente buscarCliente(String cedula, TipoCliente tipo) {
     Cliente cliente = Cliente.buscarCliente(cedula);
-    if (tipo == TipoCliente.Remitente) remitente = cliente;
-    if (tipo == TipoCliente.Destinatario) destinatario = cliente;
+    if (tipo == TipoCliente.Remitente)
+      remitente = cliente;
+    if (tipo == TipoCliente.Destinatario)
+      destinatario = cliente;
     return cliente;
   }
 
   /**
    * Modifica el estado del cliente.
    */
-  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono, TipoCliente tipo) {
+  public void setCliente(String cedula, String nombre, String ciudad, String direccion, String telefono,
+      TipoCliente tipo) {
     Cliente cliente = new Cliente(cedula, nombre, ciudad, direccion, telefono);
     if (tipo == TipoCliente.Destinatario)
       destinatario = cliente;
@@ -46,8 +49,10 @@ public class RegistrarEnvio {
       remitente = cliente;
   }
 
-  public void agregarPaqueteP(Double peso, Double valor, String descripcion, Double ancho, Double largo, Double alto, Boolean seguro) {
-    if (paquete == null) this.paquete = new Paquete();
+  public void agregarPaqueteP(Double peso, Double valor, String descripcion, Double ancho, Double largo, Double alto,
+      Boolean seguro) {
+    if (paquete == null)
+      this.paquete = new Paquete();
     paquete.peso = peso;
     paquete.valor = valor;
     paquete.descripcion = descripcion;
