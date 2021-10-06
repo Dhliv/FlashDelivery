@@ -19,17 +19,20 @@ import controller.operador.OperadorOficina;
 public class Login {
   private String user;
 
-  @FXML private JFXPasswordField txtPass;
-  @FXML private JFXTextField txtUsuario;
+  @FXML
+  private JFXPasswordField txtPass;
+  @FXML
+  private JFXTextField txtUsuario;
 
   /**
-   * Metodo para ejecutar el login de forma alternativa; en lugar de usar el botón, se usa la tecla
-   * Enter
+   * Metodo para ejecutar el login de forma alternativa; en lugar de usar el
+   * botón, se usa la tecla Enter
    * 
    * @param event
    * @throws Exception
    */
-  @FXML void loginKeyboard(KeyEvent event) throws Exception {
+  @FXML
+  void loginKeyboard(KeyEvent event) throws Exception {
     // System.out.println(event);
     KeyCode key = event.getCode();
     if (key.equals(KeyCode.ENTER)) {
@@ -43,12 +46,14 @@ public class Login {
    * @param event evento causado por el botón login
    * @throws Exception
    */
-  @FXML void clicksoide(ActionEvent event) throws Exception {
+  @FXML
+  void clicksoide(ActionEvent event) throws Exception {
     login();
   }
 
   /**
-   * Método para iniciar sesión en los distintos roles dado un usuario y una contraseña.
+   * Método para iniciar sesión en los distintos roles dado un usuario y una
+   * contraseña.
    * 
    * @throws Exception
    */
@@ -75,7 +80,7 @@ public class Login {
       // System.out.println("entre");
       Empleado userActual = Empleado.cargarEmpleado(acc + "");
       var rolAcc = userActual.getRol();
-
+      System.out.println(rolAcc);
       Globals.pantalla.close();
       Ventana vent;
 
@@ -92,8 +97,9 @@ public class Login {
       } else if (rolAcc.equals(Roles.rol[Roles.OPERADOR])) {
         vent = new Ventana("operadorOficina", new OperadorOficina(userActual));
         vent.start(Globals.pantalla);
-      } else if (rolAcc.equals(Roles.rol[Roles.SECRETARIO])) {
+      } else if (rolAcc.equals("Secretaria")) {
         vent = new Ventana("admin", new Admin(user));
+        vent.start(Globals.pantalla);
       }
     }
   }
