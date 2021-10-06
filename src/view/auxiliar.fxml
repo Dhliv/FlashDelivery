@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -20,48 +21,48 @@
 <?import javafx.scene.text.Font?>
 <?import com.jfoenix.controls.*?>
 
-<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="815.0" prefHeight="761.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="791.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane style="-fx-background-color: white;"  layoutY="-1.0" prefHeight="781.0" prefWidth="260.0">
+            <Pane prefHeight="780.0" prefWidth="253.0" style="-fx-background-color: #252525;">
                <children>
-                  <ImageView fitWidth="175.0" layoutX="41.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/Images/logoEmpresa.jpg" />
-                     </image>
-                  </ImageView>
-                  <Pane style="-fx-background-color: white;"  layoutY="210.0" />
-                  <Label fx:id="labelUsuario" layoutX="85.0" layoutY="228.0" prefHeight="70.0" prefWidth="160.0" text="Bienvenido nombreUsuario" textAlignment="CENTER" wrapText="true">
+                  <Pane layoutY="210.0" style="-fx-background-color: white;" />
+                  <Label fx:id="labelUsuario" alignment="CENTER" contentDisplay="CENTER" layoutY="247.0" prefHeight="89.0" prefWidth="253.0" text="Bienvenido nombreUsuario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Lato Bold" size="20.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btnLogOut" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="669.0" mnemonicParsing="false" onAction="#logOut" prefHeight="70.0" prefWidth="160.0" text="Log Out" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnLogOut" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="690.0" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #FDFDFD;" text="Log Out" textAlignment="CENTER" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Lato Bold" size="18.0" />
                      </font>
                   </JFXButton>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="47.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/logo3.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane style="-fx-background-color: white;"  fx:id="rightContent" layoutX="260.0" prefHeight="780.0" prefWidth="1020.0">
+            <Pane fx:id="rightContent" layoutX="260.0" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: white;">
                <padding>
                   <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
                </padding>
                <children>
-                  <TableView fx:id="recogerTable" layoutY="72.0" prefHeight="708.0" prefWidth="1020.0">
+                  <TableView fx:id="recogerTable" layoutX="-7.0" layoutY="72.0" prefHeight="708.0" prefWidth="1027.0">
                     <columns>
-                      <TableColumn fx:id="id" prefWidth="65.0" text="ID" />
-                      <TableColumn fx:id="descripcion" prefWidth="184.0" text="Descripción" />
-                        <TableColumn fx:id="nombre" prefWidth="202.0" text="Nombre del cliente" />
-                        <TableColumn fx:id="ciudad" prefWidth="120.0" text="Ciudad" />
-                        <TableColumn fx:id="direccion" prefWidth="259.0" text="Dirección" />
-                        <TableColumn fx:id="telefono" prefWidth="189.0" text="Teléfono" />
+                      <TableColumn fx:id="id" prefWidth="72.0" text="ID" />
+                      <TableColumn fx:id="descripcion" prefWidth="304.0" text="Descripción" />
+                        <TableColumn fx:id="nombre" prefWidth="196.0" text="Nombre del cliente" />
+                        <TableColumn fx:id="ciudad" prefWidth="136.0" text="Ciudad" />
+                        <TableColumn fx:id="direccion" prefWidth="171.0" text="Dirección" />
+                        <TableColumn fx:id="telefono" prefWidth="146.0" text="Teléfono" />
                     </columns>
                   </TableView>
-                  <Label layoutX="14.0" layoutY="20.0" text="Paquetes pendientes de recoger">
+                  <Label layoutX="14.0" layoutY="24.0" text="Paquetes pendientes de recoger">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="Lato Regular" size="20.0" />
                      </font>
                   </Label>
                </children>

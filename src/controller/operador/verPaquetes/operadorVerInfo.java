@@ -1,5 +1,7 @@
 package controller.operador.verPaquetes;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,35 +14,16 @@ import model.Entities.Paquete;
 import utilities.View;
 
 public class operadorVerInfo {
-    @FXML
-    private Button atrasPaquete;
-
-    @FXML
-    private Label labelID;
-
-    @FXML
-    private Label labelFechaRegistro;
-
-    @FXML
-    private Label labelMetodoPago;
-
-    @FXML
-    private Label labelDireccionEntrega;
-
-    @FXML
-    private CheckBox checkEntregado;
-
-    @FXML
-    private TextArea txtDescripcion;
-
-    @FXML
-    private Label labelVolumen;
-
-    @FXML
-    private Label labelRemitente;
-
-    @FXML
-    private Label labelDestinatario;
+    @FXML private JFXButton atrasPaquete;
+    @FXML private Label labelID;
+    @FXML private Label labelFechaRegistro;
+    @FXML private Label labelMetodoPago;
+    @FXML private Label labelDireccionEntrega;
+    @FXML private CheckBox checkEntregado;
+    @FXML private TextArea txtDescripcion;
+    @FXML private Label labelVolumen;
+    @FXML private Label labelRemitente;
+    @FXML private Label labelDestinatario;
 
     private Envio en;
     private Cliente rem, des;
@@ -64,8 +47,7 @@ public class operadorVerInfo {
         txtDescripcion.setText(p.getDescripcion().replace("\\n", "\n"));
     }
 
-    @FXML
-    void atras(ActionEvent event) {
+    @FXML void atras(ActionEvent event) {
         View.cambiar("operadorOficinaTabla");
     }
 

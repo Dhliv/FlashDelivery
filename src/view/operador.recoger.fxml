@@ -14,7 +14,7 @@
    <children>
       <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" onAction="#atras" fx:id="atrasPaquete" layoutX="26.0" layoutY="23.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="84.0" text="Atras">
          <font>
-                     <Font name="Lato Bold" size="22.0" />
+                     <Font name="System Bold" size="14.0" />
                   </font>
                </JFXButton>
             <AnchorPane layoutX="10.0" layoutY="90.0" prefHeight="670.0" prefWidth="1000.0">
@@ -42,7 +42,7 @@
                         <ComboBox fx:id="choiceSede" onAction="#selectSede" layoutX="10.0" layoutY="300.0" prefWidth="150.0" />
                         <JFXButton style="-fx-background-color: #21ba45; -fx-text-fill: #ffffff;" prefHeight="40.0" prefWidth="175.0" layoutX="415.0" layoutY="437.0" mnemonicParsing="false" onAction="#finalizarEntrega" text="Registrar recolección">
                            <font>
-                              <Font name="Lato Bold" size="14.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </JFXButton>
                         
@@ -50,7 +50,7 @@
                   </Pane>
                   <Label layoutX="616.0" layoutY="14.0" text="Registro de paquetes">
                      <font>
-                        <Font size="22.0" name="Lato Bold" />
+                        <Font size="20.0" name="Lato Bold" />
                      </font>
                   </Label>
                </children>
