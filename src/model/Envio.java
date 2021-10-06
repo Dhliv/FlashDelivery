@@ -56,9 +56,9 @@ public class Envio {
   }
 
   /**
-   * Inserta un envío en la base de datos con sus
-   * respectivos parametros. Inserta un envío en la base de datos con sus
-   * respectivos parametros, y retorna el id del envío recién insertado.
+   * Inserta un envío en la base de datos con sus respectivos parametros. Inserta
+   * un envío en la base de datos con sus respectivos parametros, y retorna el id
+   * del envío recién insertado.
    * 
    * @param fecha_registro
    * @param metodo_pago
@@ -105,14 +105,14 @@ public class Envio {
   }
 
   /**
-   * Obtiene los envíos existentes en una sede específica.
+   * Obtiene los envíos existentes en una sede específica, que estén en la sede.
    * 
    * @param id_sede Sede en la que se consulta.
    * @return Lista de envíos existentes en la sede.
    */
   public static List<Envio> getEnviosBySede(Integer id_sede) {
-    List<Envio> envios = Conexion.db().select().from("envio").naturalJoin("paquete").where("id_sede = " + id_sede)
-        .fetch().into(Envio.class);
+    List<Envio> envios = Conexion.db().select().from("envio").naturalJoin("paquete")
+        .where("id_sede = " + id_sede + " and delivered = false").fetch().into(Envio.class);
     Conexion.closeConnection();
     return envios;
   }

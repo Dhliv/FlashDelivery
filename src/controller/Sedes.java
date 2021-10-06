@@ -60,11 +60,6 @@ public class Sedes {
         else
             SpecificAlerts.showUserNullAlert();
     }
-
-    public void borrar(ActionEvent event) {
-
-    }
-
     /**
      * go back button
      */

@@ -11,10 +11,9 @@
          <columns>
             <TableColumn fx:id="tcFechaRegistro" prefWidth="96.0" text="Fecha registro" />
             <TableColumn fx:id="tcMetodoPago" prefWidth="118.0" text="Metodo de pago" />
-            <TableColumn fx:id="tcDireccionEntrega" prefWidth="355.0" text="Direccion de entrega" />
-            <TableColumn fx:id="tcRemitente" prefWidth="190.0" text="Remitente" />
-            <TableColumn fx:id="tcDestinatario" minWidth="0.0" prefWidth="166.0" text="Destinatario" />
-            <TableColumn fx:id="tcEstado" maxWidth="432.0" prefWidth="84.0" text="Estado" />
+            <TableColumn fx:id="tcDireccionEntrega" prefWidth="475.0" text="Direccion de entrega" />
+            <TableColumn fx:id="tcRemitente" prefWidth="176.0" text="Remitente" />
+            <TableColumn fx:id="tcDestinatario" minWidth="0.0" prefWidth="144.0" text="Destinatario" />
          </columns>
       </TableView>
    </children>

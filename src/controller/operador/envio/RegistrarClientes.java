@@ -3,6 +3,7 @@ package controller.operador.envio;
 import javax.swing.JOptionPane;
 
 import controller.controls.Cliente;
+import controller.operador.verPaquetes.OperadorConsulta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,7 +36,10 @@ public class RegistrarClientes {
 
     // View.setViewPane(View.getViewPane(), false);
   }
-
+  @FXML
+  void atras(ActionEvent event) {
+    View.cambiarFull("operadorOficinaTabla", new OperadorConsulta(operador));
+  }
   /**
    * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
    */
