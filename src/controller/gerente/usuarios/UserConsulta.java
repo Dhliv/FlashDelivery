@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
@@ -68,6 +70,11 @@ public class UserConsulta {
     telefono.setCellValueFactory(new PropertyValueFactory<Empleado, String>("telefono"));
     birthdate.setCellValueFactory(new PropertyValueFactory<Empleado, LocalDate>("birthdate"));
     mostrarTabla();
+
+    JMetro intefrazJMetro = new JMetro();
+    intefrazJMetro.setStyle(Style.LIGHT);
+    intefrazJMetro.setParent(tableUsers);
+    
   }
 
   /**

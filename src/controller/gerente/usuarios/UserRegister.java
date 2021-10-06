@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import com.jfoenix.controls.JFXTextField;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
@@ -44,21 +45,21 @@ public class UserRegister {
 
   // Campos de texto que se pueden rellenar en user.register view
   @FXML
-  private TextField nombreT;
+  private JFXTextField nombreT;
   @FXML
-  private TextField apellidoT;
+  private JFXTextField apellidoT;
   @FXML
-  private TextField identificacionT;
+  private JFXTextField identificacionT;
   @FXML
-  private TextField telefonoT;
+  private JFXTextField telefonoT;
   @FXML
-  private TextField direccionT;
+  private JFXTextField direccionT;
   @FXML
   private DatePicker fechaT;
   @FXML
   private ChoiceBox<String> rolT;
   @FXML
-  private TextField usernameT;
+  private JFXTextField usernameT;
   @FXML
   private ChoiceBox<String> idsedeT;
   @FXML

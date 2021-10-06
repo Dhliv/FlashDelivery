@@ -42,6 +42,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
 <VBox prefHeight="302.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
@@ -87,11 +88,11 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <TextField fx:id="cedulaT" layoutX="199.0" layoutY="126.0" />
-            <Button layoutX="203.0" layoutY="203.0" mnemonicParsing="false" onAction="#validarCliente" text="Validar">
+            <JFXButton layoutX="203.0" layoutY="203.0" mnemonicParsing="false" onAction="#validarCliente" text="Validar">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
+            </JFXButton>
             <Label layoutX="123.0" layoutY="128.0" text="Cédula">
                <font>
                   <Font size="16.0" />
