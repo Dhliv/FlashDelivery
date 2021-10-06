@@ -33,7 +33,7 @@ public class RegistrarClientes {
     remitente.initialize(envio);
     destinatario.initialize(envio);
 
-    View.setViewPane(View.getViewPane(), false);
+    // View.setViewPane(View.getViewPane(), false);
   }
 
   /**

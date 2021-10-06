@@ -34,7 +34,7 @@ public class Login {
    */
   @FXML
   void loginKeyboard(KeyEvent event) throws Exception {
-    System.out.println(event);
+    // System.out.println(event);
     KeyCode key = event.getCode();
     if (key.equals(KeyCode.ENTER)) {
       login();
@@ -78,7 +78,7 @@ public class Login {
       System.out.println("sql error");
     } else {
       // JOptionPane.showMessageDialog(null, "Entraste!");
-      System.out.println("entre");
+      // System.out.println("entre");
       Empleado userActual = Empleado.cargarEmpleado(acc + "");
       var rolAcc = userActual.getRol();
 

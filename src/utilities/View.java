@@ -19,6 +19,7 @@ public class View {
   private static Pane viewPane;
   private static Map<String, Parent> views;
   private static Boolean memory;
+  private static Boolean fullLoad;
 
   /**
    * inicializar los atributos de la clase
@@ -28,6 +29,7 @@ public class View {
   public static void init(Object obj) {
     referenceObject = obj;
     views = new LinkedHashMap<String, Parent>();
+    fullLoad = false;
   }
 
   /**
@@ -52,10 +54,15 @@ public class View {
    * @param control controlador a asignar
    */
   public static void cambiar(String name, Object control) {
-    Parent view = views.get(name) == null ? loadView(name, control) : views.get(name);
+    Parent view = views.get(name) == null || fullLoad ? loadView(name, control) : views.get(name);
     if (views.get(name) == null) views.put(name, memory == true ? view : null);
     cambiar(view);
   }
+
+  
+
+  
+
 
   /**
    * cargar vista desde FXML
@@ -100,12 +107,18 @@ public class View {
   // #---------------------------------------------------------------------------
 
   /**
-   * cambiar la vista con controlador por defecto
    * 
-   * @param name nombre del archivo fxml
+   * @param name
    */
-  public static void cambiar(String name) {
-    cambiar(name, null);
+  public static void cambiarFull(String name) {
+    cambiarFull(name, null);
+  }
+
+  public static void cambiarFull(String name, Object control) {
+    Boolean swapFullLoad = fullLoad;
+    fullLoad = true;
+    cambiar(name, control);
+    fullLoad = swapFullLoad;
   }
 
   /**
@@ -113,7 +126,7 @@ public class View {
    * 
    * @param name nombre del archivo fxml
    */
-  public static void cambiarFull(String name) {
+  public static void cambiar(String name) {
     cambiar(name, null);
   }
 
