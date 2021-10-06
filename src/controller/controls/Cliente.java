@@ -27,18 +27,12 @@ import javafx.fxml.FXML;
  * @version 1.0, 21/09/2021
  */
 public class Cliente extends Pane {
-  @FXML
-  private Label cedulaLabel;
-  @FXML
-  private TextField cedula;
-  @FXML
-  private TextField nombre;
-  @FXML
-  private TextField direccion;
-  @FXML
-  private TextField telefono;
-  @FXML
-  private TextField ciudad;
+  @FXML private Label cedulaLabel;
+  @FXML private TextField cedula;
+  @FXML private TextField nombre;
+  @FXML private TextField direccion;
+  @FXML private TextField telefono;
+  @FXML private TextField ciudad;
 
   private RegistrarEnvio envio;
   private TipoCliente tipo;
@@ -66,13 +60,10 @@ public class Cliente extends Pane {
   }
 
   /**
-   * Método encargado de buscar un cliente en la DB y mostrarlo en pantalla si
-   * existe
+   * Método encargado de buscar un cliente en la DB y mostrarlo en pantalla si existe
    */
-  @FXML
-  void onCedulaTextChanged(KeyEvent event) {
-    if (cedula.getText().trim().equals(""))
-      return;
+  @FXML void onCedulaTextChanged(KeyEvent event) {
+    if (cedula.getText().trim().equals("")) return;
     System.out.println(cedula.getText());
 
     if (cola.isEmpty()) {
@@ -94,7 +85,6 @@ public class Cliente extends Pane {
     }
     st.inExecution = true;
     System.out.println("Buscando a " + cola.peek());
-    
 
     st.inSearch = true;
     model.Entities.Cliente cliente = null;
@@ -115,15 +105,15 @@ public class Cliente extends Pane {
    * @return true si todas las validaciones son correctas
    */
   public Boolean checkAndUpdateEnvio() {
-    if (!GeneralChecker.checkTextFieldEmptyAndFC(textFields))
-      return false;
-    envio.setCliente(cedula.getText(), nombre.getText(), ciudad.getText(), direccion.getText(), telefono.getText(),
-        tipo);
+    if (!GeneralChecker.checkTextFieldEmptyAndFC(textFields)) return false;
+    envio.setCliente(cedula.getText(), nombre.getText(), ciudad.getText(), direccion.getText(), telefono.getText(), tipo);
     return true;
   }
-  public void stopBusqueda(){
+
+  public void stopBusqueda() {
     st.stop();
   }
+
   /**
    * !Este timer va a arreglar todos nuestros problemas
    */
@@ -137,8 +127,7 @@ public class Cliente extends Pane {
       inExecution = false;
     }
 
-    @Override
-    public void stop() {
+    @Override public void stop() {
       Thread t = new Thread(() -> {
         while (inExecution) {
           try {
@@ -154,6 +143,7 @@ public class Cliente extends Pane {
     }
 
   }
+
   public void restart() {
     st.start();
   }

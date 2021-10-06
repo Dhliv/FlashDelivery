@@ -52,32 +52,32 @@
             </Label>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="35.0" onMouseClicked="#ventasSemanales" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="35.0" onMouseClicked="#paquetesEnviados" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte3.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="35.0" onMouseClicked="#ventasMensuales" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte2.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="350.0" onMouseClicked="#mediosDePago" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte4.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="350.0" onMouseClicked="#clientesRegistrados" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte6.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="350.0" onMouseClicked="#servicioSolicitado" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte5.png" />
                </image>
             </ImageView>
          </children>

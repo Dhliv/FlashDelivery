@@ -52,21 +52,19 @@ public class Main extends Application {
     SpecificAlerts.init();
     Globals.pantalla = stage;
 
-    Ventana login = new Ventana("login", new Login());
-    login.start(stage);
+    /*Ventana login = new Ventana("login", new Login());
+    login.start(stage);*/
     // probarGraficas(stage);
 
-    // Ventana vent2 = new Ventana("admin", new Admin("APA"));
-    // vent2.start(Globals.pantalla);
+    /*Ventana vent2 = new Ventana("admin", new Admin("APA"));
+    vent2.start(Globals.pantalla);*/
 
-    // Ventana vent = new Ventana("operadorOficina", new
-    // OperadorOficina(model.Entities.Empleado.cargarEmpleado("12345")));
-    // vent.start(Globals.pantalla);
+    /*Ventana vent = new Ventana("operadorOficina", new OperadorOficina(model.Entities.Empleado.cargarEmpleado("7")));
+    vent.start(Globals.pantalla);*/
 
-    /*
-     * Ventana vent2 = new Ventana("auxiliar", new Auxiliar("APA"));
-     * vent2.start(Globals.pantalla);
-     */
+    Ventana vent2 = new Ventana("auxiliar", new Auxiliar(model.Entities.Empleado.cargarEmpleado("3")));
+    vent2.start(Globals.pantalla);
+
   }
 
   /**
