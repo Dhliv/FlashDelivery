@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.*;
 
@@ -31,6 +32,8 @@ public class Ventana extends Application {
     Parent root = View.loadView(ventana, cont);
     Scene scene = new Scene(root);
 
+    var a = new Image(this.getClass().getResourceAsStream("../resources/Images/icon.png"));
+    stage.getIcons().add(a);
     /*JMetro jMetro = new JMetro(Style.LIGHT);
     jMetro.setScene(scene);*/
 

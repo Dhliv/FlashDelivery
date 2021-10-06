@@ -9,7 +9,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton fx:id="atrasPaquete" layoutX="30.0" layoutY="23.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" text="Atras" />
+      <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" fx:id="atrasPaquete" layoutX="30.0" layoutY="23.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" text="Atras">
+      <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </JFXButton>
       <Label layoutX="942.0" layoutY="29.0" text="Pago">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -64,19 +68,19 @@
             </Pane>
             <Pane style="-fx-background-color: white;"  layoutX="572.0" prefHeight="660.0" prefWidth="390.0">
                <children>
-                  <JFXButton layoutX="112.0" layoutY="96.0" mnemonicParsing="false" onAction="#pagoEfectivo" prefHeight="60.0" prefWidth="180.0" text="Efectivo">
+                  <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" layoutX="112.0" layoutY="96.0" mnemonicParsing="false" onAction="#pagoEfectivo" prefHeight="60.0" prefWidth="180.0" text="Efectivo">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Lato Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="112.0" layoutY="408.0" mnemonicParsing="false" onAction="#pagoCredito" prefHeight="60.0" prefWidth="180.0" text="Tarjeta de Crédito">
+                  <JFXButton style="-fx-background-color: #2185d0; -fx-text-fill: #ffffff;" layoutX="112.0" layoutY="408.0" mnemonicParsing="false" onAction="#pagoCredito" prefHeight="60.0" prefWidth="180.0" text="Tarjeta de Crédito">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Lato Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="112.0" layoutY="252.0" mnemonicParsing="false" onAction="#pagoDebito" prefHeight="60.0" prefWidth="180.0" text="Tarjeta de Débito">
+                  <JFXButton style="-fx-background-color: #2185d0; -fx-text-fill: #ffffff;" layoutX="112.0" layoutY="252.0" mnemonicParsing="false" onAction="#pagoDebito" prefHeight="60.0" prefWidth="180.0" text="Tarjeta de Débito">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Lato Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Line endY="600.0" layoutY="30.0" stroke="#9b9b9b" strokeWidth="2.0" />
