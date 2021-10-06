@@ -12,19 +12,19 @@
 
 <Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane style="-fx-background-color: white;"  layoutX="494.0" layoutY="26.0">
+      <Pane layoutX="494.0" layoutY="26.0" style="-fx-background-color: white;">
          <children>
-            <JFXButton alignment="CENTER" mnemonicParsing="false" onAction="#goToUsuariosRegistro" text="Registrar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" layoutX="45.0" mnemonicParsing="false" onAction="#goToUsuariosRegistro" prefHeight="40.0" prefWidth="150.0" ripplerFill="#3598c9" style="-fx-background-color: white; -fx-border-radius: 2px; -fx-border-width: 1px; -fx-border-color: #3598c9;" text="Registrar    " textAlignment="CENTER" textFill="#000000b5">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" layoutX="176.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="150.0" ripplerFill="#3598c9" style="-fx-background-color: white; -fx-border-radius: 2px; -fx-border-width: 1px; -fx-border-color: #3598c9;" text="Editar  " textFill="#000000b5">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
+            <JFXButton fx:id="btBorrar" alignment="CENTER" layoutX="312.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" ripplerFill="#3598c9" style="-fx-background-color: white; -fx-border-radius: 2px; -fx-border-width: 1px; -fx-border-color: #3598c9;" text="Borrar" textAlignment="CENTER" textFill="#000000b5">
                <font>
                   <Font size="18.0" />
                </font>
