@@ -34,6 +34,8 @@ public class Ventana extends Application {
     jMetro.setScene(scene);*/
 
     stage.setTitle("Flash Delivery");
+    stage.setResizable(false);
+    stage.setMaximized(false);
 
     stage.setScene(scene);
     stage.show();
