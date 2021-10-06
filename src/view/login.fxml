@@ -55,12 +55,13 @@
 
 <Pane maxHeight="300.0" maxWidth="500.0" prefHeight="254.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
          <children>
+            <JFXTextField fx:id="txtUsuario" layoutX="243.0" layoutY="60.0" prefHeight="25.0" prefWidth="202.0" />
+            <JFXPasswordField fx:id="txtPass" layoutX="243.0" layoutY="138.0" prefHeight="25.0" prefWidth="202.0" />
             <JFXButton fx:id="btIngresar" layoutX="372.0" layoutY="196.0" mnemonicParsing="false" onAction="#clicksoide" prefHeight="41.0" prefWidth="111.0" ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" text="Ingresar" textFill="WHITE">
               <font>
                 <Font name="Lato Bold" size="14.0" />
              </font>
             </JFXButton>
-            <JFXPasswordField fx:id="txtPass" layoutX="243.0" layoutY="138.0" prefHeight="25.0" prefWidth="202.0" />
             <ImageView fitHeight="223.0" fitWidth="256.0" layoutX="-19.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/logo.png" />
@@ -70,7 +71,6 @@
                <font>
                   <Font name="Lato Bold" size="16.0" />
                </font></Label>
-            <JFXTextField fx:id="txtUsuario" layoutX="243.0" layoutY="60.0" prefHeight="25.0" prefWidth="202.0" />
             <Label layoutX="243.0" layoutY="32.0" text="Usuario">
                <font>
                   <Font name="Lato Bold" size="16.0" />
