@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="494.0" layoutY="26.0" style="-fx-background-color: white;">
          <children>
-            <JFXButton alignment="CENTER" layoutX="26.0" layoutY="-1.0" mnemonicParsing="false" onAction="#goToUsuariosRegistro" prefHeight="41.0" prefWidth="150.0" ripplerFill="#bf1717" style="-fx-background-color: #0BDCD8; -fx-border-radius: 0px; -fx-border-width: 1px; -fx-border-color: #13B2B0;" text="Registrar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" layoutX="45.0" mnemonicParsing="false" onAction="#goToUsuariosRegistro" prefHeight="40.0" prefWidth="150.0" ripplerFill="#3598c9" style="-fx-background-color: white; -fx-border-radius: 2px; -fx-border-width: 1px; -fx-border-color: #3598c9;" text="Registrar    " textAlignment="CENTER" textFill="#000000b5">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton style="-fx-background-color: #0BDCD8; -fx-border-radius: 0px; -fx-border-width: 1px; -fx-border-color: #13B2B0;" alignment="CENTER" layoutX="176.0" layoutY="1.0" mnemonicParsing="false" onAction="#userEditButton" prefHeight="39.0" prefWidth="150.0" text="Editar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" layoutX="176.0" mnemonicParsing="false" onAction="#userEditButton" prefHeight="41.0" prefWidth="150.0" ripplerFill="#3598c9" style="-fx-background-color: white; -fx-border-radius: 2px; -fx-border-width: 1px; -fx-border-color: #3598c9;" text="Editar  " textFill="#000000b5">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton style="-fx-background-color: #0BDCD8; -fx-border-radius: 0px; -fx-border-width: 1px; -fx-border-color: #13B2B0;" fx:id="btBorrar" alignment="CENTER" layoutX="326.0" mnemonicParsing="false" onAction="#borrar" prefHeight="39.0" prefWidth="150.0" text="Borrar" textAlignment="CENTER">
+            <JFXButton fx:id="btBorrar" alignment="CENTER" layoutX="312.0" mnemonicParsing="false" onAction="#borrar" prefHeight="40.0" prefWidth="150.0" ripplerFill="#3598c9" style="-fx-background-color: white; -fx-border-radius: 2px; -fx-border-width: 1px; -fx-border-color: #3598c9;" text="Borrar" textAlignment="CENTER" textFill="#000000b5">
                <font>
                   <Font size="18.0" />
                </font>
@@ -46,6 +41,9 @@
             <TableColumn fx:id="birthdate" prefWidth="141.0" text="Fecha de Nacimiento" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btChange" layoutX="799.0" layoutY="687.0" mnemonicParsing="false" onAction="#showOtherUsers" prefHeight="45.0" prefWidth="171.0" />
+      <JFXButton fx:id="btChange" layoutX="725.0" layoutY="687.0" mnemonicParsing="false" onAction="#showOtherUsers" prefHeight="45.0" prefWidth="245.0" ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></JFXButton>
    </children>
 </Pane>

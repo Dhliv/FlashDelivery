@@ -62,9 +62,9 @@
             </Pane>
             <Label layoutX="117.0" layoutY="115.0" text="Usuario" />
             <Label layoutX="117.0" layoutY="167.0" text="Contraseña" />
-            <JFXTextField fx:id="txtUsuario" layoutX="217.0" layoutY="111.0" />
-            <PasswordField fx:id="txtPass" layoutX="218.0" layoutY="163.0" />
-            <JFXButton fx:id="btIngresar" layoutX="307.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" />
+            <JFXTextField fx:id="txtUsuario" layoutX="217.0" layoutY="111.0"  prefWidth="150.0" />
+            <JFXPasswordField fx:id="txtPass" layoutX="218.0" layoutY="163.0" prefWidth="150.0" />
+            <JFXButton fx:id="btIngresar" layoutX="310.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" />
          </children>
     </AnchorPane>
   </children>
