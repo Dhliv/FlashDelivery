@@ -1,14 +1,10 @@
 package utilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.*;
 
 public class Ventana extends Application {
   private String ventana;

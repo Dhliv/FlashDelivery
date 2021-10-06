@@ -6,14 +6,12 @@ import model.Entities.Usuario.UsuarioInhabilitado;
 import utilities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXPasswordField;
 
 import controller.gerente.Admin;
 import controller.operador.OperadorOficina;
@@ -21,8 +19,7 @@ import controller.operador.OperadorOficina;
 public class Login {
   private String user;
 
-  @FXML private Button btIngresar;
-  @FXML private PasswordField txtPass;
+  @FXML private JFXPasswordField txtPass;
   @FXML private JFXTextField txtUsuario;
 
   /**
