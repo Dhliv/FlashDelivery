@@ -86,9 +86,8 @@ public class RecogerPaquete {
     choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
-  // TODO @Pergueza arreglar vista
   @FXML void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete) View.cambiarFull("operador.cliente");
+    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente");
   }
 
   /**
