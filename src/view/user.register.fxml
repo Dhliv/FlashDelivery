@@ -13,26 +13,26 @@
 
 <Pane style="-fx-background-color: white;" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="494.0" layoutY="26.0">
+      <Pane style="-fx-background-color: white;"  layoutX="494.0" layoutY="26.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" mnemonicParsing="false" text="Registrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
+            </JFXButton>
          </children>
       </Pane>
-      <Pane layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0">
+      <Pane style="-fx-background-color: white;"  layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0">
          <children>
             <Label layoutX="250.0" layoutY="160.0" text="Identificación">
                <font>
@@ -90,20 +90,20 @@
             <JFXTextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
             <JFXTextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
             <DatePicker fx:id="fechaT" layoutX="585.0" layoutY="285.0" prefWidth="184.0" />
-            <ChoiceBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXComboBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
             <JFXTextField fx:id="usernameT" layoutX="585.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
-            <ChoiceBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
-            <PasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
-            <Button layoutX="538.0" layoutY="548.0" mnemonicParsing="false" onAction="#registrarUser" text="Registrar">
+            <JFXComboBox fx:id="idsedeT" layoutX="250.0" layoutY="485.0" prefWidth="184.0" />
+            <JFXPasswordField fx:id="passwordT" layoutX="585.0" layoutY="485.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXButton layoutX="538.0" layoutY="548.0" mnemonicParsing="false" onAction="#registrarUser" text="Registrar">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button layoutX="384.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
+            </JFXButton>
+            <JFXButton layoutX="384.0" layoutY="548.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
+            </JFXButton>
             
          </children>
       </Pane>

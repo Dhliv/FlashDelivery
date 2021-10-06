@@ -4,38 +4,40 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
 <fx:root prefHeight="418.0" prefWidth="312.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
-    <Label fx:id="cedulaLabel" layoutX="14.0" layoutY="14.0" text="Ingrese la cedula del ">
+    <Label fx:id="cedulaLabel" layoutX="10.0" layoutY="14.0" text="Ingrese la cedula del ">
         <font>
         <Font size="14.0" />
         </font>
     </Label>
-    <TextField id="Cedula" fx:id="cedula" layoutX="14.0" layoutY="42.0" onKeyReleased="#onCedulaTextChanged" prefHeight="25.0" prefWidth="193.0" />
-    <Label layoutX="14.0" layoutY="91.0" text="Nombre:">
+    <Label layoutX="10.0" layoutY="91.0" text="Nombre:">
         <font>
             <Font size="14.0" />
         </font>
     </Label>
-    <TextField id="Nombre" fx:id="nombre" layoutX="12.0" layoutY="117.0" prefHeight="25.0" prefWidth="281.0" />
-    <Label layoutX="12.0" layoutY="168.0" text="Ciudad:">
+    <Label layoutX="10.0" layoutY="168.0" text="Ciudad:">
         <font>
         <Font size="14.0" />
         </font>
     </Label>
-    <TextField id="Ciudad" fx:id="ciudad" layoutX="11.0" layoutY="196.0" prefHeight="25.0" prefWidth="193.0" />
-    <TextField id="Dirección" fx:id="direccion" layoutX="13.0" layoutY="276.0" prefHeight="25.0" prefWidth="281.0" />
-    <Label layoutX="14.0" layoutY="248.0" text="Dirección:">
+    <Label layoutX="10.0" layoutY="248.0" text="Dirección:">
         <font>
         <Font size="14.0" />
         </font>
     </Label>
-    <Label layoutX="13.0" layoutY="329.0" text="Teléfono:">
+    <Label layoutX="10.0" layoutY="329.0" text="Teléfono:">
         <font>
         <Font size="14.0" />
         </font>
     </Label>
-    <TextField id="Teléfono" fx:id="telefono" layoutX="15.0" layoutY="358.0" prefHeight="25.0" prefWidth="281.0" />
+
+    <JFXTextField id="Cedula" fx:id="cedula" layoutX="10.0" layoutY="42.0" onKeyReleased="#onCedulaTextChanged" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
+    <JFXTextField id="Nombre" fx:id="nombre" layoutX="10.0" layoutY="117.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
+    <JFXTextField id="Ciudad" fx:id="ciudad" layoutX="10.0" layoutY="196.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
+    <JFXTextField id="Dirección" fx:id="direccion" layoutX="10.0" layoutY="276.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
+    <JFXTextField id="Teléfono" fx:id="telefono" layoutX="10.0" layoutY="358.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
 
 </fx:root>

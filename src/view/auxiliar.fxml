@@ -24,14 +24,14 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutY="-1.0" prefHeight="781.0" prefWidth="260.0">
+            <Pane style="-fx-background-color: white;"  layoutY="-1.0" prefHeight="781.0" prefWidth="260.0">
                <children>
                   <ImageView fitWidth="175.0" layoutX="41.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/Images/logoEmpresa.jpg" />
                      </image>
                   </ImageView>
-                  <Pane layoutY="210.0" />
+                  <Pane style="-fx-background-color: white;"  layoutY="210.0" />
                   <Label fx:id="labelUsuario" layoutX="85.0" layoutY="228.0" prefHeight="70.0" prefWidth="160.0" text="Bienvenido nombreUsuario" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
@@ -44,7 +44,7 @@
                   </JFXButton>
                </children>
             </Pane>
-            <Pane fx:id="rightContent" layoutX="260.0" prefHeight="780.0" prefWidth="1020.0">
+            <Pane style="-fx-background-color: white;"  fx:id="rightContent" layoutX="260.0" prefHeight="780.0" prefWidth="1020.0">
                <padding>
                   <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
                </padding>

@@ -15,8 +15,6 @@ import utilities.View;
 
 public class OperadorOficina {
   @FXML private Label labelPOS;
-  @FXML private Button btnSolicitudRecogida;
-  @FXML private Button btnRegistrarPaquete;
   @FXML private Label labelUsuario;
   @FXML private Pane rightContent;
   private Empleado operador;

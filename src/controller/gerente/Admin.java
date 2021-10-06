@@ -32,11 +32,10 @@ public class Admin {
   @FXML private AnchorPane content;
 
   @FXML private SplitPane splitPanel;
-  
 
   @FXML private void initialize() {
     View.setViewPane(content, false);
-    labelNameUser.setText("Bienvenido " + userName);
+    labelNameUser.setText("Bienvenido\n" + userName);
     // splitPanel.getStyleClass().add(xd.getStyle().toString());
   }
 

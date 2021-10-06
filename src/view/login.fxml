@@ -45,12 +45,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.*?>
 
 <VBox maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <AnchorPane maxHeight="300.0" maxWidth="500.0" onKeyPressed="#loginKeyboard" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutY="14.0" maxHeight="100.0" maxWidth="500.0" prefHeight="69.0" prefWidth="500.0">
+            <Pane style="-fx-background-color: white;"  layoutY="14.0" maxHeight="100.0" maxWidth="500.0" prefHeight="69.0" prefWidth="500.0">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="141.0" layoutX="10.0" pickOnBounds="true">
                      <image>
@@ -61,9 +62,9 @@
             </Pane>
             <Label layoutX="117.0" layoutY="115.0" text="Usuario" />
             <Label layoutX="117.0" layoutY="167.0" text="Contraseña" />
-            <TextField fx:id="txtUsuario" layoutX="217.0" layoutY="111.0" />
+            <JFXTextField fx:id="txtUsuario" layoutX="217.0" layoutY="111.0" />
             <PasswordField fx:id="txtPass" layoutX="218.0" layoutY="163.0" />
-            <Button fx:id="btIngresar" layoutX="307.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" />
+            <JFXButton fx:id="btIngresar" layoutX="307.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicksoide" text="Ingresar" />
          </children>
     </AnchorPane>
   </children>

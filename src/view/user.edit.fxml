@@ -8,29 +8,30 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="494.0" layoutY="26.0">
+      <Pane style="-fx-background-color: white;"  layoutX="494.0" layoutY="26.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToUsuariosRegistro" text="Registrar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" mnemonicParsing="false" onAction="#goToUsuariosRegistro" text="Registrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="192.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="384.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
+            </JFXButton>
          </children>
       </Pane>
-      <Pane layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0">
+      <Pane style="-fx-background-color: white;"  layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0">
          <children>
             <Label layoutX="250.0" layoutY="160.0" text="Identificación">
                <font>
@@ -62,29 +63,29 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
             <DatePicker fx:id="fechaT" layoutX="585.0" layoutY="285.0" prefWidth="184.0" />
             <ChoiceBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
             <ChoiceBox fx:id="idsedeT" layoutX="585.0" layoutY="385.0" prefWidth="184.0" />
-            <Button layoutX="542.0" layoutY="552.0" mnemonicParsing="false" onAction="#updateEmpleado" prefWidth="100.0" text="Modificar">
+            <JFXButton layoutX="542.0" layoutY="552.0" mnemonicParsing="false" onAction="#updateEmpleado" prefWidth="100.0" text="Modificar">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button layoutX="385.0" layoutY="552.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
+            </JFXButton>
+            <JFXButton layoutX="385.0" layoutY="552.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
+            </JFXButton>
             <Label layoutX="251.0" layoutY="66.0" text="Apellidos">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="apellidoT" layoutX="251.0" layoutY="91.0" prefHeight="25.0" prefWidth="184.0" />
-            <TextField fx:id="nombreT" layoutX="586.0" layoutY="92.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="apellidoT" layoutX="251.0" layoutY="91.0" prefHeight="25.0" prefWidth="184.0" />
+            <JFXTextField fx:id="nombreT" layoutX="586.0" layoutY="92.0" prefHeight="25.0" prefWidth="184.0" />
             <Label layoutX="586.0" layoutY="67.0" text="Nombres">
                <font>
                   <Font size="18.0" />

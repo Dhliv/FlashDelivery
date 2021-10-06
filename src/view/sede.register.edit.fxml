@@ -4,22 +4,23 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button alignment="CENTER" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onAction="#atras" text="Atras" textAlignment="CENTER">
+      <JFXButton alignment="CENTER" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onAction="#atras" text="Atras" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
-      </Button>
-      <Button alignment="CENTER" layoutX="897.0" layoutY="46.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" textAlignment="CENTER">
+      </JFXButton>
+      <JFXButton alignment="CENTER" layoutX="897.0" layoutY="46.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
-      </Button>
+      </JFXButton>
       <Label id="nombrel" layoutX="44.0" layoutY="120.0" text="Nombre:" />
-      <TextField fx:id="nombre" id="Nombre" layoutX="105.0" layoutY="116.0" prefHeight="25.0" prefWidth="182.0" />
-      <TextField fx:id="direccion" id="Dirección" layoutX="424.0" layoutY="116.0" prefHeight="25.0" prefWidth="176.0" />
+      <JFXTextField fx:id="nombre" id="Nombre" layoutX="105.0" layoutY="116.0" prefHeight="25.0" prefWidth="182.0" />
+      <JFXTextField fx:id="direccion" id="Dirección" layoutX="424.0" layoutY="116.0" prefHeight="25.0" prefWidth="176.0" />
       <Label layoutX="359.0" layoutY="120.0" prefHeight="17.0" prefWidth="65.0" text="Dirección:" />
    </children>
 </Pane>

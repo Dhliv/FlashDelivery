@@ -18,6 +18,8 @@ import java.util.Queue;
 
 import javax.swing.Timer;
 
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.fxml.FXML;
 
 /**
@@ -28,15 +30,15 @@ import javafx.fxml.FXML;
  */
 public class Cliente extends Pane {
   @FXML private Label cedulaLabel;
-  @FXML private TextField cedula;
-  @FXML private TextField nombre;
-  @FXML private TextField direccion;
-  @FXML private TextField telefono;
-  @FXML private TextField ciudad;
+  @FXML private JFXTextField cedula;
+  @FXML private JFXTextField nombre;
+  @FXML private JFXTextField direccion;
+  @FXML private JFXTextField telefono;
+  @FXML private JFXTextField ciudad;
 
   private RegistrarEnvio envio;
   private TipoCliente tipo;
-  private TextField[] textFields;
+  private JFXTextField[] textFields;
   public SuperTimer st;
   public Queue<String> cola;
 
@@ -53,8 +55,8 @@ public class Cliente extends Pane {
     TextFieldRestrictions.textFieldNumeric(cedula);
     TextFieldRestrictions.textFieldNumeric(telefono);
 
-    textFields = new TextField[] { cedula, nombre, direccion, telefono, ciudad };
-    for (TextField textField : textFields)
+    textFields = new JFXTextField[] { cedula, nombre, direccion, telefono, ciudad };
+    for (JFXTextField textField : textFields)
       textField.setId(textField.getId() + " del " + this.getId());
     st.start();
   }

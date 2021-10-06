@@ -9,26 +9,27 @@
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sedes">
+<Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sedes">
    <children>
-      <Pane layoutX="494.0" layoutY="26.0">
+      <Pane style="-fx-background-color: white;"  layoutX="494.0" layoutY="26.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#registrar" text="Registrar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" mnemonicParsing="false" onAction="#registrar" text="Registrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="192.0" mnemonicParsing="false" onAction="#editar" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="192.0" mnemonicParsing="false" onAction="#editar" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="384.0" mnemonicParsing="false" onAction="#borrar" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="384.0" mnemonicParsing="false" onAction="#borrar" prefHeight="35.0" prefWidth="92.0" text="Borrar" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
+            </JFXButton>
          </children>
       </Pane>
       <TableView fx:id="sedesTable" layoutY="91.0" prefHeight="670.0" prefWidth="1020.0">

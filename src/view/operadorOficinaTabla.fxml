@@ -4,8 +4,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
+<?import com.jfoenix.controls.*?>
 
-<Pane fx:id="rightContent" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane style="-fx-background-color: white;"  fx:id="rightContent" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="tPaquetes" focusTraversable="false" layoutY="10.0" onMouseClicked="#seleccionarEnvio" prefHeight="760.0" prefWidth="1010.0">
          <columns>

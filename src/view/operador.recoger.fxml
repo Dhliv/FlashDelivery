@@ -8,17 +8,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-            <Button fx:id="atrasPaquete" layoutX="68.0" layoutY="33.0" mnemonicParsing="false" onAction="#atras" text="Regresar">
+            <JFXButton fx:id="atrasPaquete" layoutX="68.0" layoutY="33.0" mnemonicParsing="false" onAction="#atras" text="Regresar">
                <font>
                   <Font size="22.0" />
                </font>
-            </Button>
+            </JFXButton>
             <AnchorPane layoutX="10.0" layoutY="90.0" prefHeight="670.0" prefWidth="1000.0">
                <children>
-                  <Pane layoutX="190.0" layoutY="90.0" prefHeight="500.0" prefWidth="620.0">
+                  <Pane style="-fx-background-color: white;"  layoutX="190.0" layoutY="90.0" prefHeight="500.0" prefWidth="620.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6e9ec00" height="520.0" layoutX="-10.0" layoutY="-10.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
                         <Label fx:id="txtDescripcion" layoutX="10.0" layoutY="13.0" text="Descripción">
@@ -39,11 +40,11 @@
                            </font>
                         </Label>
                         <ComboBox fx:id="choiceSede" onAction="#selectSede" layoutX="10.0" layoutY="300.0" prefWidth="150.0" />
-                        <Button layoutX="420.0" layoutY="437.0" mnemonicParsing="false" onAction="#finalizarEntrega" text="Registrar recolección">
+                        <JFXButton layoutX="420.0" layoutY="437.0" mnemonicParsing="false" onAction="#finalizarEntrega" text="Registrar recolección">
                            <font>
                               <Font size="18.0" />
                            </font>
-                        </Button>
+                        </JFXButton>
                      </children>
                   </Pane>
                   <Label layoutX="793.0" layoutY="14.0" text="Registro de paquetes">
