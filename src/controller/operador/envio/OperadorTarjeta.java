@@ -37,7 +37,7 @@ import model.Entities.Empleado;
  */
 public class OperadorTarjeta implements Initializable {
 
-  private Integer CVVLENGTH = 3;
+  private Integer CVVLENGTH = 4;
   private Integer CARDLENGTH = 16;
   private Integer tipoTarjeta; // Almacena el tipo de la tarjeta que se haya seleccionado para el método de
                                // pago.
@@ -66,7 +66,7 @@ public class OperadorTarjeta implements Initializable {
   @FXML private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
   @FXML private JFXTextField txtNumerotarjeta; // textField donde se ingresa el numero de la tarjeta
   @FXML private JFXTextField txtTitular; // textField donde se digita el nombre del titular de la tarjeta.
-  @FXML private JFXTextField txtCVV; // textField donde se digita el CVV de la tarjeta.
+  @FXML private JFXPasswordField txtCVV; // textField donde se digita el CVV de la tarjeta.
   @FXML private Label lblNumeroCuotas; // label del Texto de numero de cuotas.
   @FXML private DatePicker dateFechaVencimiento; // datePicker que indica la fecha de vencimiento de la tarjeta.
   @FXML private JFXComboBox<String> chboxNumeroCuotas; // número de cuotas en las que se pagará (depende de la tarjeta).
@@ -265,7 +265,7 @@ public class OperadorTarjeta implements Initializable {
       lblCVV.setText(SobreTarjeta.eraseFrom(lblCVV.getText(), 1));
     }
 
-    if (agregar && lblCVV.getText().length() < CVVLENGTH) lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
+    if (agregar && lblCVV.getText().length() < CVVLENGTH) lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), "*"));
   }
 
   /**

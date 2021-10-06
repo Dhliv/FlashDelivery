@@ -72,7 +72,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtCVV" onKeyPressed="#addCvv" layoutX="106.0" layoutY="347.0" prefHeight="25.0" prefWidth="55.0" />
+            <JFXPasswordField fx:id="txtCVV" onKeyPressed="#addCvv" layoutX="106.0" layoutY="347.0" prefHeight="25.0" prefWidth="55.0" />
             <Label layoutX="564.0" layoutY="324.0" text="Fecha de vencimiento">
                <font>
                   <Font size="18.0" />
