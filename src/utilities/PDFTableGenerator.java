@@ -7,7 +7,6 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
-
 /**
  * Genera una tabla en un pdf
  */
@@ -36,11 +35,11 @@ public class PDFTableGenerator {
     rows = content.length;
     rowHeight = rowH;
     tableWidth = document.getPage(0).getMediaBox().getWidth() - (2 * margin);
-    
-    //SE IMPORTAN LAS FUENTES TIPOGRAFICAS.
-    regularFont = PDType0Font.load(document, new File("src/resources/fonts/Lato-Regular.ttf")); 
-    regularBoldFont =  PDType0Font.load(document, new File("src/resources/fonts/Lato-Bold.ttf"));
-    
+
+    // SE IMPORTAN LAS FUENTES TIPOGRAFICAS.
+    regularFont = PDType0Font.load(document, new File("src/resources/fonts/Lato-Regular.ttf"));
+    regularBoldFont = PDType0Font.load(document, new File("src/resources/fonts/Lato-Bold.ttf"));
+
     cellMargin = 5f;
     marginWidth = 0.1f;
     contentStream = cs;
@@ -63,8 +62,7 @@ public class PDFTableGenerator {
 
     rows = texto.length;
     tableHeight = rowHeight * rows;
-    
-    
+
     drawDecoration(0, rows);
     addText(texto, monto);
     drawColumns();
@@ -75,6 +73,7 @@ public class PDFTableGenerator {
 
   /**
    * Dibuja el header de la tabla de la factura
+   * 
    * @throws IOException
    */
   public static void drawHeader() throws IOException {
@@ -94,7 +93,7 @@ public class PDFTableGenerator {
    */
   public static void drawDecoration(int fRow, int lastRows) throws IOException {
     for (int i = fRow; i < lastRows; i++) {
-      drawCellBackgroundColor("gray", i+1);
+      drawCellBackgroundColor("gray", i + 1);
     }
   }
 
@@ -145,15 +144,14 @@ public class PDFTableGenerator {
       contentStream.drawImage(pdImage, margin, nexty, tableWidth + marginWidth, marginWidth);
     }
   }
-  
 
   /**
    * Dibuja el texto text en las posiciones X=posX y Y=posY
    * 
-   * @param posX posición X en formato float
-   * @param posY posición Y en formato float
-   * @param text texto en string
-   * @param fuente Tipo de fuente tipografica
+   * @param posX       posición X en formato float
+   * @param posY       posición Y en formato float
+   * @param text       texto en string
+   * @param fuente     Tipo de fuente tipografica
    * @param fuenteSize Tamaño de la fuente
    * @throws IOException
    */
@@ -168,23 +166,23 @@ public class PDFTableGenerator {
   /**
    * Añadir texto a la tabla del PDF
    * 
-   * @param text Texto a escribir en la primer columna de la tabla.
+   * @param text  Texto a escribir en la primer columna de la tabla.
    * @param monto Valor del paquete
    */
   public static void addText(String[] text, String monto) throws IOException {
-    
-    float textx = margin + cellMargin; //Posición en X del texto
-    float texty = yFirstCol - 15; //Posición en Y del texto
 
-        //Primer columna
-        for (int k = 0; k < text.length; k++) {
-          drawText(textx, texty, text[k], regularFont, 10);
-          texty -= rowHeight;
-        }
+    float textx = margin + cellMargin; // Posición en X del texto
+    float texty = yFirstCol - 15; // Posición en Y del texto
 
-        texty = (yFirstCol + texty) / 2; // Centrar verticalmente la segunda columna
-        textx += (tableWidth - WIDTHLASTCOL); // Segunda columna horizontalmente
-        drawText(textx,texty, monto, regularFont, 10);
+    // Primer columna
+    for (int k = 0; k < text.length; k++) {
+      drawText(textx, texty, text[k], regularFont, 10);
+      texty -= rowHeight;
+    }
+
+    texty = (yFirstCol + texty) / 2; // Centrar verticalmente la segunda columna
+    textx += (tableWidth - WIDTHLASTCOL); // Segunda columna horizontalmente
+    drawText(textx, texty, monto, regularFont, 10);
   }
 
 }

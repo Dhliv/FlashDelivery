@@ -28,6 +28,7 @@ public class SpecificAlerts {
   private static Alert fechaNoValida; // Alerta que indica que la fecha ingresada no es valida.
   private static Alert peticionExitosa; // Alerta que indica que laa petición de recogida se generó con éxito.
   private static Alert usernameEqualPass; // Alerta que indica que la contraseña es igual al username.
+  private static Alert eliminacionDelSer;
 
   public static void init() {
 
@@ -111,6 +112,11 @@ public class SpecificAlerts {
     usernameEqualPass.setContentText("Por razones de seguridad, el username y la contraseña no pueden ser iguales.");
     usernameEqualPass.setTitle("Error de registro");
     usernameEqualPass.setHeaderText("Password = Username");
+
+    eliminacionDelSer = new Alert(AlertType.ERROR);
+    eliminacionDelSer.setContentText("No es posible deshabilitarse a usted mismo.");
+    eliminacionDelSer.setTitle("Error de Deshabilitación");
+    eliminacionDelSer.setHeaderText("Error de Deshabilitación");
   }
 
   /**
@@ -248,5 +254,12 @@ public class SpecificAlerts {
    */
   public static void showUsernameEqualPass() {
     usernameEqualPass.showAndWait();
+  }
+
+  /**
+   * Alerta que indica que no es posible borrarse a si mismo del sistema.
+   */
+  public static void showEliminacionDelSer() {
+    eliminacionDelSer.showAndWait();
   }
 }

@@ -14,57 +14,58 @@ import java.util.Properties;
 import java.io.IOException;
 
 public class Conexion {
-    private static Connection conn = null;
+  private static Connection conn = null;
 
-    /**
-     * Arreglo temporal para la eliminación futura de este método.
-     */
-    public static Connection startConnection() {
-        db();
-        return conn;
-    }
+  /**
+   * Arreglo temporal para la eliminación futura de este método.
+   */
+  public static Connection startConnection() {
+    db();
+    return conn;
+  }
 
-    static class MiShDwnHook extends Thread {
-        // Justo antes de finalizar el programa la JVM invocará
-        // este método donde podemos cerrar la conexión
-        @Override public void run() {
-            try {
-                Connection con = Conexion.startConnection();
-                con.close();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error : " + ex.getMessage());
-            }
-        }
+  static class MiShDwnHook extends Thread {
+    // Justo antes de finalizar el programa la JVM invocará
+    // este método donde podemos cerrar la conexión
+    @Override
+    public void run() {
+      try {
+        Connection con = Conexion.startConnection();
+        con.close();
+      } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Error : " + ex.getMessage());
+      }
     }
+  }
 
-    /**
-     * Establece la conexión con la base de datos con jOOQ.
-     */
-    public static DSLContext db() {
-        try {
-            Properties dbs = new Properties();
-            dbs.load(new FileReader("src/resources/db.properties"));
-            String url = dbs.getProperty("url");
-            String usr = dbs.getProperty("usr");
-            String pwd = dbs.getProperty("pwd");
-            conn = DriverManager.getConnection(url, usr, pwd);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return DSL.using(conn, SQLDialect.POSTGRES);
+  /**
+   * Establece la conexión con la base de datos con jOOQ.
+   */
+  public static DSLContext db() {
+    try {
+      Properties dbs = new Properties();
+      dbs.load(new FileReader("src/resources/db.properties"));
+      String url = dbs.getProperty("url");
+      String usr = dbs.getProperty("usr");
+      String pwd = dbs.getProperty("pwd");
+      conn = DriverManager.getConnection(url, usr, pwd);
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return DSL.using(conn, SQLDialect.POSTGRES);
+  }
 
-    public static void closeConnection() {
-        try {
-            conn.close();
-        } catch (Exception e) {
-            // e.printStackTrace();
-        }
-        conn = null;
+  public static void closeConnection() {
+    try {
+      conn.close();
+    } catch (Exception e) {
+      // e.printStackTrace();
     }
+    conn = null;
+  }
 }

@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.JMetroStyleClass;
 import jfxtras.styles.jmetro.Style;
+import model.Entities.Empleado;
 import utilities.Globals;
 import utilities.View;
 
@@ -22,42 +23,51 @@ import utilities.View;
  */
 public class Admin {
   private String userName;
+  private Empleado empleado;
 
-  public Admin(String userName) {
+  public Admin(String userName, Empleado empleado) {
     this.userName = userName;
+    this.empleado = empleado;
   }
 
-  @FXML private Label labelNameUser;
+  @FXML
+  private Label labelNameUser;
 
-  @FXML private AnchorPane content;
+  @FXML
+  private AnchorPane content;
 
-  @FXML private SplitPane splitPanel;
+  @FXML
+  private SplitPane splitPanel;
 
-  @FXML private void initialize() {
+  @FXML
+  private void initialize() {
     View.setViewPane(content, false);
     labelNameUser.setText("Bienvenido\n" + userName);
     // splitPanel.getStyleClass().add(xd.getStyle().toString());
   }
 
-  @FXML void goToSedeConsulta(ActionEvent event) {
+  @FXML
+  void goToSedeConsulta(ActionEvent event) {
     View.cambiar("sede.consulta");
   }
 
-  @FXML void goToUsuariosConsulta() {
-    View.newView("user.consulta", new UserConsulta());
-    /*Runnable r = () -> {
-      View.newView("user.consulta", new UserConsulta());
-    };
-    
-    Thread t = new Thread(r);
-    t.start();*/
+  @FXML
+  void goToUsuariosConsulta() {
+    View.newView("user.consulta", new UserConsulta(empleado));
+    /*
+     * Runnable r = () -> { View.newView("user.consulta", new UserConsulta()); };
+     * 
+     * Thread t = new Thread(r); t.start();
+     */
   }
 
-  @FXML void goToAdminReportes(ActionEvent event) {
+  @FXML
+  void goToAdminReportes(ActionEvent event) {
     View.cambiar("reportes", new Reportes());
   }
 
-  @FXML void logOut(ActionEvent event) {
+  @FXML
+  void logOut(ActionEvent event) {
     Globals.logOut();
   }
 }

@@ -1,11 +1,7 @@
 package controller.gerente.usuarios;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,15 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
 
 /**
- * Clase controller UserConsulta. Contiene componentes y métodos gráficos relacionados a la consulta
- * de usuarios.
+ * Clase controller UserConsulta. Contiene componentes y métodos gráficos
+ * relacionados a la consulta de usuarios.
  * 
  * @author David Henao
  * @author Reynell Arkad Devji Quevedo
@@ -30,18 +24,34 @@ import utilities.*;
  * @since 25/09/2021
  */
 public class UserConsulta {
-  @FXML private Button btBorrar;
-  @FXML private TableView<Empleado> tableUsers;
-  @FXML private TableColumn<Empleado, Integer> cedula;
-  @FXML private TableColumn<Empleado, String> nombre;
-  @FXML private TableColumn<Empleado, String> apellido;
-  @FXML private TableColumn<Empleado, Integer> sede;
-  @FXML private TableColumn<Empleado, String> rol;
-  @FXML private TableColumn<Empleado, String> direccion;
-  @FXML private TableColumn<Empleado, String> telefono;
-  @FXML private TableColumn<Empleado, LocalDate> birthdate;
-  @FXML private Button btChange;
+  @FXML
+  private Button btBorrar;
+  @FXML
+  private TableView<Empleado> tableUsers;
+  @FXML
+  private TableColumn<Empleado, Integer> cedula;
+  @FXML
+  private TableColumn<Empleado, String> nombre;
+  @FXML
+  private TableColumn<Empleado, String> apellido;
+  @FXML
+  private TableColumn<Empleado, Integer> sede;
+  @FXML
+  private TableColumn<Empleado, String> rol;
+  @FXML
+  private TableColumn<Empleado, String> direccion;
+  @FXML
+  private TableColumn<Empleado, String> telefono;
+  @FXML
+  private TableColumn<Empleado, LocalDate> birthdate;
+  @FXML
+  private Button btChange;
   private boolean borrar;
+  private Empleado empleado;
+
+  public UserConsulta(Empleado empleado) {
+    this.empleado = empleado;
+  }
 
   /**
    * Inicializa los datos de la tabla de empleados.
@@ -65,8 +75,8 @@ public class UserConsulta {
   }
 
   /**
-   * Carga la información en la tabla, mostrando a los empleados habilitados/deshabilitados según sea
-   * el caso.
+   * Carga la información en la tabla, mostrando a los empleados
+   * habilitados/deshabilitados según sea el caso.
    */
   void mostrarTabla() {
     ObservableList<Empleado> s = FXCollections.observableArrayList();
@@ -75,39 +85,60 @@ public class UserConsulta {
   }
 
   /**
-   * Deshabilita/habilita, según sea el caso, al empleado seleccionado en la tabla de empleados.
+   * Verifica si el empleado que se va a borrar es el mismo que está borrando. (Un
+   * empleado no se puede borrar a si mismo).
+   * 
+   * @param aBorrar Empleado que se va a borrar.
+   * @return True si es el mismo empleado, false de lo contrario.
+   */
+  private boolean soyYoMismo(Empleado aBorrar) {
+    if (aBorrar.getCedula().equals(empleado.getCedula()))
+      return true;
+    return false;
+  }
+
+  /**
+   * Deshabilita/habilita, según sea el caso, al empleado seleccionado en la tabla
+   * de empleados.
    * 
    * @param event not used.
    */
-  @FXML void borrar(ActionEvent event) {
+  @FXML
+  void borrar(ActionEvent event) {
     System.out.println();
     Empleado e = tableUsers.getItems().get(tableUsers.getSelectionModel().getFocusedIndex());
-    int op = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea " + (borrar ? "borrar" : "habilitar") + " a " + e.getNombres() + "?");
+    int op = JOptionPane.showConfirmDialog(null,
+        "¿Está seguro que desea " + (borrar ? "borrar" : "habilitar") + " a " + e.getNombres() + "?");
     if (op == 0) {
-      if (borrar)
+      if (borrar) {
+        if (soyYoMismo(e)) {
+          SpecificAlerts.showEliminacionDelSer();
+          return;
+        }
         Usuario.deshabilitarUsuario(e.getCedula());
-      else
+      } else
         Usuario.habilitarUsuario(e.getCedula());
       mostrarTabla();
     }
   }
 
   /**
-   * Cambia la información desplegada en la tabla, mostrando empleados deshabilitados/habilitados.
-   * Adicionalmenre también cambia el estado actual de 'borrar', que indica si un usuario se va a
-   * habilitar o deshabilitar.
+   * Cambia la información desplegada en la tabla, mostrando empleados
+   * deshabilitados/habilitados. Adicionalmenre también cambia el estado actual de
+   * 'borrar', que indica si un usuario se va a habilitar o deshabilitar.
    * 
    * @param event not used.
    */
-  @FXML void showOtherUsers(ActionEvent event) {
+  @FXML
+  void showOtherUsers(ActionEvent event) {
     borrar = !borrar;
     changeButtons();
     mostrarTabla();
   }
 
   /**
-   * Cambia los valores visuales de los botones que implican borrar/habilitar a un usuario, o
-   * desplegar a los empleados habilitados/deshabilitados.
+   * Cambia los valores visuales de los botones que implican borrar/habilitar a un
+   * usuario, o desplegar a los empleados habilitados/deshabilitados.
    */
   private void changeButtons() {
     btBorrar.setText(borrar ? "Borrar" : "Habilitar");
@@ -119,18 +150,20 @@ public class UserConsulta {
    * 
    * @param event not used.
    */
-  @FXML void goToUsuariosRegistro(ActionEvent event) {
+  @FXML
+  void goToUsuariosRegistro(ActionEvent event) {
     View.newView("user.register", new UserRegister());
   }
 
   /**
-   * Accede a la pestaña de edicion de empleado según el empleado seleccionado. En caso de no haberse
-   * seleccionado un empleado para su edición, se mostrará la respectuva alerta indicando esa
-   * situación.
+   * Accede a la pestaña de edicion de empleado según el empleado seleccionado. En
+   * caso de no haberse seleccionado un empleado para su edición, se mostrará la
+   * respectuva alerta indicando esa situación.
    * 
    * @param event not used.
    */
-  @FXML void userEditButton(ActionEvent event) {
+  @FXML
+  void userEditButton(ActionEvent event) {
     Empleado e = tableUsers.getSelectionModel().getSelectedItem();
     if (e != null)
       View.cambiar("user.edit", new UserEdit(e));

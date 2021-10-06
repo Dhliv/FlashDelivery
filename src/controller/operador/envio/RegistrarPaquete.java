@@ -20,14 +20,22 @@ import utilities.View;
 
 public class RegistrarPaquete {
 
-  @FXML private JFXButton atrasPaquete;
-  @FXML private TextArea txtDescripcion;
-  @FXML private JFXTextField txtAncho;
-  @FXML private JFXTextField txtAlto;
-  @FXML private JFXTextField txtLargo;
-  @FXML private JFXTextField txtPeso;
-  @FXML private JFXTextField txtValor;
-  @FXML private JFXCheckBox checkSeguro;
+  @FXML
+  private JFXButton atrasPaquete;
+  @FXML
+  private TextArea txtDescripcion;
+  @FXML
+  private JFXTextField txtAncho;
+  @FXML
+  private JFXTextField txtAlto;
+  @FXML
+  private JFXTextField txtLargo;
+  @FXML
+  private JFXTextField txtPeso;
+  @FXML
+  private JFXTextField txtValor;
+  @FXML
+  private JFXCheckBox checkSeguro;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -42,8 +50,10 @@ public class RegistrarPaquete {
     Globals.style.setParent(txtDescripcion);
   }
 
-  @FXML void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente");
+  @FXML
+  void atras(ActionEvent event) {
+    if (event.getSource() == atrasPaquete)
+      View.cambiar("operador.cliente");
   }
 
   private void clearFieldsPaquetes() {
@@ -60,7 +70,8 @@ public class RegistrarPaquete {
       Double peso = Double.parseDouble(txtPeso.getText());
       Double valor = Double.parseDouble(txtValor.getText());
       String descripcion = txtDescripcion.getText();
-      if (descripcion.trim().equals("")) return false;
+      if (descripcion.trim().equals(""))
+        return false;
       Double ancho = Double.parseDouble(txtAncho.getText());
       Double largo = Double.parseDouble(txtLargo.getText());
       Double alto = Double.parseDouble(txtAlto.getText());
@@ -73,20 +84,26 @@ public class RegistrarPaquete {
   }
 
   /**
-   * Verifica que todos los campos numéricos/decimales cumplan el formato esperado.
+   * Verifica que todos los campos numéricos/decimales cumplan el formato
+   * esperado.
    * 
-   * @return True de no presentar problemas, false si existe un campo con formato picho.
+   * @return True de no presentar problemas, false si existe un campo con formato
+   *         picho.
    */
   private boolean checkFormatosEnCampos() {
-    String campos[] = { txtPeso.getText(), txtValor.getText(), txtAncho.getText(), txtLargo.getText(), txtAlto.getText() };
+    String campos[] = { txtPeso.getText(), txtValor.getText(), txtAncho.getText(), txtLargo.getText(),
+        txtAlto.getText() };
     return TextFieldRestrictions.checkDecimalExpression(campos);
   }
 
-  @FXML void resumenEnvio(ActionEvent event) {
+  @FXML
+  void resumenEnvio(ActionEvent event) {
 
     if (!agregarPaquete() || !checkFormatosEnCampos()) {
-      if (!agregarPaquete()) JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
-      if (!checkFormatosEnCampos()) SpecificAlerts.showDecimalFormat();
+      if (!agregarPaquete())
+        JOptionPane.showMessageDialog(null, "No ha ingresado ningún paquete");
+      if (!checkFormatosEnCampos())
+        SpecificAlerts.showDecimalFormat();
     } else {
       System.out.println("Registrar paquete: " + envio.getDestinatario().cedula);
       View.newView("operador.resumen", new OperadorResumen(envio, operador));
@@ -94,11 +111,13 @@ public class RegistrarPaquete {
 
   }
 
-  @FXML void limpiarCampos(ActionEvent event) {
+  @FXML
+  void limpiarCampos(ActionEvent event) {
     clearFieldsPaquetes();
   }
 
-  @FXML void superPrueba(KeyEvent event) {
+  @FXML
+  void superPrueba(KeyEvent event) {
     System.out.println("Será que esto sí funciona así?");
   }
 }

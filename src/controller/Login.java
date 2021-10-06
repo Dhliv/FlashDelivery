@@ -85,7 +85,7 @@ public class Login {
       Ventana vent;
 
       if (rolAcc.equals(Roles.rol[Roles.ADMIN])) {
-        vent = new Ventana("admin", new Admin(user));
+        vent = new Ventana("admin", new Admin(user, userActual));
         vent.start(Globals.pantalla);
       } else if (rolAcc.equals(Roles.rol[Roles.AUXILIAR])) {
         vent = new Ventana("auxiliar", new Auxiliar(userActual));
@@ -98,7 +98,7 @@ public class Login {
         vent = new Ventana("operadorOficina", new OperadorOficina(userActual));
         vent.start(Globals.pantalla);
       } else if (rolAcc.equals("Secretaria")) {
-        vent = new Ventana("admin", new Admin(user));
+        vent = new Ventana("admin", new Admin(user, userActual));
         vent.start(Globals.pantalla);
       }
     }

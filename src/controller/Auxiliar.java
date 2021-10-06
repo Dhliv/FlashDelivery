@@ -17,15 +17,24 @@ import utilities.Globals;
  * @version 1.0, 27/09/2021
  */
 public class Auxiliar {
-  @FXML private TableView<Peticion.FormattedData> recogerTable;
-  @FXML private TableColumn<Peticion.FormattedData, Integer> id;
-  @FXML private TableColumn<Peticion.FormattedData, String> descripcion;
-  @FXML private TableColumn<Peticion.FormattedData, String> nombre;
-  @FXML private TableColumn<Peticion.FormattedData, String> ciudad;
-  @FXML private TableColumn<Peticion.FormattedData, String> direccion;
-  @FXML private TableColumn<Peticion.FormattedData, String> telefono;
-  @FXML private Label labelPOS;
-  @FXML private Label labelUsuario;
+  @FXML
+  private TableView<Peticion.FormattedData> recogerTable;
+  @FXML
+  private TableColumn<Peticion.FormattedData, Integer> id;
+  @FXML
+  private TableColumn<Peticion.FormattedData, String> descripcion;
+  @FXML
+  private TableColumn<Peticion.FormattedData, String> nombre;
+  @FXML
+  private TableColumn<Peticion.FormattedData, String> ciudad;
+  @FXML
+  private TableColumn<Peticion.FormattedData, String> direccion;
+  @FXML
+  private TableColumn<Peticion.FormattedData, String> telefono;
+  @FXML
+  private Label labelPOS;
+  @FXML
+  private Label labelUsuario;
   private Empleado user;
 
   public Auxiliar(Empleado user) {
@@ -45,7 +54,8 @@ public class Auxiliar {
     labelUsuario.setText("Bienvenido \n" + user.getNombres());
   }
 
-  @FXML void logOut(ActionEvent event) {
+  @FXML
+  void logOut(ActionEvent event) {
     Globals.logOut();
   }
 

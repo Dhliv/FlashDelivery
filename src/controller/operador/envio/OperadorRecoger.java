@@ -17,9 +17,12 @@ import utilities.View;
  * @version 0.1, 25/09/2021
  */
 public class OperadorRecoger {
-  @FXML private Cliente remitente;
-  @FXML private Cliente destinatario;
-  @FXML private Label lblTipoInterfaz;
+  @FXML
+  private Cliente remitente;
+  @FXML
+  private Cliente destinatario;
+  @FXML
+  private Label lblTipoInterfaz;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -39,9 +42,11 @@ public class OperadorRecoger {
   }
 
   /**
-   * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
+   * Verificar los campos, actualizar los valores en envio, y continuar a la vista
+   * operador.paquetes
    */
-  @FXML void registrarPaquetes(ActionEvent event) {
+  @FXML
+  void registrarPaquetes(ActionEvent event) {
     remitente.stopBusqueda();
     destinatario.stopBusqueda();
     while (remitente.st.isRunning() || destinatario.st.isRunning()) {
@@ -59,6 +64,7 @@ public class OperadorRecoger {
 
     View.cambiar("operador.recoger", new RecogerPaquete(envio, operador));
   }
+
   @FXML
   void atras(ActionEvent event) {
     View.cambiarFull("operadorOficinaTabla", new OperadorConsulta(operador));
