@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="538.0" layoutY="26.0" style="-fx-background-color: white;">
          <children>
@@ -34,7 +34,7 @@
          </children>
       </Pane>
       <Separator layoutY="90.0" prefWidth="1020.0" />
-      <TableView fx:id="tableUsers" layoutY="93.0" prefHeight="582.0" prefWidth="1020.0">
+      <TableView fx:id="tableUsers" layoutY="93.0" prefHeight="599.0" prefWidth="1020.0">
         <columns>
             <TableColumn fx:id="cedula" prefWidth="103.0" text="Cédula" />
           <TableColumn fx:id="nombre" prefWidth="113.0" text="Nombre" />
@@ -43,10 +43,10 @@
             <TableColumn fx:id="rol" prefWidth="101.0" text="Rol" />
             <TableColumn fx:id="direccion" prefWidth="184.0" text="Direccion" />
             <TableColumn fx:id="telefono" prefWidth="113.0" text="Telefono" />
-            <TableColumn fx:id="birthdate" prefWidth="149.0" text="Fecha de Nacimiento" />
+            <TableColumn fx:id="birthdate" prefWidth="148.0" text="Fecha de Nacimiento" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btChange" layoutX="755.0" layoutY="696.0" mnemonicParsing="false" onAction="#showOtherUsers" prefHeight="45.0" prefWidth="245.0" ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" textFill="WHITE">
+      <JFXButton fx:id="btChange" layoutX="755.0" layoutY="711.0" mnemonicParsing="false" onAction="#showOtherUsers" prefHeight="45.0" prefWidth="245.0" ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></JFXButton>

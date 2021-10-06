@@ -30,9 +30,9 @@
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="42.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#atras" text="Atrás">
+            <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" prefHeight="42.0" prefWidth="84.0" layoutX="42.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#atras" text="Atrás">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
          </children>

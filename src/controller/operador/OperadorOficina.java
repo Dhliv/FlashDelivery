@@ -26,7 +26,7 @@ public class OperadorOficina {
   public void initialize() {
     View.setViewPane(rightContent, true);
     View.cambiar("operadorOficinaTabla", new OperadorConsulta(operador));
-    labelUsuario.setText("Bienvenido " + operador.getNombres());
+    labelUsuario.setText("Bienvenido\n" + operador.getNombres());
     labelPOS.setText("Punto de venta " + operador.getSede());
     // View.cambiar("operador.cliente", new RegistrarClientes(operador));
 

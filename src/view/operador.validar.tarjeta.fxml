@@ -142,12 +142,12 @@
             </Label>
             <JFXButton style="-fx-background-color: #21ba45; -fx-text-fill: #ffffff;" prefHeight="40.0" prefWidth="155.0" layoutX="784.0" layoutY="705.0" mnemonicParsing="false" onAction="#finalizarPago" text="Efectuar Pago">
                <font>
-                  <Font name="Lato Bold" size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
             <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" layoutX="49.0" layoutY="27.0" prefHeight="42.0" prefWidth="84.0" mnemonicParsing="false" onAction="#atras" text="Atras">
                <font>
-                  <Font name="Lato Bold" size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
          </children>

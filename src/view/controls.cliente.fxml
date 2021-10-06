@@ -10,34 +10,34 @@
 
     <Label fx:id="cedulaLabel" layoutX="10.0" layoutY="14.0" text="Ingrese la cedula del ">
         <font>
-        <Font size="14.0" />
+        <Font name="Lato Regular" size="14.0" />
         </font>
     </Label>
     <Label layoutX="10.0" layoutY="91.0" text="Nombre:">
         <font>
-            <Font size="14.0" />
+            <Font name="Lato Regular" size="14.0" />
         </font>
     </Label>
     <Label layoutX="10.0" layoutY="168.0" text="Ciudad:">
         <font>
-        <Font size="14.0" />
+        <Font name="Lato Regular" size="14.0" />
         </font>
     </Label>
     <Label layoutX="10.0" layoutY="248.0" text="Dirección:">
         <font>
-        <Font size="14.0" />
+        <Font name="Lato Regular" size="14.0" />
         </font>
     </Label>
     <Label layoutX="10.0" layoutY="329.0" text="Teléfono:">
         <font>
-        <Font size="14.0" />
+        <Font name="Lato Regular"  size="14.0" />
         </font>
     </Label>
 
-    <JFXTextField id="Cedula" fx:id="cedula" layoutX="10.0" layoutY="42.0" onKeyReleased="#onCedulaTextChanged" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
-    <JFXTextField id="Nombre" fx:id="nombre" layoutX="10.0" layoutY="117.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
-    <JFXTextField id="Ciudad" fx:id="ciudad" layoutX="10.0" layoutY="196.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
-    <JFXTextField id="Dirección" fx:id="direccion" layoutX="10.0" layoutY="276.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
-    <JFXTextField id="Teléfono" fx:id="telefono" layoutX="10.0" layoutY="358.0" prefHeight="25.0" prefWidth="200.0" maxWidth="200.0" />
+    <JFXTextField id="Cedula" fx:id="cedula" layoutX="10.0" layoutY="42.0" onKeyReleased="#onCedulaTextChanged" prefHeight="25.0" prefWidth="260.0"  />
+    <JFXTextField id="Nombre" fx:id="nombre" layoutX="10.0" layoutY="117.0" prefHeight="25.0" prefWidth="260.0"  />
+    <JFXTextField id="Ciudad" fx:id="ciudad" layoutX="10.0" layoutY="196.0" prefHeight="25.0" prefWidth="260.0"  />
+    <JFXTextField id="Dirección" fx:id="direccion" layoutX="10.0" layoutY="276.0" prefHeight="25.0" prefWidth="260.0"  />
+    <JFXTextField id="Teléfono" fx:id="telefono" layoutX="10.0" layoutY="358.0" prefHeight="25.0" prefWidth="260.0"  />
 
 </fx:root>

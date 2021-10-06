@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.*?>
 
-<Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton alignment="CENTER" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onAction="#atras" text="Atras" textAlignment="CENTER">
+      <JFXButton alignment="CENTER" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onAction="#atras" prefHeight="42.0" prefWidth="84.0" style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" text="Atras" textAlignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton alignment="CENTER" layoutX="897.0" layoutY="46.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" textAlignment="CENTER">
+      <JFXButton alignment="CENTER" layoutX="881.0" layoutY="38.0" mnemonicParsing="false" onAction="#guardar" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #21ba45; -fx-text-fill: #ffffff;" text="Guardar" textAlignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <Label id="nombrel" layoutX="44.0" layoutY="120.0" text="Nombre:" />
-      <JFXTextField fx:id="nombre" id="Nombre" layoutX="105.0" layoutY="116.0" prefHeight="25.0" prefWidth="182.0" />
-      <JFXTextField fx:id="direccion" id="Dirección" layoutX="424.0" layoutY="116.0" prefHeight="25.0" prefWidth="176.0" />
-      <Label layoutX="359.0" layoutY="120.0" prefHeight="17.0" prefWidth="65.0" text="Dirección:" />
+      <Label id="nombrel" layoutX="216.0" layoutY="173.0" text="Nombre:">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font></Label>
+      <JFXTextField id="Nombre" fx:id="nombre" layoutX="216.0" layoutY="208.0" prefHeight="25.0" prefWidth="250.0" />
+      <JFXTextField id="Dirección" fx:id="direccion" layoutX="568.0" layoutY="208.0" prefHeight="25.0" prefWidth="250.0" />
+      <Label layoutX="568.0" layoutY="173.0" prefHeight="17.0" prefWidth="65.0" text="Dirección:">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font></Label>
+      <Separator layoutY="99.0" prefHeight="25.0" prefWidth="1020.0" />
+      <ImageView fitHeight="564.0" fitWidth="812.0" layoutX="228.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/Images/5138237.png" />
+         </image>
+      </ImageView>
+      <Separator layoutY="295.0" prefHeight="25.0" prefWidth="1020.0" />
    </children>
 </Pane>

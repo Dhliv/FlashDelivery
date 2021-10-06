@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -10,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import com.jfoenix.controls.*?>
 
-<Pane style="-fx-background-color: white;"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="494.0" layoutY="26.0" style="-fx-background-color: white;">
          <children>
@@ -31,66 +35,66 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane style="-fx-background-color: white;"  layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0">
+      <Pane layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1020.0" style="-fx-background-color: white;">
          <children>
             <Label layoutX="250.0" layoutY="160.0" text="Identificación">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
             <Label layoutX="250.0" layoutY="360.0" text="Cargo">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
             <Label layoutX="250.0" layoutY="260.0" text="Dirección">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="585.0" layoutY="160.0" text="Teléfono">
+            <Label layoutX="587.0" layoutY="160.0" text="Teléfono">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="585.0" layoutY="260.0" prefHeight="27.0" prefWidth="184.0" text="Fecha de nacimiento" wrapText="true">
+            <Label layoutX="585.0" layoutY="257.0" prefHeight="27.0" prefWidth="184.0" text="Fecha de nacimiento" wrapText="true">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
             <Label layoutX="585.0" layoutY="360.0" text="Sede">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="apellidoT" layoutX="251.0" layoutY="91.0" prefHeight="25.0" prefWidth="184.0" />
-            <JFXTextField fx:id="nombreT" layoutX="586.0" layoutY="92.0" prefHeight="25.0" prefWidth="184.0" />
-            <JFXTextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
-            <JFXTextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="184.0" />
-            <JFXTextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
-            <DatePicker fx:id="fechaT" layoutX="585.0" layoutY="285.0" prefWidth="184.0" />
-            <ChoiceBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="184.0" />
-            <ChoiceBox fx:id="idsedeT" layoutX="585.0" layoutY="385.0" prefWidth="184.0" />
+            <JFXTextField fx:id="apellidoT" layoutX="251.0" layoutY="91.0" prefHeight="25.0" prefWidth="225.0" />
+            <JFXTextField fx:id="nombreT" layoutX="586.0" layoutY="92.0" prefHeight="25.0" prefWidth="225.0" />
+            <JFXTextField fx:id="identificacionT" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="225.0" />
+            <JFXTextField fx:id="telefonoT" layoutX="585.0" layoutY="185.0" prefHeight="25.0" prefWidth="225.0" />
+            <JFXTextField fx:id="direccionT" layoutX="250.0" layoutY="285.0" prefHeight="25.0" prefWidth="225.0" />
+            <DatePicker fx:id="fechaT" layoutX="585.0" layoutY="285.0" prefWidth="225.0" />
+            <ChoiceBox fx:id="rolT" layoutX="250.0" layoutY="385.0" prefHeight="25.0" prefWidth="225.0" />
+            <ChoiceBox fx:id="idsedeT" layoutX="585.0" layoutY="385.0" prefWidth="225.0" />
             
             
-            <JFXButton ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" textFill="WHITE" layoutX="538.0" layoutY="540.0" mnemonicParsing="false" prefHeight="42.0" onAction="#updateEmpleado" prefWidth="100.0" text="Modificar">
+            <JFXButton layoutX="585.0" layoutY="498.0" mnemonicParsing="false" onAction="#updateEmpleado" prefHeight="42.0" prefWidth="225.0" ripplerFill="#1a69a4b5" style="-fx-background-color: #2185d0;" text="Modificar" textFill="WHITE">
                <font>
-                  <Font name="Lato Bold" size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" layoutX="384.0" layoutY="540.0" mnemonicParsing="false" prefHeight="42.0" onAction="#goToUsuariosConsulta" prefWidth="100.0" text="Regresar">
+            <JFXButton layoutX="250.0" layoutY="498.0" mnemonicParsing="false" onAction="#goToUsuariosConsulta" prefHeight="42.0" prefWidth="225.0" style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" text="Regresar">
                <font>
-                  <Font name="Lato Bold" size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
             <Label layoutX="251.0" layoutY="66.0" text="Apellidos">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="586.0" layoutY="67.0" text="Nombres">
+            <Label layoutX="586.0" layoutY="66.0" text="Nombres">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Regular" size="16.0" />
                </font>
             </Label>
          </children>
@@ -98,7 +102,7 @@
       <Separator layoutY="90.0" prefWidth="1020.0" />
       <Label fx:id="lblEmpleadoEditar" layoutX="30.0" layoutY="35.0" text="Modificando a">
          <font>
-            <Font size="18.0" />
+            <Font name="Lato Regular" size="18.0" />
          </font>
       </Label>
    </children>
