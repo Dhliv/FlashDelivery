@@ -5,12 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import model.Entities.Sede;
+import utilities.Globals;
 
 public class Reportes {
 
-  @FXML private ChoiceBox<String> sedeChoicebox;
+  @FXML private ComboBox<String> sedeChoicebox;
   CreateChart createChart;
 
   public void initialize() {
@@ -21,6 +23,8 @@ public class Reportes {
     sedeChoicebox.getItems().addAll(sedesObservable);
     sedeChoicebox.setValue("Todas");
     createChart = new CreateChart();
+
+    Globals.style.setParent(sedeChoicebox);
 
   }
 

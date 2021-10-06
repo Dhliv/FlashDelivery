@@ -3,6 +3,8 @@ package controller.operador.envio;
 import model.Entities.Cliente;
 import java.util.List;
 
+import com.jfoenix.controls.JFXComboBox;
+
 import controller.operador.verPaquetes.OperadorConsulta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+// import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import model.Entities.Empleado;
@@ -17,6 +20,8 @@ import model.Entities.Sede;
 import utilities.GeneralChecker;
 import utilities.View;
 import utilities.SpecificAlerts;
+import utilities.Globals;
+// import com.jfoenix.controls.*;
 
 /**
  * Controlador de la vista operador.recoger
@@ -26,23 +31,17 @@ import utilities.SpecificAlerts;
  * @since 25/09/2021
  */
 public class RecogerPaquete {
-  @FXML
-  private Button atrasPaquete;
+  @FXML private Button atrasPaquete;
 
-  @FXML
-  private TextArea txtAreaDescripcion;
+  @FXML private TextArea txtAreaDescripcion;
 
-  @FXML
-  private Label txtAuxiliar;
+  @FXML private Label txtAuxiliar;
 
-  @FXML
-  private ComboBox<String> choiceAuxiliar;
+  @FXML private ComboBox<String> choiceAuxiliar;
 
-  @FXML
-  private Label txtSede;
+  @FXML private Label txtSede;
 
-  @FXML
-  private ComboBox<String> choiceSede;
+  @FXML private ComboBox<String> choiceSede;
 
   private model.RegistrarEnvio envio;
   private Empleado operador;
@@ -51,6 +50,7 @@ public class RecogerPaquete {
   public RecogerPaquete(model.RegistrarEnvio envio, Empleado operador) {
     this.envio = envio;
     this.operador = operador;
+
   }
 
   public void initialize() {
@@ -67,16 +67,19 @@ public class RecogerPaquete {
 
     // Se selecciona por defecto la sede 1.
     choiceSede.setValue(sedes.get(0).toString());
+
+    Globals.style.setParent(choiceAuxiliar);
+    Globals.style.setParent(choiceSede);
+    Globals.style.setParent(txtAreaDescripcion);
   }
 
   /**
-   * El nombre no es muy representativo. Se cambia la información del choiceBox de
-   * Auxiliares Por uno que sea acorde a la nueva sede seleccionada
+   * El nombre no es muy representativo. Se cambia la información del choiceBox de Auxiliares Por uno
+   * que sea acorde a la nueva sede seleccionada
    * 
    * @param event Seleccionar una sede diferente.
    */
-  @FXML
-  void selectSede(ActionEvent event) {
+  @FXML void selectSede(ActionEvent event) {
     ObservableList<String> auxiliares = FXCollections.observableArrayList();
 
     choiceAuxiliar.getItems().clear();
@@ -84,18 +87,14 @@ public class RecogerPaquete {
     choiceAuxiliar.getItems().addAll(auxiliares);
   }
 
-  // TODO @Pergueza arreglar vista
-  @FXML
-  void atras(ActionEvent event) {
-    if (event.getSource() == atrasPaquete)
-      View.cambiarFull("operador.cliente");
+  @FXML void atras(ActionEvent event) {
+    if (event.getSource() == atrasPaquete) View.cambiar("operador.cliente");
   }
 
   /**
    * Inserta la información registrada por el usuario en la BD.
    */
-  @FXML
-  void finalizarEntrega(ActionEvent event) {
+  @FXML void finalizarEntrega(ActionEvent event) {
     if (!validateData()) // Comprueba si hay errores y lanza alertas independientemente del caso
       return;
 
@@ -114,12 +113,11 @@ public class RecogerPaquete {
   }
 
   /**
-   * Valida los datos obtenidos de los campos rellenables verificando que no haya
-   * campos sin llenar o que existan caracteres vacíos. Además, muestra en
-   * pantalla las alertas correspondientes en cada caso.
+   * Valida los datos obtenidos de los campos rellenables verificando que no haya campos sin llenar o
+   * que existan caracteres vacíos. Además, muestra en pantalla las alertas correspondientes en cada
+   * caso.
    * 
-   * @return True si cumple las validaciones y no hay problemas, False de lo
-   *         contrario.
+   * @return True si cumple las validaciones y no hay problemas, False de lo contrario.
    */
   private Boolean validateData() {
 
@@ -134,10 +132,8 @@ public class RecogerPaquete {
 
     // Popean los errores existentes
     if (camposVacios || forbiddenChar) {
-      if (camposVacios)
-        SpecificAlerts.showEmptyFieldAlert();
-      if (forbiddenChar)
-        SpecificAlerts.showCharForbidenAlert();
+      if (camposVacios) SpecificAlerts.showEmptyFieldAlert();
+      if (forbiddenChar) SpecificAlerts.showCharForbidenAlert();
       return false;
     }
 

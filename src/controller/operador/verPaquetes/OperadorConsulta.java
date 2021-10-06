@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.Envio;
 import model.Entities.*;
+import utilities.Globals;
 import utilities.View;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -45,6 +46,8 @@ public class OperadorConsulta implements Initializable {
     tcDireccionEntrega.setCellValueFactory(new PropertyValueFactory<Envio, String>("direccion_entrega"));
     tcRemitente.setCellValueFactory(new PropertyValueFactory<Envio, String>("cliente_envio"));
     tcDestinatario.setCellValueFactory(new PropertyValueFactory<Envio, String>("cliente_entrega"));
+    tcEstado.setCellValueFactory(new PropertyValueFactory<Envio, Boolean>("delivered"));
+    Globals.style.setParent(tPaquetes);
 
     ArrayList<Envio> enviosAux = (ArrayList<Envio>) Envio.getEnviosBySede(e.id_sede);
     ObservableList<Envio> envios = FXCollections.observableArrayList(enviosAux);

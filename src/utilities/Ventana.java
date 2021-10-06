@@ -1,13 +1,10 @@
 package utilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.*;
 
 public class Ventana extends Application {
   private String ventana;
@@ -27,14 +24,16 @@ public class Ventana extends Application {
   /**
    * Inicializa una nueva ventana.
    */
-  @Override
-  public void start(Stage stage) throws Exception {
+  @Override public void start(Stage stage) throws Exception {
     Parent root = View.loadView(ventana, cont);
     Scene scene = new Scene(root);
-    // JMetro jmetro = new JMetro(Style.LIGHT);
-    // jmetro.setScene(scene);
-    // jmetro.setParent(parent);
-    stage.setTitle(ventana);
+
+    var a = new Image(this.getClass().getResourceAsStream("../resources/Images/icon.png"));
+    stage.getIcons().add(a);
+    /*JMetro jMetro = new JMetro(Style.LIGHT);
+    jMetro.setScene(scene);*/
+
+    stage.setTitle("Flash Delivery");
 
     stage.setScene(scene);
     stage.show();

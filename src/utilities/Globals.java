@@ -1,11 +1,19 @@
 package utilities;
 
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import controller.Login;
 
 public class Globals {
   public static Stage pantalla;
+  public static JMetro style;
   private static Ventana ventana;
+
+  public static void init() {
+    style = new JMetro();
+    style.setStyle(Style.LIGHT);
+  }
 
   /**
    * Numero "value" es redondeado a "places" cifras decimales

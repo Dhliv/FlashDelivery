@@ -9,14 +9,17 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import com.jfoenix.controls.JFXTextField;
+
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.*;
 import model.Entities.Empleado;
 import model.Entities.Usuario;
 import utilities.*;
 
 /**
- * La clase UserRegister se encarga de brindar al cliente la interfaz gráfica
- * para el resgistro de un empleado en la base de datos.
+ * La clase UserRegister se encarga de brindar al cliente la interfaz gráfica para el resgistro de
+ * un empleado en la base de datos.
  * 
  * @author David Henao
  * @author Alejandro Pergueza Amaya
@@ -44,31 +47,21 @@ public class UserRegister {
   private int idSede;
 
   // Campos de texto que se pueden rellenar en user.register view
-  @FXML
-  private JFXTextField nombreT;
-  @FXML
-  private JFXTextField apellidoT;
-  @FXML
-  private JFXTextField identificacionT;
-  @FXML
-  private JFXTextField telefonoT;
-  @FXML
-  private JFXTextField direccionT;
-  @FXML
-  private DatePicker fechaT;
-  @FXML
-  private ChoiceBox<String> rolT;
-  @FXML
-  private JFXTextField usernameT;
-  @FXML
-  private ChoiceBox<String> idsedeT;
-  @FXML
-  private PasswordField passwordT;
+  @FXML private JFXTextField nombreT;
+  @FXML private JFXTextField apellidoT;
+  @FXML private JFXTextField identificacionT;
+  @FXML private JFXTextField telefonoT;
+  @FXML private JFXTextField direccionT;
+  @FXML private DatePicker fechaT;
+  @FXML private JFXComboBox<String> rolT;
+  @FXML private JFXTextField usernameT;
+  @FXML private JFXComboBox<String> idsedeT;
+  @FXML private JFXPasswordField passwordT;
   // FIN de los campos.
 
   /**
-   * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece
-   * restricciones a los campos necesarios.
+   * Ingresa los datos a los menus desplegables de Roles y Sedes. Además establece restricciones a los
+   * campos necesarios.
    * 
    */
   public void initialize() {
@@ -84,11 +77,12 @@ public class UserRegister {
 
     TextFieldRestrictions.textFieldMaxLength(identificacionT, 10);
     TextFieldRestrictions.textFieldMaxLength(telefonoT, 10);
+
+    Globals.style.setParent(fechaT);
   }
 
   /**
-   * Obtiene los datos de los campos de registro y los almacena en variables
-   * internas.
+   * Obtiene los datos de los campos de registro y los almacena en variables internas.
    */
   private void getData() {
 
@@ -121,8 +115,7 @@ public class UserRegister {
    * @return String con rol interno.
    */
   private String parseRol(String rol) {
-    if (rol == Roles.rol[Roles.SECRETARIO])
-      return "Secretaria";
+    if (rol == Roles.rol[Roles.SECRETARIO]) return "Secretaria";
     return rol;
   }
 
@@ -147,23 +140,20 @@ public class UserRegister {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosConsulta(ActionEvent event) {
+  @FXML void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
   /**
-   * Registra a un usuario en la base de datos, haciendo las respectivas
-   * validaciones (revisar que no existan campos vacíos, que no se usen caracteres
-   * prohibidos, que el empleado a registrar no se encuentre registrado, que el
-   * usuario asignado al empleado no se encuentre en uso, que la inserción de
-   * datos en la BD sea exitosa).
+   * Registra a un usuario en la base de datos, haciendo las respectivas validaciones (revisar que no
+   * existan campos vacíos, que no se usen caracteres prohibidos, que el empleado a registrar no se
+   * encuentre registrado, que el usuario asignado al empleado no se encuentre en uso, que la
+   * inserción de datos en la BD sea exitosa).
    * 
    * @param event not used.
    */
 
-  @FXML
-  void registrarUser(ActionEvent event) {
+  @FXML void registrarUser(ActionEvent event) {
 
     getData();
     String campo[] = { name, telefono, dir, ident, username, password, idS, rl, fecha, apellidos };
@@ -177,17 +167,12 @@ public class UserRegister {
 
     if (forbidchar || emptyCamps || usernameExist || empleadoExist || !formatoCorrecto || noTrabajaLegalmente) {
       { // Si hubo problemas en las validaciones, ejecuta la correspondiente alerta:
-        if (emptyCamps)
-          SpecificAlerts.showEmptyFieldAlert();
-        if (forbidchar)
-          SpecificAlerts.showCharForbidenAlert();
-        if (usernameExist)
-          SpecificAlerts.showUserExist();
-        if (empleadoExist)
-          SpecificAlerts.showEmpleadoExists();
-        if (!formatoCorrecto)
-          SpecificAlerts.showNumericFormat();
-        if(noTrabajaLegalmente){
+        if (emptyCamps) SpecificAlerts.showEmptyFieldAlert();
+        if (forbidchar) SpecificAlerts.showCharForbidenAlert();
+        if (usernameExist) SpecificAlerts.showUserExist();
+        if (empleadoExist) SpecificAlerts.showEmpleadoExists();
+        if (!formatoCorrecto) SpecificAlerts.showNumericFormat();
+        if (noTrabajaLegalmente) {
           SpecificAlerts.showFechaNoValida();
         }
       }

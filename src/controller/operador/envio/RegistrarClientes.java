@@ -43,8 +43,7 @@ public class RegistrarClientes {
   /**
    * Verificar los campos, actualizar los valores en envio, y continuar a la vista operador.paquetes
    */
-  @FXML
-  void registrarPaquetes(ActionEvent event) {
+  @FXML void registrarPaquetes(ActionEvent event) {
     remitente.stopBusqueda();
     destinatario.stopBusqueda();
     while (remitente.st.isRunning() || destinatario.st.isRunning()) {

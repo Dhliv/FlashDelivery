@@ -3,6 +3,9 @@ package controller.operador.envio;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.*;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import model.Pago;
 import utilities.GeneralChecker;
+import utilities.Globals;
 import utilities.SpecificAlerts;
 import utilities.SobreTarjeta;
 import utilities.TextFieldRestrictions;
@@ -22,10 +26,9 @@ import utilities.View;
 import model.Entities.Empleado;
 
 /**
- * Clase controller OperadorTarjeta. Contiene parámetros de front y back end
- * relacionados a una tarjeta. Posee diversos métodos para el manejo visual de
- * los datos insertados por el usuario, ademas de control sobre lo que el
- * usuario digita.
+ * Clase controller OperadorTarjeta. Contiene parámetros de front y back end relacionados a una
+ * tarjeta. Posee diversos métodos para el manejo visual de los datos insertados por el usuario,
+ * ademas de control sobre lo que el usuario digita.
  * 
  * @author David Henao
  * @author Alejandro Pergueza Amaya
@@ -60,44 +63,29 @@ public class OperadorTarjeta implements Initializable {
   private Pago pago; // Almacena toda la info relacionada con el objeto pago.
   private Empleado operador; // Almacena al operador de oficina.
 
-  @FXML
-  private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
-  @FXML
-  private TextField txtNumerotarjeta; // textField donde se ingresa el numero de la tarjeta
-  @FXML
-  private TextField txtTitular; // textField donde se digita el nombre del titular de la tarjeta.
-  @FXML
-  private TextField txtCVV; // textField donde se digita el CVV de la tarjeta.
-  @FXML
-  private Label lblNumeroCuotas; // label del Texto de numero de cuotas.
-  @FXML
-  private DatePicker dateFechaVencimiento; // datePicker que indica la fecha de vencimiento de la tarjeta.
-  @FXML
-  private ChoiceBox<String> chboxNumeroCuotas; // número de cuotas en las que se pagará (depende de la tarjeta).
-  @FXML
-  private Label lblNumero1; // primeros cuatro numeros de la tarjeta.
-  @FXML
-  private Label lblNumero2; // segundo cuarteto del numero de la tarjeta.
-  @FXML
-  private Label lblNumero3; // tercer cuarteto del numero de la tarjeta.
-  @FXML
-  private Label lblNumero4; // cuarteto final del numero de la tarjeta.
-  @FXML
-  private Label lblCVV; // cvv para desplegar en pantalla.
-  @FXML
-  private Label lblNombreEnTarjeta; // nombre del titular para desplegar en pantalla
-  @FXML
-  private Label lblMes; // mes de vencimiento de la tarjeta para desplegar en pantalla.
-  @FXML
-  private Label lblAño; // dos ultimos digitos del año de vencimiento de la tarjeta para desplegar en
-                        // pantalla.
+  @FXML private Label lblTipoTarjeta; // label que identifica el tipo de tarjeta con la que se paga.
+  @FXML private JFXTextField txtNumerotarjeta; // textField donde se ingresa el numero de la tarjeta
+  @FXML private JFXTextField txtTitular; // textField donde se digita el nombre del titular de la tarjeta.
+  @FXML private JFXTextField txtCVV; // textField donde se digita el CVV de la tarjeta.
+  @FXML private Label lblNumeroCuotas; // label del Texto de numero de cuotas.
+  @FXML private DatePicker dateFechaVencimiento; // datePicker que indica la fecha de vencimiento de la tarjeta.
+  @FXML private JFXComboBox<String> chboxNumeroCuotas; // número de cuotas en las que se pagará (depende de la tarjeta).
+  @FXML private Label lblNumero1; // primeros cuatro numeros de la tarjeta.
+  @FXML private Label lblNumero2; // segundo cuarteto del numero de la tarjeta.
+  @FXML private Label lblNumero3; // tercer cuarteto del numero de la tarjeta.
+  @FXML private Label lblNumero4; // cuarteto final del numero de la tarjeta.
+  @FXML private Label lblCVV; // cvv para desplegar en pantalla.
+  @FXML private Label lblNombreEnTarjeta; // nombre del titular para desplegar en pantalla
+  @FXML private Label lblMes; // mes de vencimiento de la tarjeta para desplegar en pantalla.
+  @FXML private Label lblAño; // dos ultimos digitos del año de vencimiento de la tarjeta para desplegar en
+                              // pantalla.
 
   /**
    * Constructor de la clase OperadorTarjeta.
    * 
    * @param tipoTarjeta identifica el número de tarjeta a usar.
-   * @param envio       Almacena la información relacionada al envío
-   *                    (destinatario, remitente, paquetes, etc).
+   * @param envio       Almacena la información relacionada al envío (destinatario, remitente,
+   *                    paquetes, etc).
    * @param pago        OBjeto de pago con toda la información relacionada a éste.
    */
   public OperadorTarjeta(Integer tipoTarjeta, model.RegistrarEnvio envio, Pago pago, Empleado operador) {
@@ -109,14 +97,14 @@ public class OperadorTarjeta implements Initializable {
   }
 
   /**
-   * Inicializa los componentes gráficos. Además establece restricciones a los
-   * campos de texto necesarios.
+   * Inicializa los componentes gráficos. Además establece restricciones a los campos de texto
+   * necesarios.
    * 
    * @param location  not used.
    * @param resources not used.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  @Override public void initialize(URL location, ResourceBundle resources) {
+    Globals.style.setParent(dateFechaVencimiento);
     ObservableList<String> numeroDeCuotas = FXCollections.observableArrayList();
     ArrayList<String> aux = new ArrayList<>();
     for (int i = 1; i <= 36; i++) {
@@ -154,13 +142,12 @@ public class OperadorTarjeta implements Initializable {
   }
 
   /**
-   * Registra todo lo relacionado al envío en la base de datos y vuelve a la
-   * pantalla principal del operador de oficina.
+   * Registra todo lo relacionado al envío en la base de datos y vuelve a la pantalla principal del
+   * operador de oficina.
    * 
    * @param event not used.
    */
-  @FXML
-  void finalizarPago(ActionEvent event) {
+  @FXML void finalizarPago(ActionEvent event) {
     getData();
     camposVacios = GeneralChecker.checkEmpty(campos, objetos);
     forbidChar = GeneralChecker.checkChar(campos);
@@ -174,7 +161,7 @@ public class OperadorTarjeta implements Initializable {
       pagar = false;
     }
     Boolean fechaVencimientoCorrecta = GeneralChecker.checkFecha(dateFechaVencimiento.getValue(), 0);
-    if(!fechaVencimientoCorrecta){
+    if (!fechaVencimientoCorrecta) {
       pagar = false;
     }
 
@@ -190,14 +177,12 @@ public class OperadorTarjeta implements Initializable {
       SpecificAlerts.showPagoExitoso();
       goBack();
     } else {
-      if (camposVacios)
-        SpecificAlerts.showEmptyFieldAlert();
-      if (forbidChar)
-        SpecificAlerts.showCharForbidenAlert();
-      if(!fechaVencimientoCorrecta){
+      if (camposVacios) SpecificAlerts.showEmptyFieldAlert();
+      if (forbidChar) SpecificAlerts.showCharForbidenAlert();
+      if (!fechaVencimientoCorrecta) {
         SpecificAlerts.showFechaNoValida();
       }
-      
+
     }
   }
 
@@ -206,8 +191,7 @@ public class OperadorTarjeta implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void atras(ActionEvent event) {
+  @FXML void atras(ActionEvent event) {
     View.newView("operador.resumen", new OperadorResumen(envio, operador));
   }
 
@@ -216,17 +200,14 @@ public class OperadorTarjeta implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void printDigitsTarjeta(KeyEvent event) {
+  @FXML void printDigitsTarjeta(KeyEvent event) {
     Object[] validados = SobreTarjeta.checkErase(event, true);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
 
     if (borrar) {
-      if (counter > 0 && counter <= SobreTarjeta.tNTM())
-        SobreTarjeta.eraseNumber(counter, lblNumero1, lblNumero2, lblNumero3, lblNumero4);
-      if (counter > 0)
-        counter--;
+      if (counter > 0 && counter <= SobreTarjeta.tNTM()) SobreTarjeta.eraseNumber(counter, lblNumero1, lblNumero2, lblNumero3, lblNumero4);
+      if (counter > 0) counter--;
     } else if (agregar && counter < SobreTarjeta.tNTM()) {
       SobreTarjeta.addNumber(event.getText(), counter, lblNumero1, lblNumero2, lblNumero3, lblNumero4);
       counter++;
@@ -234,29 +215,26 @@ public class OperadorTarjeta implements Initializable {
   }
 
   /**
-   * Borra un caracter del componente gráfico que muestra el nombre del titular de
-   * la tarjeta, si es el caso.
+   * Borra un caracter del componente gráfico que muestra el nombre del titular de la tarjeta, si es
+   * el caso.
    * 
    * @param event not used.
    */
-  @FXML
-  void eraseTitular(KeyEvent event) {
+  @FXML void eraseTitular(KeyEvent event) {
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
     agregar = (Boolean) validados[1];
 
-    if (borrar && txtTitular.getText().length() < 21)
-      lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
+    if (borrar && txtTitular.getText().length() < 21) lblNombreEnTarjeta.setText(SobreTarjeta.eraseFrom(lblNombreEnTarjeta.getText(), 1));
   }
 
   /**
-   * Agrega un caracter al componente gráfico que muestra el nombre del titular de
-   * la tarjeta, si es el caso.
+   * Agrega un caracter al componente gráfico que muestra el nombre del titular de la tarjeta, si es
+   * el caso.
    * 
    * @param event not used.
    */
-  @FXML
-  void addTitular(KeyEvent event) {
+  @FXML void addTitular(KeyEvent event) {
 
     Object[] validados = SobreTarjeta.checkErase(event, false);
     borrar = (Boolean) validados[0];
@@ -269,18 +247,15 @@ public class OperadorTarjeta implements Initializable {
 
     // Revisa que se cumpla la misma condición del txtField en el componente grafico
     // que imprime la cadena
-    if (agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21)
-      lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
+    if (agregar && Character.isDefined(event.getCharacter().charAt(0)) && lblNombreEnTarjeta.getText().length() < 21) lblNombreEnTarjeta.setText(SobreTarjeta.addTo(lblNombreEnTarjeta.getText(), event.getCharacter()));
   }
 
   /**
-   * Agrega o elimina un caracter al componente gráfico que muestra el cvv si es
-   * el caso.
+   * Agrega o elimina un caracter al componente gráfico que muestra el cvv si es el caso.
    * 
    * @param event not used
    */
-  @FXML
-  void addCvv(KeyEvent event) {
+  @FXML void addCvv(KeyEvent event) {
     // lblCVV
     Object[] validados = SobreTarjeta.checkErase(event, true);
     borrar = (Boolean) validados[0];
@@ -290,18 +265,15 @@ public class OperadorTarjeta implements Initializable {
       lblCVV.setText(SobreTarjeta.eraseFrom(lblCVV.getText(), 1));
     }
 
-    if (agregar && lblCVV.getText().length() < CVVLENGTH)
-      lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
+    if (agregar && lblCVV.getText().length() < CVVLENGTH) lblCVV.setText(SobreTarjeta.addTo(lblCVV.getText(), event.getText()));
   }
 
   /**
-   * Agrega o elimina un caracter al componente gráfico que muestra la fecha si es
-   * el caso.
+   * Agrega o elimina un caracter al componente gráfico que muestra la fecha si es el caso.
    * 
    * @param event not used.
    */
-  @FXML
-  void addFecha(ActionEvent event) {
+  @FXML void addFecha(ActionEvent event) {
 
     int month = dateFechaVencimiento.getValue().getMonthValue();
     if (month < 10)

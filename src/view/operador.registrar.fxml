@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
 <AnchorPane prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -17,7 +18,7 @@
          <content>
             <AnchorPane prefHeight="760.0" prefWidth="1010.0">
                <children>
-                  <Pane layoutX="200.0" layoutY="60.0">
+                  <Pane style="-fx-background-color: white;"  layoutX="200.0" layoutY="60.0">
                      <children>
                         <Label prefWidth="240.0" text="Cedula de cliente">
                            <font>
@@ -64,13 +65,13 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cedulaClienteT" layoutY="25.0" prefWidth="240.0" />
-                        <TextField fx:id="cedulaDestinoT" layoutX="370.0" layoutY="25.0" prefWidth="240.0" />
-                        <TextField fx:id="direccionEntregaT" layoutY="115.0" prefWidth="240.0" />
+                        <JFXTextField fx:id="cedulaClienteT" layoutY="25.0" prefWidth="240.0" />
+                        <JFXTextField fx:id="cedulaDestinoT" layoutX="370.0" layoutY="25.0" prefWidth="240.0" />
+                        <JFXTextField fx:id="direccionEntregaT" layoutY="115.0" prefWidth="240.0" />
                         <ChoiceBox fx:id="sedeEnvioT" layoutX="370.0" layoutY="115.0" prefHeight="25.0" prefWidth="240.0" />
-                        <TextField fx:id="pesoPaqueteT" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" />
+                        <JFXTextField fx:id="pesoPaqueteT" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" />
                         <ChoiceBox fx:id="metodoPagoT" layoutX="370.0" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" />
-                        <TextField fx:id="valorPaqueteT" layoutY="295.0" prefWidth="240.0" />
+                        <JFXTextField fx:id="valorPaqueteT" layoutY="295.0" prefWidth="240.0" />
                         <Label fx:id="labelImpuesto" layoutX="370.0" layoutY="293.0" text="0$">
                            <font>
                               <Font size="16.0" />
@@ -83,18 +84,18 @@
                         </Label>
                         <TextArea fx:id="descripcionT" layoutY="465.0" prefHeight="140.0" prefWidth="610.0" />
                         <CheckBox fx:id="seguroChoice" layoutY="610.0" mnemonicParsing="false" text="Seguro" />
-                        <Pane layoutX="318.0" layoutY="619.0">
+                        <Pane style="-fx-background-color: white;"  layoutX="318.0" layoutY="619.0">
                            <children>
-                              <Button fx:id="btnRegistrar" layoutX="127.0" layoutY="3.0" mnemonicParsing="false" onAction="#registrarEnvio" text="Registrar envío">
+                              <JFXButton fx:id="btnRegistrar" layoutX="127.0" layoutY="3.0" mnemonicParsing="false" onAction="#registrarEnvio" text="Registrar envío">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
-                              </Button>
-                              <Button fx:id="btnRegresar" layoutY="3.0" mnemonicParsing="false" onAction="#goToOperadorOficina" prefHeight="32.0" prefWidth="94.0" text="Regresar">
+                              </JFXButton>
+                              <JFXButton fx:id="btnRegresar" layoutY="3.0" mnemonicParsing="false" onAction="#goToOperadorOficina" prefHeight="32.0" prefWidth="94.0" text="Regresar">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
-                              </Button>
+                              </JFXButton>
                            </children>
                         </Pane>
                      </children>

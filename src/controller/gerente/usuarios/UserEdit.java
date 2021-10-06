@@ -3,6 +3,9 @@ package controller.gerente.usuarios;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +19,7 @@ import model.Entities.Empleado;
 import utilities.*;
 
 /**
- * Clase controller UserEdit. Contiene la parte visual de la edición de un
- * usuario.
+ * Clase controller UserEdit. Contiene la parte visual de la edición de un usuario.
  * 
  * @author David Henao
  * @version 1.0
@@ -41,24 +43,15 @@ public class UserEdit implements Initializable {
   private int idSede; // Id de la Sede
 
   // Campos de texto que se pueden rellenar en user.register view
-  @FXML
-  private TextField nombreT;
-  @FXML
-  private TextField apellidoT;
-  @FXML
-  private TextField identificacionT;
-  @FXML
-  private TextField telefonoT;
-  @FXML
-  private TextField direccionT;
-  @FXML
-  private DatePicker fechaT;
-  @FXML
-  private ChoiceBox<String> rolT;
-  @FXML
-  private ChoiceBox<String> idsedeT;
-  @FXML
-  private Label lblEmpleadoEditar;
+  @FXML private JFXTextField nombreT;
+  @FXML private JFXTextField apellidoT;
+  @FXML private JFXTextField identificacionT;
+  @FXML private JFXTextField telefonoT;
+  @FXML private JFXTextField direccionT;
+  @FXML private DatePicker fechaT;
+  @FXML private ChoiceBox<String> rolT;
+  @FXML private ChoiceBox<String> idsedeT;
+  @FXML private Label lblEmpleadoEditar;
   // FIN de los campos.
 
   /**
@@ -72,14 +65,13 @@ public class UserEdit implements Initializable {
   }
 
   /**
-   * Inicializador de algunos componentes gráficos. Además, se agregan
-   * restricciones a algunos campos de texto.
+   * Inicializador de algunos componentes gráficos. Además, se agregan restricciones a algunos campos
+   * de texto.
    * 
    * @param url not used.
    * @param rb  not used.
    */
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
+  @Override public void initialize(URL url, ResourceBundle rb) {
     ObservableList<String> roles = FXCollections.observableArrayList();
     ObservableList<String> sedes = FXCollections.observableArrayList();
 
@@ -151,8 +143,7 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosConsulta(ActionEvent event) {
+  @FXML void goToUsuariosConsulta(ActionEvent event) {
     volver();
   }
 
@@ -161,19 +152,16 @@ public class UserEdit implements Initializable {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosRegistro(ActionEvent event) {
+  @FXML void goToUsuariosRegistro(ActionEvent event) {
     View.newView("user.register", new UserRegister());
   }
 
   /**
-   * Actualiza los datos de un usuario en la base de datos, haciendo las
-   * validaciones necesarias.
+   * Actualiza los datos de un usuario en la base de datos, haciendo las validaciones necesarias.
    * 
    * @param event not used.
    */
-  @FXML
-  void updateEmpleado(ActionEvent event) {
+  @FXML void updateEmpleado(ActionEvent event) {
     getData();
 
     String campos[] = { name, telefono, dir, ident, fc, idS, rol };
@@ -189,12 +177,9 @@ public class UserEdit implements Initializable {
       SpecificAlerts.showUpdSucces();
       volver();
     } else {
-      if (camposVacios)
-        SpecificAlerts.showEmptyFieldAlert();
-      if (forbidChar)
-        SpecificAlerts.showCharForbidenAlert();
-      if (!formatoCorrecto)
-        SpecificAlerts.showNumericFormat();
+      if (camposVacios) SpecificAlerts.showEmptyFieldAlert();
+      if (forbidChar) SpecificAlerts.showCharForbidenAlert();
+      if (!formatoCorrecto) SpecificAlerts.showNumericFormat();
     }
   }
 

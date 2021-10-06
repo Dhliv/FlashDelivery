@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -8,76 +14,81 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1020.0" style="-fx-background-color: #252525;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Separator layoutY="90.0" prefWidth="1020.0" />
+      <Separator layoutY="90.0" prefWidth="1020.0" style="-fx-background-color: white; -fx-border-color: white;" />
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="90.0" prefWidth="1020.0">
          <children>
-            <ChoiceBox fx:id="sedeChoicebox" layoutX="60.0" layoutY="40.0" prefWidth="150.0" />
-            <Label layoutX="60.0" layoutY="23.0" text="Sede" />
+            <ComboBox fx:id="sedeChoicebox" layoutX="60.0" layoutY="45.0" prefHeight="25.0" prefWidth="199.0" />
+            <Label layoutX="60.0" layoutY="20.0" text="Sede" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="16.0" />
+               </font></Label>
+            <Line endX="921.0" layoutX="50.0" layoutY="89.0" stroke="WHITE" strokeWidth="2.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="90.0" minHeight="0.0" minWidth="0.0" prefHeight="670.0" prefWidth="1020.0">
+      <AnchorPane layoutY="90.0" minHeight="0.0" minWidth="0.0" prefHeight="685.0" prefWidth="1020.0" style="-fx-background-color: #252525;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="116.0" layoutY="295.0" text="Ventas semanales">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="297.0" text="Ventas semanales" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="439.0" layoutY="295.0" text="Ventas mensuales">
+            <Label layoutX="447.0" layoutY="297.0" text="Ventas mensuales" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="746.0" layoutY="295.0" text="Paquetes enviados">
+            <Label layoutX="755.0" layoutY="297.0" text="Paquetes enviados" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="742.0" layoutY="608.0" text="Clientes registrados">
+            <Label layoutX="751.0" layoutY="610.0" text="Clientes registrados" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="438.0" layoutY="608.0" text="Servicio solicitado">
+            <Label layoutX="447.0" layoutY="610.0" text="Servicio solicitado" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="92.0" layoutY="608.0" text="Medios de pago usados">
+            <Label layoutX="118.0" layoutY="610.0" text="Medios de pago usados" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Lato Bold" size="16.0" />
                </font>
             </Label>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="35.0" onMouseClicked="#ventasSemanales" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="35.0" onMouseClicked="#paquetesEnviados" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte3.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="35.0" onMouseClicked="#ventasMensuales" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte2.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="75.0" layoutY="350.0" onMouseClicked="#mediosDePago" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte4.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="695.0" layoutY="350.0" onMouseClicked="#clientesRegistrados" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte6.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="385.0" layoutY="350.0" onMouseClicked="#servicioSolicitado" pickOnBounds="true">
                <image>
-                  <Image url="@../resources/Images/iconTest.png" />
+                  <Image url="@../resources/Images/reporte5.png" />
                </image>
             </ImageView>
          </children>

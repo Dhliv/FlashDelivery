@@ -21,8 +21,8 @@ import model.Entities.Usuario;
 import utilities.*;
 
 /**
- * Clase controller UserConsulta. Contiene componentes y métodos gráficos
- * relacionados a la consulta de usuarios.
+ * Clase controller UserConsulta. Contiene componentes y métodos gráficos relacionados a la consulta
+ * de usuarios.
  * 
  * @author David Henao
  * @author Reynell Arkad Devji Quevedo
@@ -30,28 +30,17 @@ import utilities.*;
  * @since 25/09/2021
  */
 public class UserConsulta {
-  @FXML
-  private Button btBorrar;
-  @FXML
-  private TableView<Empleado> tableUsers;
-  @FXML
-  private TableColumn<Empleado, Integer> cedula;
-  @FXML
-  private TableColumn<Empleado, String> nombre;
-  @FXML
-  private TableColumn<Empleado, String> apellido;
-  @FXML
-  private TableColumn<Empleado, Integer> sede;
-  @FXML
-  private TableColumn<Empleado, String> rol;
-  @FXML
-  private TableColumn<Empleado, String> direccion;
-  @FXML
-  private TableColumn<Empleado, String> telefono;
-  @FXML
-  private TableColumn<Empleado, LocalDate> birthdate;
-  @FXML
-  private Button btChange;
+  @FXML private Button btBorrar;
+  @FXML private TableView<Empleado> tableUsers;
+  @FXML private TableColumn<Empleado, Integer> cedula;
+  @FXML private TableColumn<Empleado, String> nombre;
+  @FXML private TableColumn<Empleado, String> apellido;
+  @FXML private TableColumn<Empleado, Integer> sede;
+  @FXML private TableColumn<Empleado, String> rol;
+  @FXML private TableColumn<Empleado, String> direccion;
+  @FXML private TableColumn<Empleado, String> telefono;
+  @FXML private TableColumn<Empleado, LocalDate> birthdate;
+  @FXML private Button btChange;
   private boolean borrar;
 
   /**
@@ -71,15 +60,13 @@ public class UserConsulta {
     birthdate.setCellValueFactory(new PropertyValueFactory<Empleado, LocalDate>("birthdate"));
     mostrarTabla();
 
-    JMetro intefrazJMetro = new JMetro();
-    intefrazJMetro.setStyle(Style.LIGHT);
-    intefrazJMetro.setParent(tableUsers);
-    
+    Globals.style.setParent(tableUsers);
+
   }
 
   /**
-   * Carga la información en la tabla, mostrando a los empleados
-   * habilitados/deshabilitados según sea el caso.
+   * Carga la información en la tabla, mostrando a los empleados habilitados/deshabilitados según sea
+   * el caso.
    */
   void mostrarTabla() {
     ObservableList<Empleado> s = FXCollections.observableArrayList();
@@ -88,17 +75,14 @@ public class UserConsulta {
   }
 
   /**
-   * Deshabilita/habilita, según sea el caso, al empleado seleccionado en la tabla
-   * de empleados.
+   * Deshabilita/habilita, según sea el caso, al empleado seleccionado en la tabla de empleados.
    * 
    * @param event not used.
    */
-  @FXML
-  void borrar(ActionEvent event) {
+  @FXML void borrar(ActionEvent event) {
     System.out.println();
     Empleado e = tableUsers.getItems().get(tableUsers.getSelectionModel().getFocusedIndex());
-    int op = JOptionPane.showConfirmDialog(null,
-        "¿Está seguro que desea " + (borrar ? "borrar" : "habilitar") + " a " + e.getNombres() + "?");
+    int op = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea " + (borrar ? "borrar" : "habilitar") + " a " + e.getNombres() + "?");
     if (op == 0) {
       if (borrar)
         Usuario.deshabilitarUsuario(e.getCedula());
@@ -109,22 +93,21 @@ public class UserConsulta {
   }
 
   /**
-   * Cambia la información desplegada en la tabla, mostrando empleados
-   * deshabilitados/habilitados. Adicionalmenre también cambia el estado actual de
-   * 'borrar', que indica si un usuario se va a habilitar o deshabilitar.
+   * Cambia la información desplegada en la tabla, mostrando empleados deshabilitados/habilitados.
+   * Adicionalmenre también cambia el estado actual de 'borrar', que indica si un usuario se va a
+   * habilitar o deshabilitar.
    * 
    * @param event not used.
    */
-  @FXML
-  void showOtherUsers(ActionEvent event) {
+  @FXML void showOtherUsers(ActionEvent event) {
     borrar = !borrar;
     changeButtons();
     mostrarTabla();
   }
 
   /**
-   * Cambia los valores visuales de los botones que implican borrar/habilitar a un
-   * usuario, o desplegar a los empleados habilitados/deshabilitados.
+   * Cambia los valores visuales de los botones que implican borrar/habilitar a un usuario, o
+   * desplegar a los empleados habilitados/deshabilitados.
    */
   private void changeButtons() {
     btBorrar.setText(borrar ? "Borrar" : "Habilitar");
@@ -136,20 +119,18 @@ public class UserConsulta {
    * 
    * @param event not used.
    */
-  @FXML
-  void goToUsuariosRegistro(ActionEvent event) {
+  @FXML void goToUsuariosRegistro(ActionEvent event) {
     View.newView("user.register", new UserRegister());
   }
 
   /**
-   * Accede a la pestaña de edicion de empleado según el empleado seleccionado. En
-   * caso de no haberse seleccionado un empleado para su edición, se mostrará la
-   * respectuva alerta indicando esa situación.
+   * Accede a la pestaña de edicion de empleado según el empleado seleccionado. En caso de no haberse
+   * seleccionado un empleado para su edición, se mostrará la respectuva alerta indicando esa
+   * situación.
    * 
    * @param event not used.
    */
-  @FXML
-  void userEditButton(ActionEvent event) {
+  @FXML void userEditButton(ActionEvent event) {
     Empleado e = tableUsers.getSelectionModel().getSelectedItem();
     if (e != null)
       View.cambiar("user.edit", new UserEdit(e));

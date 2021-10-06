@@ -59,11 +59,6 @@ public class View {
     cambiar(view);
   }
 
-  
-
-  
-
-
   /**
    * cargar vista desde FXML
    * 

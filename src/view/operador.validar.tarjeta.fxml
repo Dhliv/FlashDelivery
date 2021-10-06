@@ -43,6 +43,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
 <VBox prefHeight="780.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -51,7 +52,7 @@
             <Separator layoutX="49.0" layoutY="90.0" prefHeight="8.0" prefWidth="942.0" />
             <Label fx:id="lblTipoTarjeta" layoutX="789.0" layoutY="62.0" text="Tarjeta de (Especificar)">
                <font>
-                  <Font size="18.0" />
+                  <Font  name="Lato Bold" size="18.0" />
                </font>
             </Label>
             <Label layoutX="106.0" layoutY="200.0" text="Número de Tarjeta">
@@ -59,19 +60,19 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNumerotarjeta" layoutX="106.0" layoutY="223.0" onKeyPressed="#printDigitsTarjeta" prefHeight="25.0" prefWidth="350.0" />
+            <JFXTextField fx:id="txtNumerotarjeta" layoutX="106.0" layoutY="223.0" onKeyPressed="#printDigitsTarjeta" prefHeight="25.0" prefWidth="350.0" />
             <Label layoutX="564.0" layoutY="200.0" text="Titular">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTitular" layoutX="564.0" layoutY="223.0" onKeyPressed="#eraseTitular" onKeyTyped="#addTitular" prefHeight="25.0" prefWidth="350.0" />
+            <JFXTextField fx:id="txtTitular" layoutX="564.0" layoutY="223.0" onKeyPressed="#eraseTitular" onKeyTyped="#addTitular" prefHeight="25.0" prefWidth="350.0" />
             <Label layoutX="106.0" layoutY="324.0" text="CVV">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCVV" onKeyPressed="#addCvv" layoutX="106.0" layoutY="347.0" prefHeight="25.0" prefWidth="55.0" />
+            <JFXTextField fx:id="txtCVV" onKeyPressed="#addCvv" layoutX="106.0" layoutY="347.0" prefHeight="25.0" prefWidth="55.0" />
             <Label layoutX="564.0" layoutY="324.0" text="Fecha de vencimiento">
                <font>
                   <Font size="18.0" />
@@ -83,7 +84,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="chboxNumeroCuotas" layoutX="383.0" layoutY="347.0" prefHeight="25.0" prefWidth="73.0" />
+            <JFXComboBox fx:id="chboxNumeroCuotas" layoutX="383.0" layoutY="347.0" prefHeight="25.0" prefWidth="73.0" />
             <ImageView fitHeight="276.0" fitWidth="350.0" layoutX="106.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/Images/cardFrontside.png" />
@@ -139,16 +140,16 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="784.0" layoutY="705.0" mnemonicParsing="false" onAction="#finalizarPago" text="Efectuar Pago">
+            <JFXButton style="-fx-background-color: #21ba45; -fx-text-fill: #ffffff;" prefHeight="40.0" prefWidth="155.0" layoutX="784.0" layoutY="705.0" mnemonicParsing="false" onAction="#finalizarPago" text="Efectuar Pago">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </Button>
-            <Button layoutX="49.0" layoutY="27.0" mnemonicParsing="false" onAction="#atras" text="Atras">
+            </JFXButton>
+            <JFXButton style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" layoutX="49.0" layoutY="27.0" prefHeight="42.0" prefWidth="84.0" mnemonicParsing="false" onAction="#atras" text="Atras">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </Button>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>

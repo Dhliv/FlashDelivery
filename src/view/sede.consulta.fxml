@@ -5,24 +5,30 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sedes">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1020.0" style="-fx-background-color: #252525;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sedes">
    <children>
-      <Pane layoutX="699.0" layoutY="27.0">
+      <Pane layoutX="519.0" layoutY="26.0" style="-fx-background-color: #252525;">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#registrar" text="Registrar" textAlignment="CENTER">
+            <JFXButton alignment="CENTER" layoutX="59.0" mnemonicParsing="false" onAction="#registrar" prefHeight="39.0" prefWidth="97.0" style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" text="Registrar" textAlignment="CENTER">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </Button>
-            <Button alignment="CENTER" layoutX="192.0" mnemonicParsing="false" onAction="#editar" prefHeight="35.0" prefWidth="92.0" text="Editar" textAlignment="CENTER">
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="224.0" mnemonicParsing="false" onAction="#editar" prefHeight="39.0" prefWidth="92.0" style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" text="Editar" textAlignment="CENTER">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </Button>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="384.0" mnemonicParsing="false" onAction="#borrar" prefHeight="39.0" prefWidth="92.0" style="-fx-background-color: #E0E1E2; -fx-text-fill: #000000bb;" text="Borrar" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
          </children>
       </Pane>
-      <TableView fx:id="sedesTable" layoutY="91.0" prefHeight="670.0" prefWidth="1020.0">
+      <TableView fx:id="sedesTable" layoutY="91.0" prefHeight="685.0" prefWidth="1020.0">
         <columns>
           <TableColumn fx:id="id_column" prefWidth="163.0" text="ID Sede" />
           <TableColumn fx:id="nombre_column" prefWidth="348.0" text="Nombre" />
@@ -30,4 +36,5 @@
         </columns>
       </TableView>
    </children>
+
 </Pane>

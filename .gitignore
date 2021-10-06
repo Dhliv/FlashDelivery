@@ -6,4 +6,3 @@ org.eclipse.*
 main.java
 *.pdf
 db.properties
-src/Main.java
