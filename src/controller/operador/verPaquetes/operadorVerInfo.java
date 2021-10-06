@@ -41,27 +41,29 @@ public class operadorVerInfo {
 
     @FXML
     private Label labelDestinatario;
-    
+
     private Envio en;
     private Cliente rem, des;
     private Paquete p;
-    public operadorVerInfo(Envio en){
+
+    public operadorVerInfo(Envio en) {
         this.en = en;
         this.rem = Cliente.buscarCliente(en.getCliente_envio());
         this.des = Cliente.buscarCliente(en.getCliente_envio());
         this.p = Paquete.cargarPaquete(en.id);
     }
 
-    public void initialize(){
-        labelID.setText(en.getIdenvio()+"");
+    public void initialize() {
+        labelID.setText(en.getIdenvio() + "");
         labelDestinatario.setText(des.nombre);
         labelDireccionEntrega.setText(en.direccion_entrega);
         labelFechaRegistro.setText(en.fecha_registro.toString());
         labelMetodoPago.setText(en.metodo_pago);
         labelRemitente.setText(rem.nombre);
-        labelVolumen.setText(p.getVolumen()+"");
-        txtDescripcion.setText(p.getDescripcion());
+        labelVolumen.setText(p.getVolumen() + "");
+        txtDescripcion.setText(p.getDescripcion().replace("\\n", "\n"));
     }
+
     @FXML
     void atras(ActionEvent event) {
         View.cambiar("operadorOficinaTabla");
