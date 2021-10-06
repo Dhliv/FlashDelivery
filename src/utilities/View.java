@@ -55,7 +55,8 @@ public class View {
    */
   public static void cambiar(String name, Object control) {
     Parent view = views.get(name) == null || fullLoad ? loadView(name, control) : views.get(name);
-    if (views.get(name) == null) views.put(name, memory == true ? view : null);
+    if (views.get(name) == null)
+      views.put(name, memory == true ? view : null);
     cambiar(view);
   }
 
@@ -68,7 +69,8 @@ public class View {
    */
   public static Parent loadView(String name, Object control) {
     FXMLLoader loader = new FXMLLoader(referenceObject.getClass().getResource("view/" + name + ".fxml"));
-    if (control != null) loader.setController(control);
+    if (control != null)
+      loader.setController(control);
     Parent root = null;
     try {
       root = loader.load();

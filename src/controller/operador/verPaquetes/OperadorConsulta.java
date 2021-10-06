@@ -46,7 +46,6 @@ public class OperadorConsulta implements Initializable {
     tcDireccionEntrega.setCellValueFactory(new PropertyValueFactory<Envio, String>("direccion_entrega"));
     tcRemitente.setCellValueFactory(new PropertyValueFactory<Envio, String>("cliente_envio"));
     tcDestinatario.setCellValueFactory(new PropertyValueFactory<Envio, String>("cliente_entrega"));
-    tcEstado.setCellValueFactory(new PropertyValueFactory<Envio, Boolean>("delivered"));
     Globals.style.setParent(tPaquetes);
 
     ArrayList<Envio> enviosAux = (ArrayList<Envio>) Envio.getEnviosBySede(e.id_sede);
