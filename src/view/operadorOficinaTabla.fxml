@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
-<?import com.jfoenix.controls.*?>
 
-<Pane fx:id="rightContent" prefHeight="775.0" prefWidth="1027.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="rightContent" prefHeight="775.0" prefWidth="1027.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="tPaquetes" focusTraversable="false" onMouseClicked="#seleccionarEnvio" prefHeight="775.0" prefWidth="1027.0">
          <columns>
-            <TableColumn fx:id="tcFechaRegistro" prefWidth="96.0" text="Fecha registro" />
-            <TableColumn fx:id="tcMetodoPago" prefWidth="118.0" text="Metodo de pago" />
-            <TableColumn fx:id="tcDireccionEntrega" prefWidth="475.0" text="Direccion de entrega" />
-            <TableColumn fx:id="tcRemitente" prefWidth="176.0" text="Remitente" />
-            <TableColumn fx:id="tcDestinatario" minWidth="0.0" prefWidth="144.0" text="Destinatario" />
+            <TableColumn fx:id="tcFechaRegistro" prefWidth="150.0" text="Fecha registro" />
+            <TableColumn fx:id="tcMetodoPago" prefWidth="181.0" text="Metodo de pago" />
+            <TableColumn fx:id="tcDireccionEntrega" prefWidth="299.0" text="Direccion de entrega" />
+            <TableColumn fx:id="tcRemitente" prefWidth="194.0" text="Remitente" />
+            <TableColumn fx:id="tcDestinatario" minWidth="0.0" prefWidth="201.0" text="Destinatario" />
          </columns>
       </TableView>
    </children>

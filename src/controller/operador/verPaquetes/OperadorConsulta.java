@@ -61,7 +61,7 @@ public class OperadorConsulta implements Initializable {
       en = tPaquetes.getSelectionModel().getSelectedItem();
       int op = JOptionPane.showConfirmDialog(null, "¿Desea ver los datos de este paquete?");
       if (op == JOptionPane.YES_OPTION) {
-        View.newView("operador.ver.paquete", new operadorVerInfo(en));
+        View.newView("operador.ver.paquete", new operadorVerInfo(en, e));
 
       }
 
