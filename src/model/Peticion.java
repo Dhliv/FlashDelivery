@@ -21,12 +21,14 @@ public class Peticion {
   /**
    * Inserta una petición de recogida en la base de datos.
    * 
-   * @param costo    del envío
-   * @param id_envio de la factura.
+   * @param descripcion  del paquete.
+   * @param auxiliar     cedula del auxiliar.
+   * @param remitente    del paquete.
+   * @param destinatario del paquete.
    */
-  public static void createPeticion(String descripcion, String empleado, String remitente, String destinatario) {
+  public static void createPeticion(String descripcion, String auxiliar, String remitente, String destinatario) {
     String sql = "insert into peticion_recogida(descripcion, id_empleado, estado, cliente_solicitud, cliente_destinatario) values('"
-        + descripcion + "', '" + empleado + "', 'Pendiente', '" + remitente + "', '" + destinatario + "')";
+        + descripcion + "', '" + auxiliar + "', 'Pendiente', '" + remitente + "', '" + destinatario + "')";
     Conexion.db().execute(sql);
     Conexion.closeConnection();
   }
