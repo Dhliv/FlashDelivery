@@ -60,6 +60,7 @@ public class operadorVerInfo {
         labelMetodoPago.setText(en.metodo_pago);
         labelRemitente.setText(rem.nombre);
         labelVolumen.setText(p.getVolumen()+"");
+        txtDescripcion.setText(p.getDescripcion());
     }
     @FXML
     void atras(ActionEvent event) {
