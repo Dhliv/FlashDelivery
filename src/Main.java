@@ -54,8 +54,8 @@ public class Main extends Application {
     SpecificAlerts.init();
     Globals.pantalla = stage;
 
-    // Ventana login = new Ventana("login", new Login());
-    // login.start(stage);
+    Ventana login = new Ventana("login", new Login());
+    login.start(stage);
     // probarGraficas(stage);
 
     // Ventana vent2 = new Ventana("admin", new Admin("APA"));
